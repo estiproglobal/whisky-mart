@@ -32,11 +32,12 @@
 
 ## In-progress
 
-- **Nothing in flight** — Increment 2 is done, verified, and pushed. Ready for Increment 3.
+- **Increment 3 — Checkout, age verification & payment** is the active/next task (not yet started). Scope + acceptance criteria in `Current_Task.md`.
 
 ## Blocked by
 
-- **Nothing.** The session's GitHub integration now has **write access** — Claude pushes directly to `origin/main` (verified this session). Manual upload is no longer required.
+- **Nothing blocking.** The session's GitHub integration has **write access** — Claude pushes directly to `origin/main` (verified). Manual upload no longer required.
+- **One decision to confirm before building Increment 3:** real **Stripe test-mode keys** (owner adds `STRIPE_SECRET_KEY`) vs a **mock payment provider** behind the same interface. Default if unspecified: mock provider (zero secrets), Stripe swapped in later behind the same interface.
 
 ## Next Action
 
