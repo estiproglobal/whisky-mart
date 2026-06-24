@@ -48,7 +48,29 @@ the on-the-record list so these are not forgotten.
 
 ---
 
-## 3. Other interface-first seams (swap when scaling)
+## 3. AI Sommelier — grounded mock → **Claude (Anthropic)** (planned)
+
+- **Status:** interface-first since **Increment 5**.
+- **Now:** an `Advisor` interface (`apps/web/lib/advisor/types.ts`) with a
+  grounded, rule-based implementation (`GroundedMockAdvisor`) that retrieves real
+  catalogue products via a shared engine — no LLM, no hallucinated products/prices.
+  `getAdvisor()` (`apps/web/lib/advisor/index.ts`) returns the mock. Powers
+  `/api/advisor` (Sommelier) and `/api/gift-finder`.
+- **Switch later to Claude:**
+  1. `pnpm add @anthropic-ai/sdk` in `apps/web`.
+  2. Implement `ClaudeAdvisor implements Advisor` — RAG over the catalogue +
+     tasting notes (retrieve with the existing engine, then have Claude phrase
+     the response and rank), using the **latest Claude model**. Keep the
+     grounding contract: cite only retrieved products; never invent price/stock.
+  3. In `getAdvisor()`, return `ClaudeAdvisor` when **`ANTHROPIC_API_KEY`** is set
+     (branch already noted in `index.ts`).
+  4. Add env: `ANTHROPIC_API_KEY`. Add prompt-eval tests (grounding, refusals,
+     responsible-drinking) per `docs/07` §9.
+  - **No changes needed** in `/api/advisor`, `/api/gift-finder`, or the UI.
+- **Guardrails (already in the mock, keep in Claude):** age-gated context,
+  responsible-drinking disclaimer, no fabricated price/stock.
+
+## 4. Other interface-first seams (swap when scaling)
 
 | Capability | Now (dev) | Production target | Seam |
 |------------|-----------|-------------------|------|

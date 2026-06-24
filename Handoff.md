@@ -27,27 +27,29 @@
 - **MVP build — Increment 3 (Checkout, age verification & payment): ✅ COMPLETE & VERIFIED, pushed to `main`.**
   - Jurisdiction engine, VAT-aware pricing, `PaymentProvider` + `MockPaymentProvider`, `/api/checkout/quote` + `/pay`, multi-step `CheckoutFlow`, confirmation.
 - **MVP build — Increment 4 (Accounts, order persistence & reviews): ✅ COMPLETE & VERIFIED, pushed to `main`.**
-  - **Interface-first persistence:** `OrderRepository` + `ReviewRepository` (`lib/db/types.ts`), in-memory impl (`lib/db/memory.ts`), single binding (`lib/db/index.ts`) — swaps to Postgres later.
-  - Orders persist on `POST /api/checkout/pay`; `GET /api/orders?email=` powers order history.
-  - Reviews: `GET|POST /api/products/[id]/reviews`, aggregate summary, **verified-purchase** via order cross-check.
-  - Mock `AccountProvider` (sign-in/profile); `/account` dashboard with order history; PDP customer-reviews section + form.
-  - **`DEFERRED.md` created** — records the planned **Postgres** and **Stripe** switches (+ auth/search/etc.), as requested, so they're on record for later.
-  - Quality gates: `typecheck` ✓ · `lint` ✓ · `test` ✓ (40) · `build` ✓ (38 routes) · runtime smoke test ✓ (order persists → history £79.90; reviews 4.5→4.7 with verified-purchase; invalid → 400).
+  - Interface-first `OrderRepository`/`ReviewRepository` (in-memory), `/account` order history, verified-purchase reviews on PDP. `DEFERRED.md` created.
+- **MVP build — Increment 5 (AI Sommelier + Gift Finder): ✅ COMPLETE & VERIFIED, pushed to `main`.**
+  - **Interface-first AI:** `Advisor` interface (`lib/advisor/types.ts`) + `GroundedMockAdvisor` (NL `parse.ts` → shared `engine.ts` over the live catalogue). `getAdvisor()` swaps to Claude when `ANTHROPIC_API_KEY` is set.
+  - APIs: `POST /api/advisor` (Sommelier), `POST /api/gift-finder`.
+  - UI: interactive `/sommelier` (chat thread + grounded recommendation cards with reasons), `/gift-finder` (guided form), home AI-tools section + nav.
+  - Grounded — only ever returns real products/prices; budget/region respected; responsible-drinking disclaimer.
+  - **`DEFERRED.md` updated** with the Claude/`ANTHROPIC_API_KEY` swap.
+  - Quality gates: `typecheck` ✓ · `lint` ✓ · `test` ✓ (53) · `build` ✓ (40 routes) · runtime smoke test ✓ (smoky-Islay-under-£80 → 3 real bottles ≤ £74.95; gift finder on-budget; empty → 400).
 
 ## In-progress
 
-- **Increment 5 — AI Whisky Advisor (Sommelier) v1 + Gift Finder** is the active/next task (not yet started). Scope + acceptance criteria in `Current_Task.md`.
+- **Increment 6 — Content & SEO (blog / buying guides / education + structured data)** is the active/next task (not yet started). Scope + acceptance criteria in `Current_Task.md`.
 
 ## Blocked by
 
 - **Nothing blocking.** Write access confirmed — Claude pushes directly to `origin/main`.
-- **Deferred production switches are recorded in `DEFERRED.md`** (Postgres persistence, Stripe payments, real auth/search/age-verification/tax/CMS). Each swaps behind an existing interface.
-- **For Increment 5:** the AI layer will be interface-first too — a grounded mock advisor now, **Claude (Anthropic) via `ANTHROPIC_API_KEY`** swapped in later (add to `DEFERRED.md` when built).
+- **Deferred production switches recorded in `DEFERRED.md`:** Postgres (persistence), Stripe (payments), **Claude (AI Sommelier)**, plus auth/search/age-verification/tax/CMS. Each swaps behind an existing interface.
+- **For Increment 6:** content will be interface-first too — a `ContentRepository` (local/MDX) now, **Sanity** later.
 
 ## Next Action
 
-1. **Claude — Increment 5:** AI Whisky Advisor (Sommelier) v1 + Gift Finder — RAG-grounded over the catalogue, interface-first (`Advisor` interface; grounded mock now, Claude via `ANTHROPIC_API_KEY` later). Guardrails: age-gated, responsible-drinking, no fabricated price/stock.
-2. **Then (suggested order):** (6) CMS (Sanity) + content/SEO · production swaps from `DEFERRED.md` (Postgres, Stripe, real auth/search).
+1. **Claude — Increment 6:** Content & SEO — blog, buying guides, whisky education; interface-first `ContentRepository` (local/MDX now → Sanity later); JSON-LD structured data (Product/Article) + sitemap/robots; content rail + cross-linking to products.
+2. **Then:** production swaps from `DEFERRED.md` (Postgres, Stripe, Claude, real auth/search) as infra/keys become available.
 3. Keep every increment runnable, tested, and pushed to `main`; update the two context files after each.
 
 ## How to run

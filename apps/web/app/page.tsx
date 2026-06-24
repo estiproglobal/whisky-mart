@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, Sparkles, ShieldCheck, Truck, Award } from "lucide-react";
+import { ArrowRight, Sparkles, ShieldCheck, Truck, Award, Gift } from "lucide-react";
 import { catalog } from "@/lib/catalog/repository";
 import { ProductRail } from "@/components/product-rail";
 import { RecentlyViewedRail } from "@/components/recently-viewed";
@@ -11,7 +11,7 @@ const SHORTCUTS: Array<{ label: string; href: string }> = [
   { label: "Peated", href: "/c/peated" },
   { label: "Best sellers", href: "/c/bestsellers" },
   { label: "Samples", href: "/c/samples" },
-  { label: "Gifts", href: "/c/gifts" },
+  { label: "Gift Finder", href: "/gift-finder" },
 ];
 
 const TRUST: Array<{ icon: typeof Award; text: string }> = [
@@ -89,18 +89,30 @@ export default async function HomePage() {
       <ProductRail title="Best sellers" products={bestsellers} viewAllHref="/c/bestsellers" />
       <RecentlyViewedRail allProducts={all} />
 
-      {/* Sommelier teaser */}
-      <section className="container-page py-12">
-        <div className="flex flex-col items-start gap-6 rounded-2xl bg-whisky-50 p-8 sm:flex-row sm:items-center sm:justify-between">
-          <div className="max-w-xl">
-            <h2 className="font-display text-2xl text-charcoal">Not sure where to start?</h2>
-            <p className="mt-2 text-charcoal/70">
-              Tell the WhiskyMart Sommelier what you like — a whisky you enjoyed, a budget, an
-              occasion — and get confident, personalised recommendations grounded in our catalogue.
-            </p>
-          </div>
-          <Link href="/sommelier" className={buttonClasses("primary", "lg")}>
-            <Sparkles className="h-4 w-4" /> Ask the Sommelier
+      {/* AI tools */}
+      <section className="container-page grid gap-6 py-12 sm:grid-cols-2">
+        <div className="flex flex-col rounded-2xl bg-whisky-50 p-8">
+          <Sparkles className="h-7 w-7 text-whisky-600" />
+          <h2 className="mt-3 font-display text-2xl text-charcoal">Ask the Sommelier</h2>
+          <p className="mt-2 flex-1 text-charcoal/70">
+            Describe a whisky you enjoyed, a flavour or a budget — get confident recommendations grounded
+            in our range.
+          </p>
+          <Link href="/sommelier" className={buttonClasses("primary", "md", "mt-5 self-start")}>
+            Ask the Sommelier <ArrowRight className="h-4 w-4" />
+          </Link>
+        </div>
+        <div className="flex flex-col rounded-2xl bg-charcoal p-8 text-cream">
+          <Gift className="h-7 w-7 text-gold" />
+          <h2 className="mt-3 font-display text-2xl">Gift Finder</h2>
+          <p className="mt-2 flex-1 text-cream/70">
+            Three quick questions — occasion, budget, taste — and we&apos;ll find the perfect whisky gift.
+          </p>
+          <Link
+            href="/gift-finder"
+            className={buttonClasses("outline", "md", "mt-5 self-start border-cream text-cream hover:bg-cream/10")}
+          >
+            Find a gift <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
       </section>
