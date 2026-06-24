@@ -216,3 +216,74 @@ export interface CartLineDetailed extends CartLine {
   variant: Variant;
   lineTotal: Money;
 }
+
+/* -------------------------------------------------------------------------- */
+/*  Checkout & Orders                                                          */
+/* -------------------------------------------------------------------------- */
+
+export const Address = z.object({
+  fullName: z.string().min(1),
+  line1: z.string().min(1),
+  line2: z.string().optional().default(""),
+  city: z.string().min(1),
+  postcode: z.string().min(1),
+  country: z.string().length(2), // ISO-3166 alpha-2
+});
+export type Address = z.infer<typeof Address>;
+
+export interface ShippingMethod {
+  id: string;
+  label: string;
+  price: Money;
+  etaDays: string;
+}
+
+/** Outcome of the server-side jurisdiction/compliance check (see docs/09). */
+export interface JurisdictionDecision {
+  country: string;
+  countryLabel: string;
+  allowed: boolean;
+  ageMin: number;
+  taxRatePct: number;
+  dutyRatePct: number;
+  vatInclusive: boolean; // true = catalogue price already includes tax (e.g. UK)
+  reason?: string; // why blocked
+  alternative?: string; // suggestion when blocked
+  carrierNote?: string;
+}
+
+export interface OrderTotals {
+  subtotal: Money;
+  shipping: Money;
+  tax: Money; // VAT / sales-tax (component or added — see vatInclusive)
+  duty: Money; // import duty estimate
+  grandTotal: Money;
+  vatInclusive: boolean;
+}
+
+export const OrderStatus = z.enum(["pending", "paid", "failed"]);
+export type OrderStatus = z.infer<typeof OrderStatus>;
+
+export interface OrderItemSnapshot {
+  productId: string;
+  variantId: string;
+  title: string;
+  sizeMl: number;
+  quantity: number;
+  unitPrice: Money;
+  lineTotal: Money;
+}
+
+export interface Order {
+  id: string;
+  orderNumber: string;
+  status: OrderStatus;
+  email: string;
+  shippingAddress: Address;
+  shipToCountry: string;
+  items: OrderItemSnapshot[];
+  totals: OrderTotals;
+  shippingMethod: ShippingMethod;
+  ageConfirmed: boolean;
+  placedAt: string; // ISO timestamp
+}

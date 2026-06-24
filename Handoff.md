@@ -23,27 +23,30 @@
   - Quality gates: `typecheck` ✓ · `lint` ✓ · `test` ✓ (16) · `build` ✓ (30 routes) · runtime smoke test ✓.
 - **Repo reconciled:** adopted `origin/main` as base; restored `.gitignore` + `apps/web/.eslintrc.json` (dropped by the web-UI folder upload); preserved the owner's Claude GitHub Action workflows.
 - **MVP build — Increment 2 (Search, Wishlist & Recently-viewed): ✅ COMPLETE & VERIFIED, pushed to `main`.**
-  - `GET /api/search` (first API endpoint) + `relevanceScore()` ranking.
-  - Instant-search header autocomplete (debounced, keyboard-navigable, thumbnails, view-all).
-  - Wishlist: `WishlistProvider` (localStorage), heart on cards + PDP, header count, `/account/wishlist`.
-  - Recently-viewed: tracker + rails on Home and PDP.
-  - PLP active-filter chips. Removed dead `search-box.tsx`.
-  - Quality gates: `typecheck` ✓ · `lint` ✓ · `test` ✓ (21) · `build` ✓ (32 routes) · runtime smoke test ✓.
+  - `GET /api/search` + `relevanceScore()`; instant-search autocomplete; wishlist (provider + hearts + page); recently-viewed; PLP active-filter chips.
+- **MVP build — Increment 3 (Checkout, age verification & payment): ✅ COMPLETE & VERIFIED, pushed to `main`.**
+  - Jurisdiction engine (`lib/checkout/jurisdiction.ts`) — server-authoritative shippability + tax/age rules (UK allowed; US/unknown blocked with reason).
+  - VAT-aware pricing (`pricing.ts`, UK inclusive / EU added), shipping methods (free standard over £100).
+  - `PaymentProvider` interface + `MockPaymentProvider` (declines a card ending 0002). Stripe swaps in behind it when `STRIPE_SECRET_KEY` is set.
+  - API: `POST /api/checkout/quote`, `POST /api/checkout/pay` (re-validates jurisdiction + age server-side).
+  - Multi-step `CheckoutFlow`, order summary, `/checkout/confirmation`; cart checkout button enabled.
+  - Quality gates: `typecheck` ✓ · `lint` ✓ · `test` ✓ (36) · `build` ✓ (36 routes) · runtime smoke test ✓ (quote allowed/blocked; pay success/age/jurisdiction/decline).
 
 ## In-progress
 
-- **Increment 3 — Checkout, age verification & payment** is the active/next task (not yet started). Scope + acceptance criteria in `Current_Task.md`.
+- **Increment 4 — Accounts, order persistence & reviews** is the active/next task (not yet started). Scope + acceptance criteria in `Current_Task.md`.
 
 ## Blocked by
 
-- **Nothing blocking.** The session's GitHub integration has **write access** — Claude pushes directly to `origin/main` (verified). Manual upload no longer required.
-- **One decision to confirm before building Increment 3:** real **Stripe test-mode keys** (owner adds `STRIPE_SECRET_KEY`) vs a **mock payment provider** behind the same interface. Default if unspecified: mock provider (zero secrets), Stripe swapped in later behind the same interface.
+- **Nothing blocking.** Write access confirmed — Claude pushes directly to `origin/main`.
+- **Decision resolved:** payment uses a **mock provider** behind a `PaymentProvider` interface; real Stripe test mode swaps in later behind the same interface (add `STRIPE_SECRET_KEY`).
+- **Heads-up for Increment 4:** orders are **not yet persisted** (returned from the pay API and held in `sessionStorage` for the confirmation page only). Increment 4 should add an `OrderRepository` / persistence layer.
 
 ## Next Action
 
-1. **Claude — Increment 3:** Checkout + age verification + Stripe (test mode) + UK jurisdiction rules. Likely: a multi-step checkout (delivery → age check → shipping → payment → review), a `services/jurisdiction`-style rules check (server-side, can-we-ship + tax), Stripe test-mode PaymentIntent via `POST /api/checkout/*`, order confirmation.
-2. **Then (suggested order):** (4) Accounts + reviews · (5) AI Whisky Advisor v1 (RAG) + Gift Finder · (6) CMS (Sanity) + content/SEO.
-3. Keep every increment runnable, tested, and pushed to `main`.
+1. **Claude — Increment 4:** Accounts, order persistence & reviews. Add an `OrderRepository`/persistence layer (orders survive), a lightweight account (profile + addresses + order history), and verified-purchase reviews that render on the PDP and aggregate ratings.
+2. **Then (suggested order):** real Stripe test mode behind the existing `PaymentProvider` · (5) AI Whisky Advisor v1 (RAG) + Gift Finder · (6) CMS (Sanity) + content/SEO.
+3. Keep every increment runnable, tested, and pushed to `main`; update the two context files after each.
 
 ## How to run
 

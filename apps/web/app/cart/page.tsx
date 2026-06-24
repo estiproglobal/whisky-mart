@@ -86,11 +86,11 @@ export default function CartPage() {
             <p className="mt-1 text-xs text-charcoal/50">
               Delivery, taxes and any duty calculated at checkout.
             </p>
-            <button className={buttonClasses("primary", "lg", "mt-5 w-full")} disabled>
+            <Link href="/checkout" className={buttonClasses("primary", "lg", "mt-5 w-full")}>
               Secure checkout
-            </button>
+            </Link>
             <p className="mt-2 text-center text-xs text-charcoal/40">
-              Checkout (age verification + payment) arrives in the next increment.
+              Age-verified at checkout · please drink responsibly.
             </p>
           </aside>
         </div>
