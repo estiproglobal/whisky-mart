@@ -6,7 +6,7 @@ import { useCart } from "@/components/cart/cart-provider";
 import { resolveCartLines } from "@/lib/catalog/repository";
 import { ProductImage } from "@/components/product-image";
 import { buttonClasses } from "@/components/ui/button";
-import { formatMoney } from "@/lib/utils";
+import { Price } from "@/components/market/price";
 
 export default function CartPage() {
   const { lines, setQty, remove } = useCart();
@@ -63,7 +63,7 @@ export default function CartPage() {
                         <Plus className="h-4 w-4" />
                       </button>
                     </div>
-                    <span className="font-medium text-charcoal">{formatMoney(line.lineTotal)}</span>
+                    <Price className="font-medium text-charcoal" money={line.lineTotal} />
                   </div>
                 </div>
                 <button
@@ -81,7 +81,7 @@ export default function CartPage() {
             <h2 className="font-display text-xl text-charcoal">Summary</h2>
             <div className="mt-4 flex justify-between text-sm">
               <span className="text-charcoal/60">Subtotal</span>
-              <span className="font-medium">{formatMoney({ amount: subtotal, currency })}</span>
+              <Price className="font-medium" money={{ amount: subtotal, currency }} />
             </div>
             <p className="mt-1 text-xs text-charcoal/50">
               Delivery, taxes and any duty calculated at checkout.

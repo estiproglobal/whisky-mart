@@ -87,7 +87,23 @@ the on-the-record list so these are not forgotten.
      revalidation webhook (`/api/webhooks/cms`) for ISR.
   - **No changes needed** in the guide pages, home rail, PDP, or `sitemap.ts`.
 
-## 5. Other interface-first seams (swap when scaling)
+## 5. Currency / FX — static rates → **live FX**, GBP-settlement → **multi-currency settlement** (planned)
+
+- **Status:** interface-first since **Increment 7** (Phase 2).
+- **Now:** `RatesProvider` with **static** illustrative rates (`apps/web/lib/market/currency.ts`),
+  base GBP. Prices are stored in GBP and converted **for display only** in the
+  shopper's chosen currency (`<Price>` + `CurrencyProvider`, cookie-persisted).
+  Payment still settles in **GBP** (a `SettlementNote` tells non-GBP shoppers).
+- **Switch later:**
+  1. Implement a live `RatesProvider` (e.g. ECB/openexchangerates) with caching;
+     swap the binding — `<Price>`/`displayMoney` are unchanged.
+  2. For true **multi-currency settlement**, use Stripe presentment currencies
+     (depends on the Stripe swap, §2) and record the settlement currency on the
+     order. Remove the `SettlementNote`.
+  3. Consider per-market price lists (not just FX conversion) for psychological
+     pricing, and currency inference from the jurisdiction/geo.
+
+## 6. Other interface-first seams (swap when scaling)
 
 | Capability | Now (dev) | Production target | Seam |
 |------------|-----------|-------------------|------|

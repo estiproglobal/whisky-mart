@@ -4,8 +4,8 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { Search, Loader2 } from "lucide-react";
 import * as React from "react";
-import { formatMoney } from "@/lib/utils";
 import { ProductImage } from "@/components/product-image";
+import { Price } from "@/components/market/price";
 
 interface Suggestion {
   id: string;
@@ -160,9 +160,7 @@ export function InstantSearch({ className }: { className?: string }) {
                           {item.region ? ` · ${item.region}` : ""}
                         </span>
                       </span>
-                      <span className="shrink-0 text-sm font-medium text-charcoal">
-                        {formatMoney(item.price)}
-                      </span>
+                      <Price className="shrink-0 text-sm font-medium text-charcoal" money={item.price} />
                     </Link>
                   </li>
                 ))}

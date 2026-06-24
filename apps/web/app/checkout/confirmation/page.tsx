@@ -5,7 +5,7 @@ import Link from "next/link";
 import { CheckCircle2 } from "lucide-react";
 import type { Order } from "@whiskymart/types";
 import { useCart } from "@/components/cart/cart-provider";
-import { formatMoney } from "@/lib/utils";
+import { Price } from "@/components/market/price";
 import { buttonClasses } from "@/components/ui/button";
 
 export default function ConfirmationPage() {
@@ -58,28 +58,28 @@ export default function ConfirmationPage() {
                   {item.title}
                   {item.sizeMl ? ` · ${item.sizeMl}cl` : ""} × {item.quantity}
                 </span>
-                <span className="font-medium text-charcoal">{formatMoney(item.lineTotal)}</span>
+                <Price className="font-medium text-charcoal" money={item.lineTotal} />
               </li>
             ))}
           </ul>
           <div className="mt-4 space-y-1.5 border-t border-whisky-100 pt-4 text-sm">
             <div className="flex justify-between text-charcoal/70">
               <span>Subtotal</span>
-              <span>{formatMoney(order.totals.subtotal)}</span>
+              <Price money={order.totals.subtotal} />
             </div>
             <div className="flex justify-between text-charcoal/70">
               <span>Shipping ({order.shippingMethod.label})</span>
-              <span>{order.totals.shipping.amount === 0 ? "Free" : formatMoney(order.totals.shipping)}</span>
+              <span>{order.totals.shipping.amount === 0 ? "Free" : <Price money={order.totals.shipping} />}</span>
             </div>
             {!order.totals.vatInclusive && order.totals.tax.amount > 0 ? (
               <div className="flex justify-between text-charcoal/70">
                 <span>Tax / VAT</span>
-                <span>{formatMoney(order.totals.tax)}</span>
+                <Price money={order.totals.tax} />
               </div>
             ) : null}
             <div className="flex justify-between border-t border-whisky-100 pt-2 font-display text-lg text-charcoal">
               <span>Total</span>
-              <span>{formatMoney(order.totals.grandTotal)}</span>
+              <Price money={order.totals.grandTotal} />
             </div>
           </div>
 

@@ -3,6 +3,7 @@ import { User } from "lucide-react";
 import { InstantSearch } from "./search/instant-search";
 import { CartIndicator } from "./cart/cart-indicator";
 import { WishlistIndicator } from "./wishlist/wishlist-indicator";
+import { CurrencySwitcher } from "./market/currency-switcher";
 
 const NAV: Array<{ label: string; href: string }> = [
   { label: "Whisky", href: "/shop" },
@@ -25,6 +26,7 @@ export function SiteHeader() {
         <InstantSearch className="relative ml-2 hidden flex-1 md:block" />
 
         <nav aria-label="Account" className="ml-auto flex items-center gap-1">
+          <CurrencySwitcher />
           <WishlistIndicator />
           <Link
             href="/account"

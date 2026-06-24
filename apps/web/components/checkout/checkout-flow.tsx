@@ -9,7 +9,7 @@ import { SHIPPABLE_COUNTRIES } from "@/lib/checkout/jurisdiction";
 import { resolveCartLines } from "@/lib/catalog/repository";
 import { useCart } from "@/components/cart/cart-provider";
 import { Button, buttonClasses } from "@/components/ui/button";
-import { formatMoney } from "@/lib/utils";
+import { Price } from "@/components/market/price";
 import { OrderSummary } from "./order-summary";
 
 type Step = "delivery" | "age" | "shipping" | "payment" | "review";
@@ -301,7 +301,7 @@ export function CheckoutFlow() {
                     </span>
                   </span>
                   <span className="text-sm font-medium text-charcoal">
-                    {m.price.amount === 0 ? "Free" : formatMoney(m.price)}
+                    {m.price.amount === 0 ? "Free" : <Price money={m.price} />}
                   </span>
                 </label>
               ))}
@@ -358,7 +358,9 @@ export function CheckoutFlow() {
                     <Loader2 className="h-4 w-4 animate-spin" /> Placing order…
                   </>
                 ) : (
-                  <>Place order {quote?.totals ? `· ${formatMoney(quote.totals.grandTotal)}` : ""}</>
+                  <>
+                    Place order {quote?.totals ? <>· <Price money={quote.totals.grandTotal} /></> : null}
+                  </>
                 )}
               </Button>
             </div>

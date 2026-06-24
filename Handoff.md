@@ -31,26 +31,29 @@
 - **MVP build — Increment 5 (AI Sommelier + Gift Finder): ✅ COMPLETE & VERIFIED, pushed to `main`.**
   - `Advisor` interface + `GroundedMockAdvisor` (NL parse → shared engine over the live catalogue); `/api/advisor` + `/api/gift-finder`; interactive `/sommelier` + `/gift-finder`. Grounded; Claude swaps in via `ANTHROPIC_API_KEY`.
 - **MVP build — Increment 6 (Content & SEO): ✅ COMPLETE & VERIFIED, pushed to `main`.**
-  - **Interface-first content:** `ContentRepository` (`lib/content/`) over seed articles; structured `ContentBlock` model with shoppable product embeds.
-  - Pages: `/guides` hub + `/guides/[slug]` (SSG) — buying guides, Academy education, journal.
-  - **SEO:** `Product` JSON-LD on PDP; `Article` + breadcrumb JSON-LD on guides; `sitemap.xml` + `robots.txt`.
-  - Cross-linking: home "Guides & stories" rail; PDP "Featured in our guides"; guides → products. "Guides" added to nav.
-  - **`DEFERRED.md` updated** with the Sanity (CMS) swap.
-  - Quality gates: `typecheck` ✓ · `lint` ✓ · `test` ✓ (64) · `build` ✓ (4 SSG guides + sitemap/robots) · runtime smoke test ✓.
+  - `ContentRepository` (`lib/content/`); `/guides` + `/guides/[slug]` (SSG); JSON-LD (Product/Article/Breadcrumb); `sitemap.xml` + `robots.txt`; home rail + PDP cross-linking. `DEFERRED.md` updated (Sanity).
+- 🎉 **Phase-1 MVP feature set complete (Increments 1–6).**
+- **Phase 2 — Increment 7 (Multi-currency): ✅ COMPLETE & VERIFIED, pushed to `main`.**
+  - Interface-first currency layer (`lib/market/currency.ts`): `RatesProvider` (static FX → live later), GBP→currency conversion, locale formatting.
+  - `CurrencyProvider` (cookie-persisted), `<Price>` (currency-aware), header `CurrencySwitcher`, `SettlementNote`.
+  - All price displays converted to `<Price>`. **Static generation preserved** — server renders GBP-canonical; the saved currency is applied client-side after mount (no hydration mismatch, no forced dynamic rendering).
+  - Payment still settles in GBP (display-only conversion) — recorded in `DEFERRED.md` (live FX + multi-currency settlement).
+  - Quality gates: `typecheck` ✓ · `lint` ✓ · `test` ✓ (72) · `build` ✓ (SSG preserved) · runtime smoke ✓.
+- Committed earlier: `screenshots.mjs` (Playwright capture, `apps/web/scripts/`).
 
 ## In-progress
 
-- **Nothing in flight.** 🎉 **Phase-1 MVP feature set is complete** (Increments 1–6). Awaiting direction on next phase.
+- **Nothing in flight.** Phase 2 has begun (multi-currency done); next increments are i18n and personalisation.
 
 ## Blocked by
 
 - **Nothing blocking.** Write access confirmed — Claude pushes directly to `origin/main`.
 - **Deferred production switches recorded in `DEFERRED.md`:** Postgres (persistence), Stripe (payments), Claude (AI Sommelier), **Sanity (content)**, plus auth/search/age-verification/tax. Each swaps behind an existing interface.
 
-## Next Action (awaiting owner direction)
+## Next Action
 
-1. **Production hardening** — wire the deferred swaps as infra/keys become available (Postgres → Stripe → Claude → Sanity → real auth/search), and add analytics + accessibility (WCAG 2.2 AA) + Core Web Vitals budgets + CI (per `docs/07`).
-2. **OR Phase 2** — Global Whisky Discovery: multi-currency/language, richer personalisation (palate profile), per `docs/01`/`docs/02`.
+1. **Claude — continue Phase 2:** (8) i18n / multi-language (message catalogue + locale switch + `hreflang`, interface-first translation source), then (9) personalisation (palate profile + "Recommended for you" rails + advisor uses the profile).
+2. **In parallel / when ready:** production swaps from `DEFERRED.md` (Postgres, Stripe, Claude, Sanity, live FX, real auth/search), plus analytics + accessibility + CWV + CI.
 3. Keep every increment runnable, tested, and pushed to `main`; update the two context files after each.
 
 ## How to run

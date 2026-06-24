@@ -1,8 +1,10 @@
+import type { ReactNode } from "react";
 import type { CartLineDetailed, OrderTotals } from "@whiskymart/types";
-import { formatMoney } from "@/lib/utils";
 import { ProductImage } from "@/components/product-image";
+import { Price } from "@/components/market/price";
+import { SettlementNote } from "@/components/market/settlement-note";
 
-function Row({ label, value, muted }: { label: string; value: string; muted?: boolean }) {
+function Row({ label, value, muted }: { label: string; value: ReactNode; muted?: boolean }) {
   return (
     <div className={`flex justify-between text-sm ${muted ? "text-charcoal/50" : "text-charcoal/70"}`}>
       <span>{label}</span>
@@ -32,29 +34,32 @@ export function OrderSummary({
                 {l.variant.sizeMl ? `${l.variant.sizeMl}cl · ` : ""}Qty {l.quantity}
               </p>
             </div>
-            <span className="text-sm font-medium text-charcoal">{formatMoney(l.lineTotal)}</span>
+            <Price className="text-sm font-medium text-charcoal" money={l.lineTotal} />
           </li>
         ))}
       </ul>
 
       {totals ? (
         <div className="mt-5 space-y-2 border-t border-whisky-100 pt-4">
-          <Row label="Subtotal" value={formatMoney(totals.subtotal)} />
+          <Row label="Subtotal" value={<Price money={totals.subtotal} />} />
           <Row
             label="Shipping"
-            value={totals.shipping.amount === 0 ? "Free" : formatMoney(totals.shipping)}
+            value={totals.shipping.amount === 0 ? "Free" : <Price money={totals.shipping} />}
           />
           {!totals.vatInclusive && totals.tax.amount > 0 ? (
-            <Row label="Tax / VAT" value={formatMoney(totals.tax)} />
+            <Row label="Tax / VAT" value={<Price money={totals.tax} />} />
           ) : null}
-          {totals.duty.amount > 0 ? <Row label="Import duty" value={formatMoney(totals.duty)} /> : null}
+          {totals.duty.amount > 0 ? <Row label="Import duty" value={<Price money={totals.duty} />} /> : null}
           <div className="flex justify-between border-t border-whisky-100 pt-3 font-display text-lg text-charcoal">
             <span>Total</span>
-            <span>{formatMoney(totals.grandTotal)}</span>
+            <Price money={totals.grandTotal} />
           </div>
           {totals.vatInclusive && totals.tax.amount > 0 ? (
-            <p className="text-xs text-charcoal/50">Includes {formatMoney(totals.tax)} VAT</p>
+            <p className="text-xs text-charcoal/50">
+              Includes <Price money={totals.tax} /> VAT
+            </p>
           ) : null}
+          <SettlementNote className="pt-1 text-xs text-charcoal/50" />
         </div>
       ) : (
         <p className="mt-5 border-t border-whisky-100 pt-4 text-sm text-charcoal/50">

@@ -3,7 +3,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { PlusCircle } from "lucide-react";
 import { catalog, getPrimaryVariant } from "@/lib/catalog/repository";
-import { formatAge, formatMoney } from "@/lib/utils";
+import { formatAge } from "@/lib/utils";
+import { Price } from "@/components/market/price";
 import { ProductImage } from "@/components/product-image";
 import { StarRating } from "@/components/star-rating";
 import { FlavourBars } from "@/components/flavour-bars";
@@ -97,10 +98,10 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
           </div>
 
           <div className="mt-6 flex items-end gap-3">
-            <span className="font-display text-3xl text-charcoal">{formatMoney(variant.price)}</span>
+            <Price className="font-display text-3xl text-charcoal" money={variant.price} />
             {variant.memberPrice ? (
               <span className="pb-1 text-sm text-whisky-700">
-                Members {formatMoney(variant.memberPrice)}
+                Members <Price money={variant.memberPrice} />
               </span>
             ) : null}
           </div>
@@ -121,7 +122,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
               <p className="text-sm font-medium text-charcoal">Not sure yet?</p>
               <div className="mt-2 flex items-center justify-between gap-3">
                 <span className="text-sm text-charcoal/60">
-                  Try a 3cl sample for {formatMoney(sampleVariant.price)}
+                  Try a 3cl sample for <Price money={sampleVariant.price} />
                 </span>
                 <AddToCartButton
                   productId={product.id}

@@ -6,7 +6,7 @@ import { Heart, LogOut, Package } from "lucide-react";
 import type { Order } from "@whiskymart/types";
 import { useAccount } from "@/components/account/account-provider";
 import { Button, buttonClasses } from "@/components/ui/button";
-import { formatMoney } from "@/lib/utils";
+import { Price } from "@/components/market/price";
 
 function SignInForm() {
   const { signIn } = useAccount();
@@ -92,7 +92,7 @@ function OrderHistory({ email }: { email: string }) {
           <p className="mt-1 text-sm text-charcoal/60">
             {new Date(o.placedAt).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" })}
             {" · "}
-            {o.items.reduce((n, i) => n + i.quantity, 0)} item(s) · {formatMoney(o.totals.grandTotal)}
+            {o.items.reduce((n, i) => n + i.quantity, 0)} item(s) · <Price money={o.totals.grandTotal} />
           </p>
           <p className="mt-2 truncate text-sm text-charcoal/70">
             {o.items.map((i) => `${i.title} ×${i.quantity}`).join(", ")}

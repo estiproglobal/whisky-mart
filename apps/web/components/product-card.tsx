@@ -1,11 +1,12 @@
 import Link from "next/link";
 import type { Product } from "@whiskymart/types";
-import { formatAge, formatMoney } from "@/lib/utils";
+import { formatAge } from "@/lib/utils";
 import { getPrimaryVariant } from "@/lib/catalog/repository";
 import { ProductImage } from "./product-image";
 import { StarRating } from "./star-rating";
 import { Badge } from "./badge";
 import { WishlistButton } from "./wishlist/wishlist-button";
+import { Price } from "./market/price";
 
 export function ProductCard({ product }: { product: Product }) {
   const variant = getPrimaryVariant(product);
@@ -41,7 +42,7 @@ export function ProductCard({ product }: { product: Product }) {
 
         <div className="mt-auto flex items-end justify-between pt-2">
           <div>
-            <div className="font-semibold text-charcoal">{formatMoney(variant.price)}</div>
+            <Price className="font-semibold text-charcoal" money={variant.price} />
             {product.whisky ? (
               <div className="text-xs text-charcoal/50">{formatAge(product.whisky.ageYears)}</div>
             ) : null}

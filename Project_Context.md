@@ -81,9 +81,10 @@ Handoff.md                             # status snapshot
 DEFERRED.md                            # planned production swaps (Postgres, Stripe, …)
 ```
 
-> **Build status:** the **Phase-1 MVP is feature-complete** on `main`, built in
-> tested increments (1–6: storefront · search/wishlist · checkout+compliance+
-> payment · accounts/persistence/reviews · AI Sommelier+Gift Finder · content+
-> SEO). 64 tests, all gates green. Interface-first throughout — production
-> integrations (Postgres, Stripe, Claude, Sanity, auth/search) are recorded in
+> **Build status:** **Phase-1 MVP feature-complete** on `main` (Increments 1–6:
+> storefront · search/wishlist · checkout+compliance+payment · accounts/
+> persistence/reviews · AI Sommelier+Gift Finder · content+SEO). **Phase 2
+> underway** — Increment 7 (multi-currency) done; next: i18n, personalisation.
+> 72 tests, all gates green. Interface-first throughout — production integrations
+> (Postgres, Stripe, Claude, Sanity, live FX, auth/search) are recorded in
 > `DEFERRED.md`.
