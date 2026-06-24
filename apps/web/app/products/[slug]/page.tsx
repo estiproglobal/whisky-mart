@@ -12,6 +12,7 @@ import { ProductCard } from "@/components/product-card";
 import { AddToCartButton } from "@/components/cart/add-to-cart-button";
 import { WishlistButton } from "@/components/wishlist/wishlist-button";
 import { RecentlyViewedRail, RecentlyViewedTracker } from "@/components/recently-viewed";
+import { ProductReviews } from "@/components/reviews/product-reviews";
 
 export async function generateStaticParams() {
   const products = await catalog.getAll();
@@ -174,6 +175,9 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
           </div>
         </section>
       ) : null}
+
+      {/* Customer reviews */}
+      <ProductReviews productId={product.id} />
 
       {/* Related */}
       {related.length > 0 ? (

@@ -287,3 +287,33 @@ export interface Order {
   ageConfirmed: boolean;
   placedAt: string; // ISO timestamp
 }
+
+/* -------------------------------------------------------------------------- */
+/*  Reviews                                                                    */
+/* -------------------------------------------------------------------------- */
+
+export const ReviewInput = z.object({
+  productId: z.string().min(1),
+  author: z.string().min(1).max(60),
+  rating: z.number().int().min(1).max(5),
+  title: z.string().min(1).max(120),
+  body: z.string().min(1).max(2000),
+  email: z.string().email().optional(), // used to flag verified purchase
+});
+export type ReviewInput = z.infer<typeof ReviewInput>;
+
+export interface Review {
+  id: string;
+  productId: string;
+  author: string;
+  rating: number; // 1–5
+  title: string;
+  body: string;
+  verifiedPurchase: boolean;
+  createdAt: string; // ISO timestamp
+}
+
+export interface ReviewSummary {
+  average: number; // 0–5, one decimal
+  count: number;
+}

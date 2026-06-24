@@ -8,7 +8,7 @@
 
 **WhiskyMart.com** is a plan to transform a premium, 14-year-aged exact-match domain (registered 17 July 2012) into the world's leading **whisky commerce, content, community, and collector ecosystem** — not merely an online store.
 
-This repository currently contains the **strategic + technical blueprint** (10 documents under `README.md` + `docs/`). The application itself has **not been built yet**; the blueprint is the contract from which an engineering team or AI coding agent will build it.
+This repository contains the **strategic + technical blueprint** (10 documents under `README.md` + `docs/`) **and** the application now being built from it (`apps/web`, `packages/`). The blueprint is the contract; the app is built in tested increments (see `Current_Task.md`/`Handoff.md`).
 
 **The thesis:** the category leaders are each incomplete — The Whisky Exchange is prestigious but supplier-owned (Pernod Ricard) and innovation-slowed; Master of Malt is deep but dated and un-personalised; The Whisky Shop is loyalty-strong but retail-bound; and the investment/auction/data world is run by entirely separate companies. **No one unifies buy → discover → learn → belong → collect → invest under one trusted, AI-native brand.** WhiskyMart.com will.
 
@@ -78,4 +78,11 @@ docs/09-compliance-and-regulatory.md
 Project_Context.md                     # this file
 Current_Task.md                        # active work + acceptance criteria
 Handoff.md                             # status snapshot
+DEFERRED.md                            # planned production swaps (Postgres, Stripe, …)
 ```
+
+> **Build status:** the application is now under active construction (not just a
+> blueprint). The monorepo + `apps/web` storefront exist on `main`, built in
+> tested increments (1–4 done: storefront, search/wishlist, checkout, accounts/
+> persistence/reviews). Interface-first throughout — production integrations are
+> recorded in `DEFERRED.md`.

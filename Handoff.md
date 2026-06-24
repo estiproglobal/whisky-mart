@@ -25,27 +25,29 @@
 - **MVP build — Increment 2 (Search, Wishlist & Recently-viewed): ✅ COMPLETE & VERIFIED, pushed to `main`.**
   - `GET /api/search` + `relevanceScore()`; instant-search autocomplete; wishlist (provider + hearts + page); recently-viewed; PLP active-filter chips.
 - **MVP build — Increment 3 (Checkout, age verification & payment): ✅ COMPLETE & VERIFIED, pushed to `main`.**
-  - Jurisdiction engine (`lib/checkout/jurisdiction.ts`) — server-authoritative shippability + tax/age rules (UK allowed; US/unknown blocked with reason).
-  - VAT-aware pricing (`pricing.ts`, UK inclusive / EU added), shipping methods (free standard over £100).
-  - `PaymentProvider` interface + `MockPaymentProvider` (declines a card ending 0002). Stripe swaps in behind it when `STRIPE_SECRET_KEY` is set.
-  - API: `POST /api/checkout/quote`, `POST /api/checkout/pay` (re-validates jurisdiction + age server-side).
-  - Multi-step `CheckoutFlow`, order summary, `/checkout/confirmation`; cart checkout button enabled.
-  - Quality gates: `typecheck` ✓ · `lint` ✓ · `test` ✓ (36) · `build` ✓ (36 routes) · runtime smoke test ✓ (quote allowed/blocked; pay success/age/jurisdiction/decline).
+  - Jurisdiction engine, VAT-aware pricing, `PaymentProvider` + `MockPaymentProvider`, `/api/checkout/quote` + `/pay`, multi-step `CheckoutFlow`, confirmation.
+- **MVP build — Increment 4 (Accounts, order persistence & reviews): ✅ COMPLETE & VERIFIED, pushed to `main`.**
+  - **Interface-first persistence:** `OrderRepository` + `ReviewRepository` (`lib/db/types.ts`), in-memory impl (`lib/db/memory.ts`), single binding (`lib/db/index.ts`) — swaps to Postgres later.
+  - Orders persist on `POST /api/checkout/pay`; `GET /api/orders?email=` powers order history.
+  - Reviews: `GET|POST /api/products/[id]/reviews`, aggregate summary, **verified-purchase** via order cross-check.
+  - Mock `AccountProvider` (sign-in/profile); `/account` dashboard with order history; PDP customer-reviews section + form.
+  - **`DEFERRED.md` created** — records the planned **Postgres** and **Stripe** switches (+ auth/search/etc.), as requested, so they're on record for later.
+  - Quality gates: `typecheck` ✓ · `lint` ✓ · `test` ✓ (40) · `build` ✓ (38 routes) · runtime smoke test ✓ (order persists → history £79.90; reviews 4.5→4.7 with verified-purchase; invalid → 400).
 
 ## In-progress
 
-- **Increment 4 — Accounts, order persistence & reviews** is the active/next task (not yet started). Scope + acceptance criteria in `Current_Task.md`.
+- **Increment 5 — AI Whisky Advisor (Sommelier) v1 + Gift Finder** is the active/next task (not yet started). Scope + acceptance criteria in `Current_Task.md`.
 
 ## Blocked by
 
 - **Nothing blocking.** Write access confirmed — Claude pushes directly to `origin/main`.
-- **Decision resolved:** payment uses a **mock provider** behind a `PaymentProvider` interface; real Stripe test mode swaps in later behind the same interface (add `STRIPE_SECRET_KEY`).
-- **Heads-up for Increment 4:** orders are **not yet persisted** (returned from the pay API and held in `sessionStorage` for the confirmation page only). Increment 4 should add an `OrderRepository` / persistence layer.
+- **Deferred production switches are recorded in `DEFERRED.md`** (Postgres persistence, Stripe payments, real auth/search/age-verification/tax/CMS). Each swaps behind an existing interface.
+- **For Increment 5:** the AI layer will be interface-first too — a grounded mock advisor now, **Claude (Anthropic) via `ANTHROPIC_API_KEY`** swapped in later (add to `DEFERRED.md` when built).
 
 ## Next Action
 
-1. **Claude — Increment 4:** Accounts, order persistence & reviews. Add an `OrderRepository`/persistence layer (orders survive), a lightweight account (profile + addresses + order history), and verified-purchase reviews that render on the PDP and aggregate ratings.
-2. **Then (suggested order):** real Stripe test mode behind the existing `PaymentProvider` · (5) AI Whisky Advisor v1 (RAG) + Gift Finder · (6) CMS (Sanity) + content/SEO.
+1. **Claude — Increment 5:** AI Whisky Advisor (Sommelier) v1 + Gift Finder — RAG-grounded over the catalogue, interface-first (`Advisor` interface; grounded mock now, Claude via `ANTHROPIC_API_KEY` later). Guardrails: age-gated, responsible-drinking, no fabricated price/stock.
+2. **Then (suggested order):** (6) CMS (Sanity) + content/SEO · production swaps from `DEFERRED.md` (Postgres, Stripe, real auth/search).
 3. Keep every increment runnable, tested, and pushed to `main`; update the two context files after each.
 
 ## How to run

@@ -5,6 +5,7 @@ import { evaluateJurisdiction } from "@/lib/checkout/jurisdiction";
 import { findShippingMethod } from "@/lib/checkout/shipping";
 import { calculateTotals } from "@/lib/checkout/pricing";
 import { getPaymentProvider } from "@/lib/checkout/payment";
+import { orders } from "@/lib/db";
 import type { PayRequest, PayResponse } from "@/lib/checkout/contracts";
 
 function fail(error: string, field?: string, status = 400) {
@@ -91,6 +92,6 @@ export async function POST(req: NextRequest) {
     placedAt: new Date().toISOString(),
   };
 
-  // NOTE: orders are not yet persisted — Increment 4 wires Postgres/Medusa.
+  await orders.create(order);
   return NextResponse.json<PayResponse>({ ok: true, order });
 }
