@@ -70,7 +70,24 @@ the on-the-record list so these are not forgotten.
 - **Guardrails (already in the mock, keep in Claude):** age-gated context,
   responsible-drinking disclaimer, no fabricated price/stock.
 
-## 4. Other interface-first seams (swap when scaling)
+## 4. Content/CMS — seed content → **Sanity** (planned)
+
+- **Status:** interface-first since **Increment 6**.
+- **Now:** a `ContentRepository` (`apps/web/lib/content/repository.ts`) over seed
+  articles (`seed.ts`). Content is a structured block model (`ContentBlock`)
+  supporting shoppable product embeds. Powers `/guides`, `/guides/[slug]`, the
+  home "Guides & stories" rail, and PDP "Featured in our guides".
+- **Switch later to Sanity:**
+  1. Create a Sanity project; model `Article` + portable-text/blocks to match
+     the `Article`/`ContentBlock` types.
+  2. Implement `SanityContentRepository implements ContentRepository`; map
+     portable text → our `ContentBlock[]` (or extend the renderer).
+  3. Rebind `content` in `repository.ts` to the Sanity-backed impl.
+  4. Add env: `SANITY_PROJECT_ID`, `SANITY_DATASET`, `SANITY_API_TOKEN`; add a
+     revalidation webhook (`/api/webhooks/cms`) for ISR.
+  - **No changes needed** in the guide pages, home rail, PDP, or `sitemap.ts`.
+
+## 5. Other interface-first seams (swap when scaling)
 
 | Capability | Now (dev) | Production target | Seam |
 |------------|-----------|-------------------|------|
@@ -79,7 +96,6 @@ the on-the-record list so these are not forgotten.
 | Search | Seed + `relevanceScore()` over `/api/search` | Algolia / Typesense + vector | `/api/search` route + repository |
 | Age verification | Self-declared gate + checkout checkbox | Persona / Veriff / Yoti | checkout `age` step + `/api/checkout/pay` |
 | Jurisdiction/tax | Encoded rules table | Tax engine (Stripe Tax / Avalara) + fuller rules | `lib/checkout/jurisdiction.ts` |
-| CMS/content | Static | Sanity | (Increment 6) |
 
 ---
 

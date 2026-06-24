@@ -29,27 +29,28 @@
 - **MVP build — Increment 4 (Accounts, order persistence & reviews): ✅ COMPLETE & VERIFIED, pushed to `main`.**
   - Interface-first `OrderRepository`/`ReviewRepository` (in-memory), `/account` order history, verified-purchase reviews on PDP. `DEFERRED.md` created.
 - **MVP build — Increment 5 (AI Sommelier + Gift Finder): ✅ COMPLETE & VERIFIED, pushed to `main`.**
-  - **Interface-first AI:** `Advisor` interface (`lib/advisor/types.ts`) + `GroundedMockAdvisor` (NL `parse.ts` → shared `engine.ts` over the live catalogue). `getAdvisor()` swaps to Claude when `ANTHROPIC_API_KEY` is set.
-  - APIs: `POST /api/advisor` (Sommelier), `POST /api/gift-finder`.
-  - UI: interactive `/sommelier` (chat thread + grounded recommendation cards with reasons), `/gift-finder` (guided form), home AI-tools section + nav.
-  - Grounded — only ever returns real products/prices; budget/region respected; responsible-drinking disclaimer.
-  - **`DEFERRED.md` updated** with the Claude/`ANTHROPIC_API_KEY` swap.
-  - Quality gates: `typecheck` ✓ · `lint` ✓ · `test` ✓ (53) · `build` ✓ (40 routes) · runtime smoke test ✓ (smoky-Islay-under-£80 → 3 real bottles ≤ £74.95; gift finder on-budget; empty → 400).
+  - `Advisor` interface + `GroundedMockAdvisor` (NL parse → shared engine over the live catalogue); `/api/advisor` + `/api/gift-finder`; interactive `/sommelier` + `/gift-finder`. Grounded; Claude swaps in via `ANTHROPIC_API_KEY`.
+- **MVP build — Increment 6 (Content & SEO): ✅ COMPLETE & VERIFIED, pushed to `main`.**
+  - **Interface-first content:** `ContentRepository` (`lib/content/`) over seed articles; structured `ContentBlock` model with shoppable product embeds.
+  - Pages: `/guides` hub + `/guides/[slug]` (SSG) — buying guides, Academy education, journal.
+  - **SEO:** `Product` JSON-LD on PDP; `Article` + breadcrumb JSON-LD on guides; `sitemap.xml` + `robots.txt`.
+  - Cross-linking: home "Guides & stories" rail; PDP "Featured in our guides"; guides → products. "Guides" added to nav.
+  - **`DEFERRED.md` updated** with the Sanity (CMS) swap.
+  - Quality gates: `typecheck` ✓ · `lint` ✓ · `test` ✓ (64) · `build` ✓ (4 SSG guides + sitemap/robots) · runtime smoke test ✓.
 
 ## In-progress
 
-- **Increment 6 — Content & SEO (blog / buying guides / education + structured data)** is the active/next task (not yet started). Scope + acceptance criteria in `Current_Task.md`.
+- **Nothing in flight.** 🎉 **Phase-1 MVP feature set is complete** (Increments 1–6). Awaiting direction on next phase.
 
 ## Blocked by
 
 - **Nothing blocking.** Write access confirmed — Claude pushes directly to `origin/main`.
-- **Deferred production switches recorded in `DEFERRED.md`:** Postgres (persistence), Stripe (payments), **Claude (AI Sommelier)**, plus auth/search/age-verification/tax/CMS. Each swaps behind an existing interface.
-- **For Increment 6:** content will be interface-first too — a `ContentRepository` (local/MDX) now, **Sanity** later.
+- **Deferred production switches recorded in `DEFERRED.md`:** Postgres (persistence), Stripe (payments), Claude (AI Sommelier), **Sanity (content)**, plus auth/search/age-verification/tax. Each swaps behind an existing interface.
 
-## Next Action
+## Next Action (awaiting owner direction)
 
-1. **Claude — Increment 6:** Content & SEO — blog, buying guides, whisky education; interface-first `ContentRepository` (local/MDX now → Sanity later); JSON-LD structured data (Product/Article) + sitemap/robots; content rail + cross-linking to products.
-2. **Then:** production swaps from `DEFERRED.md` (Postgres, Stripe, Claude, real auth/search) as infra/keys become available.
+1. **Production hardening** — wire the deferred swaps as infra/keys become available (Postgres → Stripe → Claude → Sanity → real auth/search), and add analytics + accessibility (WCAG 2.2 AA) + Core Web Vitals budgets + CI (per `docs/07`).
+2. **OR Phase 2** — Global Whisky Discovery: multi-currency/language, richer personalisation (palate profile), per `docs/01`/`docs/02`.
 3. Keep every increment runnable, tested, and pushed to `main`; update the two context files after each.
 
 ## How to run

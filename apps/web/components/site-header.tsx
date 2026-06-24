@@ -10,7 +10,8 @@ const NAV: Array<{ label: string; href: string }> = [
   { label: "Speyside", href: "/c/speyside" },
   { label: "Best sellers", href: "/c/bestsellers" },
   { label: "Samples", href: "/c/samples" },
-  { label: "Gifts", href: "/c/gifts" },
+  { label: "Guides", href: "/guides" },
+  { label: "Gift Finder", href: "/gift-finder" },
 ];
 
 export function SiteHeader() {

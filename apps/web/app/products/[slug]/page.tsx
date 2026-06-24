@@ -13,6 +13,9 @@ import { AddToCartButton } from "@/components/cart/add-to-cart-button";
 import { WishlistButton } from "@/components/wishlist/wishlist-button";
 import { RecentlyViewedRail, RecentlyViewedTracker } from "@/components/recently-viewed";
 import { ProductReviews } from "@/components/reviews/product-reviews";
+import { content, readingMinutes } from "@/lib/content/repository";
+import { JsonLd } from "@/components/json-ld";
+import { productJsonLd } from "@/lib/seo/structured-data";
 
 export async function generateStaticParams() {
   const products = await catalog.getAll();
@@ -52,10 +55,12 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
   const sampleVariant = product.variants.find((v) => v.sizeMl > 0 && v.sizeMl <= 30);
   const related = await catalog.getRelated(slug);
   const allProducts = await catalog.getAll();
+  const articles = await content.byProduct(product.id);
   const w = product.whisky;
 
   return (
     <div className="container-page py-8">
+      <JsonLd data={productJsonLd(product)} />
       <RecentlyViewedTracker productId={product.id} />
       <nav aria-label="Breadcrumb" className="mb-6 text-sm text-charcoal/50">
         <Link href="/" className="hover:text-whisky-700">Home</Link>
@@ -188,6 +193,29 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
               <ProductCard key={p.id} product={p} />
             ))}
           </div>
+        </section>
+      ) : null}
+
+      {/* Featured in guides */}
+      {articles.length > 0 ? (
+        <section className="mt-14">
+          <h2 className="font-display text-2xl text-charcoal">Featured in our guides</h2>
+          <ul className="mt-5 space-y-3">
+            {articles.map((a) => (
+              <li key={a.id}>
+                <Link
+                  href={`/guides/${a.slug}`}
+                  className="flex items-center justify-between gap-4 rounded-2xl bg-white p-5 shadow-card hover:shadow-lg"
+                >
+                  <span>
+                    <span className="block font-display text-lg text-charcoal">{a.title}</span>
+                    <span className="block text-sm text-charcoal/60">{a.excerpt}</span>
+                  </span>
+                  <span className="shrink-0 text-sm text-whisky-700">{readingMinutes(a)} min →</span>
+                </Link>
+              </li>
+            ))}
+          </ul>
         </section>
       ) : null}
 

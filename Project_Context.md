@@ -81,8 +81,9 @@ Handoff.md                             # status snapshot
 DEFERRED.md                            # planned production swaps (Postgres, Stripe, …)
 ```
 
-> **Build status:** the application is now under active construction (not just a
-> blueprint). The monorepo + `apps/web` storefront exist on `main`, built in
-> tested increments (1–4 done: storefront, search/wishlist, checkout, accounts/
-> persistence/reviews). Interface-first throughout — production integrations are
-> recorded in `DEFERRED.md`.
+> **Build status:** the **Phase-1 MVP is feature-complete** on `main`, built in
+> tested increments (1–6: storefront · search/wishlist · checkout+compliance+
+> payment · accounts/persistence/reviews · AI Sommelier+Gift Finder · content+
+> SEO). 64 tests, all gates green. Interface-first throughout — production
+> integrations (Postgres, Stripe, Claude, Sanity, auth/search) are recorded in
+> `DEFERRED.md`.

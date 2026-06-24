@@ -317,3 +317,31 @@ export interface ReviewSummary {
   average: number; // 0–5, one decimal
   count: number;
 }
+
+/* -------------------------------------------------------------------------- */
+/*  Content (editorial / guides / education)                                   */
+/* -------------------------------------------------------------------------- */
+
+export type ArticleType = "article" | "guide" | "education";
+
+/** Structured content blocks — supports shoppable product embeds. */
+export type ContentBlock =
+  | { kind: "heading"; text: string }
+  | { kind: "paragraph"; text: string }
+  | { kind: "quote"; text: string; cite?: string }
+  | { kind: "products"; productIds: string[]; note?: string };
+
+export interface Article {
+  id: string;
+  type: ArticleType;
+  slug: string;
+  title: string;
+  excerpt: string;
+  heroSeed: string; // deterministic gradient hero (placeholder for real imagery)
+  author: string;
+  publishedAt: string; // ISO date
+  tags: string[];
+  body: ContentBlock[];
+  relatedProductIds: string[];
+  seo?: { metaTitle?: string; metaDescription?: string };
+}

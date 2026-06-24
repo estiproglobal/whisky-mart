@@ -1,8 +1,10 @@
 import Link from "next/link";
 import { ArrowRight, Sparkles, ShieldCheck, Truck, Award, Gift } from "lucide-react";
 import { catalog } from "@/lib/catalog/repository";
+import { content, readingMinutes } from "@/lib/content/repository";
 import { ProductRail } from "@/components/product-rail";
 import { RecentlyViewedRail } from "@/components/recently-viewed";
+import { ArticleCard } from "@/components/content/article-card";
 import { buttonClasses } from "@/components/ui/button";
 
 const SHORTCUTS: Array<{ label: string; href: string }> = [
@@ -25,6 +27,7 @@ export default async function HomePage() {
   const all = await catalog.getAll();
   const newLimited = all.filter((p) => p.badges.includes("new") || p.badges.includes("limited"));
   const bestsellers = all.filter((p) => p.badges.includes("bestseller"));
+  const articles = await content.featured(3);
 
   return (
     <>
@@ -114,6 +117,24 @@ export default async function HomePage() {
           >
             Find a gift <ArrowRight className="h-4 w-4" />
           </Link>
+        </div>
+      </section>
+
+      {/* Guides & stories */}
+      <section className="container-page py-10">
+        <div className="mb-5 flex items-end justify-between">
+          <h2 className="font-display text-2xl text-charcoal sm:text-3xl">Guides &amp; stories</h2>
+          <Link
+            href="/guides"
+            className="inline-flex items-center gap-1 text-sm font-medium text-whisky-700 hover:text-whisky-900"
+          >
+            All guides <ArrowRight className="h-4 w-4" />
+          </Link>
+        </div>
+        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {articles.map((article) => (
+            <ArticleCard key={article.id} article={article} minutes={readingMinutes(article)} />
+          ))}
         </div>
       </section>
 
