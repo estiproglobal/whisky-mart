@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ArrowRight, Sparkles, ShieldCheck, Truck, Award } from "lucide-react";
 import { catalog } from "@/lib/catalog/repository";
 import { ProductRail } from "@/components/product-rail";
+import { RecentlyViewedRail } from "@/components/recently-viewed";
 import { buttonClasses } from "@/components/ui/button";
 
 const SHORTCUTS: Array<{ label: string; href: string }> = [
@@ -86,6 +87,7 @@ export default async function HomePage() {
 
       <ProductRail title="New & limited" products={newLimited} viewAllHref="/shop?sort=newest" />
       <ProductRail title="Best sellers" products={bestsellers} viewAllHref="/c/bestsellers" />
+      <RecentlyViewedRail allProducts={all} />
 
       {/* Sommelier teaser */}
       <section className="container-page py-12">

@@ -1,5 +1,11 @@
 import { describe, expect, it } from "vitest";
-import { catalog, getPrimaryVariant, resolveCartLines } from "./repository";
+import {
+  catalog,
+  getPrimaryVariant,
+  getProductsByIds,
+  relevanceScore,
+  resolveCartLines,
+} from "./repository";
 
 describe("catalog.search", () => {
   it("returns the full catalogue with no filter", async () => {
@@ -66,5 +72,37 @@ describe("resolveCartLines", () => {
       { productId: "nope", variantId: "nope", quantity: 1 },
     ]);
     expect(resolved).toHaveLength(0);
+  });
+});
+
+describe("getProductsByIds", () => {
+  it("returns products preserving the requested order", () => {
+    const products = getProductsByIds(["p_ardbeg10", "p_glenfiddich12"]);
+    expect(products.map((p) => p.id)).toEqual(["p_ardbeg10", "p_glenfiddich12"]);
+  });
+
+  it("skips unknown ids", () => {
+    const products = getProductsByIds(["nope", "p_talisker10"]);
+    expect(products.map((p) => p.id)).toEqual(["p_talisker10"]);
+  });
+});
+
+describe("relevanceScore", () => {
+  it("ranks exact/prefix title matches above brand-only matches", async () => {
+    const lagavulin = (await catalog.getBySlug("lagavulin-16-year-old"))!;
+    const glenfiddich = (await catalog.getBySlug("glenfiddich-12-year-old"))!;
+    expect(relevanceScore(lagavulin, "lagavulin")).toBeGreaterThan(
+      relevanceScore(glenfiddich, "lagavulin"),
+    );
+  });
+
+  it("returns 0 for an empty query", async () => {
+    const p = (await catalog.getBySlug("ardbeg-10-year-old"))!;
+    expect(relevanceScore(p, "")).toBe(0);
+  });
+
+  it("orders search results by relevance for a free-text query", async () => {
+    const { items } = await catalog.search({ query: "ardbeg" }, "relevance");
+    expect(items[0]!.slug).toBe("ardbeg-10-year-old");
   });
 });

@@ -5,6 +5,7 @@ import { getPrimaryVariant } from "@/lib/catalog/repository";
 import { ProductImage } from "./product-image";
 import { StarRating } from "./star-rating";
 import { Badge } from "./badge";
+import { WishlistButton } from "./wishlist/wishlist-button";
 
 export function ProductCard({ product }: { product: Product }) {
   const variant = getPrimaryVariant(product);
@@ -24,6 +25,7 @@ export function ProductCard({ product }: { product: Product }) {
             ))}
           </div>
         ) : null}
+        <WishlistButton productId={product.id} className="absolute right-3 top-3" />
       </div>
 
       <div className="flex flex-1 flex-col gap-2 p-4">

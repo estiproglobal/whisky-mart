@@ -1,6 +1,6 @@
 # Handoff
 
-**Date:** 2026-06-23
+**Date:** 2026-06-24
 **From:** Claude (agent session)
 **To:** Repo owner (estiproglobal) / next agent session
 
@@ -21,28 +21,30 @@
   - Pages: Home (hero, shortcuts, rails, sommelier teaser, trust bar), Shop/PLP (faceted, URL-driven), 12 category collections, Search, PDP (buy box, key facts, flavour bars, tasting notes, sample CTA, related), Cart (qty/remove/summary), Sommelier teaser, 404.
   - Cart: client context + localStorage persistence + header indicator.
   - Quality gates: `typecheck` ✓ · `lint` ✓ · `test` ✓ (16) · `build` ✓ (30 routes) · runtime smoke test ✓.
+- **Repo reconciled:** adopted `origin/main` as base; restored `.gitignore` + `apps/web/.eslintrc.json` (dropped by the web-UI folder upload); preserved the owner's Claude GitHub Action workflows.
+- **MVP build — Increment 2 (Search, Wishlist & Recently-viewed): ✅ COMPLETE & VERIFIED, pushed to `main`.**
+  - `GET /api/search` (first API endpoint) + `relevanceScore()` ranking.
+  - Instant-search header autocomplete (debounced, keyboard-navigable, thumbnails, view-all).
+  - Wishlist: `WishlistProvider` (localStorage), heart on cards + PDP, header count, `/account/wishlist`.
+  - Recently-viewed: tracker + rails on Home and PDP.
+  - PLP active-filter chips. Removed dead `search-box.tsx`.
+  - Quality gates: `typecheck` ✓ · `lint` ✓ · `test` ✓ (21) · `build` ✓ (32 routes) · runtime smoke test ✓.
 
 ## In-progress
 
-- **Nothing in flight** — Increment 1 is done and verified. Awaiting owner push, then Increment 2.
+- **Nothing in flight** — Increment 2 is done, verified, and pushed. Ready for Increment 3.
 
 ## Blocked by
 
-- **Nothing blocking work.** Push to GitHub is **manual by design** — the session's GitHub integration is read-only (`403 Resource not accessible by integration`), so the owner pushes from their own machine. Claude provides a step-by-step push/upload guide with each increment.
-- *(Optional future unblock:* grant the Claude GitHub App **Contents: write** on the repo to enable direct pushes — separate from the repo's Actions workflow-permissions setting.)
+- **Nothing.** The session's GitHub integration now has **write access** — Claude pushes directly to `origin/main` (verified this session). Manual upload is no longer required.
 
 ## Next Action
 
-1. **Owner:** push Increment 1 to GitHub using the provided manual guide (git CLI or web UI); confirm.
-2. **Claude (next increments, suggested order):**
-   - (2) Search results polish + cart enhancements (instant search, recently viewed, wishlist persistence)
-   - (3) Checkout + age verification + Stripe (test mode) + UK jurisdiction rules
-   - (4) Accounts + wishlist + reviews
-   - (5) AI Whisky Advisor v1 (RAG) + Gift Finder
-   - (6) CMS (Sanity) + content/SEO
-3. Keep every increment runnable, tested, and accompanied by a manual push guide.
+1. **Claude — Increment 3:** Checkout + age verification + Stripe (test mode) + UK jurisdiction rules. Likely: a multi-step checkout (delivery → age check → shipping → payment → review), a `services/jurisdiction`-style rules check (server-side, can-we-ship + tax), Stripe test-mode PaymentIntent via `POST /api/checkout/*`, order confirmation.
+2. **Then (suggested order):** (4) Accounts + reviews · (5) AI Whisky Advisor v1 (RAG) + Gift Finder · (6) CMS (Sanity) + content/SEO.
+3. Keep every increment runnable, tested, and pushed to `main`.
 
-## How to run (Increment 1)
+## How to run
 
 ```bash
 pnpm install

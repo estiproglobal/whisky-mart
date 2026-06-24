@@ -1,7 +1,8 @@
 import Link from "next/link";
-import { Heart, User } from "lucide-react";
-import { SearchBox } from "./search-box";
+import { User } from "lucide-react";
+import { InstantSearch } from "./search/instant-search";
 import { CartIndicator } from "./cart/cart-indicator";
+import { WishlistIndicator } from "./wishlist/wishlist-indicator";
 
 const NAV: Array<{ label: string; href: string }> = [
   { label: "Whisky", href: "/shop" },
@@ -20,16 +21,10 @@ export function SiteHeader() {
           WhiskyMart
         </Link>
 
-        <SearchBox className="ml-2 hidden flex-1 md:block" />
+        <InstantSearch className="relative ml-2 hidden flex-1 md:block" />
 
         <nav aria-label="Account" className="ml-auto flex items-center gap-1">
-          <Link
-            href="/account/wishlist"
-            className="inline-flex h-10 w-10 items-center justify-center rounded-xl hover:bg-whisky-50"
-            aria-label="Wishlist"
-          >
-            <Heart className="h-5 w-5 text-charcoal" />
-          </Link>
+          <WishlistIndicator />
           <Link
             href="/account"
             className="inline-flex h-10 w-10 items-center justify-center rounded-xl hover:bg-whisky-50"
@@ -56,7 +51,7 @@ export function SiteHeader() {
       </div>
 
       <div className="container-page py-2 md:hidden">
-        <SearchBox />
+        <InstantSearch className="relative" />
       </div>
     </header>
   );

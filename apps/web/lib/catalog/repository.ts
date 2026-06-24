@@ -49,6 +49,13 @@ export function resolveCartLines(lines: CartLine[]): CartLineDetailed[] {
   return out;
 }
 
+/** Look up products by id, preserving the order of the supplied ids. */
+export function getProductsByIds(ids: string[]): Product[] {
+  return ids
+    .map((id) => SEED_PRODUCTS.find((p) => p.id === id))
+    .filter((p): p is Product => Boolean(p));
+}
+
 const FLAVOUR_THRESHOLD = 50; // a product "is smoky" if smoky >= 50
 
 function hasFlavour(product: Product, axis: FlavourAxis): boolean {
@@ -71,6 +78,28 @@ function matchesQuery(product: Product, query: string): boolean {
     .split(/\s+/)
     .filter(Boolean)
     .every((term) => haystack.includes(term));
+}
+
+/** Lightweight relevance score for free-text queries (higher = better match). */
+export function relevanceScore(product: Product, query: string): number {
+  const q = query.trim().toLowerCase();
+  if (!q) return 0;
+  const title = product.title.toLowerCase();
+  const brand = product.brand.name.toLowerCase();
+  let score = 0;
+  if (title === q) score += 100;
+  if (title.startsWith(q)) score += 50;
+  if (title.includes(q)) score += 25;
+  if (brand.includes(q)) score += 20;
+  if (product.distillery?.name.toLowerCase().includes(q)) score += 15;
+  if (product.flavourTags.some((t) => t.includes(q))) score += 10;
+  // Per-term partial credit so multi-word queries still rank sensibly.
+  for (const term of q.split(/\s+/).filter(Boolean)) {
+    if (title.includes(term)) score += 5;
+  }
+  // Gentle tie-breaker by popularity.
+  score += product.ratingCount / 1000;
+  return score;
 }
 
 function applyFilter(product: Product, filter: ProductFilter): boolean {
@@ -175,7 +204,11 @@ export const catalog: CatalogRepository = {
       filter.query ? matchesQuery(p, filter.query) : true,
     );
     const filtered = queryMatched.filter((p) => applyFilter(p, filter));
-    const items = sortProducts(filtered, sort);
+    // For a free-text query with the default sort, rank by relevance.
+    const items =
+      filter.query && sort === "relevance"
+        ? [...filtered].sort((a, b) => relevanceScore(b, filter.query!) - relevanceScore(a, filter.query!))
+        : sortProducts(filtered, sort);
 
     return {
       items,

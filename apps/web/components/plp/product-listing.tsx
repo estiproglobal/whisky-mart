@@ -3,6 +3,7 @@ import { catalog } from "@/lib/catalog/repository";
 import { ProductCard } from "@/components/product-card";
 import { FacetSidebar } from "./facet-sidebar";
 import { SortSelect } from "./sort-select";
+import { ActiveFilters } from "./active-filters";
 
 export interface ListingSearchParams {
   region?: string;
@@ -55,6 +56,8 @@ export async function ProductListing({
           </p>
           <SortSelect value={sort} />
         </div>
+
+        <ActiveFilters />
 
         {items.length === 0 ? (
           <div className="rounded-2xl bg-white p-10 text-center shadow-card">

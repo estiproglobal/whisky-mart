@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { Heart, PlusCircle } from "lucide-react";
+import { PlusCircle } from "lucide-react";
 import { catalog, getPrimaryVariant } from "@/lib/catalog/repository";
 import { formatAge, formatMoney } from "@/lib/utils";
 import { ProductImage } from "@/components/product-image";
@@ -10,7 +10,8 @@ import { FlavourBars } from "@/components/flavour-bars";
 import { Badge } from "@/components/badge";
 import { ProductCard } from "@/components/product-card";
 import { AddToCartButton } from "@/components/cart/add-to-cart-button";
-import { buttonClasses } from "@/components/ui/button";
+import { WishlistButton } from "@/components/wishlist/wishlist-button";
+import { RecentlyViewedRail, RecentlyViewedTracker } from "@/components/recently-viewed";
 
 export async function generateStaticParams() {
   const products = await catalog.getAll();
@@ -49,10 +50,12 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
   const variant = getPrimaryVariant(product);
   const sampleVariant = product.variants.find((v) => v.sizeMl > 0 && v.sizeMl <= 30);
   const related = await catalog.getRelated(slug);
+  const allProducts = await catalog.getAll();
   const w = product.whisky;
 
   return (
     <div className="container-page py-8">
+      <RecentlyViewedTracker productId={product.id} />
       <nav aria-label="Breadcrumb" className="mb-6 text-sm text-charcoal/50">
         <Link href="/" className="hover:text-whisky-700">Home</Link>
         <span className="px-2">/</span>
@@ -104,13 +107,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
               variantId={variant.id}
               className="min-w-44"
             />
-            <button
-              className={buttonClasses("outline", "md")}
-              aria-label="Add to wishlist"
-              type="button"
-            >
-              <Heart className="h-4 w-4" /> Wishlist
-            </button>
+            <WishlistButton productId={product.id} variant="button" />
           </div>
 
           {sampleVariant ? (
@@ -189,6 +186,8 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
           </div>
         </section>
       ) : null}
+
+      <RecentlyViewedRail allProducts={allProducts} excludeId={product.id} />
     </div>
   );
 }

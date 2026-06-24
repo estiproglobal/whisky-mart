@@ -7,23 +7,29 @@
 
 ## What I'm working on right now
 
-**Phase 1 / MVP build — Increment 1: Storefront foundation → ✅ COMPLETE.**
-Next up: **Increment 2 (search + cart polish)** then **Increment 3 (checkout + age verification + Stripe test mode)**.
+**Phase 1 / MVP build — Increment 2: Search, Wishlist & Recently-viewed → ✅ COMPLETE.**
+Next up: **Increment 3 (checkout + age verification + Stripe test mode + UK jurisdiction rules)**.
 
-The blueprint is complete and live in GitHub (`estiproglobal/whisky-mart`, `main`). We are building the application from `docs/07-ai-development-spec.md`. Increment 1 delivered a runnable, tested storefront foundation (monorepo, design system, catalogue/PLP/PDP/cart over a swappable data layer).
+The blueprint is live in GitHub (`estiproglobal/whisky-mart`, `main`). We build the app from `docs/07-ai-development-spec.md` in runnable, tested increments. Increment 1 delivered the storefront foundation; Increment 2 added discovery + save features.
 
-**Push policy:** all pushes to GitHub are **manual by the repo owner**. Claude provides a step-by-step push/upload guide with every increment (the session's GitHub integration is read-only; the owner pushes from their own machine).
+**Push policy:** the session's GitHub integration now has **write access** — Claude pushes directly to `origin/main`. (Increment 1 was pushed manually by the owner; from Increment 2 on, pushes are automatic.)
 
-## Current increment scope (Increment 1)
+## Increment 2 scope (this session)
 
-A runnable Next.js storefront skeleton with seed data:
-- Monorepo scaffold (pnpm workspaces + Turborepo, shared TS/ESLint config).
-- `packages/types` — shared domain types (Product, Variant, WhiskyDetails, Review…) aligned to `docs/05-database-schema.md`.
-- `apps/web` — Next.js (App Router) + TypeScript + Tailwind + design tokens (whisky theme).
-- Core chrome: header (nav, search, cart, account), footer, age-gate.
-- Seed catalogue + typed data-access layer (mockable, swappable for Medusa/API later).
-- Pages: Home (hero + rails), Category/PLP (faceted), Product/PDP (buy box, key facts, flavour profile).
-- Unit tests (Vitest) + the app builds green.
+- **Instant search** — debounced header autocomplete backed by `GET /api/search` (the first API-layer endpoint), keyboard-navigable, with product thumbnails + "view all results".
+- **Search relevance** — `relevanceScore()` ranks free-text queries (exact/prefix/brand/tag weighting) so the best match leads.
+- **Wishlist** — `WishlistProvider` (localStorage), heart toggle on cards + PDP, header indicator with count, and `/account/wishlist` page.
+- **Recently viewed** — tracker on PDP + rails on Home and PDP (localStorage, most-recent-first, capped).
+- **PLP polish** — removable active-filter chips.
+
+### Increment 2 acceptance criteria — ✅ COMPLETE & VERIFIED
+- [x] `GET /api/search` returns relevance-ranked results; enforces a 2-char minimum.
+- [x] Instant-search dropdown with keyboard nav + view-all.
+- [x] Wishlist persists, toggles from card + PDP, shows header count, lists on `/account/wishlist`.
+- [x] Recently-viewed tracked and rendered on Home + PDP.
+- [x] Active-filter chips on PLP.
+- [x] `typecheck` ✓ · `lint` ✓ · `test` ✓ (**21 tests**) · `build` ✓ (**32 routes**) · runtime smoke test ✓.
+- [x] Pushed to `origin/main`.
 
 ## Acceptance criteria
 
