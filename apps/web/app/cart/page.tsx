@@ -16,10 +16,10 @@ export default function CartPage() {
 
   return (
     <div className="container-page py-10">
-      <h1 className="font-display text-3xl text-charcoal">Your basket</h1>
+      <h1 className="font-display text-[2.25rem] tracking-tightest text-charcoal">Your basket</h1>
 
       {detailed.length === 0 ? (
-        <div className="mt-8 rounded-2xl bg-white p-10 text-center shadow-card">
+        <div className="mt-8 rounded-lg border border-line bg-ivory p-12 text-center">
           <p className="text-charcoal/70">Your basket is empty.</p>
           <Link href="/shop" className={buttonClasses("primary", "md", "mt-5")}>
             Browse whisky
@@ -31,7 +31,7 @@ export default function CartPage() {
             {detailed.map((line) => (
               <li
                 key={line.variantId}
-                className="flex gap-4 rounded-2xl bg-white p-4 shadow-card"
+                className="flex gap-4 rounded-lg border border-line bg-ivory p-4"
               >
                 <ProductImage image={line.product.image} className="h-24 w-20 shrink-0 rounded-xl" />
                 <div className="flex flex-1 flex-col">
@@ -46,7 +46,7 @@ export default function CartPage() {
                   </span>
 
                   <div className="mt-auto flex items-center justify-between pt-3">
-                    <div className="inline-flex items-center rounded-lg border border-whisky-200">
+                    <div className="inline-flex items-center rounded-md border border-line">
                       <button
                         onClick={() => setQty(line.variantId, line.quantity - 1)}
                         className="flex h-8 w-8 items-center justify-center text-charcoal/70 hover:text-whisky-700"
@@ -77,8 +77,8 @@ export default function CartPage() {
             ))}
           </ul>
 
-          <aside className="h-fit rounded-2xl bg-white p-6 shadow-card">
-            <h2 className="font-display text-xl text-charcoal">Summary</h2>
+          <aside className="h-fit rounded-lg border border-line bg-ivory p-6">
+            <h2 className="font-display text-2xl text-charcoal">Summary</h2>
             <div className="mt-4 flex justify-between text-sm">
               <span className="text-charcoal/60">Subtotal</span>
               <Price className="font-medium" money={{ amount: subtotal, currency }} />

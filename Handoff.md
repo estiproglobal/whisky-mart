@@ -1,6 +1,6 @@
 # Handoff
 
-**Date:** 2026-06-24
+**Date:** 2026-06-25
 **From:** Claude (agent session)
 **To:** Repo owner (estiproglobal) / next agent session
 
@@ -61,11 +61,19 @@
   - Brand (`components/brand/`), primitives (`components/ui/`: LuxurySection, PageHero, EditorialCard, TrustBar, Button, Badge), premium header/footer.
   - Redesigned: homepage (hero + curated collections + editorial band + service cards), product cards, PLP (archive filters), PDP (dossier + sticky buy panel), Sommelier (concierge), Gift Finder (guided steps), guides/article cards.
   - **No behaviour/logic/route/test changes.** Gates: `typecheck` ✓ · `lint` ✓ · `test` ✓ (85) · `build` ✓ (51 pages).
+- **Increment 11 — "The Cabinet, refined" (stricter luxury pass): ✅ COMPLETE & VERIFIED, pushed to `claude/amazing-meitner-cmly8g`.**
+  - Token-led restraint: tightened/architectural **radius scale**, near-hairline **shadows**, refined warm-paper palette + new `line` hairline token, bronze-leaning amber/gold, subtler glows, `prefers-reduced-motion` guard.
+  - **CTA hierarchy:** `primary` → ink/charcoal (luxe default); amber demoted to a dark-surface `accent` (hero + ink service card); uppercase letter-spaced buttons.
+  - **Product cards → flat hairline tiles** (no floating white card / shadow / lift) + gentle image zoom; **product placeholder → dim lit display niche** (spotlight + reflection).
+  - Quieter **badges/chips** (letter-spaced labels, squared tiles); home **credo band**; refined primitives + hero scale; `/taste` uses `PageHero`; refined article reading view; elevated age gate.
+  - **Cohesion sweep:** every `bg-white` utility surface → warm ivory tiles with hairlines.
+  - **37 files, presentational only — no behaviour/logic/route/test changes.** Gates: `typecheck` ✓ · `lint` ✓ · `test` ✓ (85) · `build` ✓ (51 pages, SSG preserved).
+  - ⚙️ Sandbox build note: `turbo run build` doesn't forward `NODE_EXTRA_CA_CERTS`, so `next/font` fails TLS in-sandbox; build with `NODE_EXTRA_CA_CERTS=/root/.ccr/ca-bundle.crt npx next build` from `apps/web` (CI/Vercel unaffected).
 
 ## In-progress
 
-- **Nothing in flight.** Overhaul shipped to the Vercel preview (auto-deploy on push). Awaiting **owner design sign-off** on `https://whisky-mart-web.vercel.app`, then attach `whiskymart.com`.
-- **Deploy pipeline LIVE:** Vercel ↔ `main`. Sandbox can't reach `*.vercel.app` (egress 403), so visual review is owner-side.
+- **Nothing in flight.** Increment 11 pushed to `claude/amazing-meitner-cmly8g`. Awaiting **owner design sign-off** on the preview; this branch is not yet merged to `main`.
+- **Deploy pipeline LIVE:** Vercel ↔ `main` (preview auto-deploys from `main`). Sandbox can't reach `*.vercel.app` (egress 403), so visual review is owner-side. To preview Increment 11, review the branch or merge it to `main`.
 
 ## Blocked by
 

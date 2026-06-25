@@ -20,7 +20,7 @@ export function WishlistList({ allProducts }: { allProducts: Product[] }) {
 
   if (products.length === 0) {
     return (
-      <div className="rounded-2xl bg-white p-10 text-center shadow-card">
+      <div className="rounded-lg border border-line bg-ivory p-12 text-center">
         <p className="text-charcoal/70">Your wishlist is empty.</p>
         <p className="mt-1 text-sm text-charcoal/50">Tap the heart on any whisky to save it here.</p>
         <Link href="/shop" className={buttonClasses("primary", "md", "mt-5")}>

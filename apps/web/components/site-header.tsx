@@ -25,11 +25,9 @@ export function SiteHeader() {
   return (
     <header className="sticky top-0 z-40">
       {/* Utility bar */}
-      <div className="border-b border-gold/15 bg-parchment/90 backdrop-blur">
-        <div className="container-page flex h-9 items-center justify-between text-xs text-charcoal/60">
-          <p className="hidden tracking-wide sm:block">
-            Age-verified delivery · Hand-curated since 2012
-          </p>
+      <div className="border-b border-line bg-parchment/70 backdrop-blur">
+        <div className="container-page flex h-9 items-center justify-between text-[10.5px] uppercase tracking-[0.18em] text-charcoal/55">
+          <p className="hidden sm:block">Age-verified delivery · Curated since 2012</p>
           <div className="ml-auto flex items-center gap-1.5">
             <LocaleSwitcher />
             <CurrencySwitcher />
@@ -38,34 +36,34 @@ export function SiteHeader() {
       </div>
 
       {/* Main row */}
-      <div className="border-b border-gold/15 bg-cream/95 backdrop-blur">
-        <div className="container-page flex h-16 items-center gap-4">
+      <div className="border-b border-line bg-cream/90 backdrop-blur">
+        <div className="container-page flex h-[4.5rem] items-center gap-4">
           <Link href="/" aria-label="WhiskyMart home" className="text-charcoal">
             <Wordmark />
           </Link>
 
-          <InstantSearch className="relative ml-4 hidden max-w-xl flex-1 md:block" />
+          <InstantSearch className="relative ml-6 hidden max-w-xl flex-1 md:block" />
 
           <nav aria-label="Account" className="ml-auto flex items-center gap-0.5">
             <WishlistIndicator />
             <Link
               href="/account"
-              className="inline-flex h-10 w-10 items-center justify-center rounded-xl text-charcoal hover:bg-parchment"
+              className="inline-flex h-10 w-10 items-center justify-center rounded-md text-charcoal hover:bg-parchment"
               aria-label={t("header.account")}
             >
-              <User className="h-5 w-5" />
+              <User className="h-5 w-5" strokeWidth={1.5} />
             </Link>
             <CartIndicator />
           </nav>
         </div>
 
         {/* Primary nav */}
-        <div className="container-page flex h-12 items-center gap-7 overflow-x-auto">
+        <div className="container-page flex h-11 items-center gap-9 overflow-x-auto">
           {NAV.map((item) => (
             <Link
               key={item.href}
               href={item.href}
-              className="whitespace-nowrap text-[13px] font-medium tracking-wide text-charcoal/75 transition-colors hover:text-whisky-700"
+              className="whitespace-nowrap text-[11px] font-semibold uppercase tracking-[0.16em] text-charcoal/65 transition-colors hover:text-charcoal"
             >
               {t(item.key)}
             </Link>

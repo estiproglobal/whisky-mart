@@ -61,7 +61,7 @@ export function FacetSidebar({ facets }: { facets: ProductSearchResult["facets"]
         if (options.length === 0) return null;
         const chosen = selected(group.key);
         return (
-          <fieldset key={group.key} className="border-t border-gold/15 pt-4">
+          <fieldset key={group.key} className="border-t border-line pt-4">
             <legend className="mb-2.5 font-display text-base text-charcoal">{group.title}</legend>
             <ul className="space-y-1.5">
               {options.map((opt) => {

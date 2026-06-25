@@ -38,11 +38,11 @@ const COLUMNS: Array<{ titleKey?: string; title?: string; links: Array<{ label: 
 export function SiteFooter() {
   const { t } = useT();
   return (
-    <footer className="texture-grain relative mt-20 overflow-hidden bg-ink text-cream/80">
-      <div className="container-page relative grid grid-cols-2 gap-10 py-16 sm:grid-cols-4">
+    <footer className="texture-grain edge-sheen relative mt-24 overflow-hidden bg-ink text-cream/80">
+      <div className="container-page relative grid grid-cols-2 gap-10 py-20 sm:grid-cols-4">
         <div className="col-span-2 sm:col-span-1">
           <Wordmark className="text-cream" />
-          <p className="mt-4 max-w-xs text-sm leading-relaxed text-cream/55">{t("footer.tagline")}</p>
+          <p className="mt-5 max-w-xs text-sm leading-relaxed text-cream/50">{t("footer.tagline")}</p>
         </div>
         {COLUMNS.map((col) => {
           const heading = col.titleKey ? t(col.titleKey) : col.title!;
@@ -64,13 +64,13 @@ export function SiteFooter() {
       </div>
 
       {/* Responsible drinking — kept clearly legible, not hidden */}
-      <div className="border-t border-gold/15">
+      <div className="border-t border-cream/10">
         <div className="container-page relative py-7">
           <TrustBar tone="dark" />
         </div>
       </div>
 
-      <div className="border-t border-gold/15">
+      <div className="border-t border-cream/10">
         <div className="container-page relative flex flex-col gap-2 py-6 text-sm text-cream/55 sm:flex-row sm:items-center sm:justify-between">
           <p>© {new Date().getFullYear()} WhiskyMart.com · {t("footer.responsibly")}</p>
           <p className="font-medium text-cream/70">{t("footer.ageNotice")}</p>

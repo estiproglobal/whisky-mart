@@ -26,20 +26,24 @@ export function ArticleCard({ article, minutes }: { article: Article; minutes: n
   return (
     <Link
       href={`/guides/${article.slug}`}
-      className="group flex h-full flex-col overflow-hidden rounded-2xl border border-gold/20 bg-ivory transition-all duration-300 hover:-translate-y-0.5 hover:border-gold/40 hover:shadow-card"
+      className="group flex h-full flex-col overflow-hidden rounded-lg border border-line bg-ivory transition-colors duration-300 hover:border-charcoal/30"
     >
       <div
-        className="relative flex aspect-[16/10] items-end p-5"
+        className="relative flex aspect-[16/10] items-end overflow-hidden p-5"
         style={{ background: `linear-gradient(135deg, ${from}, ${to})` }}
       >
-        <span className="overline text-gold-light">{TYPE_LABEL[article.type]}</span>
+        <span
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 bg-cask-glow-soft opacity-60"
+        />
+        <span className="relative overline text-gold-light">{TYPE_LABEL[article.type]}</span>
       </div>
       <div className="flex flex-1 flex-col gap-2.5 p-6">
-        <h3 className="font-display text-xl leading-snug text-charcoal transition-colors group-hover:text-whisky-700">
+        <h3 className="font-display text-[1.4rem] leading-tight text-charcoal transition-colors group-hover:text-whisky-800">
           {article.title}
         </h3>
-        <p className="line-clamp-2 text-sm leading-relaxed text-charcoal/60">{article.excerpt}</p>
-        <p className="mt-auto pt-2 text-xs uppercase tracking-wider text-smoke">
+        <p className="line-clamp-2 text-sm leading-relaxed text-charcoal/55">{article.excerpt}</p>
+        <p className="mt-auto pt-2 text-[10.5px] uppercase tracking-[0.14em] text-smoke">
           {new Date(article.publishedAt).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" })}
           {" · "}
           {minutes} min read

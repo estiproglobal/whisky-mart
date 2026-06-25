@@ -7,6 +7,48 @@
 
 ## What I'm working on right now
 
+**Increment 11 — "The Cabinet, refined" (stricter luxury pass) → ✅ COMPLETE.**
+A second, stricter design iteration on top of Increment 10. The previous pass
+improved wording but still read as a polished ecommerce MVP; this pass pushes it
+toward a premium whisky house / private collector's cabinet. **Presentational
+only — no behaviour/logic/route/test changes.** Developed on branch
+`claude/amazing-meitner-cmly8g`.
+
+### Increment 11 acceptance — ✅ COMPLETE & VERIFIED
+- [x] **Tokens:** tightened, architectural **radius scale** (cards/panels markedly
+  less "app-bubbly"); near-hairline **shadows**; refined warm-paper palette
+  (deeper/cooler `cream`, new `line` hairline token, bronze-leaning `amber`/`gold`);
+  subtler `cask-glow`; **`prefers-reduced-motion` guard**; refined `.overline` + new
+  `.edge-sheen` utility.
+- [x] **CTA hierarchy restrained:** `primary` is now **ink/charcoal** (the luxe
+  default on light surfaces); cask **amber demoted to a dark-surface `accent`**
+  (hero + ink service card only). Buttons are uppercase, letter-spaced, squarer.
+- [x] **Product cards:** flat warm-ivory **tiles with hairline borders + gentle
+  image zoom** — no floating white card, no drop-shadow, no lift.
+- [x] **Product placeholder:** a **dim lit display niche** (warm spotlight, dark
+  cabinet ground, soft reflection) instead of kraft-paper parchment.
+- [x] **Quieter signals:** badges → tiny **letter-spaced labels**; chips squared;
+  active-filter / sort / review / status pills refined to hairline tiles.
+- [x] **Editorial rhythm:** home **credo band**; larger, tighter hero; rule+overline
+  section headings; upgraded primitives (`LuxurySection`/`PageHero`/`EditorialCard`/
+  `TrustBar`); `/taste` now uses `PageHero`; refined article reading view + shoppable
+  embeds; elevated age gate (wordmark + brass rule).
+- [x] **Cohesion sweep:** every `bg-white` utility surface (cart/account/checkout/
+  reviews/wishlist/confirmation/search/quiz) → warm **ivory tiles with hairlines**.
+- [x] Behaviour/logic/routes/tests unchanged. `typecheck` ✓ · `lint` ✓ · `test` ✓
+  (85) · `build` ✓ (51 pages, SSG preserved, fonts fetched).
+
+> ⚙️ **Build note (sandbox only):** `next/font/google` fetches at build time.
+> `turbo run build` did not forward `NODE_EXTRA_CA_CERTS` to the child, so fonts
+> failed TLS in the sandbox; `NODE_EXTRA_CA_CERTS=/root/.ccr/ca-bundle.crt npx next
+> build` from `apps/web` builds cleanly (51/51 static pages). CI/Vercel are unaffected.
+
+> ⚠️ Imagery: still gradient/SVG placeholders — now a darker, museum-like lit niche.
+> Real product/lifestyle **photography** remains the one asset to fully land it
+> (`DEFERRED.md`).
+
+---
+
 **Increment 10 — "The Private Cask Room" design overhaul → ✅ COMPLETE.**
 Full luxury/editorial redesign. Live preview auto-deploys from `main` to Vercel (`whisky-mart-web.vercel.app`); **whiskymart.com domain held until sign-off.**
 

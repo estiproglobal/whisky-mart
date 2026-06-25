@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import { Button } from "@/components/ui/button";
+import { Wordmark } from "@/components/brand/wordmark";
 import { useT } from "@/components/i18n/locale-provider";
 
 const STORAGE_KEY = "wm_age_ok";
@@ -31,21 +32,26 @@ export function AgeGate() {
       role="dialog"
       aria-modal="true"
       aria-labelledby="age-gate-title"
-      className="fixed inset-0 z-50 flex items-center justify-center bg-charcoal/80 p-4"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-ink/85 p-4 backdrop-blur-sm"
     >
-      <div className="w-full max-w-md rounded-2xl bg-cream p-8 text-center shadow-card">
-        <p className="font-display text-2xl text-whisky-700">WhiskyMart</p>
-        <h1 id="age-gate-title" className="mt-4 font-display text-xl text-charcoal">
+      <div className="w-full max-w-md rounded-lg border border-line bg-cream p-9 text-center shadow-lift">
+        <div className="flex justify-center text-charcoal">
+          <Wordmark />
+        </div>
+        <div className="mt-6 flex justify-center">
+          <span className="rule-gold" />
+        </div>
+        <h1 id="age-gate-title" className="mt-6 font-display text-[1.75rem] leading-tight tracking-tightest text-charcoal">
           {t("ageGate.question")}
         </h1>
-        <p className="mt-2 text-sm text-charcoal/70">{t("ageGate.subtitle")}</p>
+        <p className="mt-3 text-sm text-charcoal/70">{t("ageGate.subtitle")}</p>
 
         {state === "denied" ? (
-          <p className="mt-6 rounded-xl bg-whisky-100 p-4 text-sm text-whisky-900">
+          <p className="mt-7 rounded-md border border-line bg-parchment/70 p-4 text-sm text-whisky-900">
             {t("ageGate.denied")}
           </p>
         ) : (
-          <div className="mt-6 flex gap-3">
+          <div className="mt-7 flex gap-3">
             <Button onClick={confirm} className="flex-1">
               {t("ageGate.yes")}
             </Button>

@@ -63,11 +63,14 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
       </nav>
 
       <div className="mx-auto max-w-3xl">
-        <p className="text-sm font-medium uppercase tracking-wide text-whisky-700">
-          {article.type === "guide" ? "Buying guide" : article.type === "education" ? "Academy" : "Journal"}
-        </p>
-        <h1 className="mt-2 font-display text-4xl leading-tight text-charcoal">{article.title}</h1>
-        <p className="mt-3 text-charcoal/60">
+        <div className="flex items-center gap-3">
+          <span className="rule-gold" />
+          <p className="overline text-whisky-700">
+            {article.type === "guide" ? "Buying guide" : article.type === "education" ? "Academy" : "Journal"}
+          </p>
+        </div>
+        <h1 className="mt-5 font-display text-[2.75rem] leading-[1.04] tracking-tightest text-charcoal">{article.title}</h1>
+        <p className="mt-4 text-sm text-charcoal/55">
           {article.author} ·{" "}
           {new Date(article.publishedAt).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" })}{" "}
           · {readingMinutes(article)} min read · {referenced.length} whiskies featured
@@ -79,7 +82,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
 
         {related.length > 0 ? (
           <section className="mt-14">
-            <h2 className="font-display text-2xl text-charcoal">Featured whiskies</h2>
+            <h2 className="font-display text-[1.75rem] tracking-tightest text-charcoal">Featured whiskies</h2>
             <div className="mt-5 grid grid-cols-2 gap-4 sm:grid-cols-3">
               {related.map((p) => (
                 <ProductCard key={p.id} product={p} />

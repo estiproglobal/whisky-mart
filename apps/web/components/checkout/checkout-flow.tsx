@@ -45,7 +45,7 @@ function Field({
         onChange={(e) => onChange(e.target.value)}
         autoComplete={autoComplete}
         placeholder={placeholder}
-        className="h-11 w-full rounded-xl border border-whisky-200 bg-white px-3 text-sm outline-none focus:border-whisky-500"
+        className="h-11 w-full rounded-md border border-line bg-ivory px-3 text-sm outline-none focus:border-charcoal/40"
       />
     </label>
   );
@@ -104,7 +104,7 @@ export function CheckoutFlow() {
 
   if (lines.length === 0 && !placing) {
     return (
-      <div className="rounded-2xl bg-white p-10 text-center shadow-card">
+      <div className="rounded-2xl bg-ivory p-10 text-center shadow-card">
         <p className="text-charcoal/70">Your basket is empty.</p>
         <Link href="/shop" className={buttonClasses("primary", "md", "mt-5")}>
           Browse whisky
@@ -218,7 +218,7 @@ export function CheckoutFlow() {
               <select
                 value={address.country}
                 onChange={(e) => setAddress({ ...address, country: e.target.value })}
-                className="h-11 w-full rounded-xl border border-whisky-200 bg-white px-3 text-sm outline-none focus:border-whisky-500"
+                className="h-11 w-full rounded-md border border-line bg-ivory px-3 text-sm outline-none focus:border-charcoal/40"
               >
                 {SHIPPABLE_COUNTRIES.map((c) => (
                   <option key={c.code} value={c.code}>
@@ -283,8 +283,8 @@ export function CheckoutFlow() {
               {(quote?.shippingMethods ?? []).map((m) => (
                 <label
                   key={m.id}
-                  className={`flex cursor-pointer items-center justify-between rounded-xl border p-4 ${
-                    shippingMethodId === m.id ? "border-whisky-500 bg-whisky-50" : "border-whisky-200"
+                  className={`flex cursor-pointer items-center justify-between rounded-md border p-4 transition-colors ${
+                    shippingMethodId === m.id ? "border-charcoal bg-parchment" : "border-line"
                   }`}
                 >
                   <span className="flex items-center gap-3">
@@ -338,7 +338,7 @@ export function CheckoutFlow() {
         {step === "review" ? (
           <section className="space-y-5">
             <h2 className="font-display text-2xl text-charcoal">Review &amp; place order</h2>
-            <div className="rounded-xl border border-whisky-100 p-4 text-sm">
+            <div className="rounded-md border border-line p-4 text-sm">
               <p className="font-medium text-charcoal">Delivering to</p>
               <p className="mt-1 text-charcoal/70">
                 {address.fullName}, {address.line1}

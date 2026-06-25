@@ -31,11 +31,11 @@ export function PalateQuiz() {
   const canSubmit = answeredCount > 0;
 
   return (
-    <div className="space-y-8 rounded-2xl bg-white p-6 shadow-card">
+    <div className="space-y-8 rounded-lg border border-line bg-ivory p-6 sm:p-8">
       {PALATE_QUIZ.map((q) => (
         <fieldset key={q.id}>
-          <legend className="font-display text-lg text-charcoal">{q.prompt}</legend>
-          <div className="mt-3 flex flex-wrap gap-2">
+          <legend className="font-display text-xl text-charcoal">{q.prompt}</legend>
+          <div className="mt-3.5 flex flex-wrap gap-2">
             {q.options.map((opt, idx) => {
               const selected = (answers[q.id] ?? []).includes(idx);
               return (
@@ -45,10 +45,10 @@ export function PalateQuiz() {
                   onClick={() => toggle(q.id, idx, !!q.multi)}
                   aria-pressed={selected}
                   className={cn(
-                    "inline-flex items-center gap-1.5 rounded-full border px-4 py-1.5 text-sm",
+                    "inline-flex items-center gap-1.5 rounded-md border px-4 py-1.5 text-sm transition-colors",
                     selected
-                      ? "border-whisky-500 bg-whisky-50 text-whisky-700"
-                      : "border-whisky-200 text-charcoal/80 hover:border-whisky-400",
+                      ? "border-charcoal bg-charcoal text-cream"
+                      : "border-line text-charcoal/80 hover:border-charcoal",
                   )}
                 >
                   {selected ? <Check className="h-3.5 w-3.5" /> : null}

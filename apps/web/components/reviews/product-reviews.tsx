@@ -108,14 +108,14 @@ export function ProductReviews({ productId }: { productId: string }) {
       )}
 
       {open ? (
-        <form onSubmit={submit} className="mt-5 space-y-4 rounded-2xl bg-white p-6 shadow-card">
+        <form onSubmit={submit} className="mt-5 space-y-4 rounded-lg border border-line bg-ivory p-6">
           <StarInput value={rating} onChange={setRating} />
           {!customer ? (
             <input
               value={name}
               onChange={(e) => setName(e.target.value)}
               placeholder="Your name"
-              className="h-11 w-full rounded-xl border border-whisky-200 px-3 text-sm outline-none focus:border-whisky-500"
+              className="h-11 w-full rounded-md border border-line bg-cream px-3 text-sm outline-none focus:border-charcoal/40"
             />
           ) : (
             <p className="text-sm text-charcoal/60">Posting as {customer.name}</p>
@@ -124,14 +124,14 @@ export function ProductReviews({ productId }: { productId: string }) {
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             placeholder="Headline"
-            className="h-11 w-full rounded-xl border border-whisky-200 px-3 text-sm outline-none focus:border-whisky-500"
+            className="h-11 w-full rounded-md border border-line bg-cream px-3 text-sm outline-none focus:border-charcoal/40"
           />
           <textarea
             value={body}
             onChange={(e) => setBody(e.target.value)}
             placeholder="What did you think? Nose, palate, finish…"
             rows={4}
-            className="w-full rounded-xl border border-whisky-200 px-3 py-2 text-sm outline-none focus:border-whisky-500"
+            className="w-full rounded-md border border-line bg-cream px-3 py-2 text-sm outline-none focus:border-charcoal/40"
           />
           {error ? <p className="text-sm text-red-700">{error}</p> : null}
           <Button type="submit" disabled={!canSubmit || submitting}>
@@ -142,16 +142,16 @@ export function ProductReviews({ productId }: { productId: string }) {
 
       <ul className="mt-6 space-y-4">
         {reviews.map((r) => (
-          <li key={r.id} className="rounded-2xl bg-white p-5 shadow-card">
+          <li key={r.id} className="rounded-lg border border-line bg-ivory p-5">
             <div className="flex items-center justify-between gap-2">
               <StarRating value={r.rating} />
               {r.verifiedPurchase ? (
-                <span className="rounded-full bg-whisky-100 px-2.5 py-0.5 text-xs font-semibold text-whisky-800">
+                <span className="rounded-[3px] border border-whisky-600/40 bg-cream/85 px-2 py-[3px] text-[10px] font-semibold uppercase tracking-[0.14em] text-whisky-800">
                   Verified purchase
                 </span>
               ) : null}
             </div>
-            <h3 className="mt-2 font-display text-lg text-charcoal">{r.title}</h3>
+            <h3 className="mt-3 font-display text-xl text-charcoal">{r.title}</h3>
             <p className="mt-1 text-sm text-charcoal/70">{r.body}</p>
             <p className="mt-2 text-xs text-charcoal/40">
               {r.author} ·{" "}

@@ -15,31 +15,32 @@ const config: Config = {
     extend: {
       colors: {
         // Darks
-        obsidian: "#0B0A08",
+        obsidian: "#0A0907",
         ink: "#0B0A08",
-        charcoal: "#15110D", // primary text on light
-        oak: "#2A1A12", // dark oak brown
-        // Lights
-        cream: "#F4EBDD", // warm ivory — page background
-        ivory: "#FBF7EF", // lighter surface (cards on cream)
-        parchment: "#EADCC4", // section tint
-        // Accents
-        amber: { DEFAULT: "#C9822E", dark: "#AE6E26" }, // cask amber (primary)
-        gold: { DEFAULT: "#B08A4A", light: "#C9A86A", dark: "#8C6E3A" }, // antique brass
-        burgundy: "#4A1717",
-        smoke: "#6B6157", // secondary text (AA on cream)
+        charcoal: "#171310", // primary text on light
+        oak: "#211510", // dark oak brown (editorial bands)
+        // Lights — refined warm paper, less buttery than before
+        cream: "#F2ECE0", // page background
+        ivory: "#FBF8F1", // card / panel surface
+        parchment: "#E7D9C0", // section tint (deeper for definition)
+        line: "#E0D3BB", // warm hairline border on light surfaces
+        // Accents — bronze-leaning, used sparingly
+        amber: { DEFAULT: "#BE7A2B", dark: "#A1661F" }, // cask amber accent
+        gold: { DEFAULT: "#A98A4E", light: "#C8AA6E", dark: "#866A38" }, // antique brass
+        burgundy: "#451616",
+        smoke: "#645A4F", // secondary text (AA on cream)
         // Warm neutral ramp (backgrounds / borders / text)
         whisky: {
-          50: "#F7EFE0",
-          100: "#EDDFC6",
-          200: "#DCC39A",
-          300: "#CCA66C",
-          400: "#C9822E",
-          500: "#B0702A",
-          600: "#935D24",
-          700: "#784B1F",
-          800: "#553418",
-          900: "#2A1A12",
+          50: "#F6EEDF",
+          100: "#EADCC2",
+          200: "#DABF95",
+          300: "#C9A468",
+          400: "#BE7A2B",
+          500: "#A86A28",
+          600: "#8C5822",
+          700: "#71471D",
+          800: "#503217",
+          900: "#281911",
         },
       },
       fontFamily: {
@@ -47,23 +48,28 @@ const config: Config = {
         sans: ["var(--font-sans)", "system-ui", "sans-serif"],
       },
       letterSpacing: {
-        tightest: "-0.02em",
-        luxe: "0.24em", // eyebrow / overline caps
+        tightest: "-0.025em",
+        luxe: "0.28em", // eyebrow / overline caps
       },
+      // Tightened, architectural radius scale — gallery, not app-bubbly.
       borderRadius: {
-        xl: "0.875rem",
-        "2xl": "1.25rem",
+        DEFAULT: "0.1875rem",
+        md: "0.25rem",
+        lg: "0.3125rem",
+        xl: "0.4375rem",
+        "2xl": "0.625rem",
+        "3xl": "0.75rem",
       },
       boxShadow: {
-        // Soft, low — luxury through restraint, not heavy drop shadows
-        card: "0 1px 2px rgba(11,10,8,0.04), 0 12px 30px -18px rgba(11,10,8,0.22)",
-        lift: "0 2px 6px rgba(11,10,8,0.06), 0 28px 56px -28px rgba(11,10,8,0.34)",
+        // Near-hairline — depth comes from tone + borders, not drop shadows
+        card: "0 1px 2px -1px rgba(11,10,8,0.05)",
+        lift: "0 2px 4px -2px rgba(11,10,8,0.07), 0 24px 48px -34px rgba(11,10,8,0.30)",
       },
       backgroundImage: {
         "cask-glow":
-          "radial-gradient(60% 75% at 50% -5%, rgba(201,130,46,0.20), rgba(201,130,46,0.05) 45%, transparent 72%)",
+          "radial-gradient(58% 70% at 50% -8%, rgba(190,122,43,0.16), rgba(190,122,43,0.03) 46%, transparent 72%)",
         "cask-glow-soft":
-          "radial-gradient(50% 60% at 80% 0%, rgba(176,138,74,0.16), transparent 70%)",
+          "radial-gradient(50% 60% at 82% 0%, rgba(169,138,78,0.11), transparent 70%)",
       },
     },
   },

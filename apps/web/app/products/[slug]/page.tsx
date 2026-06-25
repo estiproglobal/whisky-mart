@@ -40,7 +40,7 @@ export async function generateMetadata({
 
 function Fact({ label, value }: { label: string; value: string }) {
   return (
-    <div className="rounded-xl border border-gold/20 bg-ivory px-4 py-3">
+    <div className="rounded-xl border border-line bg-ivory px-4 py-3">
       <dt className="text-[11px] uppercase tracking-wider text-smoke">{label}</dt>
       <dd className="mt-0.5 font-medium text-charcoal">{value}</dd>
     </div>
@@ -57,7 +57,7 @@ function Section({
   children: React.ReactNode;
 }) {
   return (
-    <section className="border-t border-gold/15 py-10">
+    <section className="border-t border-line py-12">
       <p className="overline text-whisky-700">{eyebrow}</p>
       <h2 className="mt-2 font-display text-3xl text-charcoal">{title}</h2>
       <div className="mt-5">{children}</div>
@@ -95,7 +95,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
           <ProductImage
             image={product.image}
             label={product.brand.name}
-            className="aspect-[4/5] w-full rounded-2xl border border-gold/20"
+            className="aspect-[4/5] w-full rounded-2xl border border-line"
           />
         </div>
 
@@ -137,7 +137,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
 
           {sampleVariant ? (
             <div className="mt-4 flex items-center justify-between gap-3 rounded-xl border border-dashed border-gold/40 p-4">
-              <span className="text-sm text-charcoal/65">
+              <span className="text-sm text-charcoal/60">
                 Not sure yet? Try a 3cl sample for <Price money={sampleVariant.price} />
               </span>
               <AddToCartButton
@@ -157,7 +157,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
           </button>
 
           {/* Delivery & compliance */}
-          <div className="mt-6 space-y-2 rounded-xl border border-gold/20 bg-parchment/40 p-4 text-sm text-charcoal/70">
+          <div className="mt-6 space-y-2 rounded-xl border border-line bg-parchment/40 p-4 text-sm text-charcoal/70">
             <p className="flex items-start gap-2">
               <ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-whisky-700" />
               Age-verified delivery — an adult signature (18+) is required.
@@ -187,14 +187,14 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
         {product.flavour || product.tastingNote ? (
           <Section eyebrow="On the palate" title="Tasting profile">
             {product.flavour ? (
-              <div className="max-w-3xl rounded-2xl border border-gold/20 bg-ivory p-6">
+              <div className="max-w-3xl rounded-2xl border border-line bg-ivory p-6">
                 <FlavourBars flavour={product.flavour} />
               </div>
             ) : null}
             {product.tastingNote ? (
               <div className="mt-4 grid gap-4 sm:grid-cols-3">
                 {(["nose", "palate", "finish"] as const).map((key) => (
-                  <div key={key} className="rounded-2xl border border-gold/20 bg-ivory p-6">
+                  <div key={key} className="rounded-2xl border border-line bg-ivory p-6">
                     <h3 className="font-display text-lg capitalize text-whisky-700">{key}</h3>
                     <p className="mt-2 text-sm leading-relaxed text-charcoal/70">
                       {product.tastingNote![key]}
@@ -241,21 +241,21 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
         {/* Delivery, age verification & returns */}
         <Section eyebrow="Buying with confidence" title="Delivery, age verification & returns">
           <div className="grid max-w-4xl gap-5 sm:grid-cols-3">
-            <div className="rounded-2xl border border-gold/20 bg-ivory p-6">
+            <div className="rounded-2xl border border-line bg-ivory p-6">
               <Truck className="h-5 w-5 text-whisky-700" />
               <h3 className="mt-3 font-display text-lg text-charcoal">Tracked delivery</h3>
               <p className="mt-1.5 text-sm leading-relaxed text-charcoal/65">
                 Dispatched in 1–2 working days, carefully packed and fully tracked.
               </p>
             </div>
-            <div className="rounded-2xl border border-gold/20 bg-ivory p-6">
+            <div className="rounded-2xl border border-line bg-ivory p-6">
               <ShieldCheck className="h-5 w-5 text-whisky-700" />
               <h3 className="mt-3 font-display text-lg text-charcoal">Age verified</h3>
               <p className="mt-1.5 text-sm leading-relaxed text-charcoal/65">
                 We verify age at checkout, and an adult signature (18+) is required on delivery.
               </p>
             </div>
-            <div className="rounded-2xl border border-gold/20 bg-ivory p-6">
+            <div className="rounded-2xl border border-line bg-ivory p-6">
               <PlusCircle className="h-5 w-5 text-whisky-700" />
               <h3 className="mt-3 font-display text-lg text-charcoal">Returns</h3>
               <p className="mt-1.5 text-sm leading-relaxed text-charcoal/65">
@@ -272,7 +272,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
       {/* Related */}
       {related.length > 0 ? (
         <section className="mt-14">
-          <h2 className="font-display text-2xl text-charcoal">If you like this…</h2>
+          <h2 className="font-display text-[1.75rem] tracking-tightest text-charcoal">If you like this…</h2>
           <div className="mt-5 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
             {related.map((p) => (
               <ProductCard key={p.id} product={p} />
@@ -284,19 +284,21 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
       {/* Featured in guides */}
       {articles.length > 0 ? (
         <section className="mt-14">
-          <h2 className="font-display text-2xl text-charcoal">Featured in our guides</h2>
+          <h2 className="font-display text-[1.75rem] tracking-tightest text-charcoal">Featured in our guides</h2>
           <ul className="mt-5 space-y-3">
             {articles.map((a) => (
               <li key={a.id}>
                 <Link
                   href={`/guides/${a.slug}`}
-                  className="flex items-center justify-between gap-4 rounded-2xl bg-white p-5 shadow-card hover:shadow-lg"
+                  className="flex items-center justify-between gap-4 rounded-lg border border-line bg-ivory p-5 transition-colors hover:border-charcoal/30"
                 >
                   <span>
-                    <span className="block font-display text-lg text-charcoal">{a.title}</span>
-                    <span className="block text-sm text-charcoal/60">{a.excerpt}</span>
+                    <span className="block font-display text-xl text-charcoal">{a.title}</span>
+                    <span className="block text-sm text-charcoal/55">{a.excerpt}</span>
                   </span>
-                  <span className="shrink-0 text-sm text-whisky-700">{readingMinutes(a)} min →</span>
+                  <span className="shrink-0 text-[11px] font-semibold uppercase tracking-[0.14em] text-whisky-700">
+                    {readingMinutes(a)} min →
+                  </span>
                 </Link>
               </li>
             ))}
