@@ -58,7 +58,8 @@
 
 ## In-progress
 
-- **Awaiting owner:** connect the repo to **Vercel** (Root Directory `apps/web`) **or** deploy the `Dockerfile` to a single-instance host, then point **whiskymart.com** DNS at it (steps in `DEPLOY.md`). 🎉 Phase 1 + Phase 2 feature-complete on `main`.
+- **Increment 10 — Luxury/editorial overhaul + brand assets (slice 1 done, more to come).** Brand marks (`components/brand/`), token/type refresh, editorial hero, wordmark in header/footer, favicon. Build/lint/tests green (85).
+- **Deploy pipeline is LIVE:** Vercel connected to `main` (auto-deploy on push) → `https://whisky-mart-web.vercel.app`. **whiskymart.com NOT yet attached** (intentionally — attach after the overhaul). Note: sandbox can't reach `*.vercel.app` (egress policy 403), so smoke-testing the live URL is owner-side.
 
 ## Blocked by
 

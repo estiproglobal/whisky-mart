@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ArrowRight, Sparkles, ShieldCheck, Truck, Award, Gift } from "lucide-react";
+import { Monogram } from "@/components/brand/monogram";
 import { catalog } from "@/lib/catalog/repository";
 import { content, readingMinutes } from "@/lib/content/repository";
 import { ProductRail } from "@/components/product-rail";
@@ -35,41 +36,51 @@ export default async function HomePage() {
   return (
     <>
       {/* Hero */}
-      <section className="bg-charcoal text-cream">
-        <div className="container-page grid gap-8 py-16 lg:grid-cols-2 lg:items-center lg:py-24">
+      <section className="relative overflow-hidden bg-ink text-cream">
+        <div
+          className="pointer-events-none absolute -right-20 -top-16 hidden opacity-[0.05] lg:block"
+          aria-hidden="true"
+        >
+          <Monogram className="h-[30rem] w-[30rem] text-cream" />
+        </div>
+        <div className="container-page relative grid gap-10 py-20 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:py-28">
           <div>
-            <p className="text-sm uppercase tracking-[0.2em] text-gold">Whisky, beautifully chosen</p>
-            <h1 className="mt-4 font-display text-4xl leading-tight sm:text-5xl">
+            <div className="flex items-center gap-3">
+              <span className="rule-gold" />
+              <p className="overline text-gold-light">Whisky, beautifully chosen</p>
+            </div>
+            <h1 className="mt-5 font-display text-5xl leading-[1.04] tracking-tightest sm:text-6xl">
               Find your next favourite whisky.
             </h1>
-            <p className="mt-4 max-w-md text-cream/70">
+            <p className="mt-5 max-w-md text-base leading-relaxed text-cream/70">
               Thousands of bottles, expert tasting notes, low-risk samples, and an AI Sommelier that
-              learns your palate. Whatever your relationship with whisky, we&apos;ll meet you there.
+              learns your palate — whatever your relationship with whisky, we&apos;ll meet you there.
             </p>
-            <div className="mt-8 flex flex-wrap gap-3">
+            <div className="mt-9 flex flex-wrap gap-3">
               <Link href="/sommelier" className={buttonClasses("primary", "lg")}>
                 <Sparkles className="h-4 w-4" /> Ask the Sommelier
               </Link>
               <Link
                 href="/shop"
-                className={buttonClasses("outline", "lg", "border-cream text-cream hover:bg-cream/10")}
+                className={buttonClasses("outline", "lg", "border-cream/40 text-cream hover:bg-cream/10")}
               >
                 Browse all whisky <ArrowRight className="h-4 w-4" />
               </Link>
             </div>
           </div>
 
-          <div className="rounded-2xl bg-gradient-to-br from-whisky-600 to-whisky-800 p-8 shadow-card">
-            <p className="font-display text-2xl">New here?</p>
-            <p className="mt-2 text-cream/80">
-              Start with a tasting flight — four 3cl samples to find what you love before committing
-              to a bottle.
+          <div className="relative rounded-2xl border border-gold/30 bg-cream/[0.04] p-8 backdrop-blur-sm">
+            <p className="overline text-gold-light">New to whisky?</p>
+            <p className="mt-3 font-display text-3xl leading-snug">Start with a tasting flight.</p>
+            <p className="mt-3 text-sm leading-relaxed text-cream/70">
+              Four 3cl samples to discover what you love before committing to a full bottle.
             </p>
             <Link
               href="/c/samples"
-              className="mt-6 inline-flex items-center gap-1 font-medium text-gold hover:underline"
+              className="group mt-6 inline-flex items-center gap-1.5 text-sm font-medium text-gold-light"
             >
-              Explore samples & flights <ArrowRight className="h-4 w-4" />
+              Explore samples &amp; flights
+              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
             </Link>
           </div>
         </div>

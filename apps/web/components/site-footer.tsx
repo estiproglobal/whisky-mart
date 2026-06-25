@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { Wordmark } from "./brand/wordmark";
 import { useT } from "./i18n/locale-provider";
 
 const COLUMNS: Array<{ titleKey?: string; title?: string; links: Array<{ label: string; href: string }> }> = [
@@ -39,8 +40,8 @@ export function SiteFooter() {
     <footer className="mt-16 border-t border-whisky-100 bg-white">
       <div className="container-page grid grid-cols-2 gap-8 py-12 sm:grid-cols-4">
         <div className="col-span-2 sm:col-span-1">
-          <p className="font-display text-2xl font-semibold text-whisky-700">WhiskyMart</p>
-          <p className="mt-2 max-w-xs text-sm text-charcoal/60">{t("footer.tagline")}</p>
+          <Wordmark className="text-charcoal" />
+          <p className="mt-3 max-w-xs text-sm text-charcoal/60">{t("footer.tagline")}</p>
         </div>
         {COLUMNS.map((col) => {
           const heading = col.titleKey ? t(col.titleKey) : col.title!;

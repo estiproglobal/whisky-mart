@@ -13,32 +13,45 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        cream: "#FBF7F0",
-        charcoal: "#1A1714",
-        gold: "#C9A24B",
+        // Editorial neutrals
+        cream: "#FAF6EE", // page background (warm paper)
+        parchment: "#F2EADB", // alternating sections / tints
+        charcoal: "#171310", // primary ink (deep espresso)
+        ink: "#0E0B09", // near-black for hero / footer
+        // Accent metals
+        gold: {
+          DEFAULT: "#C2A14E",
+          light: "#E4D29A",
+          dark: "#9A7C32",
+        },
         whisky: {
           50: "#FBF3E8",
-          100: "#F6E4CC",
-          200: "#EBC79A",
-          300: "#DFA968",
-          400: "#D08F3E",
-          500: "#B8732B",
-          600: "#9A5C20",
-          700: "#7B481B",
-          800: "#5E3717",
-          900: "#3F2611",
+          100: "#F4E2C8",
+          200: "#E7C695",
+          300: "#D7A765",
+          400: "#C68A3C",
+          500: "#AE6D27",
+          600: "#90551E",
+          700: "#724219",
+          800: "#553216",
+          900: "#392310",
         },
       },
       fontFamily: {
         display: ["var(--font-display)"],
         sans: ["var(--font-sans)"],
       },
+      letterSpacing: {
+        tightest: "-0.02em",
+        luxe: "0.22em", // eyebrow / overline caps
+      },
       borderRadius: {
         xl: "0.875rem",
         "2xl": "1.25rem",
       },
       boxShadow: {
-        card: "0 1px 2px rgba(26,23,20,0.06), 0 8px 24px rgba(26,23,20,0.06)",
+        card: "0 1px 2px rgba(23,19,16,0.05), 0 10px 30px -12px rgba(23,19,16,0.18)",
+        lift: "0 2px 4px rgba(23,19,16,0.06), 0 24px 48px -20px rgba(23,19,16,0.28)",
       },
     },
   },

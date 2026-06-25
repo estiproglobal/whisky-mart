@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { User } from "lucide-react";
+import { Wordmark } from "./brand/wordmark";
 import { InstantSearch } from "./search/instant-search";
 import { CartIndicator } from "./cart/cart-indicator";
 import { WishlistIndicator } from "./wishlist/wishlist-indicator";
@@ -24,8 +25,8 @@ export function SiteHeader() {
   return (
     <header className="sticky top-0 z-40 border-b border-whisky-100 bg-cream/95 backdrop-blur">
       <div className="container-page flex h-16 items-center gap-4">
-        <Link href="/" className="font-display text-2xl font-semibold text-whisky-700">
-          WhiskyMart
+        <Link href="/" aria-label="WhiskyMart home" className="text-charcoal">
+          <Wordmark />
         </Link>
 
         <InstantSearch className="relative ml-2 hidden flex-1 md:block" />

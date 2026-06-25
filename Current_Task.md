@@ -7,10 +7,15 @@
 
 ## What I'm working on right now
 
-**Phase 2 (Global Whisky Discovery) — Increment 9: Personalisation → ✅ COMPLETE.**
-🎉 **Phase 2 is feature-complete** (multi-currency ✅ 7, i18n ✅ 8, personalisation ✅ 9).
+**Increment 10 — Luxury/editorial design overhaul + brand assets → 🔧 IN PROGRESS (slice 1 done).**
+Direction: luxury/editorial. Live preview auto-deploys from `main` to Vercel (`whisky-mart-web.vercel.app`); **whiskymart.com domain held until the overhaul ships.**
 
-Phase-1 MVP (1–6) + Phase 2 (7–9) are on `main`. **Deployment prep for the preview (Option A) is done** — `DEPLOY.md`, `Dockerfile`, `.nvmrc`; clean build verified. **Next: owner connects Vercel/host + DNS for whiskymart.com** (steps in `DEPLOY.md`); deploy can't run from the sandbox (no host/DNS creds).
+- **Slice 1 (done):** brand identity — crafted swappable SVG `Monogram` + `Wordmark` + `app/icon.svg` favicon; design-token refresh (deeper ink/charcoal, warm parchment, refined gold scale, `lift` shadow, `tracking-luxe`/`tightest`); editorial font stacks + `.overline`/`.rule-gold` utilities; header/footer use the wordmark; editorial hero.
+- **Next slices:** PLP/PDP polish (editorial product storytelling), refined cards/buttons/badges, category & guide headers, `opengraph-image`, and imagery treatment.
+
+Phase-1 MVP (1–6) + Phase 2 (7–9) are complete and live on the Vercel preview. Deployment pipeline is connected (auto-deploy on push). **Domain attach is the final step after the overhaul.**
+
+> ⚠️ Imagery: catalogue still uses gradient placeholders (no licensed photos). A luxury/editorial look ultimately needs real product/lifestyle photography — the one asset that needs to come from the owner (or a stock licence).
 
 ### Increment 9 acceptance criteria — ✅ COMPLETE & VERIFIED
 - [x] Interface-first palate profile (`lib/personalization/palate.ts`): quiz → ranked flavour axes; `PalateProvider` (localStorage).
