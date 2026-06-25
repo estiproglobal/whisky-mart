@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import type { ProductFilter } from "@whiskymart/types";
 import { ProductListing, type ListingSearchParams } from "@/components/plp/product-listing";
+import { PageHero } from "@/components/ui/page-hero";
 
 interface Collection {
   title: string;
@@ -54,12 +55,7 @@ export default async function CollectionPage({
 
   return (
     <>
-      <div className="border-b border-whisky-100 bg-white">
-        <div className="container-page py-8">
-          <h1 className="font-display text-3xl text-charcoal">{collection.title}</h1>
-          <p className="mt-2 max-w-2xl text-charcoal/60">{collection.intro}</p>
-        </div>
-      </div>
+      <PageHero eyebrow="Collection" title={collection.title} intro={collection.intro} />
       <ProductListing searchParams={sp} base={collection.base} />
     </>
   );

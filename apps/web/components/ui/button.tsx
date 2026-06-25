@@ -5,22 +5,23 @@ type Variant = "primary" | "secondary" | "outline" | "ghost";
 type Size = "sm" | "md" | "lg";
 
 const variants: Record<Variant, string> = {
-  primary: "bg-whisky-600 text-cream hover:bg-whisky-700",
-  secondary: "bg-charcoal text-cream hover:bg-charcoal/90",
-  outline: "border border-whisky-600 text-whisky-700 hover:bg-whisky-50",
-  ghost: "text-charcoal hover:bg-whisky-50",
+  // Cask amber on ink — warm, high-contrast, works on light or dark surfaces.
+  primary: "bg-amber text-ink hover:bg-amber-dark",
+  secondary: "bg-charcoal text-cream hover:bg-oak",
+  outline: "border border-gold/50 text-charcoal hover:border-charcoal hover:bg-charcoal hover:text-cream",
+  ghost: "text-charcoal hover:bg-parchment",
 };
 
 const sizes: Record<Size, string> = {
-  sm: "h-9 px-3 text-sm",
-  md: "h-11 px-5 text-sm",
-  lg: "h-12 px-7 text-base",
+  sm: "h-9 px-3.5 text-sm",
+  md: "h-11 px-6 text-sm",
+  lg: "h-12 px-8 text-[15px]",
 };
 
 /** Shared button styling — also used to style `<Link>` elements as buttons. */
 export function buttonClasses(variant: Variant = "primary", size: Size = "md", className?: string): string {
   return cn(
-    "inline-flex items-center justify-center gap-2 rounded-xl font-medium transition-colors disabled:pointer-events-none disabled:opacity-50",
+    "inline-flex items-center justify-center gap-2 rounded-xl font-medium tracking-wide transition-colors duration-200 disabled:pointer-events-none disabled:opacity-50",
     variants[variant],
     sizes[size],
     className,

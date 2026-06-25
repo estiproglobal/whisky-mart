@@ -45,7 +45,7 @@ export function FacetSidebar({ facets }: { facets: ProductSearchResult["facets"]
   return (
     <aside className="space-y-6">
       <div className="flex items-center justify-between">
-        <h2 className="font-display text-lg text-charcoal">Filter</h2>
+        <h2 className="overline text-whisky-700">Refine</h2>
         {hasFilters ? (
           <button
             onClick={clearAll}
@@ -61,8 +61,8 @@ export function FacetSidebar({ facets }: { facets: ProductSearchResult["facets"]
         if (options.length === 0) return null;
         const chosen = selected(group.key);
         return (
-          <fieldset key={group.key} className="border-t border-whisky-100 pt-4">
-            <legend className="mb-2 text-sm font-semibold text-charcoal">{group.title}</legend>
+          <fieldset key={group.key} className="border-t border-gold/15 pt-4">
+            <legend className="mb-2.5 font-display text-base text-charcoal">{group.title}</legend>
             <ul className="space-y-1.5">
               {options.map((opt) => {
                 const isChecked = chosen.includes(opt.value);

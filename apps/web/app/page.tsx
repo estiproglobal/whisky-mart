@@ -1,169 +1,216 @@
 import Link from "next/link";
-import { ArrowRight, Sparkles, ShieldCheck, Truck, Award, Gift } from "lucide-react";
-import { Monogram } from "@/components/brand/monogram";
-import { catalog } from "@/lib/catalog/repository";
+import { ArrowRight, Sparkles, Gift } from "lucide-react";
+import { catalog, getPrimaryVariant } from "@/lib/catalog/repository";
 import { content, readingMinutes } from "@/lib/content/repository";
-import { ProductRail } from "@/components/product-rail";
-import { RecentlyViewedRail } from "@/components/recently-viewed";
+import { ProductCard } from "@/components/product-card";
 import { RecommendedRail } from "@/components/personalization/recommended-rail";
 import { ArticleCard } from "@/components/content/article-card";
+import { LuxurySection } from "@/components/ui/luxury-section";
+import { EditorialCard } from "@/components/ui/editorial-card";
+import { TrustBar } from "@/components/ui/trust-bar";
+import { Monogram } from "@/components/brand/monogram";
 import { buttonClasses } from "@/components/ui/button";
 
-const SHORTCUTS: Array<{ label: string; href: string }> = [
-  { label: "Beginner", href: "/c/beginners" },
-  { label: "Under £50", href: "/c/under-50" },
-  { label: "Peated", href: "/c/peated" },
-  { label: "Best sellers", href: "/c/bestsellers" },
-  { label: "Samples", href: "/c/samples" },
-  { label: "Taste quiz", href: "/taste" },
-  { label: "Gift Finder", href: "/gift-finder" },
-];
-
-const TRUST: Array<{ icon: typeof Award; text: string }> = [
-  { icon: ShieldCheck, text: "Authenticity guaranteed" },
-  { icon: Truck, text: "Age-verified delivery" },
-  { icon: Award, text: "Hand-picked by experts" },
-  { icon: Sparkles, text: "AI Sommelier guidance" },
-];
+function Grid({ children }: { children: React.ReactNode }) {
+  return <div className="grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-4">{children}</div>;
+}
 
 export default async function HomePage() {
   const all = await catalog.getAll();
   const newLimited = all.filter((p) => p.badges.includes("new") || p.badges.includes("limited"));
   const bestsellers = all.filter((p) => p.badges.includes("bestseller"));
   const topRated = [...all].sort((a, b) => b.ratingAvg - a.ratingAvg).slice(0, 4);
+  const under50 = all
+    .filter((p) => p.type !== "accessory" && getPrimaryVariant(p).price.amount <= 5000)
+    .slice(0, 4);
+  const flights = all.filter((p) => p.type === "sample");
   const articles = await content.featured(3);
 
   return (
     <>
       {/* Hero */}
-      <section className="relative overflow-hidden bg-ink text-cream">
+      <section className="texture-grain relative overflow-hidden bg-ink bg-cask-glow text-cream">
         <div
-          className="pointer-events-none absolute -right-20 -top-16 hidden opacity-[0.05] lg:block"
+          className="pointer-events-none absolute -right-24 top-1/2 hidden -translate-y-1/2 opacity-[0.05] lg:block"
           aria-hidden="true"
         >
-          <Monogram className="h-[30rem] w-[30rem] text-cream" />
+          <Monogram className="h-[34rem] w-[34rem] text-cream" />
         </div>
-        <div className="container-page relative grid gap-10 py-20 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:py-28">
-          <div>
+        <div className="container-page relative py-24 sm:py-28 lg:py-36">
+          <div className="max-w-2xl">
             <div className="flex items-center gap-3">
               <span className="rule-gold" />
-              <p className="overline text-gold-light">Whisky, beautifully chosen</p>
+              <p className="overline text-gold-light">The private cask room</p>
             </div>
-            <h1 className="mt-5 font-display text-5xl leading-[1.04] tracking-tightest sm:text-6xl">
-              Find your next favourite whisky.
+            <h1 className="mt-6 font-display text-5xl leading-[1.03] tracking-tightest sm:text-6xl lg:text-7xl">
+              The world&apos;s whisky cabinet, curated for you.
             </h1>
-            <p className="mt-5 max-w-md text-base leading-relaxed text-cream/70">
-              Thousands of bottles, expert tasting notes, low-risk samples, and an AI Sommelier that
-              learns your palate — whatever your relationship with whisky, we&apos;ll meet you there.
+            <p className="mt-6 max-w-xl text-lg leading-relaxed text-cream/70">
+              Discover, buy, learn, collect and invest — a hand-curated catalogue of single malts,
+              rare bottlings and tasting flights, with a private Sommelier to guide every choice.
             </p>
             <div className="mt-9 flex flex-wrap gap-3">
               <Link href="/sommelier" className={buttonClasses("primary", "lg")}>
-                <Sparkles className="h-4 w-4" /> Ask the Sommelier
+                <Sparkles className="h-4 w-4" /> Consult the Sommelier
               </Link>
               <Link
                 href="/shop"
-                className={buttonClasses("outline", "lg", "border-cream/40 text-cream hover:bg-cream/10")}
+                className={buttonClasses("outline", "lg", "border-cream/30 text-cream hover:border-cream hover:bg-cream/10 hover:text-cream")}
               >
-                Browse all whisky <ArrowRight className="h-4 w-4" />
+                Browse the catalogue <ArrowRight className="h-4 w-4" />
               </Link>
             </div>
+            <div className="mt-12 border-t border-gold/20 pt-7">
+              <TrustBar tone="dark" />
+            </div>
           </div>
+        </div>
+      </section>
 
-          <div className="relative rounded-2xl border border-gold/30 bg-cream/[0.04] p-8 backdrop-blur-sm">
-            <p className="overline text-gold-light">New to whisky?</p>
-            <p className="mt-3 font-display text-3xl leading-snug">Start with a tasting flight.</p>
-            <p className="mt-3 text-sm leading-relaxed text-cream/70">
-              Four 3cl samples to discover what you love before committing to a full bottle.
+      {/* The Cabinet — best sellers */}
+      <LuxurySection
+        eyebrow="The Cabinet"
+        title="What our members are pouring"
+        viewAllHref="/c/bestsellers"
+      >
+        <Grid>
+          {bestsellers.map((p) => (
+            <ProductCard key={p.id} product={p} />
+          ))}
+        </Grid>
+      </LuxurySection>
+
+      {/* New & limited */}
+      <div className="bg-parchment/50">
+        <LuxurySection
+          eyebrow="Fresh from the shelf"
+          title="New &amp; limited releases"
+          viewAllHref="/shop?sort=newest"
+        >
+          <Grid>
+            {newLimited.map((p) => (
+              <ProductCard key={p.id} product={p} />
+            ))}
+          </Grid>
+        </LuxurySection>
+      </div>
+
+      {/* Editorial brand band */}
+      <section className="texture-grain relative overflow-hidden bg-oak bg-cask-glow-soft text-cream">
+        <div className="container-page relative py-16 sm:py-20">
+          <div className="max-w-2xl">
+            <p className="overline text-gold-light">More than a shop</p>
+            <h2 className="mt-3 font-display text-4xl leading-tight tracking-tightest sm:text-5xl">
+              Buy the bottle. Learn the story. Build the cellar.
+            </h2>
+          </div>
+          <div className="mt-10 grid gap-5 md:grid-cols-3">
+            <EditorialCard
+              index="01"
+              eyebrow="Discover"
+              title="Guided by taste"
+              body="Tell us a bottle you loved or a flavour you crave — the Sommelier narrows the shelf to whiskies matched to your palate."
+              href="/sommelier"
+              cta="Meet the Sommelier"
+            />
+            <EditorialCard
+              index="02"
+              eyebrow="Collect"
+              title="Provenance & rare releases"
+              body="Limited bottlings, age statements and cask detail — chosen for character and kept honest, ready for the collector marketplace to come."
+              href="/c/bestsellers"
+              cta="Browse the cabinet"
+            />
+            <EditorialCard
+              index="03"
+              eyebrow="Belong"
+              title="Tasting notes & guides"
+              body="Expert guides, structured tasting notes and a taste profile that follows you — the beginnings of a membership-led whisky club."
+              href="/guides"
+              cta="Read the guides"
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* Premium service cards — Sommelier & Gift Finder */}
+      <section className="container-page py-12 sm:py-16">
+        <div className="grid gap-5 lg:grid-cols-2">
+          <div className="flex flex-col rounded-2xl border border-gold/30 bg-ink p-8 text-cream sm:p-10">
+            <Sparkles className="h-7 w-7 text-gold-light" />
+            <p className="overline mt-5 text-gold-light">Private concierge</p>
+            <h3 className="mt-3 font-display text-3xl">Ask the Sommelier</h3>
+            <p className="mt-3 flex-1 text-cream/70">
+              Find a bottle for a dinner, a gift, or your next cabinet slot. Describe the moment — we&apos;ll
+              recommend, with reasons.
             </p>
             <Link
-              href="/c/samples"
-              className="group mt-6 inline-flex items-center gap-1.5 text-sm font-medium text-gold-light"
+              href="/sommelier"
+              className={buttonClasses("primary", "md", "mt-7 self-start")}
             >
-              Explore samples &amp; flights
-              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+              Begin a consultation <ArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
+
+          <div className="flex flex-col rounded-2xl border border-gold/30 bg-ivory p-8 sm:p-10">
+            <Gift className="h-7 w-7 text-whisky-700" />
+            <p className="overline mt-5 text-whisky-700">The art of gifting</p>
+            <h3 className="mt-3 font-display text-3xl text-charcoal">Gift Finder</h3>
+            <p className="mt-3 flex-1 text-charcoal/65">
+              Occasion, budget, taste. We&apos;ll narrow the shelf to a handful of bottles they&apos;ll
+              remember — beautifully presented.
+            </p>
+            <Link href="/gift-finder" className={buttonClasses("outline", "md", "mt-7 self-start")}>
+              Find a gift <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
         </div>
       </section>
 
-      {/* Intent shortcuts */}
-      <section className="border-b border-whisky-100 bg-white">
-        <div className="container-page flex flex-wrap gap-3 py-5">
-          <span className="self-center text-sm font-medium text-charcoal/60">Shop by:</span>
-          {SHORTCUTS.map((s) => (
-            <Link
-              key={s.href}
-              href={s.href}
-              className="rounded-full border border-whisky-200 px-4 py-1.5 text-sm font-medium text-charcoal/80 hover:border-whisky-500 hover:text-whisky-700"
-            >
-              {s.label}
-            </Link>
-          ))}
-        </div>
-      </section>
-
+      {/* Recommended for your palate */}
       <RecommendedRail fallback={topRated} />
-      <ProductRail title="New & limited" products={newLimited} viewAllHref="/shop?sort=newest" />
-      <ProductRail title="Best sellers" products={bestsellers} viewAllHref="/c/bestsellers" />
-      <RecentlyViewedRail allProducts={all} />
 
-      {/* AI tools */}
-      <section className="container-page grid gap-6 py-12 sm:grid-cols-2">
-        <div className="flex flex-col rounded-2xl bg-whisky-50 p-8">
-          <Sparkles className="h-7 w-7 text-whisky-600" />
-          <h2 className="mt-3 font-display text-2xl text-charcoal">Ask the Sommelier</h2>
-          <p className="mt-2 flex-1 text-charcoal/70">
-            Describe a whisky you enjoyed, a flavour or a budget — get confident recommendations grounded
-            in our range.
-          </p>
-          <Link href="/sommelier" className={buttonClasses("primary", "md", "mt-5 self-start")}>
-            Ask the Sommelier <ArrowRight className="h-4 w-4" />
-          </Link>
-        </div>
-        <div className="flex flex-col rounded-2xl bg-charcoal p-8 text-cream">
-          <Gift className="h-7 w-7 text-gold" />
-          <h2 className="mt-3 font-display text-2xl">Gift Finder</h2>
-          <p className="mt-2 flex-1 text-cream/70">
-            Three quick questions — occasion, budget, taste — and we&apos;ll find the perfect whisky gift.
-          </p>
-          <Link
-            href="/gift-finder"
-            className={buttonClasses("outline", "md", "mt-5 self-start border-cream text-cream hover:bg-cream/10")}
-          >
-            Find a gift <ArrowRight className="h-4 w-4" />
-          </Link>
-        </div>
-      </section>
+      {/* Under £50 + Tasting flights */}
+      <div className="bg-parchment/50">
+        <LuxurySection
+          eyebrow="Expertly chosen"
+          title="Under £50, beautifully judged"
+          intro="Exceptional drams that prove restraint and value can share a glass."
+          viewAllHref="/c/under-50"
+        >
+          <Grid>
+            {under50.map((p) => (
+              <ProductCard key={p.id} product={p} />
+            ))}
+          </Grid>
+        </LuxurySection>
+      </div>
+
+      {flights.length > 0 ? (
+        <LuxurySection
+          eyebrow="Try before the bottle"
+          title="Tasting flights"
+          intro="Low-risk 3cl samples — discover what you love before committing to a full bottle."
+          viewAllHref="/c/samples"
+        >
+          <Grid>
+            {flights.map((p) => (
+              <ProductCard key={p.id} product={p} />
+            ))}
+          </Grid>
+        </LuxurySection>
+      ) : null}
 
       {/* Guides & stories */}
-      <section className="container-page py-10">
-        <div className="mb-5 flex items-end justify-between">
-          <h2 className="font-display text-2xl text-charcoal sm:text-3xl">Guides &amp; stories</h2>
-          <Link
-            href="/guides"
-            className="inline-flex items-center gap-1 text-sm font-medium text-whisky-700 hover:text-whisky-900"
-          >
-            All guides <ArrowRight className="h-4 w-4" />
-          </Link>
-        </div>
-        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {articles.map((article) => (
-            <ArticleCard key={article.id} article={article} minutes={readingMinutes(article)} />
-          ))}
-        </div>
-      </section>
-
-      {/* Trust bar */}
-      <section className="border-t border-whisky-100 bg-white">
-        <div className="container-page grid grid-cols-2 gap-6 py-8 sm:grid-cols-4">
-          {TRUST.map(({ icon: Icon, text }) => (
-            <div key={text} className="flex items-center gap-3">
-              <Icon className="h-6 w-6 shrink-0 text-whisky-600" />
-              <span className="text-sm font-medium text-charcoal/80">{text}</span>
-            </div>
-          ))}
-        </div>
-      </section>
+      <div className="bg-parchment/50">
+        <LuxurySection eyebrow="The journal" title="Guides &amp; stories" viewAllHref="/guides">
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {articles.map((article) => (
+              <ArticleCard key={article.id} article={article} minutes={readingMinutes(article)} />
+            ))}
+          </div>
+        </LuxurySection>
+      </div>
     </>
   );
 }

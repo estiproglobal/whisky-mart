@@ -56,10 +56,16 @@
 - Committed earlier: `screenshots.mjs` (Playwright capture, `apps/web/scripts/`).
 - **Deployment prep (Option A — preview/demo): DONE.** Added `DEPLOY.md` (Vercel + single-container runbook + DNS for whiskymart.com), `Dockerfile` + `.dockerignore` (single-instance, stable demo), `.nvmrc` (Node 22). Clean production build verified (50 static pages). The deploy itself is **owner-action** (connect Vercel/host + point DNS) — cannot be done from the sandbox (no host/DNS credentials; Docker daemon unavailable).
 
+- **Increment 10 — "The Private Cask Room" design overhaul: ✅ COMPLETE & VERIFIED, pushed to `main`.**
+  - Luxury palette + `next/font/google` (Cormorant Garamond + Inter); cask-glow + grain textures; soft shadows.
+  - Brand (`components/brand/`), primitives (`components/ui/`: LuxurySection, PageHero, EditorialCard, TrustBar, Button, Badge), premium header/footer.
+  - Redesigned: homepage (hero + curated collections + editorial band + service cards), product cards, PLP (archive filters), PDP (dossier + sticky buy panel), Sommelier (concierge), Gift Finder (guided steps), guides/article cards.
+  - **No behaviour/logic/route/test changes.** Gates: `typecheck` ✓ · `lint` ✓ · `test` ✓ (85) · `build` ✓ (51 pages).
+
 ## In-progress
 
-- **Increment 10 — Luxury/editorial overhaul + brand assets (slice 1 done, more to come).** Brand marks (`components/brand/`), token/type refresh, editorial hero, wordmark in header/footer, favicon. Build/lint/tests green (85).
-- **Deploy pipeline is LIVE:** Vercel connected to `main` (auto-deploy on push) → `https://whisky-mart-web.vercel.app`. **whiskymart.com NOT yet attached** (intentionally — attach after the overhaul). Note: sandbox can't reach `*.vercel.app` (egress policy 403), so smoke-testing the live URL is owner-side.
+- **Nothing in flight.** Overhaul shipped to the Vercel preview (auto-deploy on push). Awaiting **owner design sign-off** on `https://whisky-mart-web.vercel.app`, then attach `whiskymart.com`.
+- **Deploy pipeline LIVE:** Vercel ↔ `main`. Sandbox can't reach `*.vercel.app` (egress 403), so visual review is owner-side.
 
 ## Blocked by
 
@@ -68,10 +74,11 @@
 
 ## Next Action
 
-1. **Owner — deploy the preview (Option A):** follow `DEPLOY.md` — import to Vercel (Root Directory `apps/web`) or deploy the `Dockerfile`, then point `whiskymart.com` DNS at it. Run the post-deploy smoke checklist.
-2. **Then — go-live as a real store / hardening:** wire the `DEFERRED.md` swaps (Stripe → Postgres → real auth → Claude → Sanity → live FX) + analytics/a11y/CWV/CI, alongside the legal/merchant prerequisites (alcohol licence, payment underwriting, age-verification vendor).
-3. **OR Phase 3** — Community & Membership per `docs/02`.
-4. Keep every increment runnable, tested, and pushed to `main`; update the two context files after each.
+1. **Owner — review the redesign** on `https://whisky-mart-web.vercel.app` (it auto-deployed). On sign-off, **attach `whiskymart.com`** in Vercel → Domains (DNS steps in `DEPLOY.md`).
+2. **(Optional) Provide photography** — real bottle/lifestyle images are the one asset that will fully land the luxury aesthetic (placeholders are warm/elegant but synthetic).
+3. **Then — go-live as a real store / hardening:** wire the `DEFERRED.md` swaps (Stripe → Postgres → real auth → Claude → Sanity → live FX) + analytics/a11y/CWV/CI, alongside the legal/merchant prerequisites (alcohol licence, payment underwriting, age-verification vendor).
+4. **OR Phase 3** — Community & Membership per `docs/02`.
+5. Keep every increment runnable, tested, and pushed to `main`; update the two context files after each.
 
 ## How to run
 

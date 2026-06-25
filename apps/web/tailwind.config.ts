@@ -1,8 +1,9 @@
 import type { Config } from "tailwindcss";
 
 /**
- * WhiskyMart design tokens (see docs/04-ui-ux-architecture.md §2).
- * Premium, warm palette: deep amber/whisky tones, charcoal, cream, gold.
+ * WhiskyMart — "The Private Cask Room" design tokens.
+ * Restrained luxury: obsidian + oak darks, warm parchment lights, cask amber +
+ * antique brass accents, deep burgundy. (See Current_Task.md / brief.)
  */
 const config: Config = {
   content: [
@@ -13,45 +14,56 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Editorial neutrals
-        cream: "#FAF6EE", // page background (warm paper)
-        parchment: "#F2EADB", // alternating sections / tints
-        charcoal: "#171310", // primary ink (deep espresso)
-        ink: "#0E0B09", // near-black for hero / footer
-        // Accent metals
-        gold: {
-          DEFAULT: "#C2A14E",
-          light: "#E4D29A",
-          dark: "#9A7C32",
-        },
+        // Darks
+        obsidian: "#0B0A08",
+        ink: "#0B0A08",
+        charcoal: "#15110D", // primary text on light
+        oak: "#2A1A12", // dark oak brown
+        // Lights
+        cream: "#F4EBDD", // warm ivory — page background
+        ivory: "#FBF7EF", // lighter surface (cards on cream)
+        parchment: "#EADCC4", // section tint
+        // Accents
+        amber: { DEFAULT: "#C9822E", dark: "#AE6E26" }, // cask amber (primary)
+        gold: { DEFAULT: "#B08A4A", light: "#C9A86A", dark: "#8C6E3A" }, // antique brass
+        burgundy: "#4A1717",
+        smoke: "#6B6157", // secondary text (AA on cream)
+        // Warm neutral ramp (backgrounds / borders / text)
         whisky: {
-          50: "#FBF3E8",
-          100: "#F4E2C8",
-          200: "#E7C695",
-          300: "#D7A765",
-          400: "#C68A3C",
-          500: "#AE6D27",
-          600: "#90551E",
-          700: "#724219",
-          800: "#553216",
-          900: "#392310",
+          50: "#F7EFE0",
+          100: "#EDDFC6",
+          200: "#DCC39A",
+          300: "#CCA66C",
+          400: "#C9822E",
+          500: "#B0702A",
+          600: "#935D24",
+          700: "#784B1F",
+          800: "#553418",
+          900: "#2A1A12",
         },
       },
       fontFamily: {
-        display: ["var(--font-display)"],
-        sans: ["var(--font-sans)"],
+        display: ["var(--font-display)", "Georgia", "serif"],
+        sans: ["var(--font-sans)", "system-ui", "sans-serif"],
       },
       letterSpacing: {
         tightest: "-0.02em",
-        luxe: "0.22em", // eyebrow / overline caps
+        luxe: "0.24em", // eyebrow / overline caps
       },
       borderRadius: {
         xl: "0.875rem",
         "2xl": "1.25rem",
       },
       boxShadow: {
-        card: "0 1px 2px rgba(23,19,16,0.05), 0 10px 30px -12px rgba(23,19,16,0.18)",
-        lift: "0 2px 4px rgba(23,19,16,0.06), 0 24px 48px -20px rgba(23,19,16,0.28)",
+        // Soft, low — luxury through restraint, not heavy drop shadows
+        card: "0 1px 2px rgba(11,10,8,0.04), 0 12px 30px -18px rgba(11,10,8,0.22)",
+        lift: "0 2px 6px rgba(11,10,8,0.06), 0 28px 56px -28px rgba(11,10,8,0.34)",
+      },
+      backgroundImage: {
+        "cask-glow":
+          "radial-gradient(60% 75% at 50% -5%, rgba(201,130,46,0.20), rgba(201,130,46,0.05) 45%, transparent 72%)",
+        "cask-glow-soft":
+          "radial-gradient(50% 60% at 80% 0%, rgba(176,138,74,0.16), transparent 70%)",
       },
     },
   },

@@ -44,15 +44,17 @@ export async function ProductListing({
   const { items, total, facets } = await catalog.search(filter, sort);
 
   return (
-    <div className="container-page grid grid-cols-1 gap-8 py-8 lg:grid-cols-[260px_1fr]">
-      <div className="lg:sticky lg:top-32 lg:self-start">
-        <FacetSidebar facets={facets} />
-      </div>
+    <div className="container-page grid grid-cols-1 gap-10 py-12 sm:py-14 lg:grid-cols-[270px_1fr]">
+      <aside className="lg:sticky lg:top-40 lg:self-start">
+        <div className="rounded-2xl border border-gold/20 bg-ivory p-6">
+          <FacetSidebar facets={facets} />
+        </div>
+      </aside>
 
       <div>
-        <div className="mb-5 flex items-center justify-between">
-          <p className="text-sm text-charcoal/60">
-            {total} {total === 1 ? "result" : "results"}
+        <div className="mb-5 flex items-center justify-between border-b border-gold/15 pb-4">
+          <p className="text-sm tracking-wide text-charcoal/60">
+            <span className="font-medium text-charcoal">{total}</span> {total === 1 ? "bottle" : "bottles"}
           </p>
           <SortSelect value={sort} />
         </div>
@@ -60,14 +62,14 @@ export async function ProductListing({
         <ActiveFilters />
 
         {items.length === 0 ? (
-          <div className="rounded-2xl bg-white p-10 text-center shadow-card">
-            <p className="font-display text-xl text-charcoal">No matches</p>
+          <div className="rounded-2xl border border-gold/20 bg-ivory p-12 text-center">
+            <p className="font-display text-2xl text-charcoal">Nothing on this shelf</p>
             <p className="mt-2 text-sm text-charcoal/60">
               Try removing a filter — or ask the WhiskyMart Sommelier to help you choose.
             </p>
           </div>
         ) : (
-          <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
+          <div className="grid grid-cols-2 gap-5 sm:grid-cols-3">
             {items.map((p) => (
               <ProductCard key={p.id} product={p} />
             ))}

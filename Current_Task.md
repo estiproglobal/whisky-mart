@@ -7,15 +7,25 @@
 
 ## What I'm working on right now
 
-**Increment 10 — Luxury/editorial design overhaul + brand assets → 🔧 IN PROGRESS (slice 1 done).**
-Direction: luxury/editorial. Live preview auto-deploys from `main` to Vercel (`whisky-mart-web.vercel.app`); **whiskymart.com domain held until the overhaul ships.**
+**Increment 10 — "The Private Cask Room" design overhaul → ✅ COMPLETE.**
+Full luxury/editorial redesign. Live preview auto-deploys from `main` to Vercel (`whisky-mart-web.vercel.app`); **whiskymart.com domain held until sign-off.**
 
-- **Slice 1 (done):** brand identity — crafted swappable SVG `Monogram` + `Wordmark` + `app/icon.svg` favicon; design-token refresh (deeper ink/charcoal, warm parchment, refined gold scale, `lift` shadow, `tracking-luxe`/`tightest`); editorial font stacks + `.overline`/`.rule-gold` utilities; header/footer use the wordmark; editorial hero.
-- **Next slices:** PLP/PDP polish (editorial product storytelling), refined cards/buttons/badges, category & guide headers, `opengraph-image`, and imagery treatment.
+### Increment 10 acceptance — ✅ COMPLETE & VERIFIED
+- [x] **Tokens & type:** restrained luxury palette (obsidian/charcoal/oak · cream/ivory/parchment · cask amber · antique brass · burgundy · smoke); **fonts via `next/font/google` — Cormorant Garamond (display) + Inter (body)**; cask-glow gradients + film-grain texture; soft shadows only.
+- [x] **Brand:** swappable SVG `Monogram` + `Wordmark` (amber accent) + `app/icon.svg` favicon.
+- [x] **Primitives:** `LuxurySection`, `PageHero`, `EditorialCard`, `TrustBar`, refined `Button`, `Badge`.
+- [x] **Header:** restrained utility bar (lang/currency/age note) + clean spacious nav + minimal switchers.
+- [x] **Homepage:** immersive cask-glow hero + micro-trust row; curated collections (The Cabinet, New & Limited, Under £50, Tasting Flights); editorial brand band ("Buy the bottle…") with Discover/Collect/Belong; premium Sommelier + Gift Finder service cards.
+- [x] **Product cards:** bottle-led, warm lit surface, refined badges/price, save control.
+- [x] **PLP:** archive-style filter panel + page hero + roomier grid.
+- [x] **PDP:** dossier — sticky buy panel + delivery/age note + key facts; Tasting Profile, Cask & Maturation, Distillery Story, Delivery/Age/Returns sections.
+- [x] **Sommelier:** private-concierge panel + elegant prompt chips. **Gift Finder:** editorial 01/02/03 guided steps.
+- [x] **Footer:** dark catalogue footer; responsible-drinking + 18+ clearly legible.
+- [x] Behaviour/logic/tests unchanged. `typecheck` ✓ · `lint` ✓ · `test` ✓ (85) · `build` ✓ (51 pages, fonts fetched).
 
-Phase-1 MVP (1–6) + Phase 2 (7–9) are complete and live on the Vercel preview. Deployment pipeline is connected (auto-deploy on push). **Domain attach is the final step after the overhaul.**
+Phase-1 MVP (1–6) + Phase 2 (7–9) + design overhaul (10) are complete and live on the Vercel preview (auto-deploy on push). **Domain attach is the final step after design sign-off.**
 
-> ⚠️ Imagery: catalogue still uses gradient placeholders (no licensed photos). A luxury/editorial look ultimately needs real product/lifestyle photography — the one asset that needs to come from the owner (or a stock licence).
+> ⚠️ Imagery: still gradient/SVG placeholders (warm, lit) — real product/lifestyle **photography** is the one remaining asset to fully land the aesthetic (owner-provided or stock licence). Recorded in `DEFERRED.md`.
 
 ### Increment 9 acceptance criteria — ✅ COMPLETE & VERIFIED
 - [x] Interface-first palate profile (`lib/personalization/palate.ts`): quiz → ranked flavour axes; `PalateProvider` (localStorage).

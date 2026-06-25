@@ -2,16 +2,15 @@ import type { ProductImage as ProductImageType } from "@whiskymart/types";
 import { cn } from "@/lib/utils";
 
 /**
- * Deterministic gradient placeholder. Real product photography slots in here
- * in a later increment (next/image + CDN) without changing callers.
+ * Warm, museum-like placeholder: a lit parchment surface with a centred,
+ * labelled bottle silhouette. Real photography slots in here later (next/image
+ * + CDN) without changing callers. Tones are deliberately muted/cohesive.
  */
-const GRADIENTS: Array<[string, string]> = [
-  ["#7B481B", "#D08F3E"],
-  ["#3F2611", "#9A5C20"],
-  ["#5E3717", "#C9A24B"],
-  ["#9A5C20", "#EBC79A"],
-  ["#1A1714", "#7B481B"],
-  ["#B8732B", "#F6E4CC"],
+const SURFACES: Array<[string, string]> = [
+  ["#F1E6D3", "#D8C2A0"],
+  ["#ECDDC4", "#CBB089"],
+  ["#F0E7D7", "#D3BE9C"],
+  ["#E8D8BE", "#C7AC85"],
 ];
 
 function hash(seed: string): number {
@@ -29,23 +28,43 @@ export function ProductImage({
   className?: string;
   label?: string;
 }) {
-  const [from, to] = GRADIENTS[hash(image.seed) % GRADIENTS.length]!;
+  const h = hash(image.seed);
+  const [top, bottom] = SURFACES[h % SURFACES.length]!;
+  const gid = `g-${Math.abs(h)}`;
+
   return (
     <div
       role="img"
       aria-label={image.alt}
       className={cn("relative flex items-center justify-center overflow-hidden", className)}
-      style={{ background: `linear-gradient(140deg, ${from}, ${to})` }}
+      style={{
+        background: `radial-gradient(60% 55% at 50% 42%, rgba(201,130,46,0.16), transparent 70%), linear-gradient(180deg, ${top}, ${bottom})`,
+      }}
     >
-      {/* Simple bottle silhouette */}
-      <svg viewBox="0 0 60 160" className="h-3/4 w-auto opacity-30" aria-hidden="true">
+      {/* Labelled bottle silhouette */}
+      <svg viewBox="0 0 64 180" className="h-[82%] w-auto drop-shadow-sm" aria-hidden="true">
+        <defs>
+          <linearGradient id={gid} x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stopColor="#3A2415" />
+            <stop offset="1" stopColor="#6B431C" />
+          </linearGradient>
+        </defs>
+        {/* cap */}
+        <rect x="26" y="6" width="12" height="12" rx="2" fill="#241710" />
+        {/* body + neck */}
         <path
-          d="M24 6h12v22c0 6 10 10 10 26v94a6 6 0 0 1-6 6H20a6 6 0 0 1-6-6V54c0-16 10-20 10-26V6z"
-          fill="#FBF7F0"
+          d="M27 17h10v15c0 7 11 11 11 28v82a8 8 0 0 1-8 8H24a8 8 0 0 1-8-8V60c0-17 11-21 11-28V17z"
+          fill={`url(#${gid})`}
         />
+        {/* label */}
+        <rect x="18" y="104" width="28" height="40" rx="2" fill="#F6EFE1" opacity="0.92" />
+        <rect x="18" y="104" width="28" height="40" rx="2" fill="none" stroke="#B08A4A" strokeWidth="0.75" />
+        <rect x="23" y="118" width="18" height="2" rx="1" fill="#B08A4A" opacity="0.7" />
+        <rect x="25" y="124" width="14" height="1.5" rx="0.75" fill="#2A1A12" opacity="0.35" />
       </svg>
+
       {label ? (
-        <span className="absolute bottom-2 left-2 right-2 truncate text-center text-xs font-medium text-cream/90 drop-shadow">
+        <span className="absolute bottom-3 left-3 right-3 truncate text-center text-xs font-medium uppercase tracking-wide text-charcoal/70">
           {label}
         </span>
       ) : null}

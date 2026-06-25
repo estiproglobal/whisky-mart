@@ -47,76 +47,72 @@ export default function GiftFinderPage() {
 
   const recs: RecItem[] = (result?.recommendations ?? []).map((r) => ({ product: r.product, reason: r.reason }));
 
+  const chip = (active: boolean) =>
+    cn(
+      "rounded-full border px-4 py-2 text-sm transition-colors",
+      active
+        ? "border-whisky-600 bg-whisky-50 text-whisky-700"
+        : "border-gold/40 bg-cream text-charcoal/80 hover:border-whisky-500",
+    );
+
   return (
-    <div className="container-page py-10">
+    <div className="container-page py-12 sm:py-16">
       <div className="mx-auto max-w-3xl">
         <div className="text-center">
-          <span className="inline-flex items-center gap-2 rounded-full bg-whisky-100 px-4 py-1.5 text-sm font-medium text-whisky-800">
-            <Gift className="h-4 w-4" /> Gift Finder
-          </span>
-          <h1 className="mt-5 font-display text-4xl text-charcoal">Find the perfect whisky gift.</h1>
-          <p className="mt-3 text-charcoal/70">Answer three quick questions and we&apos;ll do the rest.</p>
+          <div className="inline-flex items-center gap-2 rounded-full border border-gold/30 bg-parchment/60 px-4 py-1.5">
+            <Gift className="h-4 w-4 text-whisky-700" />
+            <span className="overline text-whisky-700">The art of gifting</span>
+          </div>
+          <h1 className="mt-5 font-display text-4xl text-charcoal sm:text-5xl">
+            Find the perfect whisky gift.
+          </h1>
+          <p className="mx-auto mt-3 max-w-xl text-charcoal/65">
+            Three considered questions — occasion, budget, taste. We&apos;ll narrow the shelf to a
+            handful they&apos;ll remember.
+          </p>
         </div>
 
-        <form onSubmit={find} className="mt-8 space-y-6 rounded-2xl bg-white p-6 shadow-card">
-          <div>
-            <p className="mb-2 text-sm font-medium text-charcoal/80">Occasion</p>
-            <div className="flex flex-wrap gap-2">
+        <form onSubmit={find} className="mt-8 space-y-8 rounded-2xl border border-gold/25 bg-ivory p-6 sm:p-8">
+          <fieldset>
+            <legend className="overline text-whisky-700">01 · Occasion</legend>
+            <div className="mt-3 flex flex-wrap gap-2.5">
               {OCCASIONS.map((o) => (
-                <button
-                  key={o}
-                  type="button"
-                  onClick={() => setOccasion(o)}
-                  className={cn(
-                    "rounded-full border px-4 py-1.5 text-sm",
-                    occasion === o ? "border-whisky-500 bg-whisky-50 text-whisky-700" : "border-whisky-200 text-charcoal/80",
-                  )}
-                >
+                <button key={o} type="button" onClick={() => setOccasion(o)} className={chip(occasion === o)}>
                   {o}
                 </button>
               ))}
             </div>
-          </div>
+          </fieldset>
 
-          <div>
-            <p className="mb-2 text-sm font-medium text-charcoal/80">Budget</p>
-            <div className="flex flex-wrap gap-2">
+          <fieldset>
+            <legend className="overline text-whisky-700">02 · Budget</legend>
+            <div className="mt-3 flex flex-wrap gap-2.5">
               {BUDGETS.map((b, i) => (
-                <button
-                  key={b.label}
-                  type="button"
-                  onClick={() => setBudgetIdx(i)}
-                  className={cn(
-                    "rounded-full border px-4 py-1.5 text-sm",
-                    budgetIdx === i ? "border-whisky-500 bg-whisky-50 text-whisky-700" : "border-whisky-200 text-charcoal/80",
-                  )}
-                >
+                <button key={b.label} type="button" onClick={() => setBudgetIdx(i)} className={chip(budgetIdx === i)}>
                   {b.label}
                 </button>
               ))}
             </div>
-          </div>
+          </fieldset>
 
-          <div>
-            <p className="mb-2 text-sm font-medium text-charcoal/80">Tastes they enjoy (optional)</p>
-            <div className="flex flex-wrap gap-2">
+          <fieldset>
+            <legend className="overline text-whisky-700">03 · Taste they enjoy</legend>
+            <p className="mt-1 text-xs text-charcoal/45">Optional — choose any that apply.</p>
+            <div className="mt-3 flex flex-wrap gap-2.5">
               {FLAVOUR_AXES.map((axis) => (
                 <button
                   key={axis}
                   type="button"
                   onClick={() => toggleTaste(axis)}
-                  className={cn(
-                    "rounded-full border px-4 py-1.5 text-sm capitalize",
-                    taste.includes(axis) ? "border-whisky-500 bg-whisky-50 text-whisky-700" : "border-whisky-200 text-charcoal/80",
-                  )}
+                  className={cn(chip(taste.includes(axis)), "capitalize")}
                 >
                   {axis}
                 </button>
               ))}
             </div>
-          </div>
+          </fieldset>
 
-          <label className="flex items-center gap-2.5 text-sm">
+          <label className="flex items-center gap-2.5 border-t border-gold/15 pt-6 text-sm">
             <input
               type="checkbox"
               checked={forBeginner}
@@ -126,10 +122,10 @@ export default function GiftFinderPage() {
             They&apos;re new to whisky
           </label>
 
-          <Button type="submit" disabled={loading}>
+          <Button type="submit" size="lg" disabled={loading}>
             {loading ? (
               <>
-                <Loader2 className="h-4 w-4 animate-spin" /> Finding gifts…
+                <Loader2 className="h-4 w-4 animate-spin" /> Curating gifts…
               </>
             ) : (
               <>
@@ -140,10 +136,10 @@ export default function GiftFinderPage() {
         </form>
 
         {result ? (
-          <div className="mt-10 space-y-4">
-            <p className="font-display text-xl text-charcoal">{result.message}</p>
+          <div className="mt-12 space-y-5">
+            <p className="font-display text-2xl text-charcoal">{result.message}</p>
             <RecommendationGrid items={recs} />
-            <p className="text-xs text-charcoal/40">{result.disclaimer}</p>
+            <p className="text-xs text-smoke">{result.disclaimer}</p>
           </div>
         ) : null}
       </div>

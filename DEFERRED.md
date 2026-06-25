@@ -144,6 +144,7 @@ the on-the-record list so these are not forgotten.
 | Search | Seed + `relevanceScore()` over `/api/search` | Algolia / Typesense + vector | `/api/search` route + repository |
 | Age verification | Self-declared gate + checkout checkbox | Persona / Veriff / Yoti | checkout `age` step + `/api/checkout/pay` |
 | Jurisdiction/tax | Encoded rules table | Tax engine (Stripe Tax / Avalara) + fuller rules | `lib/checkout/jurisdiction.ts` |
+| Imagery | Warm lit SVG/gradient placeholders | Real product/lifestyle **photography** (CDN + `next/image`) | `components/product-image.tsx`, `article-card.tsx` |
 
 ---
 

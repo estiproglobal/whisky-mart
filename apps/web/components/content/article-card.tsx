@@ -1,11 +1,12 @@
 import Link from "next/link";
 import type { Article } from "@whiskymart/types";
 
-const GRADIENTS: Array<[string, string]> = [
-  ["#3F2611", "#9A5C20"],
-  ["#5E3717", "#C9A24B"],
-  ["#1A1714", "#7B481B"],
-  ["#7B481B", "#D08F3E"],
+// Muted, cohesive warm surfaces (no vivid gradients).
+const SURFACES: Array<[string, string]> = [
+  ["#2A1A12", "#3A2415"],
+  ["#15110D", "#2A1A12"],
+  ["#3A2415", "#6B431C"],
+  ["#241710", "#4A1717"],
 ];
 
 function hash(seed: string): number {
@@ -21,26 +22,24 @@ const TYPE_LABEL: Record<Article["type"], string> = {
 };
 
 export function ArticleCard({ article, minutes }: { article: Article; minutes: number }) {
-  const [from, to] = GRADIENTS[hash(article.heroSeed) % GRADIENTS.length]!;
+  const [from, to] = SURFACES[hash(article.heroSeed) % SURFACES.length]!;
   return (
     <Link
       href={`/guides/${article.slug}`}
-      className="group flex h-full flex-col overflow-hidden rounded-2xl bg-white shadow-card transition-shadow hover:shadow-lg"
+      className="group flex h-full flex-col overflow-hidden rounded-2xl border border-gold/20 bg-ivory transition-all duration-300 hover:-translate-y-0.5 hover:border-gold/40 hover:shadow-card"
     >
       <div
-        className="flex aspect-[16/9] items-end p-4"
+        className="relative flex aspect-[16/10] items-end p-5"
         style={{ background: `linear-gradient(135deg, ${from}, ${to})` }}
       >
-        <span className="rounded-full bg-cream/90 px-2.5 py-0.5 text-xs font-semibold text-whisky-800">
-          {TYPE_LABEL[article.type]}
-        </span>
+        <span className="overline text-gold-light">{TYPE_LABEL[article.type]}</span>
       </div>
-      <div className="flex flex-1 flex-col gap-2 p-5">
-        <h3 className="font-display text-lg leading-snug text-charcoal group-hover:text-whisky-700">
+      <div className="flex flex-1 flex-col gap-2.5 p-6">
+        <h3 className="font-display text-xl leading-snug text-charcoal transition-colors group-hover:text-whisky-700">
           {article.title}
         </h3>
-        <p className="line-clamp-2 text-sm text-charcoal/60">{article.excerpt}</p>
-        <p className="mt-auto pt-2 text-xs text-charcoal/40">
+        <p className="line-clamp-2 text-sm leading-relaxed text-charcoal/60">{article.excerpt}</p>
+        <p className="mt-auto pt-2 text-xs uppercase tracking-wider text-smoke">
           {new Date(article.publishedAt).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" })}
           {" · "}
           {minutes} min read

@@ -84,8 +84,10 @@ DEFERRED.md                            # planned production swaps (Postgres, Str
 > **Build status:** **Phase-1 MVP feature-complete** on `main` (Increments 1–6:
 > storefront · search/wishlist · checkout+compliance+payment · accounts/
 > persistence/reviews · AI Sommelier+Gift Finder · content+SEO). **Phase 2
-> complete** — multi-currency (7) + i18n (8) + personalisation (9). 85 tests,
-> all gates green. Interface-first throughout — production integrations
-> (Postgres, Stripe, Claude, Sanity, live FX, i18n routing/TMS, learned palate,
-> auth/search) are recorded in `DEFERRED.md`. Not yet deployed/live (see Handoff
-> for the go-live path).
+> complete** — multi-currency (7) + i18n (8) + personalisation (9). **Increment
+> 10: "The Private Cask Room" luxury/editorial design overhaul complete**
+> (palette + `next/font/google` Cormorant Garamond/Inter + UI primitives;
+> behaviour unchanged). 85 tests, all gates green. **Deployed to a Vercel
+> preview** (`whisky-mart-web.vercel.app`, auto-deploy on push); whiskymart.com
+> held pending design sign-off. Interface-first throughout — production
+> integrations + real photography are recorded in `DEFERRED.md`.

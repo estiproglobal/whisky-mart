@@ -17,7 +17,7 @@ export function Wordmark({
       <Monogram className="h-8 w-8 shrink-0 text-current" />
       {!compact ? (
         <span className="font-display text-2xl font-semibold tracking-tightest leading-none">
-          Whisky<span className="text-whisky-600">Mart</span>
+          Whisky<span className="text-amber">Mart</span>
         </span>
       ) : null}
     </span>
