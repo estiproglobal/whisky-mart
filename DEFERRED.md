@@ -120,7 +120,22 @@ the on-the-record list so these are not forgotten.
      workflows; translate full page bodies + product/content data per locale.
   3. Localise formats already partly handled (Intl currency/date).
 
-## 7. Other interface-first seams (swap when scaling)
+## 7. Personalisation — quiz palate → **learned palate fingerprint** (planned)
+
+- **Status:** interface-first since **Increment 9** (Phase 2).
+- **Now:** a client-side `PalateProfile` (flavour axes) from a short quiz
+  (`lib/personalization/palate.ts`), stored in localStorage. Drives "Recommended
+  for you" (`/api/recommendations` over the shared engine) and seeds the
+  Sommelier when a query lacks a flavour hint.
+- **Switch later:**
+  1. Persist the profile server-side (with the Postgres swap) and **learn** it
+     from behaviour — purchases, reviews, vault, clicks — into the richer
+     "palate fingerprint" (docs/02), not just the quiz.
+  2. Personalise ranking on PLP/search and lifecycle email; add collaborative
+     filtering + embeddings re-ranked by the LLM (with the Claude swap).
+  3. Add a privacy/preference centre (profiling transparency — docs/09).
+
+## 8. Other interface-first seams (swap when scaling)
 
 | Capability | Now (dev) | Production target | Seam |
 |------------|-----------|-------------------|------|

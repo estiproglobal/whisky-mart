@@ -4,6 +4,7 @@ import { catalog } from "@/lib/catalog/repository";
 import { content, readingMinutes } from "@/lib/content/repository";
 import { ProductRail } from "@/components/product-rail";
 import { RecentlyViewedRail } from "@/components/recently-viewed";
+import { RecommendedRail } from "@/components/personalization/recommended-rail";
 import { ArticleCard } from "@/components/content/article-card";
 import { buttonClasses } from "@/components/ui/button";
 
@@ -13,6 +14,7 @@ const SHORTCUTS: Array<{ label: string; href: string }> = [
   { label: "Peated", href: "/c/peated" },
   { label: "Best sellers", href: "/c/bestsellers" },
   { label: "Samples", href: "/c/samples" },
+  { label: "Taste quiz", href: "/taste" },
   { label: "Gift Finder", href: "/gift-finder" },
 ];
 
@@ -27,6 +29,7 @@ export default async function HomePage() {
   const all = await catalog.getAll();
   const newLimited = all.filter((p) => p.badges.includes("new") || p.badges.includes("limited"));
   const bestsellers = all.filter((p) => p.badges.includes("bestseller"));
+  const topRated = [...all].sort((a, b) => b.ratingAvg - a.ratingAvg).slice(0, 4);
   const articles = await content.featured(3);
 
   return (
@@ -88,6 +91,7 @@ export default async function HomePage() {
         </div>
       </section>
 
+      <RecommendedRail fallback={topRated} />
       <ProductRail title="New & limited" products={newLimited} viewAllHref="/shop?sort=newest" />
       <ProductRail title="Best sellers" products={bestsellers} viewAllHref="/c/bestsellers" />
       <RecentlyViewedRail allProducts={all} />

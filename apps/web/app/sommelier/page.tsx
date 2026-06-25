@@ -4,6 +4,7 @@ import * as React from "react";
 import { Send, Sparkles, Loader2 } from "lucide-react";
 import type { AdvisorResponse } from "@/lib/advisor/types";
 import { RecommendationGrid, type RecItem } from "@/components/advisor/recommendation-grid";
+import { usePalate } from "@/components/personalization/palate-provider";
 import { Button } from "@/components/ui/button";
 
 interface Turn {
@@ -22,6 +23,7 @@ const EXAMPLES = [
 ];
 
 export default function SommelierPage() {
+  const { palate } = usePalate();
   const [turns, setTurns] = React.useState<Turn[]>([]);
   const [input, setInput] = React.useState("");
   const [loading, setLoading] = React.useState(false);
@@ -36,7 +38,7 @@ export default function SommelierPage() {
       const res = await fetch("/api/advisor", {
         method: "POST",
         headers: { "content-type": "application/json" },
-        body: JSON.stringify({ message: q }),
+        body: JSON.stringify({ message: q, palate: palate?.flavours ?? [] }),
       });
       const data = (await res.json()) as AdvisorResponse;
       setTurns((t) => [

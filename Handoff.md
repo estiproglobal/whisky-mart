@@ -46,21 +46,28 @@
   - Static generation preserved (English-canonical server render; preference applied client-side after mount).
   - `DEFERRED.md` updated: locale-routed URLs + `hreflang` + TMS/CMS content translation deferred.
   - Quality gates: `typecheck` ✓ · `lint` ✓ · `test` ✓ (78) · `build` ✓ (SSG preserved) · runtime smoke ✓.
+- **Phase 2 — Increment 9 (Personalisation): ✅ COMPLETE & VERIFIED, pushed to `main`.**
+  - Interface-first palate profile (`lib/personalization/palate.ts`): quiz → ranked flavour axes; `PalateProvider` (localStorage).
+  - `/taste` quiz page; "Recommended for you" rail (home + `/taste`) grounded via `POST /api/recommendations`; `PalateQuiz`, `RecommendedRail`.
+  - Sommelier seeds from the saved palate when a query lacks a flavour hint (`Advisor.ask` gained an optional `palate`).
+  - SSG preserved (rail renders server fallback, swaps to palate picks client-side).
+  - `DEFERRED.md` updated: learned palate fingerprint + server-side profile.
+  - Quality gates: `typecheck` ✓ · `lint` ✓ · `test` ✓ (85) · `build` ✓ · runtime smoke ✓.
 - Committed earlier: `screenshots.mjs` (Playwright capture, `apps/web/scripts/`).
 
 ## In-progress
 
-- **Nothing in flight.** Phase 2: multi-currency ✅ + i18n ✅ done; **personalisation (Increment 9) next**.
+- **Nothing in flight.** 🎉 **Phase 1 (MVP) and Phase 2 (Global Discovery) are both feature-complete** on `main`. Awaiting direction: production hardening / go-live, or Phase 3.
 
 ## Blocked by
 
 - **Nothing blocking.** Write access confirmed — Claude pushes directly to `origin/main`.
 - **Deferred production switches recorded in `DEFERRED.md`:** Postgres (persistence), Stripe (payments), Claude (AI Sommelier), **Sanity (content)**, plus auth/search/age-verification/tax. Each swaps behind an existing interface.
 
-## Next Action
+## Next Action (awaiting owner direction)
 
-1. **Claude — continue Phase 2:** (8) i18n / multi-language (message catalogue + locale switch + `hreflang`, interface-first translation source), then (9) personalisation (palate profile + "Recommended for you" rails + advisor uses the profile).
-2. **In parallel / when ready:** production swaps from `DEFERRED.md` (Postgres, Stripe, Claude, Sanity, live FX, real auth/search), plus analytics + accessibility + CWV + CI.
+1. **Go-live / production hardening** — wire the `DEFERRED.md` swaps (Postgres → Stripe → real auth → Claude → Sanity → live FX), add analytics + accessibility (WCAG 2.2 AA) + CWV budgets + CI, and deploy to the domain. (See the go-live note for the owner: a demo on the domain is ~1 day; a real transacting store is a few weeks, gated mostly by legal/merchant — alcohol licence, Stripe high-risk underwriting, age-verification vendor.)
+2. **OR Phase 3** — Community & Membership (profiles, clubs, tastings, loyalty) per `docs/02`.
 3. Keep every increment runnable, tested, and pushed to `main`; update the two context files after each.
 
 ## How to run

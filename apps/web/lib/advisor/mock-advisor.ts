@@ -1,7 +1,13 @@
 import { catalog } from "@/lib/catalog/repository";
 import { parseQuery } from "./parse";
 import { recommend } from "./engine";
-import { type Advisor, type AdvisorIntent, type AdvisorResponse, RESPONSIBLE_DISCLAIMER } from "./types";
+import {
+  type Advisor,
+  type AdvisorIntent,
+  type AdvisorOptions,
+  type AdvisorResponse,
+  RESPONSIBLE_DISCLAIMER,
+} from "./types";
 
 function uniq(arr: string[]): string[] {
   return [...new Set(arr)];
@@ -33,7 +39,7 @@ function summariseIntent(intent: AdvisorIntent): string {
 export class GroundedMockAdvisor implements Advisor {
   readonly name = "grounded-mock";
 
-  async ask(query: string): Promise<AdvisorResponse> {
+  async ask(query: string, options?: AdvisorOptions): Promise<AdvisorResponse> {
     const products = await catalog.getAll();
     const knownNames = uniq([
       ...products.map((p) => p.brand.name.toLowerCase()),
@@ -41,6 +47,10 @@ export class GroundedMockAdvisor implements Advisor {
     ]);
 
     const intent = parseQuery(query, knownNames);
+    // Fall back to the shopper's saved palate when the query has no flavour hint.
+    if (intent.flavours.length === 0 && options?.palate?.length) {
+      intent.flavours = options.palate;
+    }
 
     let recs = recommend(intent, products, { limit: 3, includeAccessories: intent.gift });
     let relaxed = false;

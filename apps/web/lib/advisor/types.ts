@@ -25,6 +25,11 @@ export interface AdvisorResponse {
   disclaimer: string;
 }
 
+export interface AdvisorOptions {
+  /** The shopper's saved palate flavours, used when the query gives no flavour hint. */
+  palate?: FlavourAxis[];
+}
+
 /**
  * The Sommelier abstraction. The grounded mock is used today; a Claude-backed
  * implementation swaps in behind this interface when ANTHROPIC_API_KEY is set
@@ -32,7 +37,7 @@ export interface AdvisorResponse {
  */
 export interface Advisor {
   readonly name: string;
-  ask(query: string): Promise<AdvisorResponse>;
+  ask(query: string, options?: AdvisorOptions): Promise<AdvisorResponse>;
 }
 
 export const RESPONSIBLE_DISCLAIMER =
