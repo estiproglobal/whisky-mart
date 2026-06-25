@@ -43,14 +43,14 @@ export default function ConfirmationPage() {
       <div className="mx-auto max-w-2xl">
         <div className="text-center">
           <CheckCircle2 className="mx-auto h-14 w-14 text-whisky-600" />
-          <h1 className="mt-4 font-display text-3xl text-charcoal">Thank you — order confirmed</h1>
+          <h1 className="mt-5 font-display text-[2.25rem] leading-tight tracking-tightest text-charcoal">Thank you — order confirmed</h1>
           <p className="mt-2 text-charcoal/70">
             Order <span className="font-medium text-charcoal">{order.orderNumber}</span> · a confirmation has
             been sent to {order.email}.
           </p>
         </div>
 
-        <div className="mt-8 rounded-2xl bg-white p-6 shadow-card">
+        <div className="mt-8 rounded-lg border border-line bg-ivory p-6">
           <ul className="space-y-3">
             {order.items.map((item) => (
               <li key={item.variantId} className="flex justify-between text-sm">
@@ -62,7 +62,7 @@ export default function ConfirmationPage() {
               </li>
             ))}
           </ul>
-          <div className="mt-4 space-y-1.5 border-t border-whisky-100 pt-4 text-sm">
+          <div className="mt-4 space-y-1.5 border-t border-line pt-4 text-sm">
             <div className="flex justify-between text-charcoal/70">
               <span>Subtotal</span>
               <Price money={order.totals.subtotal} />
@@ -77,13 +77,13 @@ export default function ConfirmationPage() {
                 <Price money={order.totals.tax} />
               </div>
             ) : null}
-            <div className="flex justify-between border-t border-whisky-100 pt-2 font-display text-lg text-charcoal">
+            <div className="flex justify-between border-t border-line pt-2 font-display text-lg text-charcoal">
               <span>Total</span>
               <Price money={order.totals.grandTotal} />
             </div>
           </div>
 
-          <div className="mt-5 border-t border-whisky-100 pt-4 text-sm text-charcoal/70">
+          <div className="mt-5 border-t border-line pt-4 text-sm text-charcoal/70">
             <p className="font-medium text-charcoal">Delivering to</p>
             <p className="mt-1">
               {order.shippingAddress.fullName}, {order.shippingAddress.line1}, {order.shippingAddress.city},{" "}

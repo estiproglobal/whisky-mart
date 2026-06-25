@@ -46,15 +46,15 @@ export async function ProductListing({
   return (
     <div className="container-page grid grid-cols-1 gap-10 py-12 sm:py-14 lg:grid-cols-[270px_1fr]">
       <aside className="lg:sticky lg:top-40 lg:self-start">
-        <div className="rounded-2xl border border-gold/20 bg-ivory p-6">
+        <div className="rounded-lg border border-line bg-ivory p-6">
           <FacetSidebar facets={facets} />
         </div>
       </aside>
 
       <div>
-        <div className="mb-5 flex items-center justify-between border-b border-gold/15 pb-4">
-          <p className="text-sm tracking-wide text-charcoal/60">
-            <span className="font-medium text-charcoal">{total}</span> {total === 1 ? "bottle" : "bottles"}
+        <div className="mb-6 flex items-center justify-between border-b border-line pb-4">
+          <p className="text-[11px] uppercase tracking-[0.14em] text-charcoal/55">
+            <span className="font-semibold text-charcoal">{total}</span> {total === 1 ? "bottle" : "bottles"}
           </p>
           <SortSelect value={sort} />
         </div>
@@ -62,8 +62,8 @@ export async function ProductListing({
         <ActiveFilters />
 
         {items.length === 0 ? (
-          <div className="rounded-2xl border border-gold/20 bg-ivory p-12 text-center">
-            <p className="font-display text-2xl text-charcoal">Nothing on this shelf</p>
+          <div className="rounded-lg border border-line bg-ivory p-14 text-center">
+            <p className="font-display text-[1.75rem] tracking-tightest text-charcoal">Nothing on this shelf</p>
             <p className="mt-2 text-sm text-charcoal/60">
               Try removing a filter — or ask the WhiskyMart Sommelier to help you choose.
             </p>

@@ -23,18 +23,18 @@ export function PageHero({
       >
         <Monogram className="h-72 w-72 text-cream" />
       </div>
-      <div className="container-page relative py-14 sm:py-16">
+      <div className="container-page relative py-16 sm:py-20">
         {eyebrow ? (
           <div className="flex items-center gap-3">
             <span className="rule-gold" />
             <p className="overline text-gold-light">{eyebrow}</p>
           </div>
         ) : null}
-        <h1 className="mt-4 max-w-3xl font-display text-4xl leading-[1.05] tracking-tightest sm:text-5xl">
+        <h1 className="mt-5 max-w-3xl font-display text-[2.6rem] leading-[1.02] tracking-tightest sm:text-[3.4rem]">
           {title}
         </h1>
-        {intro ? <p className="mt-4 max-w-2xl text-cream/70">{intro}</p> : null}
-        {children ? <div className="mt-6">{children}</div> : null}
+        {intro ? <p className="mt-5 max-w-2xl text-[15px] leading-relaxed text-cream/65">{intro}</p> : null}
+        {children ? <div className="mt-7">{children}</div> : null}
       </div>
     </section>
   );

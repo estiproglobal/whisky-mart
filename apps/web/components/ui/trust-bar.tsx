@@ -15,12 +15,12 @@ export function TrustBar({ tone = "light" }: { tone?: "light" | "dark" }) {
   const dark = tone === "dark";
   return (
     <ul
-      className={`flex flex-wrap items-center gap-x-8 gap-y-3 ${dark ? "text-cream/75" : "text-charcoal/70"}`}
+      className={`flex flex-wrap items-center gap-x-9 gap-y-3 ${dark ? "text-cream/70" : "text-charcoal/65"}`}
     >
       {ITEMS.map(({ icon: Icon, text }) => (
-        <li key={text} className="flex items-center gap-2.5 text-sm">
-          <Icon className={`h-4 w-4 shrink-0 ${dark ? "text-gold-light" : "text-whisky-700"}`} />
-          <span className="tracking-wide">{text}</span>
+        <li key={text} className="flex items-center gap-2.5 text-[11px] font-medium uppercase tracking-[0.14em]">
+          <Icon className={`h-3.5 w-3.5 shrink-0 ${dark ? "text-gold-light" : "text-whisky-700"}`} />
+          <span>{text}</span>
         </li>
       ))}
     </ul>

@@ -23,23 +23,23 @@ export function EditorialCard({
 }) {
   const inner = (
     <>
-      <div className="flex items-center justify-between">
+      <div className="flex items-baseline justify-between gap-4">
         <p className="overline text-whisky-700">{eyebrow}</p>
-        {index ? <span className="font-display text-2xl text-gold/70">{index}</span> : null}
+        {index ? <span className="font-display text-3xl leading-none text-gold/45">{index}</span> : null}
       </div>
-      <h3 className="mt-4 font-display text-2xl text-charcoal">{title}</h3>
-      <p className="mt-2 flex-1 text-sm leading-relaxed text-charcoal/65">{body}</p>
+      <h3 className="mt-5 font-display text-[1.6rem] leading-tight text-charcoal">{title}</h3>
+      <p className="mt-3 flex-1 text-[14px] leading-relaxed text-charcoal/60">{body}</p>
       {href && cta ? (
-        <span className="group mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-whisky-700">
+        <span className="group/cta mt-6 inline-flex items-center gap-2 border-b border-whisky-700/30 pb-0.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-whisky-800 transition-colors group-hover:border-whisky-700">
           {cta}
-          <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+          <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
         </span>
       ) : null}
     </>
   );
 
   const className =
-    "flex h-full flex-col rounded-2xl border border-gold/25 bg-ivory p-7 transition-colors hover:border-gold/50";
+    "group flex h-full flex-col rounded-lg border border-line bg-ivory p-7 transition-colors hover:border-charcoal/30";
 
   return href ? (
     <Link href={href} className={className}>

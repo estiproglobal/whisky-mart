@@ -29,41 +29,55 @@ export default async function HomePage() {
   return (
     <>
       {/* Hero */}
-      <section className="texture-grain relative overflow-hidden bg-ink bg-cask-glow text-cream">
+      <section className="texture-grain edge-sheen relative overflow-hidden bg-ink bg-cask-glow text-cream">
         <div
-          className="pointer-events-none absolute -right-24 top-1/2 hidden -translate-y-1/2 opacity-[0.05] lg:block"
+          className="pointer-events-none absolute -right-28 top-1/2 hidden -translate-y-1/2 opacity-[0.045] lg:block"
           aria-hidden="true"
         >
-          <Monogram className="h-[34rem] w-[34rem] text-cream" />
+          <Monogram className="h-[38rem] w-[38rem] text-cream" />
         </div>
-        <div className="container-page relative py-24 sm:py-28 lg:py-36">
+        <div className="container-page relative py-28 sm:py-32 lg:py-40">
           <div className="max-w-2xl">
             <div className="flex items-center gap-3">
               <span className="rule-gold" />
               <p className="overline text-gold-light">The private cask room</p>
             </div>
-            <h1 className="mt-6 font-display text-5xl leading-[1.03] tracking-tightest sm:text-6xl lg:text-7xl">
+            <h1 className="mt-7 font-display text-[3.25rem] leading-[0.98] tracking-tightest sm:text-7xl lg:text-[5rem]">
               The world&apos;s whisky cabinet, curated for you.
             </h1>
-            <p className="mt-6 max-w-xl text-lg leading-relaxed text-cream/70">
+            <p className="mt-7 max-w-xl text-[17px] leading-relaxed text-cream/65">
               Discover, buy, learn, collect and invest — a hand-curated catalogue of single malts,
               rare bottlings and tasting flights, with a private Sommelier to guide every choice.
             </p>
-            <div className="mt-9 flex flex-wrap gap-3">
-              <Link href="/sommelier" className={buttonClasses("primary", "lg")}>
+            <div className="mt-10 flex flex-wrap gap-3">
+              <Link href="/sommelier" className={buttonClasses("accent", "lg")}>
                 <Sparkles className="h-4 w-4" /> Consult the Sommelier
               </Link>
               <Link
                 href="/shop"
-                className={buttonClasses("outline", "lg", "border-cream/30 text-cream hover:border-cream hover:bg-cream/10 hover:text-cream")}
+                className={buttonClasses("outline", "lg", "border-cream/25 text-cream hover:border-cream hover:bg-cream/10 hover:text-cream")}
               >
                 Browse the catalogue <ArrowRight className="h-4 w-4" />
               </Link>
             </div>
-            <div className="mt-12 border-t border-gold/20 pt-7">
+            <div className="mt-14 border-t border-cream/12 pt-7">
               <TrustBar tone="dark" />
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* House credo — a quiet editorial pause */}
+      <section className="border-b border-line bg-cream">
+        <div className="container-page py-16 text-center sm:py-20">
+          <div className="flex justify-center">
+            <span className="rule-gold" />
+          </div>
+          <p className="mx-auto mt-7 max-w-3xl font-display text-[1.6rem] leading-[1.4] text-charcoal/85 sm:text-[2rem]">
+            We keep a small, deliberate cellar — every bottle chosen for its character, its
+            provenance, and the moment it was made for.
+          </p>
+          <p className="overline mt-7 text-whisky-700">The WhiskyMart house</p>
         </div>
       </section>
 
@@ -96,15 +110,18 @@ export default async function HomePage() {
       </div>
 
       {/* Editorial brand band */}
-      <section className="texture-grain relative overflow-hidden bg-oak bg-cask-glow-soft text-cream">
-        <div className="container-page relative py-16 sm:py-20">
+      <section className="texture-grain edge-sheen relative overflow-hidden bg-oak bg-cask-glow-soft text-cream">
+        <div className="container-page relative py-20 sm:py-24">
           <div className="max-w-2xl">
-            <p className="overline text-gold-light">More than a shop</p>
-            <h2 className="mt-3 font-display text-4xl leading-tight tracking-tightest sm:text-5xl">
+            <div className="flex items-center gap-3">
+              <span className="rule-gold" />
+              <p className="overline text-gold-light">More than a shop</p>
+            </div>
+            <h2 className="mt-5 font-display text-[2.5rem] leading-[1.04] tracking-tightest sm:text-[3.25rem]">
               Buy the bottle. Learn the story. Build the cellar.
             </h2>
           </div>
-          <div className="mt-10 grid gap-5 md:grid-cols-3">
+          <div className="mt-12 grid gap-5 md:grid-cols-3">
             <EditorialCard
               index="01"
               eyebrow="Discover"
@@ -134,33 +151,30 @@ export default async function HomePage() {
       </section>
 
       {/* Premium service cards — Sommelier & Gift Finder */}
-      <section className="container-page py-12 sm:py-16">
+      <section className="container-page py-14 sm:py-20">
         <div className="grid gap-5 lg:grid-cols-2">
-          <div className="flex flex-col rounded-2xl border border-gold/30 bg-ink p-8 text-cream sm:p-10">
-            <Sparkles className="h-7 w-7 text-gold-light" />
-            <p className="overline mt-5 text-gold-light">Private concierge</p>
-            <h3 className="mt-3 font-display text-3xl">Ask the Sommelier</h3>
-            <p className="mt-3 flex-1 text-cream/70">
+          <div className="texture-grain edge-sheen relative flex flex-col overflow-hidden rounded-lg border border-gold/25 bg-ink bg-cask-glow-soft p-9 text-cream sm:p-11">
+            <Sparkles className="h-6 w-6 text-gold-light" strokeWidth={1.5} />
+            <p className="overline mt-6 text-gold-light">Private concierge</p>
+            <h3 className="mt-4 font-display text-[2rem] leading-tight">Ask the Sommelier</h3>
+            <p className="mt-3 flex-1 text-[15px] leading-relaxed text-cream/65">
               Find a bottle for a dinner, a gift, or your next cabinet slot. Describe the moment — we&apos;ll
               recommend, with reasons.
             </p>
-            <Link
-              href="/sommelier"
-              className={buttonClasses("primary", "md", "mt-7 self-start")}
-            >
+            <Link href="/sommelier" className={buttonClasses("accent", "md", "mt-8 self-start")}>
               Begin a consultation <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
 
-          <div className="flex flex-col rounded-2xl border border-gold/30 bg-ivory p-8 sm:p-10">
-            <Gift className="h-7 w-7 text-whisky-700" />
-            <p className="overline mt-5 text-whisky-700">The art of gifting</p>
-            <h3 className="mt-3 font-display text-3xl text-charcoal">Gift Finder</h3>
-            <p className="mt-3 flex-1 text-charcoal/65">
+          <div className="flex flex-col rounded-lg border border-line bg-ivory p-9 sm:p-11">
+            <Gift className="h-6 w-6 text-whisky-700" strokeWidth={1.5} />
+            <p className="overline mt-6 text-whisky-700">The art of gifting</p>
+            <h3 className="mt-4 font-display text-[2rem] leading-tight text-charcoal">Gift Finder</h3>
+            <p className="mt-3 flex-1 text-[15px] leading-relaxed text-charcoal/60">
               Occasion, budget, taste. We&apos;ll narrow the shelf to a handful of bottles they&apos;ll
               remember — beautifully presented.
             </p>
-            <Link href="/gift-finder" className={buttonClasses("outline", "md", "mt-7 self-start")}>
+            <Link href="/gift-finder" className={buttonClasses("outline", "md", "mt-8 self-start")}>
               Find a gift <ArrowRight className="h-4 w-4" />
             </Link>
           </div>

@@ -20,7 +20,7 @@ function SignInForm() {
         e.preventDefault();
         if (valid) signIn({ name: name.trim(), email: email.trim() });
       }}
-      className="max-w-sm space-y-4 rounded-2xl bg-white p-6 shadow-card"
+      className="max-w-sm space-y-4 rounded-lg border border-line bg-ivory p-6"
     >
       <p className="text-sm text-charcoal/60">
         Sign in to see your orders and saved whisky. (Demo sign-in — no password yet.)
@@ -30,7 +30,7 @@ function SignInForm() {
         <input
           value={name}
           onChange={(e) => setName(e.target.value)}
-          className="h-11 w-full rounded-xl border border-whisky-200 px-3 text-sm outline-none focus:border-whisky-500"
+          className="h-11 w-full rounded-md border border-line bg-ivory px-3 text-sm outline-none focus:border-charcoal/40"
         />
       </label>
       <label className="block">
@@ -39,7 +39,7 @@ function SignInForm() {
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="h-11 w-full rounded-xl border border-whisky-200 px-3 text-sm outline-none focus:border-whisky-500"
+          className="h-11 w-full rounded-md border border-line bg-ivory px-3 text-sm outline-none focus:border-charcoal/40"
         />
       </label>
       <Button type="submit" disabled={!valid} className="w-full">
@@ -70,7 +70,7 @@ function OrderHistory({ email }: { email: string }) {
   if (orders === null) return <p className="text-sm text-charcoal/50">Loading orders…</p>;
   if (orders.length === 0) {
     return (
-      <div className="rounded-2xl bg-white p-6 text-sm text-charcoal/60 shadow-card">
+      <div className="rounded-lg border border-line bg-ivory p-6 text-sm text-charcoal/60">
         No orders yet.{" "}
         <Link href="/shop" className="font-medium text-whisky-700 hover:underline">
           Start shopping →
@@ -82,10 +82,10 @@ function OrderHistory({ email }: { email: string }) {
   return (
     <ul className="space-y-3">
       {orders.map((o) => (
-        <li key={o.id} className="rounded-2xl bg-white p-5 shadow-card">
+        <li key={o.id} className="rounded-lg border border-line bg-ivory p-5">
           <div className="flex flex-wrap items-center justify-between gap-2">
-            <span className="font-medium text-charcoal">{o.orderNumber}</span>
-            <span className="rounded-full bg-whisky-100 px-2.5 py-0.5 text-xs font-semibold capitalize text-whisky-800">
+            <span className="font-display text-lg text-charcoal">{o.orderNumber}</span>
+            <span className="rounded-[3px] border border-line bg-parchment px-2 py-0.5 text-[10px] font-semibold uppercase tracking-[0.14em] text-charcoal/70">
               {o.status}
             </span>
           </div>
@@ -109,7 +109,7 @@ export default function AccountPage() {
 
   return (
     <div className="container-page py-10">
-      <h1 className="font-display text-3xl text-charcoal">My WhiskyMart</h1>
+      <h1 className="font-display text-[2.25rem] tracking-tightest text-charcoal">My WhiskyMart</h1>
 
       {!customer ? (
         <div className="mt-8">
@@ -117,8 +117,8 @@ export default function AccountPage() {
         </div>
       ) : (
         <div className="mt-6 grid gap-8 lg:grid-cols-[260px_1fr]">
-          <aside className="h-fit rounded-2xl bg-white p-6 shadow-card">
-            <p className="font-display text-lg text-charcoal">{customer.name}</p>
+          <aside className="h-fit rounded-lg border border-line bg-ivory p-6">
+            <p className="font-display text-xl text-charcoal">{customer.name}</p>
             <p className="text-sm text-charcoal/50">{customer.email}</p>
             <div className="mt-4 space-y-2">
               <Link href="/account/wishlist" className="flex items-center gap-2 text-sm text-charcoal/70 hover:text-whisky-700">

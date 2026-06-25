@@ -85,9 +85,12 @@ DEFERRED.md                            # planned production swaps (Postgres, Str
 > storefront · search/wishlist · checkout+compliance+payment · accounts/
 > persistence/reviews · AI Sommelier+Gift Finder · content+SEO). **Phase 2
 > complete** — multi-currency (7) + i18n (8) + personalisation (9). **Increment
-> 10: "The Private Cask Room" luxury/editorial design overhaul complete**
-> (palette + `next/font/google` Cormorant Garamond/Inter + UI primitives;
-> behaviour unchanged). 85 tests, all gates green. **Deployed to a Vercel
-> preview** (`whisky-mart-web.vercel.app`, auto-deploy on push); whiskymart.com
-> held pending design sign-off. Interface-first throughout — production
-> integrations + real photography are recorded in `DEFERRED.md`.
+> 10: "The Private Cask Room" luxury/editorial design overhaul** + **Increment
+> 11: "The Cabinet, refined" — a stricter luxury pass** (token-led restraint:
+> tighter radii, hairline-led flat tiles, ink-default CTAs with amber demoted to
+> a dark-surface accent, quieter badges, museum-like lit product niche; behaviour
+> unchanged). 85 tests, all gates green. **Deployed to a Vercel preview**
+> (`whisky-mart-web.vercel.app`, auto-deploy from `main`); Increment 11 is on
+> branch `claude/amazing-meitner-cmly8g` pending sign-off; whiskymart.com held.
+> Interface-first throughout — production integrations + real photography are
+> recorded in `DEFERRED.md`.

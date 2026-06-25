@@ -49,30 +49,31 @@ export default function GiftFinderPage() {
 
   const chip = (active: boolean) =>
     cn(
-      "rounded-full border px-4 py-2 text-sm transition-colors",
+      "rounded-md border px-4 py-2 text-sm transition-colors",
       active
-        ? "border-whisky-600 bg-whisky-50 text-whisky-700"
-        : "border-gold/40 bg-cream text-charcoal/80 hover:border-whisky-500",
+        ? "border-charcoal bg-charcoal text-cream"
+        : "border-line bg-cream text-charcoal/80 hover:border-charcoal",
     );
 
   return (
     <div className="container-page py-12 sm:py-16">
       <div className="mx-auto max-w-3xl">
         <div className="text-center">
-          <div className="inline-flex items-center gap-2 rounded-full border border-gold/30 bg-parchment/60 px-4 py-1.5">
-            <Gift className="h-4 w-4 text-whisky-700" />
+          <div className="flex items-center justify-center gap-3">
+            <span className="rule-gold" />
             <span className="overline text-whisky-700">The art of gifting</span>
+            <span className="rule-gold" />
           </div>
-          <h1 className="mt-5 font-display text-4xl text-charcoal sm:text-5xl">
+          <h1 className="mt-6 font-display text-[2.75rem] leading-[1.02] tracking-tightest text-charcoal sm:text-[3.4rem]">
             Find the perfect whisky gift.
           </h1>
-          <p className="mx-auto mt-3 max-w-xl text-charcoal/65">
+          <p className="mx-auto mt-4 max-w-xl text-[15px] leading-relaxed text-charcoal/60">
             Three considered questions — occasion, budget, taste. We&apos;ll narrow the shelf to a
             handful they&apos;ll remember.
           </p>
         </div>
 
-        <form onSubmit={find} className="mt-8 space-y-8 rounded-2xl border border-gold/25 bg-ivory p-6 sm:p-8">
+        <form onSubmit={find} className="mt-10 space-y-8 rounded-lg border border-line bg-ivory p-6 sm:p-8">
           <fieldset>
             <legend className="overline text-whisky-700">01 · Occasion</legend>
             <div className="mt-3 flex flex-wrap gap-2.5">

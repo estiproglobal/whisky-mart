@@ -104,7 +104,7 @@ export function InstantSearch({ className }: { className?: string }) {
         <label htmlFor="instant-search" className="sr-only">
           Search whisky
         </label>
-        <div className="flex items-center gap-2 rounded-xl border border-whisky-200 bg-white px-3 focus-within:border-whisky-500">
+        <div className="flex items-center gap-2 rounded-md border border-line bg-ivory px-3 focus-within:border-charcoal/40">
           <Search className="h-4 w-4 text-charcoal/40" aria-hidden="true" />
           <input
             id="instant-search"
@@ -131,7 +131,7 @@ export function InstantSearch({ className }: { className?: string }) {
           <div
             id="instant-search-results"
             role="listbox"
-            className="absolute left-0 right-0 top-full z-50 mt-2 overflow-hidden rounded-xl border border-whisky-100 bg-white shadow-card"
+            className="absolute left-0 right-0 top-full z-50 mt-2 overflow-hidden rounded-md border border-line bg-ivory shadow-lift"
           >
             {items.length === 0 && !loading ? (
               <p className="px-4 py-6 text-center text-sm text-charcoal/50">

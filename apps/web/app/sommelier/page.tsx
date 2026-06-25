@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Send, Sparkles, Loader2 } from "lucide-react";
+import { Send, Loader2 } from "lucide-react";
 import type { AdvisorResponse } from "@/lib/advisor/types";
 import { RecommendationGrid, type RecItem } from "@/components/advisor/recommendation-grid";
 import { usePalate } from "@/components/personalization/palate-provider";
@@ -65,18 +65,21 @@ export default function SommelierPage() {
     <div className="container-page py-12 sm:py-16">
       <div className="mx-auto max-w-3xl">
         <div className="text-center">
-          <div className="inline-flex items-center gap-2 rounded-full border border-gold/30 bg-parchment/60 px-4 py-1.5">
-            <Sparkles className="h-4 w-4 text-whisky-700" />
+          <div className="flex items-center justify-center gap-3">
+            <span className="rule-gold" />
             <span className="overline text-whisky-700">Private concierge</span>
+            <span className="rule-gold" />
           </div>
-          <h1 className="mt-5 font-display text-4xl text-charcoal sm:text-5xl">Tell me what you love.</h1>
-          <p className="mx-auto mt-3 max-w-xl text-charcoal/65">
+          <h1 className="mt-6 font-display text-[2.75rem] leading-[1.02] tracking-tightest text-charcoal sm:text-[3.4rem]">
+            Tell me what you love.
+          </h1>
+          <p className="mx-auto mt-4 max-w-xl text-[15px] leading-relaxed text-charcoal/60">
             Describe a whisky you enjoyed, a flavour, a budget or an occasion — your Sommelier will
             recommend bottles from our cellar, with the reasoning behind each.
           </p>
         </div>
 
-        <div className="mt-8 rounded-2xl border border-gold/25 bg-ivory p-5 sm:p-7">
+        <div className="mt-10 rounded-lg border border-line bg-ivory p-5 sm:p-7">
           {turns.length === 0 ? (
             <div className="py-4">
               <p className="text-center text-sm text-charcoal/55">Try asking…</p>
@@ -85,7 +88,7 @@ export default function SommelierPage() {
                   <button
                     key={ex}
                     onClick={() => ask(ex)}
-                    className="rounded-full border border-gold/40 bg-cream px-4 py-2 text-sm text-charcoal/80 transition-colors hover:border-whisky-600 hover:text-whisky-700"
+                    className="rounded-md border border-line bg-cream px-4 py-2 text-sm text-charcoal/80 transition-colors hover:border-charcoal hover:text-charcoal"
                   >
                     “{ex}”
                   </button>
@@ -124,7 +127,7 @@ export default function SommelierPage() {
               e.preventDefault();
               ask(input);
             }}
-            className="mt-5 flex items-center gap-2 rounded-xl border border-gold/30 bg-cream p-2 focus-within:border-whisky-500"
+            className="mt-5 flex items-center gap-2 rounded-md border border-line bg-cream p-2 focus-within:border-charcoal/40"
           >
             <input
               value={input}
