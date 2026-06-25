@@ -10,7 +10,7 @@
 **Phase 2 (Global Whisky Discovery) — Increment 9: Personalisation → ✅ COMPLETE.**
 🎉 **Phase 2 is feature-complete** (multi-currency ✅ 7, i18n ✅ 8, personalisation ✅ 9).
 
-Phase-1 MVP (1–6) + Phase 2 (7–9) are live on `main`. Next (awaiting direction): **production hardening / go-live** (wire the `DEFERRED.md` swaps + analytics/a11y/CI) or **Phase 3** (community & membership).
+Phase-1 MVP (1–6) + Phase 2 (7–9) are on `main`. **Deployment prep for the preview (Option A) is done** — `DEPLOY.md`, `Dockerfile`, `.nvmrc`; clean build verified. **Next: owner connects Vercel/host + DNS for whiskymart.com** (steps in `DEPLOY.md`); deploy can't run from the sandbox (no host/DNS creds).
 
 ### Increment 9 acceptance criteria — ✅ COMPLETE & VERIFIED
 - [x] Interface-first palate profile (`lib/personalization/palate.ts`): quiz → ranked flavour axes; `PalateProvider` (localStorage).

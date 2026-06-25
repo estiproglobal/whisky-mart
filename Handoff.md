@@ -54,21 +54,23 @@
   - `DEFERRED.md` updated: learned palate fingerprint + server-side profile.
   - Quality gates: `typecheck` ✓ · `lint` ✓ · `test` ✓ (85) · `build` ✓ · runtime smoke ✓.
 - Committed earlier: `screenshots.mjs` (Playwright capture, `apps/web/scripts/`).
+- **Deployment prep (Option A — preview/demo): DONE.** Added `DEPLOY.md` (Vercel + single-container runbook + DNS for whiskymart.com), `Dockerfile` + `.dockerignore` (single-instance, stable demo), `.nvmrc` (Node 22). Clean production build verified (50 static pages). The deploy itself is **owner-action** (connect Vercel/host + point DNS) — cannot be done from the sandbox (no host/DNS credentials; Docker daemon unavailable).
 
 ## In-progress
 
-- **Nothing in flight.** 🎉 **Phase 1 (MVP) and Phase 2 (Global Discovery) are both feature-complete** on `main`. Awaiting direction: production hardening / go-live, or Phase 3.
+- **Awaiting owner:** connect the repo to **Vercel** (Root Directory `apps/web`) **or** deploy the `Dockerfile` to a single-instance host, then point **whiskymart.com** DNS at it (steps in `DEPLOY.md`). 🎉 Phase 1 + Phase 2 feature-complete on `main`.
 
 ## Blocked by
 
 - **Nothing blocking.** Write access confirmed — Claude pushes directly to `origin/main`.
 - **Deferred production switches recorded in `DEFERRED.md`:** Postgres (persistence), Stripe (payments), Claude (AI Sommelier), **Sanity (content)**, plus auth/search/age-verification/tax. Each swaps behind an existing interface.
 
-## Next Action (awaiting owner direction)
+## Next Action
 
-1. **Go-live / production hardening** — wire the `DEFERRED.md` swaps (Postgres → Stripe → real auth → Claude → Sanity → live FX), add analytics + accessibility (WCAG 2.2 AA) + CWV budgets + CI, and deploy to the domain. (See the go-live note for the owner: a demo on the domain is ~1 day; a real transacting store is a few weeks, gated mostly by legal/merchant — alcohol licence, Stripe high-risk underwriting, age-verification vendor.)
-2. **OR Phase 3** — Community & Membership (profiles, clubs, tastings, loyalty) per `docs/02`.
-3. Keep every increment runnable, tested, and pushed to `main`; update the two context files after each.
+1. **Owner — deploy the preview (Option A):** follow `DEPLOY.md` — import to Vercel (Root Directory `apps/web`) or deploy the `Dockerfile`, then point `whiskymart.com` DNS at it. Run the post-deploy smoke checklist.
+2. **Then — go-live as a real store / hardening:** wire the `DEFERRED.md` swaps (Stripe → Postgres → real auth → Claude → Sanity → live FX) + analytics/a11y/CWV/CI, alongside the legal/merchant prerequisites (alcohol licence, payment underwriting, age-verification vendor).
+3. **OR Phase 3** — Community & Membership per `docs/02`.
+4. Keep every increment runnable, tested, and pushed to `main`; update the two context files after each.
 
 ## How to run
 
