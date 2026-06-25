@@ -7,10 +7,17 @@
 
 ## What I'm working on right now
 
-**Phase 2 (Global Whisky Discovery) — Increment 7: Multi-currency → ✅ COMPLETE.**
-Next Phase-2 increments (suggested order): **(8) Multi-language / i18n**, then **(9) Personalisation (palate profile + personalised rails)**.
+**Phase 2 (Global Whisky Discovery) — Increment 8: Multi-language / i18n → ✅ COMPLETE.**
+Next: **(9) Personalisation (palate profile + personalised rails)** — the last planned Phase-2 increment.
 
-Phase-1 MVP (Increments 1–6) is feature-complete and live on `main`. Phase 2 began with multi-currency. We build from `docs/` in runnable, tested increments.
+Phase-1 MVP (Increments 1–6) is feature-complete and live on `main`. Phase 2: multi-currency ✅ (7), i18n ✅ (8), personalisation next (9). We build from `docs/` in runnable, tested increments.
+
+### Increment 8 acceptance criteria — ✅ COMPLETE & VERIFIED
+- [x] Interface-first i18n: message catalogue (`lib/i18n/`, en/de/fr) + `translate()` with English/key fallback.
+- [x] `LocaleProvider` (cookie-persisted) + `useT` + header `LocaleSwitcher`; `<html lang>` updates on switch.
+- [x] Core chrome translated (nav, footer, age gate); static generation preserved (English-canonical server render, preference applied client-side).
+- [x] Tests (translate fallback, catalogue integrity across locales); `typecheck` / `lint` / `build` green (78 tests).
+- [x] Pushed to `origin/main`. (Locale-routed URLs + `hreflang` + full-content translation recorded in `DEFERRED.md`.)
 
 **Push policy:** write access confirmed — Claude commits and pushes directly to `origin/main`.
 **Standing rule:** update `Current_Task.md` and `Handoff.md` after **every** increment.
@@ -30,12 +37,14 @@ Phase-1 MVP (Increments 1–6) is feature-complete and live on `main`. Phase 2 b
 **Verification:** `typecheck` ✓ · `lint` ✓ · `test` ✓ (**72 tests**) · `build` ✓ (SSG/static preserved) · runtime smoke ✓ (switcher present; GBP server-default; pages 200).
 
 ## Phase 2 — remaining (planned)
-- **Increment 8 — i18n / multi-language:** message catalogue + locale switching + `hreflang`; interface-first translation source (local now → TMS/Sanity later).
 - **Increment 9 — Personalisation:** palate profile (from a quiz + behaviour), "Recommended for you" rails, advisor uses the profile.
 
 ---
 
 ## Completed increments
+
+### Increment 8 — Multi-language / i18n ✅ (Phase 2)
+- `lib/i18n/` message catalogue (en/de/fr) + `translate()`; `LocaleProvider`/`useT`/`LocaleSwitcher`; core chrome translated; static generation preserved.
 
 ### Increment 7 — Multi-currency ✅ (Phase 2)
 - `lib/market/currency.ts` (`RatesProvider`, conversion, formatting); `CurrencyProvider`/`<Price>`/`CurrencySwitcher`/`SettlementNote`; all price displays currency-aware; static generation preserved.
@@ -62,12 +71,12 @@ Phase-1 MVP (Increments 1–6) is feature-complete and live on `main`. Phase 2 b
 
 ## Roadmap status
 - [x] **Phase 1 MVP** — storefront, search, checkout+compliance, accounts/reviews, AI, content/SEO *(Increments 1–6)*
-- [ ] **Phase 2 — Global Discovery** — multi-currency ✅ *(7)* · i18n *(8)* · personalisation *(9)*
+- [ ] **Phase 2 — Global Discovery** — multi-currency ✅ *(7)* · i18n ✅ *(8)* · personalisation *(9)*
 - [ ] Production swaps: Postgres, Stripe, Claude, Sanity, live FX, real auth/search *(see `DEFERRED.md`)*
 - [ ] Analytics + accessibility (WCAG 2.2 AA) + Core Web Vitals budgets *(ongoing)*
 
 ## Stats
-- **72 tests** across 12 files · ~45 routes · all gates green (`typecheck`, `lint`, `build`, runtime smoke).
+- **78 tests** across 13 files · ~45 routes · all gates green (`typecheck`, `lint`, `build`, runtime smoke).
 
 ## Notes for whoever continues
 - Keep every increment runnable, tested, pushed to `main`; update the two context files after each.

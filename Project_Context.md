@@ -84,7 +84,7 @@ DEFERRED.md                            # planned production swaps (Postgres, Str
 > **Build status:** **Phase-1 MVP feature-complete** on `main` (Increments 1–6:
 > storefront · search/wishlist · checkout+compliance+payment · accounts/
 > persistence/reviews · AI Sommelier+Gift Finder · content+SEO). **Phase 2
-> underway** — Increment 7 (multi-currency) done; next: i18n, personalisation.
-> 72 tests, all gates green. Interface-first throughout — production integrations
-> (Postgres, Stripe, Claude, Sanity, live FX, auth/search) are recorded in
-> `DEFERRED.md`.
+> underway** — multi-currency (7) + i18n (8) done; next: personalisation (9).
+> 78 tests, all gates green. Interface-first throughout — production integrations
+> (Postgres, Stripe, Claude, Sanity, live FX, i18n routing/TMS, auth/search) are
+> recorded in `DEFERRED.md`.

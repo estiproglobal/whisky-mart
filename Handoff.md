@@ -39,11 +39,18 @@
   - All price displays converted to `<Price>`. **Static generation preserved** — server renders GBP-canonical; the saved currency is applied client-side after mount (no hydration mismatch, no forced dynamic rendering).
   - Payment still settles in GBP (display-only conversion) — recorded in `DEFERRED.md` (live FX + multi-currency settlement).
   - Quality gates: `typecheck` ✓ · `lint` ✓ · `test` ✓ (72) · `build` ✓ (SSG preserved) · runtime smoke ✓.
+- **Phase 2 — Increment 8 (Multi-language / i18n): ✅ COMPLETE & VERIFIED, pushed to `main`.**
+  - Interface-first i18n: `lib/i18n/` message catalogue (en/de/fr) + `translate()` (English/key fallback).
+  - `LocaleProvider` (cookie-persisted) + `useT` + header `LocaleSwitcher`; `<html lang>` updates on switch.
+  - Core chrome translated (header nav, footer, age gate); header/footer converted to client components.
+  - Static generation preserved (English-canonical server render; preference applied client-side after mount).
+  - `DEFERRED.md` updated: locale-routed URLs + `hreflang` + TMS/CMS content translation deferred.
+  - Quality gates: `typecheck` ✓ · `lint` ✓ · `test` ✓ (78) · `build` ✓ (SSG preserved) · runtime smoke ✓.
 - Committed earlier: `screenshots.mjs` (Playwright capture, `apps/web/scripts/`).
 
 ## In-progress
 
-- **Nothing in flight.** Phase 2 has begun (multi-currency done); next increments are i18n and personalisation.
+- **Nothing in flight.** Phase 2: multi-currency ✅ + i18n ✅ done; **personalisation (Increment 9) next**.
 
 ## Blocked by
 

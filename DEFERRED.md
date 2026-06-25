@@ -103,7 +103,24 @@ the on-the-record list so these are not forgotten.
   3. Consider per-market price lists (not just FX conversion) for psychological
      pricing, and currency inference from the jurisdiction/geo.
 
-## 6. Other interface-first seams (swap when scaling)
+## 6. i18n — UI message catalogue → **TMS/CMS + locale-routed SEO** (planned)
+
+- **Status:** interface-first since **Increment 8** (Phase 2).
+- **Now:** a local message catalogue (`apps/web/lib/i18n/messages.ts`, en/de/fr)
+  + `LocaleProvider`/`useT`/`LocaleSwitcher`. Server + first render are English
+  (English-canonical, SSG preserved); the saved locale is applied client-side
+  after mount (`<html lang>` updated). The **core chrome** (nav, footer, age
+  gate) is translated.
+- **Switch later:**
+  1. **Locale-routed URLs** (`/de/...`, `/fr/...`) via an `app/[locale]/` segment
+     + middleware locale detection, so each language has a real URL — then add
+     **`hreflang`** alternates for SEO. (This is the bigger refactor; the message
+     layer above is reused.)
+  2. Move strings to a **TMS** (e.g. Crowdin/Locize) or **Sanity** for translator
+     workflows; translate full page bodies + product/content data per locale.
+  3. Localise formats already partly handled (Intl currency/date).
+
+## 7. Other interface-first seams (swap when scaling)
 
 | Capability | Now (dev) | Production target | Seam |
 |------------|-----------|-------------------|------|

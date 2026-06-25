@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import { Button } from "@/components/ui/button";
+import { useT } from "@/components/i18n/locale-provider";
 
 const STORAGE_KEY = "wm_age_ok";
 
@@ -11,6 +12,7 @@ const STORAGE_KEY = "wm_age_ok";
  * dedicated provider (see docs/09-compliance-and-regulatory.md §2).
  */
 export function AgeGate() {
+  const { t } = useT();
   const [state, setState] = React.useState<"loading" | "ok" | "ask" | "denied">("loading");
 
   React.useEffect(() => {
@@ -34,23 +36,21 @@ export function AgeGate() {
       <div className="w-full max-w-md rounded-2xl bg-cream p-8 text-center shadow-card">
         <p className="font-display text-2xl text-whisky-700">WhiskyMart</p>
         <h1 id="age-gate-title" className="mt-4 font-display text-xl text-charcoal">
-          Are you of legal drinking age?
+          {t("ageGate.question")}
         </h1>
-        <p className="mt-2 text-sm text-charcoal/70">
-          You must be 18 or over to enter. Please drink responsibly.
-        </p>
+        <p className="mt-2 text-sm text-charcoal/70">{t("ageGate.subtitle")}</p>
 
         {state === "denied" ? (
           <p className="mt-6 rounded-xl bg-whisky-100 p-4 text-sm text-whisky-900">
-            Sorry — you must be of legal drinking age to use this site.
+            {t("ageGate.denied")}
           </p>
         ) : (
           <div className="mt-6 flex gap-3">
             <Button onClick={confirm} className="flex-1">
-              Yes, I am 18+
+              {t("ageGate.yes")}
             </Button>
             <Button variant="outline" onClick={() => setState("denied")} className="flex-1">
-              No
+              {t("ageGate.no")}
             </Button>
           </div>
         )}
