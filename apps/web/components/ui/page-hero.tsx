@@ -21,7 +21,7 @@ export function PageHero({
         className="pointer-events-none absolute -right-16 -top-10 hidden opacity-[0.05] lg:block"
         aria-hidden="true"
       >
-        <Monogram className="h-72 w-72 text-cream" />
+        <Monogram decorative className="h-72 w-72" />
       </div>
       <div className="container-page relative py-16 sm:py-20">
         {eyebrow ? (

@@ -1,38 +1,27 @@
+import { cn } from "@/lib/utils";
+
 /**
- * WhiskyMart monogram — a gold seal with a serif "WM".
- * Pure SVG + currentColor for the letters (so it adapts to light/dark surfaces);
- * the ring is gold. Swap this file to drop in a commissioned mark later.
+ * WhiskyMart seal — the supplied brass monogram (`public/logos`). Sized by the
+ * caller via `className` (height/width). `decorative` hides it from assistive
+ * tech when nearby text already names the brand (e.g. the hero watermark).
  */
 export function Monogram({
   className,
   title = "WhiskyMart",
+  decorative = false,
 }: {
   className?: string;
   title?: string;
+  decorative?: boolean;
 }) {
   return (
-    <svg
-      viewBox="0 0 64 64"
-      className={className}
-      role="img"
-      aria-label={title}
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <circle cx="32" cy="32" r="31" stroke="#C2A14E" strokeWidth="1" strokeOpacity="0.55" />
-      <circle cx="32" cy="32" r="26.5" stroke="#C2A14E" strokeWidth="1.5" />
-      <text
-        x="32"
-        y="41.5"
-        textAnchor="middle"
-        fontFamily='"Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif'
-        fontSize="25"
-        fontWeight="600"
-        letterSpacing="0.5"
-        fill="currentColor"
-      >
-        WM
-      </text>
-    </svg>
+    // eslint-disable-next-line @next/next/no-img-element -- static brand SVG; next/image adds no value and blocks SVG by default
+    <img
+      src="/logos/whiskymart-monogram.svg"
+      alt={decorative ? "" : title}
+      aria-hidden={decorative || undefined}
+      draggable={false}
+      className={cn("inline-block h-9 w-9 select-none", className)}
+    />
   );
 }

@@ -94,4 +94,6 @@ DEFERRED.md                            # planned production swaps (Postgres, Str
 > production deployment** (`whisky-mart-web.vercel.app`, auto-deploy from `main`);
 > **`whiskymart.com` not yet attached** (owner/DNS — `DEPLOY.md`). Interface-first
 > throughout — production integrations + real photography are recorded in
-> `DEFERRED.md`.
+> `DEFERRED.md`. **Brand:** the owner-supplied WhiskyMart logo package (seal +
+> wordmark + lockups + favicon) is integrated from `apps/web/public/logos/`
+> (charcoal lockup on light surfaces, full-colour brass+ivory on dark).

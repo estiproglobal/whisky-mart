@@ -35,8 +35,8 @@ export function AgeGate() {
       className="fixed inset-0 z-50 flex items-center justify-center bg-ink/85 p-4 backdrop-blur-sm"
     >
       <div className="w-full max-w-md rounded-lg border border-line bg-cream p-9 text-center shadow-lift">
-        <div className="flex justify-center text-charcoal">
-          <Wordmark />
+        <div className="flex justify-center">
+          <Wordmark className="h-12" />
         </div>
         <div className="mt-6 flex justify-center">
           <span className="rule-gold" />

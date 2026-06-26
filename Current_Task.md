@@ -7,6 +7,24 @@
 
 ## What I'm working on right now
 
+**Brand identity — official WhiskyMart logo integrated → ✅ COMPLETE.**
+The owner supplied a vector logo package (seal + wordmark + lockups, full-colour
+and one-colour, favicon). Dropped the SVGs into `apps/web/public/logos/` and
+wired the `Monogram`/`Wordmark` components to them (no hand-drawn artwork):
+- **Header / age gate** (cream): charcoal lockup. **Footer** (ink): full-colour
+  brass + ivory lockup with the "Private Casks. Curated." strapline. **Hero /
+  page-hero watermarks**: brass seal. **Favicon** (`app/icon.svg`): supplied file.
+- A **charcoal** light-surface lockup is generated from the supplied one-colour
+  file (so the seal + wordmark read on cream); full-colour artwork is brass +
+  ivory for dark surfaces.
+- Palette already matches the brand sheet (cream `#F2EDE2`, brass `#B08D57`,
+  copper `#C97A2B`). Verified on light/dark via headless Chromium.
+- Note: the seal carries **EST. 2024** (from the supplied art) while site copy
+  says "Curated since 2012" — flagged for the owner to reconcile.
+- Presentational only. `typecheck` ✓ · `lint` ✓ · `test` ✓ (85) · `build` ✓ (51 pages).
+
+---
+
 **Increment 11 — "The Cabinet, refined" (stricter luxury pass) → ✅ COMPLETE,
 MERGED TO `main`, IN PRODUCTION.**
 A second, stricter design iteration on top of Increment 10. The previous pass

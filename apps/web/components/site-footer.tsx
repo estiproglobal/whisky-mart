@@ -41,7 +41,7 @@ export function SiteFooter() {
     <footer className="texture-grain edge-sheen relative mt-24 overflow-hidden bg-ink text-cream/80">
       <div className="container-page relative grid grid-cols-2 gap-10 py-20 sm:grid-cols-4">
         <div className="col-span-2 sm:col-span-1">
-          <Wordmark className="text-cream" />
+          <Wordmark surface="dark" className="h-12" />
           <p className="mt-5 max-w-xs text-sm leading-relaxed text-cream/50">{t("footer.tagline")}</p>
         </div>
         {COLUMNS.map((col) => {
