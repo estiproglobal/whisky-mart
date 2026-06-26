@@ -61,7 +61,7 @@
   - Brand (`components/brand/`), primitives (`components/ui/`: LuxurySection, PageHero, EditorialCard, TrustBar, Button, Badge), premium header/footer.
   - Redesigned: homepage (hero + curated collections + editorial band + service cards), product cards, PLP (archive filters), PDP (dossier + sticky buy panel), Sommelier (concierge), Gift Finder (guided steps), guides/article cards.
   - **No behaviour/logic/route/test changes.** Gates: `typecheck` ✓ · `lint` ✓ · `test` ✓ (85) · `build` ✓ (51 pages).
-- **Increment 11 — "The Cabinet, refined" (stricter luxury pass): ✅ COMPLETE & VERIFIED, pushed to `claude/amazing-meitner-cmly8g`.**
+- **Increment 11 — "The Cabinet, refined" (stricter luxury pass): ✅ COMPLETE & VERIFIED, MERGED to `main` (PR #3, squash → `8b2e329`), now in Vercel production.**
   - Token-led restraint: tightened/architectural **radius scale**, near-hairline **shadows**, refined warm-paper palette + new `line` hairline token, bronze-leaning amber/gold, subtler glows, `prefers-reduced-motion` guard.
   - **CTA hierarchy:** `primary` → ink/charcoal (luxe default); amber demoted to a dark-surface `accent` (hero + ink service card); uppercase letter-spaced buttons.
   - **Product cards → flat hairline tiles** (no floating white card / shadow / lift) + gentle image zoom; **product placeholder → dim lit display niche** (spotlight + reflection).
@@ -72,8 +72,8 @@
 
 ## In-progress
 
-- **Nothing in flight.** Increment 11 pushed to `claude/amazing-meitner-cmly8g`. Awaiting **owner design sign-off** on the preview; this branch is not yet merged to `main`.
-- **Deploy pipeline LIVE:** Vercel ↔ `main` (preview auto-deploys from `main`). Sandbox can't reach `*.vercel.app` (egress 403), so visual review is owner-side. To preview Increment 11, review the branch or merge it to `main`.
+- **Nothing in flight.** Increment 11 **merged to `main`** (PR #3) and **design signed off** by the owner; Vercel auto-deployed it to **production**. The feature branch `claude/amazing-meitner-cmly8g` is now stale (safe to delete).
+- **Deploy pipeline LIVE:** Vercel ↔ `main` → production at `whisky-mart-web.vercel.app`. **`whiskymart.com` not yet attached** (owner/DNS action — `DEPLOY.md`).
 
 ## Blocked by
 
@@ -82,8 +82,8 @@
 
 ## Next Action
 
-1. **Owner — review the redesign** on `https://whisky-mart-web.vercel.app` (it auto-deployed). On sign-off, **attach `whiskymart.com`** in Vercel → Domains (DNS steps in `DEPLOY.md`).
-2. **(Optional) Provide photography** — real bottle/lifestyle images are the one asset that will fully land the luxury aesthetic (placeholders are warm/elegant but synthetic).
+1. **Attach `whiskymart.com`** — design is signed off and live in production, so point the custom domain in Vercel → Domains (DNS steps in `DEPLOY.md`). Owner/DNS action.
+2. **(Optional) Provide photography** — real bottle/lifestyle images are the one asset that will fully land the luxury aesthetic (placeholders are now museum-like but synthetic).
 3. **Then — go-live as a real store / hardening:** wire the `DEFERRED.md` swaps (Stripe → Postgres → real auth → Claude → Sanity → live FX) + analytics/a11y/CWV/CI, alongside the legal/merchant prerequisites (alcohol licence, payment underwriting, age-verification vendor).
 4. **OR Phase 3** — Community & Membership per `docs/02`.
 5. Keep every increment runnable, tested, and pushed to `main`; update the two context files after each.

@@ -89,8 +89,9 @@ DEFERRED.md                            # planned production swaps (Postgres, Str
 > 11: "The Cabinet, refined" — a stricter luxury pass** (token-led restraint:
 > tighter radii, hairline-led flat tiles, ink-default CTAs with amber demoted to
 > a dark-surface accent, quieter badges, museum-like lit product niche; behaviour
-> unchanged). 85 tests, all gates green. **Deployed to a Vercel preview**
-> (`whisky-mart-web.vercel.app`, auto-deploy from `main`); Increment 11 is on
-> branch `claude/amazing-meitner-cmly8g` pending sign-off; whiskymart.com held.
-> Interface-first throughout — production integrations + real photography are
-> recorded in `DEFERRED.md`.
+> unchanged). 85 tests, all gates green. **Increment 11 reviewed via PR #3,
+> owner-signed-off, and squash-merged to `main` (`8b2e329`) — now the live Vercel
+> production deployment** (`whisky-mart-web.vercel.app`, auto-deploy from `main`);
+> **`whiskymart.com` not yet attached** (owner/DNS — `DEPLOY.md`). Interface-first
+> throughout — production integrations + real photography are recorded in
+> `DEFERRED.md`.
