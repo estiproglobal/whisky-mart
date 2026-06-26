@@ -61,6 +61,7 @@
   - Brand (`components/brand/`), primitives (`components/ui/`: LuxurySection, PageHero, EditorialCard, TrustBar, Button, Badge), premium header/footer.
   - Redesigned: homepage (hero + curated collections + editorial band + service cards), product cards, PLP (archive filters), PDP (dossier + sticky buy panel), Sommelier (concierge), Gift Finder (guided steps), guides/article cards.
   - **No behaviour/logic/route/test changes.** Gates: `typecheck` ✓ · `lint` ✓ · `test` ✓ (85) · `build` ✓ (51 pages).
+- **Brand identity — official logo integrated: ✅ COMPLETE.** Owner-supplied vector package dropped into `apps/web/public/logos/`; `Monogram`/`Wordmark` now render the supplied SVGs (charcoal lockup on light surfaces, full-colour brass+ivory on dark, supplied favicon). One-colour files retained for tinting; a charcoal light-surface lockup is generated from them. ⚠️ Seal says **EST. 2024** vs site copy "since 2012" — owner to reconcile. Gates green (85 tests, 51-page build).
 - **Increment 11 — "The Cabinet, refined" (stricter luxury pass): ✅ COMPLETE & VERIFIED, MERGED to `main` (PR #3, squash → `8b2e329`), now in Vercel production.**
   - Token-led restraint: tightened/architectural **radius scale**, near-hairline **shadows**, refined warm-paper palette + new `line` hairline token, bronze-leaning amber/gold, subtler glows, `prefers-reduced-motion` guard.
   - **CTA hierarchy:** `primary` → ink/charcoal (luxe default); amber demoted to a dark-surface `accent` (hero + ink service card); uppercase letter-spaced buttons.
