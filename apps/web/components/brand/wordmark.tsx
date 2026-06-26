@@ -2,41 +2,39 @@ import { cn } from "@/lib/utils";
 import { Monogram } from "./monogram";
 
 /**
- * The WhiskyMart lockup: a brass seal + the serif wordmark. The seal is always
- * gold; the wordmark inherits its colour from the caller (charcoal on light,
- * cream on dark). `compact` shows the seal only; `tagline` adds the
- * "Private Casks. Curated." strapline (use on dark surfaces for legibility).
+ * The WhiskyMart horizontal lockup (seal + wordmark + "Private Casks. Curated."),
+ * from the supplied brand package (`public/logos`).
+ * - `surface="dark"`  → full-colour brass + ivory artwork (use on dark surfaces).
+ * - `surface="light"` → charcoal monochrome (use on cream/light surfaces).
+ * `compact` renders the seal only. Height is set by the caller via `className`.
  */
+const LOCKUP = {
+  dark: "/logos/whiskymart-lockup-horizontal.svg",
+  light: "/logos/whiskymart-lockup-horizontal-charcoal.svg",
+} as const;
+
 export function Wordmark({
   className,
+  surface = "light",
   compact = false,
-  tagline = false,
+  title = "WhiskyMart",
 }: {
   className?: string;
+  surface?: "light" | "dark";
   compact?: boolean;
-  tagline?: boolean;
+  title?: string;
 }) {
   if (compact) {
-    return <Monogram className={cn("h-9 w-9 shrink-0 text-gold", className)} />;
+    return <Monogram className={className} title={title} />;
   }
 
   return (
-    <span className={cn("inline-flex items-center gap-3", className)}>
-      <Monogram className="h-9 w-9 shrink-0 text-gold" decorative />
-      <span className="inline-flex flex-col">
-        <span className="font-display text-[1.6rem] font-semibold leading-none tracking-tightest">
-          WhiskyMart
-        </span>
-        {tagline ? (
-          <span className="mt-2 flex items-center justify-center gap-2" aria-hidden="true">
-            <span className="h-px w-4 bg-gold/60" />
-            <span className="whitespace-nowrap text-[8px] font-semibold uppercase tracking-[0.28em] text-gold">
-              Private Casks. Curated.
-            </span>
-            <span className="h-px w-4 bg-gold/60" />
-          </span>
-        ) : null}
-      </span>
-    </span>
+    // eslint-disable-next-line @next/next/no-img-element -- static brand SVG; next/image adds no value and blocks SVG by default
+    <img
+      src={LOCKUP[surface]}
+      alt={title}
+      draggable={false}
+      className={cn("inline-block h-10 w-auto select-none", className)}
+    />
   );
 }

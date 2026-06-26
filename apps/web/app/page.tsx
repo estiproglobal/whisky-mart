@@ -34,7 +34,7 @@ export default async function HomePage() {
           className="pointer-events-none absolute -right-28 top-1/2 hidden -translate-y-1/2 opacity-[0.045] lg:block"
           aria-hidden="true"
         >
-          <Monogram className="h-[38rem] w-[38rem] text-cream" />
+          <Monogram decorative className="h-[38rem] w-[38rem]" />
         </div>
         <div className="container-page relative py-28 sm:py-32 lg:py-40">
           <div className="max-w-2xl">
