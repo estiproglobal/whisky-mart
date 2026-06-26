@@ -39,7 +39,7 @@ export function SiteHeader() {
       <div className="border-b border-line bg-cream/90 backdrop-blur">
         <div className="container-page flex h-[4.5rem] items-center gap-4">
           <Link href="/" aria-label="WhiskyMart home" className="shrink-0">
-            <Wordmark className="h-11" />
+            <Wordmark className="h-11 lg:h-14" />
           </Link>
 
           <InstantSearch className="relative ml-6 hidden max-w-xl flex-1 md:block" />
