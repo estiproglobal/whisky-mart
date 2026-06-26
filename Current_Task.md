@@ -7,12 +7,16 @@
 
 ## What I'm working on right now
 
-**Increment 11 — "The Cabinet, refined" (stricter luxury pass) → ✅ COMPLETE.**
+**Increment 11 — "The Cabinet, refined" (stricter luxury pass) → ✅ COMPLETE,
+MERGED TO `main`, IN PRODUCTION.**
 A second, stricter design iteration on top of Increment 10. The previous pass
 improved wording but still read as a polished ecommerce MVP; this pass pushes it
 toward a premium whisky house / private collector's cabinet. **Presentational
 only — no behaviour/logic/route/test changes.** Developed on branch
-`claude/amazing-meitner-cmly8g`.
+`claude/amazing-meitner-cmly8g`, reviewed via **PR #3** (Vercel preview ✓ ·
+`claude-review` ✓), **owner signed off and squash-merged to `main`** (commit
+`8b2e329`) on 2026-06-25 → auto-deployed to the Vercel **production**
+environment (`whisky-mart-web.vercel.app`).
 
 ### Increment 11 acceptance — ✅ COMPLETE & VERIFIED
 - [x] **Tokens:** tightened, architectural **radius scale** (cards/panels markedly
