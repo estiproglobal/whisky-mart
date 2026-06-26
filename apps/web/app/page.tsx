@@ -30,9 +30,9 @@ export default async function HomePage() {
     <>
       {/* Hero */}
       <section className="texture-grain edge-sheen relative overflow-hidden bg-ink bg-cask-glow text-cream">
-        <div className="container-page relative grid items-center gap-10 py-20 sm:py-24 lg:grid-cols-[1.08fr_0.92fr] lg:gap-8 lg:py-24 xl:py-28">
+        <div className="container-page relative grid items-center gap-8 py-16 sm:py-20 lg:grid-cols-[1.1fr_0.9fr] lg:gap-6 lg:py-20 xl:py-24">
           {/* Editorial text block */}
-          <div className="max-w-xl">
+          <div className="max-w-2xl">
             <div className="flex items-center gap-3">
               <span className="rule-gold" />
               <p className="overline text-gold-light">The private cask room</p>
@@ -41,11 +41,11 @@ export default async function HomePage() {
               <span className="block">The world&apos;s whisky</span>
               <span className="block">cabinet, curated for you.</span>
             </h1>
-            <p className="mt-6 max-w-md text-[15px] leading-relaxed text-cream/65 sm:text-base">
+            <p className="mt-5 max-w-md text-[15px] leading-relaxed text-cream/65 sm:text-base">
               Discover, buy, learn, collect and invest — a hand-curated catalogue of single malts,
               rare bottlings and tasting flights, with a private Sommelier to guide every choice.
             </p>
-            <div className="mt-8 flex flex-wrap gap-3">
+            <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
               <Link href="/sommelier" className={buttonClasses("accent", "lg")}>
                 <Sparkles className="h-4 w-4" /> Consult the Sommelier
               </Link>
@@ -56,7 +56,7 @@ export default async function HomePage() {
                 Browse the catalogue <ArrowRight className="h-4 w-4" />
               </Link>
             </div>
-            <div className="mt-10 border-t border-cream/12 pt-6">
+            <div className="mt-9 border-t border-cream/12 pt-6">
               <TrustBar tone="dark" />
             </div>
           </div>
