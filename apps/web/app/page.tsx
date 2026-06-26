@@ -57,7 +57,7 @@ export default async function HomePage() {
               </Link>
             </div>
             <div className="mt-9 border-t border-cream/12 pt-6">
-              <TrustBar tone="dark" />
+              <TrustBar tone="dark" max={3} />
             </div>
           </div>
 
