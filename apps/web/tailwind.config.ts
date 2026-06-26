@@ -19,14 +19,14 @@ const config: Config = {
         ink: "#0B0A08",
         charcoal: "#171310", // primary text on light
         oak: "#211510", // dark oak brown (editorial bands)
-        // Lights — refined warm paper, less buttery than before
-        cream: "#F2ECE0", // page background
+        // Lights — refined warm paper (brand cream #F2EDE2)
+        cream: "#F2EDE2", // page background
         ivory: "#FBF8F1", // card / panel surface
         parchment: "#E7D9C0", // section tint (deeper for definition)
         line: "#E0D3BB", // warm hairline border on light surfaces
-        // Accents — bronze-leaning, used sparingly
-        amber: { DEFAULT: "#BE7A2B", dark: "#A1661F" }, // cask amber accent
-        gold: { DEFAULT: "#A98A4E", light: "#C8AA6E", dark: "#866A38" }, // antique brass
+        // Accents — official brand brass + copper, used sparingly
+        amber: { DEFAULT: "#C97A2B", dark: "#A8631F" }, // cask copper accent
+        gold: { DEFAULT: "#B08D57", light: "#C8A877", dark: "#8C6E40" }, // antique brass
         burgundy: "#451616",
         smoke: "#645A4F", // secondary text (AA on cream)
         // Warm neutral ramp (backgrounds / borders / text)
@@ -35,8 +35,8 @@ const config: Config = {
           100: "#EADCC2",
           200: "#DABF95",
           300: "#C9A468",
-          400: "#BE7A2B",
-          500: "#A86A28",
+          400: "#C97A2B",
+          500: "#A8631F",
           600: "#8C5822",
           700: "#71471D",
           800: "#503217",
