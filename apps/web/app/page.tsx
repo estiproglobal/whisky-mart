@@ -8,7 +8,7 @@ import { ArticleCard } from "@/components/content/article-card";
 import { LuxurySection } from "@/components/ui/luxury-section";
 import { EditorialCard } from "@/components/ui/editorial-card";
 import { TrustBar } from "@/components/ui/trust-bar";
-import { Monogram } from "@/components/brand/monogram";
+import { HeroBottle } from "@/components/hero-bottle";
 import { buttonClasses } from "@/components/ui/button";
 
 function Grid({ children }: { children: React.ReactNode }) {
@@ -30,26 +30,22 @@ export default async function HomePage() {
     <>
       {/* Hero */}
       <section className="texture-grain edge-sheen relative overflow-hidden bg-ink bg-cask-glow text-cream">
-        <div
-          className="pointer-events-none absolute -right-28 top-1/2 hidden -translate-y-1/2 opacity-[0.045] lg:block"
-          aria-hidden="true"
-        >
-          <Monogram decorative className="h-[38rem] w-[38rem]" />
-        </div>
-        <div className="container-page relative py-28 sm:py-32 lg:py-40">
+        <div className="container-page relative grid items-center gap-8 py-16 sm:py-20 lg:grid-cols-[1.1fr_0.9fr] lg:gap-6 lg:py-20 xl:py-24">
+          {/* Editorial text block */}
           <div className="max-w-2xl">
             <div className="flex items-center gap-3">
               <span className="rule-gold" />
               <p className="overline text-gold-light">The private cask room</p>
             </div>
-            <h1 className="mt-7 font-display text-[3.25rem] leading-[0.98] tracking-tightest sm:text-7xl lg:text-[5rem]">
-              The world&apos;s whisky cabinet, curated for you.
+            <h1 className="mt-6 text-balance font-display tracking-tightest text-[2.6rem] leading-[1.04] sm:text-[3.4rem] sm:leading-[1.0] lg:text-[3.9rem] lg:leading-[0.98]">
+              <span className="block">The world&apos;s whisky</span>
+              <span className="block">cabinet, curated for you.</span>
             </h1>
-            <p className="mt-7 max-w-xl text-[17px] leading-relaxed text-cream/65">
+            <p className="mt-5 max-w-md text-[15px] leading-relaxed text-cream/65 sm:text-base">
               Discover, buy, learn, collect and invest — a hand-curated catalogue of single malts,
               rare bottlings and tasting flights, with a private Sommelier to guide every choice.
             </p>
-            <div className="mt-10 flex flex-wrap gap-3">
+            <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
               <Link href="/sommelier" className={buttonClasses("accent", "lg")}>
                 <Sparkles className="h-4 w-4" /> Consult the Sommelier
               </Link>
@@ -60,9 +56,14 @@ export default async function HomePage() {
                 Browse the catalogue <ArrowRight className="h-4 w-4" />
               </Link>
             </div>
-            <div className="mt-14 border-t border-cream/12 pt-7">
-              <TrustBar tone="dark" />
+            <div className="mt-9 border-t border-cream/12 pt-6">
+              <TrustBar tone="dark" max={3} />
             </div>
+          </div>
+
+          {/* Premium bottle visual */}
+          <div className="hidden lg:flex lg:items-center lg:justify-center">
+            <HeroBottle />
           </div>
         </div>
       </section>
