@@ -1,12 +1,16 @@
 # Handoff
 
-**Date:** 2026-06-25
+**Date:** 2026-06-27
 **From:** Claude (agent session)
 **To:** Repo owner (estiproglobal) / next agent session
 
 ---
 
 ## Completed
+
+- **Brand logo integration (PR #5):** owner-supplied vector logo package wired into `Monogram`/`Wordmark` + favicon; palette aligned to the brand sheet. Merged to `main`, in production. ⚠️ Seal art says **EST. 2024** vs site copy "since 2012" — owner to reconcile.
+- **Homepage hero & header refinement + bottle visual (PRs #6, #7):** larger desktop wordmark; two-line headline; side-by-side CTAs (desktop) / stacked (mobile); tighter spacing; hero trust row trimmed to **three** (Collector-ready removed via new `TrustBar` `max` prop; footer still four). **Hero visual** = owner-supplied **WhiskyMart "Cabinet Selection"** single-bottle render (own brand), isolated to a transparent WebP (`public/hero/whiskymart-bottle.webp`, white bg removed via Pillow flood-fill) and staged on the dark hero via `next/image` with backlight halo + overhead spotlight + grounded base (contact shadow, reflection, floor pool, brass shelf) + rim/glass/label enrichment; lazy, hidden on mobile. A **Macallan** image was offered but **declined** (real trademarked/copyrighted brand) in favour of the own-brand bottle. Header/hero only — no routes/data/checkout/logic. Merged to `main`, in production.
+  - ⚙️ Asset tip: pasted images aren't on disk; recover them from the session transcript (`/root/.claude/projects/.../<id>.jsonl`, base64 image blocks). Pillow installed for background removal. Headless Chromium (`/opt/pw-browsers/chromium-1194/chrome-linux/chrome`) drives via CDP for screenshots — `apps/web` builds need `NODE_EXTRA_CA_CERTS=/root/.ccr/ca-bundle.crt npx next build` (turbo doesn't forward the CA, so `next/font` fails under `turbo build` in-sandbox).
 
 - **Platform blueprint** (11 docs: `README.md` + `docs/00`–`docs/09`) authored, covering all 7 Parts + benchmark analysis + compliance dossier.
 - **Context files:** `Project_Context.md`, `Current_Task.md`, `Handoff.md`, plus `.gitignore`.

@@ -1,11 +1,21 @@
 # Current Task
 
-**Last updated:** 2026-06-25
+**Last updated:** 2026-06-27
 **Owner:** Claude (agent)
 
 ---
 
 ## What I'm working on right now
+
+**Homepage hero & header refinement + bottle hero visual → ✅ COMPLETE, MERGED, IN PRODUCTION.**
+A focused header/hero polish (no site redesign), shipped across **PRs #5–#7**:
+- **Header:** desktop wordmark enlarged (`lg:h-[3.9rem]`) for a premium brand mark, not bulky (mobile unchanged).
+- **Hero copy/layout:** two clean headline lines — "The world's whisky" / "cabinet, curated for you." (forced break + `text-balance`, so mobile never orphans "you."); **CTAs side-by-side on desktop**, stacked on mobile; tighter, intentional vertical rhythm; **trust row trimmed to three signals** on the hero (Collector-ready removed — `TrustBar` gained an optional `max`; footer still shows four).
+- **Hero visual:** replaced the illustrated bottle with the **owner-supplied WhiskyMart "Cabinet Selection" single-bottle render** (own brand — a fictional house bottling, not a real distillery). Isolated to a transparent WebP (white background removed via Pillow flood-fill) at `apps/web/public/hero/whiskymart-bottle.webp`; staged on the dark hero via **`next/image`** with a warm amber **backlight halo** + ambient cabinet glow, a soft **overhead spotlight**, a **grounded base** (contact shadow, faded reflection, warm floor pool, brass shelf line), and warm **rim + glass/label enrichment**. Lazy-loaded; hidden on mobile.
+- ⚠️ A **Macallan** image was offered for the hero but **NOT used** — real trademarked/copyrighted distillery photography; declined for brand-safety and the own-brand WhiskyMart bottle used instead.
+- Files touched: `components/hero-bottle.tsx`, `app/page.tsx`, `components/site-header.tsx`, `components/ui/trust-bar.tsx`, `public/hero/`. No routes/data/checkout/logic. `typecheck`/`lint`/`build` green (51 pages); verified desktop + mobile via headless Chromium. Production-deployed.
+
+---
 
 **Brand identity — official WhiskyMart logo integrated → ✅ COMPLETE.**
 The owner supplied a vector logo package (seal + wordmark + lockups, full-colour
