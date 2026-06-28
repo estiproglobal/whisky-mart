@@ -7,6 +7,16 @@
 
 ## What I'm working on right now
 
+**Premium funnel — cart, checkout & confirmation → ✅ COMPLETE, MERGED (PR #11), IN PRODUCTION.**
+Continued the premium thread through the purchase journey (presentation only — no logic/routes/data):
+- **Cart** (`app/cart/page.tsx`): staged product thumbnails (per-product `tone`) in framed niches, refined line items (brand·region eyebrow, serif title, size/ABV), tidier qty stepper, and a **sticky summary** with secure-checkout CTA + trust signals (age-verified, encrypted payment, drink responsibly).
+- **Order summary** (`checkout/order-summary.tsx`): framed, tone-matched thumbnails.
+- **Checkout stepper** (`checkout/checkout-flow.tsx`): refined numbered steps with hairline connectors and an amber-ringed current step; calmer error block.
+- **Confirmation** (`checkout/confirmation/page.tsx`): a "seal of confirmation" header (brass ring + rule).
+- The premium journey is now consistent end-to-end: **hero → catalogue (PLP/PDP) → cart → checkout → confirmation.** `typecheck`/`lint`/`build` green (51 pages); verified desktop.
+
+---
+
 **Premium catalogue — staged product imagery (PLP cards + PDP) → ✅ COMPLETE, MERGED (PR #9), IN PRODUCTION.**
 Carried the hero's lit, staged quality into the shopping journey (catalogue presentation only — no routes/data/checkout/logic):
 - **`ProductImage`** reworked into a premium **display-case render**: warm backlight halo + overhead spotlight, dark cabinet ground + vignette, rim-lit glass with speculars, brass cap, soft contact shadow, plinth line, faded reflection.
