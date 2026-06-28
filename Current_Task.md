@@ -7,6 +7,16 @@
 
 ## What I'm working on right now
 
+**Premium catalogue — staged product imagery (PLP cards + PDP) → ✅ COMPLETE, MERGED (PR #9), IN PRODUCTION.**
+Carried the hero's lit, staged quality into the shopping journey (catalogue presentation only — no routes/data/checkout/logic):
+- **`ProductImage`** reworked into a premium **display-case render**: warm backlight halo + overhead spotlight, dark cabinet ground + vignette, rim-lit glass with speculars, brass cap, soft contact shadow, plinth line, faded reflection.
+- **Per-product spirit colour** via a new exported `toneFor(whisky, flavour)` helper — sherry → mahogany, young/fresh → gold, rich → copper, else amber — so bottles read distinctly. `ProductImage` takes an optional `tone`; cart/recently-viewed default to a stable per-seed tone.
+- **Product cards** (`product-card.tsx`): dark display ground, gentle hover lift + soft shadow, deeper image zoom; pass the per-product tone.
+- **PDP gallery** (`products/[slug]/page.tsx`): staged display frame, capped to a premium size, per-product tone.
+- Placeholder art only (generic silhouettes, no real brand labels); **real photography still drops in behind the same caller contract** (`DEFERRED.md`). `typecheck`/`lint`/`build` green (51 pages); verified PLP + PDP desktop & mobile.
+
+---
+
 **Homepage hero & header refinement + bottle hero visual → ✅ COMPLETE, MERGED, IN PRODUCTION.**
 A focused header/hero polish (no site redesign), shipped across **PRs #5–#7**:
 - **Header:** desktop wordmark enlarged (`lg:h-[3.9rem]`) for a premium brand mark, not bulky (mobile unchanged).
