@@ -5,7 +5,7 @@ import { PlusCircle, ShieldCheck, Truck } from "lucide-react";
 import { catalog, getPrimaryVariant } from "@/lib/catalog/repository";
 import { formatAge } from "@/lib/utils";
 import { Price } from "@/components/market/price";
-import { ProductImage } from "@/components/product-image";
+import { ProductImage, toneFor } from "@/components/product-image";
 import { StarRating } from "@/components/star-rating";
 import { FlavourBars } from "@/components/flavour-bars";
 import { Badge } from "@/components/badge";
@@ -92,11 +92,14 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
       <div className="grid gap-10 lg:grid-cols-[1fr_400px]">
         {/* Gallery */}
         <div>
-          <ProductImage
-            image={product.image}
-            label={product.brand.name}
-            className="aspect-[4/5] w-full rounded-2xl border border-line"
-          />
+          <div className="mx-auto w-full max-w-[460px]">
+            <ProductImage
+              image={product.image}
+              tone={toneFor(product.whisky, product.flavour)}
+              label={product.brand.name}
+              className="aspect-[4/5] w-full rounded-xl border border-line shadow-card"
+            />
+          </div>
         </div>
 
         {/* Buy panel (sticky) */}
