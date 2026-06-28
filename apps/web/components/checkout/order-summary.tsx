@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import type { CartLineDetailed, OrderTotals } from "@whiskymart/types";
-import { ProductImage } from "@/components/product-image";
+import { ProductImage, toneFor } from "@/components/product-image";
 import { Price } from "@/components/market/price";
 import { SettlementNote } from "@/components/market/settlement-note";
 
@@ -27,7 +27,11 @@ export function OrderSummary({
       <ul className="mt-4 space-y-3">
         {items.map((l) => (
           <li key={l.variantId} className="flex items-center gap-3">
-            <ProductImage image={l.product.image} className="h-14 w-11 shrink-0 rounded-md" />
+            <ProductImage
+              image={l.product.image}
+              tone={toneFor(l.product.whisky, l.product.flavour)}
+              className="h-16 w-12 shrink-0 rounded-md border border-line"
+            />
             <div className="min-w-0 flex-1">
               <p className="truncate text-sm font-medium text-charcoal">{l.product.title}</p>
               <p className="text-xs text-charcoal/50">

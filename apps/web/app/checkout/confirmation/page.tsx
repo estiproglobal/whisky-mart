@@ -42,9 +42,14 @@ export default function ConfirmationPage() {
     <div className="container-page py-12">
       <div className="mx-auto max-w-2xl">
         <div className="text-center">
-          <CheckCircle2 className="mx-auto h-14 w-14 text-whisky-600" />
+          <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full border border-gold/40 bg-ivory shadow-card">
+            <CheckCircle2 className="h-9 w-9 text-whisky-700" strokeWidth={1.5} />
+          </div>
+          <div className="mt-6 flex justify-center">
+            <span className="rule-gold" />
+          </div>
           <h1 className="mt-5 font-display text-[2.25rem] leading-tight tracking-tightest text-charcoal">Thank you — order confirmed</h1>
-          <p className="mt-2 text-charcoal/70">
+          <p className="mt-3 text-charcoal/65">
             Order <span className="font-medium text-charcoal">{order.orderNumber}</span> · a confirmation has
             been sent to {order.email}.
           </p>
