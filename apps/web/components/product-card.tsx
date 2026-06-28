@@ -2,7 +2,7 @@ import Link from "next/link";
 import type { Product } from "@whiskymart/types";
 import { formatAge } from "@/lib/utils";
 import { getPrimaryVariant } from "@/lib/catalog/repository";
-import { ProductImage } from "./product-image";
+import { ProductImage, toneFor } from "./product-image";
 import { StarRating } from "./star-rating";
 import { Badge } from "./badge";
 import { WishlistButton } from "./wishlist/wishlist-button";
@@ -11,16 +11,18 @@ import { Price } from "./market/price";
 export function ProductCard({ product }: { product: Product }) {
   const variant = getPrimaryVariant(product);
   const region = product.whisky?.region;
+  const tone = toneFor(product.whisky, product.flavour);
 
   return (
     <Link
       href={`/products/${product.slug}`}
-      className="group flex h-full flex-col overflow-hidden rounded-lg border border-line bg-ivory transition-colors duration-300 hover:border-charcoal/30"
+      className="group flex h-full flex-col overflow-hidden rounded-lg border border-line bg-ivory shadow-card transition-all duration-300 hover:-translate-y-0.5 hover:border-charcoal/30 hover:shadow-lift"
     >
-      <div className="relative aspect-[4/5] overflow-hidden bg-parchment">
+      <div className="relative aspect-[4/5] overflow-hidden bg-ink">
         <ProductImage
           image={product.image}
-          className="h-full w-full transition-transform duration-[900ms] ease-out group-hover:scale-[1.035]"
+          tone={tone}
+          className="h-full w-full transition-transform duration-[1100ms] ease-out group-hover:scale-[1.05]"
         />
         {product.badges.length > 0 ? (
           <div className="absolute left-3 top-3 flex flex-wrap gap-1.5">
