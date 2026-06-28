@@ -172,30 +172,36 @@ export function CheckoutFlow() {
     <div className="grid gap-8 lg:grid-cols-[1fr_360px]">
       <div>
         {/* Progress */}
-        <ol className="mb-8 flex flex-wrap gap-x-2 gap-y-1 text-sm">
+        <ol className="mb-9 flex flex-wrap items-center gap-x-3 gap-y-2">
           {STEPS.map((s, i) => (
-            <li key={s.id} className="flex items-center gap-2">
-              <span
-                className={`flex h-6 w-6 items-center justify-center rounded-full text-xs font-semibold ${
-                  i < stepIndex
-                    ? "bg-whisky-600 text-cream"
-                    : i === stepIndex
+            <li key={s.id} className="flex items-center gap-3">
+              <span className="flex items-center gap-2">
+                <span
+                  className={`flex h-6 w-6 items-center justify-center rounded-full text-[11px] font-semibold ${
+                    i < stepIndex
                       ? "bg-charcoal text-cream"
-                      : "bg-whisky-100 text-charcoal/50"
-                }`}
-              >
-                {i < stepIndex ? <Check className="h-3.5 w-3.5" /> : i + 1}
+                      : i === stepIndex
+                        ? "bg-charcoal text-cream ring-2 ring-amber/40 ring-offset-2 ring-offset-cream"
+                        : "border border-line text-charcoal/40"
+                  }`}
+                >
+                  {i < stepIndex ? <Check className="h-3.5 w-3.5" /> : i + 1}
+                </span>
+                <span
+                  className={`text-[11px] uppercase tracking-[0.14em] ${
+                    i === stepIndex ? "font-semibold text-charcoal" : "text-charcoal/45"
+                  }`}
+                >
+                  {s.label}
+                </span>
               </span>
-              <span className={i === stepIndex ? "font-medium text-charcoal" : "text-charcoal/50"}>
-                {s.label}
-              </span>
-              {i < STEPS.length - 1 ? <span className="text-charcoal/20">›</span> : null}
+              {i < STEPS.length - 1 ? <span aria-hidden="true" className="hidden h-px w-6 bg-line sm:block" /> : null}
             </li>
           ))}
         </ol>
 
         {error ? (
-          <div className="mb-5 flex items-start gap-2 rounded-xl bg-red-50 p-4 text-sm text-red-800">
+          <div className="mb-5 flex items-start gap-2 rounded-md bg-red-50 p-4 text-sm text-red-800">
             <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0" />
             <span>{error}</span>
           </div>
