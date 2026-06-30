@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Minus, Plus, Trash2, ShieldCheck, Lock } from "lucide-react";
 import { useCart } from "@/components/cart/cart-provider";
 import { resolveCartLines } from "@/lib/catalog/repository";
+import { formatVolume } from "@/lib/utils";
 import { ProductImage, toneFor } from "@/components/product-image";
 import { buttonClasses } from "@/components/ui/button";
 import { Price } from "@/components/market/price";
@@ -67,7 +68,7 @@ export default function CartPage() {
                           {line.product.title}
                         </Link>
                         <p className="mt-0.5 text-sm text-charcoal/50">
-                          {line.variant.sizeMl ? `${line.variant.sizeMl}cl` : "Accessory"}
+                          {formatVolume(line.variant.sizeMl) || "Accessory"}
                           {line.product.whisky ? ` · ${line.product.whisky.abv}% ABV` : ""}
                         </p>
                       </div>

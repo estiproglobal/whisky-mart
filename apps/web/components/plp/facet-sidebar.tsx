@@ -43,9 +43,12 @@ export function FacetSidebar({ facets }: { facets: ProductSearchResult["facets"]
   }
 
   return (
-    <aside className="space-y-6">
+    <aside className="space-y-5">
       <div className="flex items-center justify-between">
-        <h2 className="overline text-whisky-700">Refine</h2>
+        <div className="flex items-center gap-2.5">
+          <span className="rule-gold" />
+          <h2 className="overline text-whisky-700">Refine the shelf</h2>
+        </div>
         {hasFilters ? (
           <button
             onClick={clearAll}

@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { PlusCircle, ShieldCheck, Truck } from "lucide-react";
+import { PlusCircle, ShieldCheck, Truck, Undo2 } from "lucide-react";
 import { catalog, getPrimaryVariant } from "@/lib/catalog/repository";
-import { formatAge } from "@/lib/utils";
+import { formatAge, formatVolume } from "@/lib/utils";
+import { describeFlavour } from "@/lib/catalog/flavour";
 import { Price } from "@/components/market/price";
 import { ProductImage, toneFor } from "@/components/product-image";
 import { StarRating } from "@/components/star-rating";
@@ -38,6 +39,8 @@ export async function generateMetadata({
   };
 }
 
+const titleCase = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
+
 function Fact({ label, value }: { label: string; value: string }) {
   return (
     <div className="rounded-xl border border-line bg-ivory px-4 py-3">
@@ -47,19 +50,32 @@ function Fact({ label, value }: { label: string; value: string }) {
   );
 }
 
+/** A label/value row for the dossier-style cask & maturation panel. */
+function SpecRow({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="flex items-baseline justify-between gap-4 border-b border-line/70 py-3">
+      <dt className="text-[11px] font-semibold uppercase tracking-[0.14em] text-smoke">{label}</dt>
+      <dd className="text-right text-sm font-medium text-charcoal">{value}</dd>
+    </div>
+  );
+}
+
 function Section({
   eyebrow,
   title,
+  intro,
   children,
 }: {
   eyebrow: string;
   title: string;
+  intro?: string;
   children: React.ReactNode;
 }) {
   return (
     <section className="border-t border-line py-12">
       <p className="overline text-whisky-700">{eyebrow}</p>
       <h2 className="mt-2 font-display text-3xl text-charcoal">{title}</h2>
+      {intro ? <p className="mt-2 max-w-2xl text-[15px] leading-relaxed text-charcoal/60">{intro}</p> : null}
       <div className="mt-5">{children}</div>
     </section>
   );
@@ -76,6 +92,35 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
   const allProducts = await catalog.getAll();
   const articles = await content.byProduct(product.id);
   const w = product.whisky;
+  const regionLabel = w ? titleCase(w.region) : "";
+  const volume = formatVolume(variant.sizeMl);
+
+  // Dossier rows — built from whatever structured data the product carries.
+  const specRows: Array<{ label: string; value: string }> = w
+    ? [
+        { label: "Region", value: regionLabel },
+        { label: "Age", value: formatAge(w.ageYears) },
+        { label: "ABV", value: `${w.abv}%` },
+        ...(w.caskType.length ? [{ label: "Cask", value: w.caskType.join(", ") }] : []),
+        { label: "Peat", value: w.peatPpm ? `${w.peatPpm} ppm phenols` : "Unpeated" },
+        ...(w.chillFiltered !== undefined
+          ? [{ label: "Chill-filtered", value: w.chillFiltered ? "Yes" : "No" }]
+          : []),
+        ...(w.naturalColour !== undefined
+          ? [{ label: "Natural colour", value: w.naturalColour ? "Yes" : "No" }]
+          : []),
+        ...(product.bottlerType !== "NA"
+          ? [{ label: "Bottling", value: product.bottlerType === "IB" ? "Independent" : "Official" }]
+          : []),
+        ...(w.limitedEdition ? [{ label: "Limited edition", value: "Yes" }] : []),
+        ...(w.outturn ? [{ label: "Outturn", value: `${w.outturn.toLocaleString()} bottles` }] : []),
+      ]
+    : [];
+
+  // Curated recommendation lead-in, derived only from this product's own data.
+  const relatedIntro = product.flavour
+    ? `If you like ${describeFlavour(product.flavour, 2)}${w ? ` ${regionLabel}` : ""} whisky, start here.`
+    : "More from the cabinet you might enjoy.";
 
   return (
     <div className="container-page py-8">
@@ -85,6 +130,12 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
         <Link href="/" className="hover:text-whisky-700">Home</Link>
         <span className="px-2">/</span>
         <Link href="/shop" className="hover:text-whisky-700">Whisky</Link>
+        {w ? (
+          <>
+            <span className="px-2">/</span>
+            <Link href={`/c/${w.region}`} className="capitalize hover:text-whisky-700">{regionLabel}</Link>
+          </>
+        ) : null}
         <span className="px-2">/</span>
         <span className="text-charcoal/70">{product.title}</span>
       </nav>
@@ -93,12 +144,26 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
         {/* Gallery */}
         <div>
           <div className="mx-auto w-full max-w-[460px]">
-            <ProductImage
-              image={product.image}
-              tone={toneFor(product.whisky, product.flavour)}
-              label={product.brand.name}
-              className="aspect-[4/5] w-full rounded-xl border border-line shadow-card"
-            />
+            <div className="relative">
+              <ProductImage
+                image={product.image}
+                tone={toneFor(product.whisky, product.flavour)}
+                label={product.brand.name}
+                className="aspect-[4/5] w-full rounded-xl border border-line shadow-card"
+              />
+              {product.flavour ? (
+                <span className="absolute left-4 top-4 rounded-[3px] border border-gold/30 bg-ink/70 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.16em] text-gold-light backdrop-blur">
+                  {describeFlavour(product.flavour, 2)}
+                </span>
+              ) : null}
+            </div>
+            {volume || w ? (
+              <p className="mt-4 text-center text-[11px] uppercase tracking-[0.18em] text-charcoal/45">
+                {[volume, w ? `${w.abv}% ABV` : "", w ? formatAge(w.ageYears) : ""]
+                  .filter(Boolean)
+                  .join("  ·  ")}
+              </p>
+            ) : null}
           </div>
         </div>
 
@@ -112,8 +177,15 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
           </Link>
           <h1 className="mt-3 font-display text-4xl leading-tight text-charcoal">{product.title}</h1>
 
-          <div className="mt-4 flex flex-wrap items-center gap-3">
-            {product.ratingCount > 0 ? <StarRating value={product.ratingAvg} count={product.ratingCount} /> : null}
+          <div className="mt-4 flex flex-wrap items-center gap-x-3 gap-y-2">
+            {product.ratingCount > 0 ? (
+              <span className="inline-flex items-center gap-2">
+                <StarRating value={product.ratingAvg} />
+                <span className="text-[10px] font-semibold uppercase tracking-[0.14em] text-charcoal/40">
+                  House rating
+                </span>
+              </span>
+            ) : null}
             {product.badges.map((b) => (
               <Badge key={b} kind={b} />
             ))}
@@ -128,7 +200,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
             ) : null}
           </div>
           <p className="mt-1.5 text-sm text-charcoal/55">
-            {variant.sizeMl ? `${variant.sizeMl}cl · ` : ""}
+            {volume ? `${volume} · ` : ""}
             {w ? `${w.abv}% ABV · ` : ""}
             {variant.inStock ? "In stock" : "Out of stock"}
           </p>
@@ -141,7 +213,8 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
           {sampleVariant ? (
             <div className="mt-4 flex items-center justify-between gap-3 rounded-xl border border-dashed border-gold/40 p-4">
               <span className="text-sm text-charcoal/60">
-                Not sure yet? Try a 3cl sample for <Price money={sampleVariant.price} />
+                Not sure yet? Try a {formatVolume(sampleVariant.sizeMl)} sample for{" "}
+                <Price money={sampleVariant.price} />
               </span>
               <AddToCartButton
                 productId={product.id}
@@ -171,15 +244,12 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
             </p>
           </div>
 
-          {/* Key facts */}
+          {/* Key facts — at-a-glance; full dossier sits below */}
           {w ? (
-            <dl className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3">
-              <Fact label="Region" value={w.region.charAt(0).toUpperCase() + w.region.slice(1)} />
+            <dl className="mt-6 grid grid-cols-3 gap-3">
+              <Fact label="Region" value={regionLabel} />
               <Fact label="Age" value={formatAge(w.ageYears)} />
               <Fact label="ABV" value={`${w.abv}%`} />
-              {w.caskType.length ? <Fact label="Cask" value={w.caskType.join(", ")} /> : null}
-              {w.peatPpm ? <Fact label="Peat" value={`${w.peatPpm} ppm`} /> : null}
-              <Fact label="Bottler" value={product.bottlerType === "IB" ? "Independent" : "Official"} />
             </dl>
           ) : null}
         </div>
@@ -188,9 +258,17 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
       <div className="mt-12">
         {/* Tasting profile */}
         {product.flavour || product.tastingNote ? (
-          <Section eyebrow="On the palate" title="Tasting profile">
+          <Section
+            eyebrow="On the palate"
+            title="Tasting profile"
+            intro={
+              product.flavour
+                ? `A ${describeFlavour(product.flavour, 3)} character — here's how the notes stack up.`
+                : undefined
+            }
+          >
             {product.flavour ? (
-              <div className="max-w-3xl rounded-2xl border border-line bg-ivory p-6">
+              <div className="max-w-3xl rounded-2xl border border-line bg-ivory p-6 sm:p-8">
                 <FlavourBars flavour={product.flavour} />
               </div>
             ) : null}
@@ -198,8 +276,8 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
               <div className="mt-4 grid gap-4 sm:grid-cols-3">
                 {(["nose", "palate", "finish"] as const).map((key) => (
                   <div key={key} className="rounded-2xl border border-line bg-ivory p-6">
-                    <h3 className="font-display text-lg capitalize text-whisky-700">{key}</h3>
-                    <p className="mt-2 text-sm leading-relaxed text-charcoal/70">
+                    <p className="overline text-whisky-700">The {key}</p>
+                    <p className="mt-3 text-[15px] leading-relaxed text-charcoal/75">
                       {product.tastingNote![key]}
                     </p>
                   </div>
@@ -209,34 +287,51 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
           </Section>
         ) : null}
 
-        {/* Cask & maturation */}
-        {w ? (
+        {/* Cask & maturation — collector dossier */}
+        {specRows.length > 0 ? (
           <Section eyebrow="Wood & time" title="Cask & maturation">
-            <dl className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-              <Fact label="Age" value={formatAge(w.ageYears)} />
-              <Fact label="ABV" value={`${w.abv}%`} />
-              {w.caskType.length ? <Fact label="Cask" value={w.caskType.join(", ")} /> : null}
-              {w.peatPpm ? <Fact label="Peat" value={`${w.peatPpm} ppm`} /> : null}
-              {w.chillFiltered !== undefined ? (
-                <Fact label="Chill-filtered" value={w.chillFiltered ? "Yes" : "No"} />
-              ) : null}
-              {w.naturalColour !== undefined ? (
-                <Fact label="Natural colour" value={w.naturalColour ? "Yes" : "No"} />
-              ) : null}
-            </dl>
+            <div className="max-w-3xl rounded-2xl border border-line bg-ivory p-6 sm:p-8">
+              <dl className="grid gap-x-12 sm:grid-cols-2">
+                {specRows.map((row) => (
+                  <SpecRow key={row.label} label={row.label} value={row.value} />
+                ))}
+              </dl>
+            </div>
           </Section>
         ) : null}
 
         {/* Distillery story */}
         <Section eyebrow="Provenance" title={product.distillery?.name ?? product.brand.name}>
-          <div className="max-w-3xl space-y-4 text-lg leading-relaxed text-charcoal/75">
-            {product.story ? <p>{product.story}</p> : null}
-            <p>{product.description}</p>
-            {product.distillery?.foundedYear ? (
-              <p className="text-sm text-smoke">
-                {product.distillery.name} · established {product.distillery.foundedYear}
-                {w ? ` · ${w.region.charAt(0).toUpperCase()}${w.region.slice(1)}` : ""}
-              </p>
+          <div className="grid gap-8 lg:grid-cols-[1fr_260px]">
+            <div className="max-w-2xl space-y-4 text-lg leading-relaxed text-charcoal/75">
+              {product.story ? <p>{product.story}</p> : null}
+              <p>{product.description}</p>
+            </div>
+            {product.distillery ? (
+              <aside className="h-fit rounded-2xl border border-line bg-parchment/30 p-6">
+                <p className="overline text-whisky-700">The distillery</p>
+                <p className="mt-2 font-display text-2xl text-charcoal">{product.distillery.name}</p>
+                <dl className="mt-4 space-y-2.5 text-sm">
+                  {product.distillery.foundedYear ? (
+                    <div className="flex justify-between gap-3">
+                      <dt className="text-charcoal/50">Established</dt>
+                      <dd className="font-medium text-charcoal">{product.distillery.foundedYear}</dd>
+                    </div>
+                  ) : null}
+                  <div className="flex justify-between gap-3">
+                    <dt className="text-charcoal/50">Region</dt>
+                    <dd className="font-medium capitalize text-charcoal">{regionLabel || "—"}</dd>
+                  </div>
+                  {product.bottlerType !== "NA" ? (
+                    <div className="flex justify-between gap-3">
+                      <dt className="text-charcoal/50">Bottling</dt>
+                      <dd className="font-medium text-charcoal">
+                        {product.bottlerType === "IB" ? "Independent" : "Official"}
+                      </dd>
+                    </div>
+                  ) : null}
+                </dl>
+              </aside>
             ) : null}
           </div>
         </Section>
@@ -259,7 +354,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
               </p>
             </div>
             <div className="rounded-2xl border border-line bg-ivory p-6">
-              <PlusCircle className="h-5 w-5 text-whisky-700" />
+              <Undo2 className="h-5 w-5 text-whisky-700" />
               <h3 className="mt-3 font-display text-lg text-charcoal">Returns</h3>
               <p className="mt-1.5 text-sm leading-relaxed text-charcoal/65">
                 Unopened bottles can be returned within 14 days, in line with our policy.
@@ -272,11 +367,15 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
       {/* Customer reviews */}
       <ProductReviews productId={product.id} />
 
-      {/* Related */}
+      {/* Recommendations */}
       {related.length > 0 ? (
         <section className="mt-14">
-          <h2 className="font-display text-[1.75rem] tracking-tightest text-charcoal">If you like this…</h2>
-          <div className="mt-5 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
+          <p className="overline text-whisky-700">You may also like</p>
+          <h2 className="mt-2 font-display text-[1.75rem] tracking-tightest text-charcoal">
+            Similar bottles from the cabinet
+          </h2>
+          <p className="mt-1.5 max-w-2xl text-[15px] leading-relaxed text-charcoal/60">{relatedIntro}</p>
+          <div className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
             {related.map((p) => (
               <ProductCard key={p.id} product={p} />
             ))}
@@ -284,11 +383,12 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
         </section>
       ) : null}
 
-      {/* Featured in guides */}
+      {/* Featured guides */}
       {articles.length > 0 ? (
         <section className="mt-14">
-          <h2 className="font-display text-[1.75rem] tracking-tightest text-charcoal">Featured in our guides</h2>
-          <ul className="mt-5 space-y-3">
+          <p className="overline text-whisky-700">From the journal</p>
+          <h2 className="mt-2 font-display text-[1.75rem] tracking-tightest text-charcoal">Read before you buy</h2>
+          <ul className="mt-6 space-y-3">
             {articles.map((a) => (
               <li key={a.id}>
                 <Link

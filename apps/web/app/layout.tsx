@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     template: "%s | WhiskyMart",
   },
   description:
-    "The world's most trusted place to discover, buy, collect and invest in whisky and premium spirits.",
+    "Discover, buy and collect exceptional whisky — a curated cabinet of single malts, rare bottlings and tasting samples.",
   metadataBase: new URL("https://www.whiskymart.com"),
 };
 

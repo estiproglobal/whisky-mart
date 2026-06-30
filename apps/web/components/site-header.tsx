@@ -27,7 +27,7 @@ export function SiteHeader() {
       {/* Utility bar */}
       <div className="border-b border-line bg-parchment/70 backdrop-blur">
         <div className="container-page flex h-9 items-center justify-between text-[10.5px] uppercase tracking-[0.18em] text-charcoal/55">
-          <p className="hidden sm:block">Age-verified delivery · Curated since 2012</p>
+          <p className="hidden sm:block">Age-verified delivery · A curated cabinet of single malts</p>
           <div className="ml-auto flex items-center gap-1.5">
             <LocaleSwitcher />
             <CurrencySwitcher />

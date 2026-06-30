@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { formatAge, formatMoney } from "./utils";
+import { formatAge, formatMoney, formatVolume } from "./utils";
 
 describe("formatMoney", () => {
   it("formats GBP minor units as pounds", () => {
@@ -20,5 +20,23 @@ describe("formatAge", () => {
   it("pluralises correctly", () => {
     expect(formatAge(12)).toBe("12 Years");
     expect(formatAge(1)).toBe("1 Year");
+  });
+});
+
+describe("formatVolume", () => {
+  it("renders millilitres as centilitres for whole values", () => {
+    expect(formatVolume(700)).toBe("70cl");
+    expect(formatVolume(30)).toBe("3cl");
+    expect(formatVolume(120)).toBe("12cl");
+  });
+
+  it("falls back to millilitres for non-whole centilitres", () => {
+    expect(formatVolume(75)).toBe("75ml");
+  });
+
+  it("returns an empty string for non-liquid items", () => {
+    expect(formatVolume(0)).toBe("");
+    expect(formatVolume(null)).toBe("");
+    expect(formatVolume(undefined)).toBe("");
   });
 });

@@ -1,11 +1,75 @@
 # Current Task
 
-**Last updated:** 2026-06-27
+**Last updated:** 2026-06-30
 **Owner:** Claude (agent)
 
 ---
 
 ## What I'm working on right now
+
+**Premium category landing pages + PDP dossier + credibility fixes → ✅ COMPLETE, VALIDATED. Awaiting owner sign-off to merge/deploy.**
+A focused editorial pass on `/c/[slug]` and `/products/[slug]` only — no whole-site
+redesign; aesthetic, palette, typography, header, homepage and product-card system
+preserved. Developed on `claude/amazing-meitner-cmly8g`.
+
+### Category landing pages (`/c/[slug]`)
+- Reworked from one-line collection pages into **premium editorial collection pages**.
+  `COLLECTIONS` now carries an `eyebrow`, a short **editorial story** (1–2 paragraphs),
+  qualitative `copy` (Best for / Collector interest / Gift suitability) and a
+  `signature` flag — authored for all 12 collections (Islay, Speyside, Highland,
+  Islands, Japan, Ireland, Best sellers, Samples, Beginners, Peated, Under £50, Gifts).
+- New **`CollectionStory`** band (on the warm surface, beneath the dark `PageHero`):
+  the story, a **data-driven flavour signature** (`aggregateFlavour` averages the
+  collection's products → refined intensity meters + a `describeFlavour` headline,
+  e.g. Islay = "Smoky, Peaty & Maritime"), and a row of premium **info cards** —
+  Best for, **Start here** (computed: top-rated in-stock bottle, linked), Collector
+  interest, Gift suitability. Signature is shown for flavour-led collections and
+  suppressed for mixed sets (Gifts, Under £50) to avoid a meaningless average.
+- **Filter sidebar** lightly refined ("Refine the shelf" + brass rule); **filter/sort
+  behaviour unchanged**. Elegant transition into the existing product grid below.
+
+### PDP dossier (`/products/[slug]`)
+- **Tasting profile:** a `describeFlavour` lead-in + the upgraded **`FlavourBars`**
+  (ranked intensity meters, gradient brass fill, numeric values) + nose/palate/finish
+  cards with overline hierarchy.
+- **Cask & maturation:** the basic `<Fact>` grid became a **collector dossier** —
+  a bordered spec panel of label/value rows (Region, Age, ABV, Cask, Peat ["ppm
+  phenols"/"Unpeated"], Chill-filtered, Natural colour, Bottling, Limited edition,
+  Outturn — all conditional on data present).
+- **Provenance:** story prose beside a **distillery card** (established / region /
+  bottling). **Gallery:** flavour badge overlay + a `70cl · 43% ABV · 16 Years` caption.
+- **Recommendations:** "**Similar bottles from the cabinet**" + a derived lead
+  ("If you like smoky & peaty Islay whisky, start here."). **Guides:** "**Read before
+  you buy**" with an overline. Buy panel, cart, compliance, sample CTA all unchanged.
+
+### Credibility fixes
+- **No more "700cl".** New `formatVolume(sizeMl)` helper (700→`70cl`, 30→`3cl`,
+  120→`12cl`, odd→`ml`, 0→`""`); applied on PDP, cart, order summary and confirmation.
+- **Rating/review contradiction resolved.** The mock `ratingAvg`/`ratingCount` is now
+  labelled **"House rating"** on the PDP (the contradictory `(212)` count removed), kept
+  distinct from the genuine (seed) **Customer reviews** section — no invented reviews.
+  For products with no reviews (e.g. the Glencairn glass) the honest "No customer
+  reviews yet" empty state now reads fine against the clearly-labelled house rating.
+- **JSON-LD** `aggregateRating` switched from `reviewCount` → **`ratingCount`** (these
+  are house ratings, not written reviews); test updated.
+- **Copy polish (shared chrome):** removed unsupported claims — header "Curated since
+  2012" → "A curated cabinet of single malts"; layout meta + footer tagline (en/de/fr)
+  "world's most trusted…" → "A curated cabinet of whisky…".
+
+### Validation — all gates green
+- `typecheck` ✓ · `lint` ✓ (0 warnings) · `test` ✓ (**94 tests**, +9: `formatVolume`,
+  flavour helpers) · `build` ✓ (**51 static pages**; `/c/[slug]` 12 paths + `/products/[slug]`
+  10 paths prerendered SSG — static rendering preserved).
+- QA'd via headless Chromium: `/c/islay`, `/c/speyside`, `/c/highland`, `/shop`,
+  `/products/lagavulin-16-year-old`, `/products/glencairn-…` (accessory degrades
+  cleanly — no tasting/cask/facts sections), desktop + mobile.
+
+### Deferred / not done (intentionally)
+- Real category/region **photography** still not used (CSS/texture/monogram only —
+  per brief and `DEFERRED.md`). Seeded customer reviews left as-is (demo content, not
+  invented by this pass). Build still uses the sandbox CA workaround (CI/Vercel unaffected).
+
+---
 
 **Premium funnel — cart, checkout & confirmation → ✅ COMPLETE, MERGED (PR #11), IN PRODUCTION.**
 Continued the premium thread through the purchase journey (presentation only — no logic/routes/data):
@@ -49,8 +113,9 @@ wired the `Monogram`/`Wordmark` components to them (no hand-drawn artwork):
   ivory for dark surfaces.
 - Palette already matches the brand sheet (cream `#F2EDE2`, brass `#B08D57`,
   copper `#C97A2B`). Verified on light/dark via headless Chromium.
-- Note: the seal carries **EST. 2024** (from the supplied art) while site copy
-  says "Curated since 2012" — flagged for the owner to reconcile.
+- Note: the seal carries **EST. 2024** (from the supplied art). The conflicting
+  "Curated since 2012" / "world's most trusted" site copy has since been **removed**
+  in the category/PDP credibility pass (2026-06-30) in favour of safer premium wording.
 - Presentational only. `typecheck` ✓ · `lint` ✓ · `test` ✓ (85) · `build` ✓ (51 pages).
 
 ---
@@ -191,7 +256,7 @@ Phase-1 MVP (1–6) + Phase 2 (7–9) + design overhaul (10) are complete and li
 - [ ] Analytics + accessibility (WCAG 2.2 AA) + Core Web Vitals budgets *(ongoing)*
 
 ## Stats
-- **85 tests** across 14 files · ~48 routes · all gates green (`typecheck`, `lint`, `build`, runtime smoke).
+- **94 tests** across 16 files · ~48 routes · all gates green (`typecheck`, `lint`, `build`, runtime smoke).
 
 ## Notes for whoever continues
 - Keep every increment runnable, tested, pushed to `main`; update the two context files after each.

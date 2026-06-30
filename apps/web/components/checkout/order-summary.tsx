@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import type { CartLineDetailed, OrderTotals } from "@whiskymart/types";
+import { formatVolume } from "@/lib/utils";
 import { ProductImage, toneFor } from "@/components/product-image";
 import { Price } from "@/components/market/price";
 import { SettlementNote } from "@/components/market/settlement-note";
@@ -35,7 +36,7 @@ export function OrderSummary({
             <div className="min-w-0 flex-1">
               <p className="truncate text-sm font-medium text-charcoal">{l.product.title}</p>
               <p className="text-xs text-charcoal/50">
-                {l.variant.sizeMl ? `${l.variant.sizeMl}cl · ` : ""}Qty {l.quantity}
+                {formatVolume(l.variant.sizeMl) ? `${formatVolume(l.variant.sizeMl)} · ` : ""}Qty {l.quantity}
               </p>
             </div>
             <Price className="text-sm font-medium text-charcoal" money={l.lineTotal} />

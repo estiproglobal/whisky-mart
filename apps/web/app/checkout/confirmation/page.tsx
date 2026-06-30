@@ -5,6 +5,7 @@ import Link from "next/link";
 import { CheckCircle2 } from "lucide-react";
 import type { Order } from "@whiskymart/types";
 import { useCart } from "@/components/cart/cart-provider";
+import { formatVolume } from "@/lib/utils";
 import { Price } from "@/components/market/price";
 import { buttonClasses } from "@/components/ui/button";
 
@@ -61,7 +62,7 @@ export default function ConfirmationPage() {
               <li key={item.variantId} className="flex justify-between text-sm">
                 <span className="text-charcoal/80">
                   {item.title}
-                  {item.sizeMl ? ` · ${item.sizeMl}cl` : ""} × {item.quantity}
+                  {formatVolume(item.sizeMl) ? ` · ${formatVolume(item.sizeMl)}` : ""} × {item.quantity}
                 </span>
                 <Price className="font-medium text-charcoal" money={item.lineTotal} />
               </li>

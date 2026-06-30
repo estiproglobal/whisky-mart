@@ -6,7 +6,7 @@ import { articleJsonLd, breadcrumbJsonLd, productJsonLd } from "./structured-dat
 interface ProductLd {
   "@type": string;
   offers: { price: string; priceCurrency: string; availability: string };
-  aggregateRating?: { reviewCount: number };
+  aggregateRating?: { ratingCount: number; ratingValue: number };
 }
 interface ArticleLd {
   "@type": string;
@@ -30,9 +30,10 @@ describe("productJsonLd", () => {
     expect(data.offers.availability).toMatch(/InStock/);
   });
 
-  it("includes AggregateRating when the product has reviews", () => {
+  it("includes an AggregateRating (rating count, not review count) when rated", () => {
     const data = productJsonLd(lagavulin) as unknown as ProductLd;
-    expect(data.aggregateRating?.reviewCount).toBe(lagavulin.ratingCount);
+    expect(data.aggregateRating?.ratingCount).toBe(lagavulin.ratingCount);
+    expect(data.aggregateRating?.ratingValue).toBe(lagavulin.ratingAvg);
   });
 
   it("works for accessories (no whisky details)", () => {

@@ -33,7 +33,7 @@ const en: Messages = {
   "header.account": "Account",
   "header.wishlist": "Wishlist",
   "header.basket": "Basket",
-  "footer.tagline": "The world's most trusted place to discover, buy, collect and invest in whisky.",
+  "footer.tagline": "A curated cabinet of whisky — discover, buy and collect exceptional single malts and rare bottlings.",
   "footer.shop": "Shop",
   "footer.explore": "Explore",
   "footer.responsibly": "Please drink responsibly.",
@@ -57,7 +57,7 @@ const de: Messages = {
   "header.wishlist": "Wunschliste",
   "header.basket": "Warenkorb",
   "footer.tagline":
-    "Der vertrauenswürdigste Ort der Welt, um Whisky zu entdecken, zu kaufen, zu sammeln und in ihn zu investieren.",
+    "Ein kuratiertes Whisky-Kabinett – außergewöhnliche Single Malts und seltene Abfüllungen entdecken, kaufen und sammeln.",
   "footer.shop": "Shop",
   "footer.explore": "Entdecken",
   "footer.responsibly": "Bitte trinken Sie verantwortungsbewusst.",
@@ -82,7 +82,7 @@ const fr: Messages = {
   "header.wishlist": "Liste de souhaits",
   "header.basket": "Panier",
   "footer.tagline":
-    "L'endroit le plus fiable au monde pour découvrir, acheter, collectionner et investir dans le whisky.",
+    "Un cabinet de whisky soigneusement sélectionné — découvrir, acheter et collectionner des single malts d'exception et des embouteillages rares.",
   "footer.shop": "Boutique",
   "footer.explore": "Explorer",
   "footer.responsibly": "À consommer avec modération.",

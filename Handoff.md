@@ -1,6 +1,6 @@
 # Handoff
 
-**Date:** 2026-06-27
+**Date:** 2026-06-30
 **From:** Claude (agent session)
 **To:** Repo owner (estiproglobal) / next agent session
 
@@ -8,6 +8,11 @@
 
 ## Completed
 
+- **Premium category landing pages + PDP dossier + credibility fixes: ✅ COMPLETE & VALIDATED on `claude/amazing-meitner-cmly8g` — awaiting owner sign-off to merge/deploy.** Focused editorial pass on `/c/[slug]` and `/products/[slug]` only; no whole-site redesign (palette, type, header, homepage, product cards untouched).
+  - **Category pages:** `COLLECTIONS` enriched with editorial story + qualitative copy per collection; new **`CollectionStory`** band renders the story, a **data-driven flavour signature** (`aggregateFlavour` + `describeFlavour`, new `lib/catalog/flavour.ts`) and premium info cards (Best for / **Start here** computed top-rated bottle / Collector interest / Gift suitability). Sidebar lightly refined ("Refine the shelf"); **filter/sort behaviour unchanged**.
+  - **PDP dossier:** upgraded tasting profile (ranked `FlavourBars` meters + nose/palate/finish cards), **Cask & maturation spec dossier** (Region/Age/ABV/Cask/Peat/Chill-filtered/Natural colour/Bottling/Limited/Outturn), provenance + distillery card, "**Similar bottles from the cabinet**" (derived "If you like…" lead) + "**Read before you buy**" guides.
+  - **Credibility:** new `formatVolume()` kills "**700cl**" (→ `70cl`) on PDP/cart/order-summary/confirmation; PDP rating relabelled **"House rating"** (contradictory `(212)` count removed) and kept distinct from the genuine Customer reviews section — **no invented reviews**; JSON-LD `reviewCount`→`ratingCount`; shared-chrome copy "Curated since 2012" / "world's most trusted" replaced with safer premium wording (header + layout meta + footer tagline en/de/fr).
+  - **Gates:** `typecheck` ✓ · `lint` ✓ · `test` ✓ (**94**, +9) · `build` ✓ (**51 pages**, SSG preserved). QA'd via headless Chromium across `/c/islay`,`/speyside`,`/highland`, `/shop`, Lagavulin PDP, and the Glencairn accessory PDP (degrades cleanly), desktop + mobile.
 - **Premium funnel — cart, checkout & confirmation (PR #11):** continued the premium thread into the purchase journey. Cart: staged per-product thumbnails + refined line items + trust-backed sticky summary; checkout: refined numbered stepper + tone-matched order-summary thumbnails; confirmation: "seal of confirmation" header. Presentation only — no logic/routes/data. The premium journey is now consistent end-to-end (hero → catalogue → cart → checkout → confirmation). Merged to `main`, in production.
 - **Premium catalogue — staged product imagery (PR #9):** brought the hero's lit/staged look to **product cards** and the **PDP gallery**. `ProductImage` reworked into a display-case render (backlight halo, overhead spotlight, vignette, rim-lit glass, brass cap, contact shadow, reflection); **per-product spirit colour** via new exported `toneFor(whisky, flavour)` (sherry→mahogany, young→gold, rich→copper, else amber); card hover lift; PDP gallery staged + size-capped. Placeholder art only (no real labels) — real photography drops in behind the same contract. Catalogue presentation only — no routes/data/checkout/logic. Merged to `main`, in production.
 - **Brand logo integration (PR #5):** owner-supplied vector logo package wired into `Monogram`/`Wordmark` + favicon; palette aligned to the brand sheet. Merged to `main`, in production. ⚠️ Seal art says **EST. 2024** vs site copy "since 2012" — owner to reconcile.
@@ -79,7 +84,7 @@
 
 ## In-progress
 
-- **Nothing in flight.** Increment 11 **merged to `main`** (PR #3) and **design signed off** by the owner; Vercel auto-deployed it to **production**. The feature branch `claude/amazing-meitner-cmly8g` is now stale (safe to delete).
+- **Category/PDP editorial + credibility pass is committed on `claude/amazing-meitner-cmly8g`, validated, NOT yet merged.** Awaiting owner sign-off → squash-merge to `main` (Vercel auto-deploys to production). No data/checkout/compliance/auth changes; SSG preserved.
 - **Deploy pipeline LIVE:** Vercel ↔ `main` → production at `whisky-mart-web.vercel.app`. **`whiskymart.com` not yet attached** (owner/DNS action — `DEPLOY.md`).
 
 ## Blocked by
@@ -89,7 +94,7 @@
 
 ## Next Action
 
-1. **Attach `whiskymart.com`** — design is signed off and live in production, so point the custom domain in Vercel → Domains (DNS steps in `DEPLOY.md`). Owner/DNS action.
+1. **Review & sign off the category/PDP editorial + credibility pass** on `claude/amazing-meitner-cmly8g`, then squash-merge to `main` (auto-deploys). Then **attach `whiskymart.com`** — point the custom domain in Vercel → Domains (DNS steps in `DEPLOY.md`). Owner/DNS action.
 2. **(Optional) Provide photography** — real bottle/lifestyle images are the one asset that will fully land the luxury aesthetic (placeholders are now museum-like but synthetic).
 3. **Then — go-live as a real store / hardening:** wire the `DEFERRED.md` swaps (Stripe → Postgres → real auth → Claude → Sanity → live FX) + analytics/a11y/CWV/CI, alongside the legal/merchant prerequisites (alcohol licence, payment underwriting, age-verification vendor).
 4. **OR Phase 3** — Community & Membership per `docs/02`.
@@ -99,7 +104,9 @@
 
 ```bash
 pnpm install
-pnpm build        # production build (30 routes)
-pnpm test         # 16 unit tests
+pnpm build        # production build (51 static pages)
+pnpm test         # 94 unit tests
 pnpm --filter @whiskymart/web dev   # local dev at http://localhost:3000
+# sandbox build (turbo doesn't forward the CA): from apps/web run
+#   NODE_EXTRA_CA_CERTS=/root/.ccr/ca-bundle.crt npx next build
 ```
