@@ -8,7 +8,7 @@
 
 ## Completed
 
-- **Premium category landing pages + PDP dossier + credibility fixes: ✅ COMPLETE & VALIDATED on `claude/amazing-meitner-cmly8g` — awaiting owner sign-off to merge/deploy.** Focused editorial pass on `/c/[slug]` and `/products/[slug]` only; no whole-site redesign (palette, type, header, homepage, product cards untouched).
+- **Premium category landing pages + PDP dossier + credibility fixes: ✅ COMPLETE & VALIDATED, MERGED TO `main` (fast-forward from `claude/amazing-meitner-cmly8g`, 2026-06-30) → Vercel auto-deploys to production.** Focused editorial pass on `/c/[slug]` and `/products/[slug]` only; no whole-site redesign (palette, type, header, homepage, product cards untouched).
   - **Category pages:** `COLLECTIONS` enriched with editorial story + qualitative copy per collection; new **`CollectionStory`** band renders the story, a **data-driven flavour signature** (`aggregateFlavour` + `describeFlavour`, new `lib/catalog/flavour.ts`) and premium info cards (Best for / **Start here** computed top-rated bottle / Collector interest / Gift suitability). Sidebar lightly refined ("Refine the shelf"); **filter/sort behaviour unchanged**.
   - **PDP dossier:** upgraded tasting profile (ranked `FlavourBars` meters + nose/palate/finish cards), **Cask & maturation spec dossier** (Region/Age/ABV/Cask/Peat/Chill-filtered/Natural colour/Bottling/Limited/Outturn), provenance + distillery card, "**Similar bottles from the cabinet**" (derived "If you like…" lead) + "**Read before you buy**" guides.
   - **Credibility:** new `formatVolume()` kills "**700cl**" (→ `70cl`) on PDP/cart/order-summary/confirmation; PDP rating relabelled **"House rating"** (contradictory `(212)` count removed) and kept distinct from the genuine Customer reviews section — **no invented reviews**; JSON-LD `reviewCount`→`ratingCount`; shared-chrome copy "Curated since 2012" / "world's most trusted" replaced with safer premium wording (header + layout meta + footer tagline en/de/fr).
@@ -84,7 +84,7 @@
 
 ## In-progress
 
-- **Category/PDP editorial + credibility pass is committed on `claude/amazing-meitner-cmly8g`, validated, NOT yet merged.** Awaiting owner sign-off → squash-merge to `main` (Vercel auto-deploys to production). No data/checkout/compliance/auth changes; SSG preserved.
+- **Nothing in flight.** The category/PDP editorial + credibility pass is **merged to `main`** and deploying to production; the feature branch matches `main`. No data/checkout/compliance/auth changes; SSG preserved.
 - **Deploy pipeline LIVE:** Vercel ↔ `main` → production at `whisky-mart-web.vercel.app`. **`whiskymart.com` not yet attached** (owner/DNS action — `DEPLOY.md`).
 
 ## Blocked by
@@ -94,7 +94,7 @@
 
 ## Next Action
 
-1. **Review & sign off the category/PDP editorial + credibility pass** on `claude/amazing-meitner-cmly8g`, then squash-merge to `main` (auto-deploys). Then **attach `whiskymart.com`** — point the custom domain in Vercel → Domains (DNS steps in `DEPLOY.md`). Owner/DNS action.
+1. **Attach `whiskymart.com`** — the category/PDP editorial + credibility pass is merged and deploying, so point the custom domain in Vercel → Domains (DNS steps in `DEPLOY.md`). Owner/DNS action.
 2. **(Optional) Provide photography** — real bottle/lifestyle images are the one asset that will fully land the luxury aesthetic (placeholders are now museum-like but synthetic).
 3. **Then — go-live as a real store / hardening:** wire the `DEFERRED.md` swaps (Stripe → Postgres → real auth → Claude → Sanity → live FX) + analytics/a11y/CWV/CI, alongside the legal/merchant prerequisites (alcohol licence, payment underwriting, age-verification vendor).
 4. **OR Phase 3** — Community & Membership per `docs/02`.

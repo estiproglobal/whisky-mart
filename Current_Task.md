@@ -7,7 +7,7 @@
 
 ## What I'm working on right now
 
-**Premium category landing pages + PDP dossier + credibility fixes → ✅ COMPLETE, VALIDATED. Awaiting owner sign-off to merge/deploy.**
+**Premium category landing pages + PDP dossier + credibility fixes → ✅ COMPLETE, VALIDATED, MERGED TO `main` (2026-06-30), DEPLOYING TO PRODUCTION via Vercel.**
 A focused editorial pass on `/c/[slug]` and `/products/[slug]` only — no whole-site
 redesign; aesthetic, palette, typography, header, homepage and product-card system
 preserved. Developed on `claude/amazing-meitner-cmly8g`.
