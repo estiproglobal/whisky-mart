@@ -18,7 +18,7 @@ export default async function TastePage() {
       <PageHero
         eyebrow="Personalisation"
         title="Find your palate"
-        intro="Tell us what you enjoy and we'll tailor recommendations to your taste — across the site and with the Sommelier."
+        intro="Tell us what you enjoy and we'll tailor recommendations to your taste, across the site and with the Sommelier."
       />
 
       <div className="container-page py-14 sm:py-16">

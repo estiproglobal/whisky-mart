@@ -6,7 +6,7 @@ const H = 1376;
 const SIZES = "(min-width: 1024px) 200px, 1px";
 
 /**
- * Hero visual — the WhiskyMart "Cabinet Selection" bottle (a fictional house
+ * Hero visual: the WhiskyMart "Cabinet Selection" bottle (a fictional house
  * bottling, isolated to transparency) staged on the dark hero like a lit
  * collector's-cabinet object. Layered, restrained lighting: a wide ambient
  * cabinet glow, a focused warm backlight halo, a soft overhead spotlight, a
@@ -17,7 +17,7 @@ const SIZES = "(min-width: 1024px) 200px, 1px";
 export function HeroBottle() {
   return (
     <div className="relative mx-auto w-full max-w-[18rem]" aria-hidden="true">
-      {/* Ambient cabinet glow — wide, very soft */}
+      {/* Ambient cabinet glow: wide, very soft */}
       <div
         className="pointer-events-none absolute left-1/2 top-[46%] h-[100%] w-[155%] -translate-x-1/2 -translate-y-1/2"
         style={{ background: "radial-gradient(46% 50% at 50% 50%, rgba(201,122,43,0.15), transparent 70%)" }}
@@ -40,7 +40,7 @@ export function HeroBottle() {
         }}
       />
 
-      {/* Bottle — warm rim + glass enrichment + grounding shadow */}
+      {/* Bottle: warm rim + glass enrichment + grounding shadow */}
       <Image
         src={SRC}
         alt=""

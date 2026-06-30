@@ -19,7 +19,7 @@ function generateOrderNumber(): string {
 }
 
 /**
- * POST /api/checkout/pay — server-authoritative order placement.
+ * POST /api/checkout/pay: server-authoritative order placement.
  * Re-runs the jurisdiction + age + totals checks (never trusts the client),
  * charges via the payment provider, and returns the created order.
  */

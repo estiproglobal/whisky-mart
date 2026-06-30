@@ -5,7 +5,7 @@ import type { OrderRepository, ReviewRepository } from "./types";
  * In-memory persistence (interface-first). Module-level singletons shared
  * across requests within one running server process.
  *
- * Limitations (acceptable for dev; resolved by the Postgres swap — see
+ * Limitations (acceptable for dev; resolved by the Postgres swap: see
  * DEFERRED.md): data resets on server restart and is not shared across
  * multiple instances. Do not rely on this in production.
  */

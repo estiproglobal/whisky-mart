@@ -2,7 +2,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
 /**
- * LuxurySection — a commerce/editorial section with an editorial heading
+ * LuxurySection: a commerce/editorial section with an editorial heading
  * (overline + serif title + brass rule) and an optional "view all" link.
  */
 export function LuxurySection({

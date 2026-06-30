@@ -19,7 +19,7 @@ const STORAGE_KEY = "wm_account";
 
 /**
  * Mock client-side account (dev only). Real auth (Clerk/Auth0) + server
- * sessions land with the auth swap — see DEFERRED.md.
+ * sessions land with the auth swap, see DEFERRED.md.
  */
 export function AccountProvider({ children }: { children: React.ReactNode }) {
   const [customer, setCustomer] = React.useState<Customer | null>(null);

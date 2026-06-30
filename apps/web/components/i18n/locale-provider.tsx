@@ -14,7 +14,7 @@ const LocaleContext = React.createContext<LocaleContextValue | null>(null);
 /**
  * Holds the UI language. Server + first client render use English (so pages stay
  * statically generated and SEO is English-canonical); the saved preference is
- * read from a cookie after mount and applied client-side — no hydration
+ * read from a cookie after mount and applied client-side, no hydration
  * mismatch. Full locale-routed URLs + hreflang are a production follow-up
  * (see DEFERRED.md).
  */

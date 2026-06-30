@@ -1,4 +1,4 @@
-# 07 — AI Development Specification (Part 7)
+# 07: AI Development Specification (Part 7)
 
 > A drop-in technical specification for **AI software-engineering platforms** (Claude Code, Cursor, Windsurf, Replit Agent, OpenAI Codex) or a human team to begin building **WhiskyMart.com**. It is written to be actionable: folder structure, API contracts, data models, component hierarchy, user flows, security, testing, deployment, and CI/CD.
 
@@ -129,7 +129,7 @@ POST   /api/v1/webhooks/age-verification
 POST   /api/v1/webhooks/cms        # Sanity → revalidate ISR
 ```
 
-### 3.2 GraphQL (storefront composite) — example
+### 3.2 GraphQL (storefront composite): example
 
 ```graphql
 type Query {
@@ -290,7 +290,7 @@ enum AgeCheckStatus { REQUIRED PASSED AT_DELIVERY }
 
 ## 5. AI subsystem specification
 
-### 5.1 Sommelier (RAG advisor) — reference flow
+### 5.1 Sommelier (RAG advisor): reference flow
 ```
 user message
   → guardrails.preCheck (age verified? responsible-drinking intent? PII?)
@@ -305,7 +305,7 @@ user message
 ```
 **System prompt principles:** persona = knowledgeable, warm whisky sommelier; always ground recommendations in retrieved catalogue; cite products by id; never fabricate prices/stock (read from tools); promote responsible drinking; refuse to advise minors; stay in-domain.
 
-**Model choice:** use the **latest Claude models** via the Claude API — an Opus-class model for the conversational advisor/agentic support, a faster/cheaper Claude for bulk tasks (tagging, summarising reviews, generating SEO copy). Use **prompt caching** for large static context (policies, taxonomy) and **streaming** for UX.
+**Model choice:** use the **latest Claude models** via the Claude API, an Opus-class model for the conversational advisor/agentic support, a faster/cheaper Claude for bulk tasks (tagging, summarising reviews, generating SEO copy). Use **prompt caching** for large static context (policies, taxonomy) and **streaming** for UX.
 
 ### 5.2 Recommendations
 Hybrid: collaborative filtering (purchase/co-view) + content embeddings (flavour vectors) + LLM re-ranking with the user's palate profile. Served from `recommendation_cache` with TTL; recomputed on signals (purchase, review, vault add).
@@ -313,7 +313,7 @@ Hybrid: collaborative filtering (purchase/co-view) + content embeddings (flavour
 ### 5.3 Guardrails (non-negotiable)
 - Age-gate every AI surface; never assist minors.
 - Responsible-drinking framing; no health/medical claims; no encouragement of excess.
-- Strict grounding (RAG); no fabricated stock/price/availability — read via tools.
+- Strict grounding (RAG); no fabricated stock/price/availability: read via tools.
 - PII minimisation in prompts/logs; output validation; human-in-loop for support actions that change state (refunds, address changes).
 - Evaluation suite (golden questions, factuality, refusal correctness) gating prompt/model changes in CI.
 
@@ -455,7 +455,7 @@ jobs:
 
 ---
 
-## 12. Environment variables (contract — names only)
+## 12. Environment variables (contract: names only)
 ```
 DATABASE_URL  REDIS_URL  CLICKHOUSE_URL
 STRIPE_SECRET_KEY  STRIPE_WEBHOOK_SECRET  STRIPE_CONNECT_CLIENT_ID

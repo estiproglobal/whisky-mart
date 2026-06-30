@@ -7,7 +7,7 @@ type Size = "sm" | "md" | "lg";
 const variants: Record<Variant, string> = {
   // Restrained luxe default: near-black on light surfaces.
   primary: "bg-charcoal text-cream hover:bg-oak",
-  // Cask amber — reserved for dark surfaces (hero, ink panels) where it pops.
+  // Cask amber: reserved for dark surfaces (hero, ink panels) where it pops.
   accent: "bg-amber text-ink hover:bg-amber-dark",
   // Quiet parchment alternative.
   secondary: "bg-parchment text-charcoal hover:bg-whisky-100",
@@ -21,7 +21,7 @@ const sizes: Record<Size, string> = {
   lg: "h-[3.25rem] px-9 text-[12px]",
 };
 
-/** Shared button styling — also used to style `<Link>` elements as buttons. */
+/** Shared button styling: also used to style `<Link>` elements as buttons. */
 export function buttonClasses(variant: Variant = "primary", size: Size = "md", className?: string): string {
   return cn(
     "inline-flex items-center justify-center gap-2 rounded-md font-semibold uppercase tracking-[0.14em] transition-colors duration-200 disabled:pointer-events-none disabled:opacity-50",

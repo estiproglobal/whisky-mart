@@ -14,7 +14,7 @@ import {
 import { SEED_PRODUCTS } from "./seed";
 
 /**
- * CatalogRepository — the single seam between the UI and the product data
+ * CatalogRepository: the single seam between the UI and the product data
  * source. The in-memory implementation below reads from the seed catalogue;
  * a later increment swaps it for Medusa / an API without changing callers.
  */

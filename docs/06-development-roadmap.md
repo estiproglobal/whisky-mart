@@ -1,12 +1,12 @@
-# 06 — Development Roadmap (Part 6)
+# 06: Development Roadmap (Part 6)
 
-> Three investment stages — **MVP (90 days)**, **Growth (12 months)**, **Enterprise (3 years)** — each with scope, team, timeline, and indicative budget.
+> Three investment stages (**MVP (90 days)**, **Growth (12 months)**, **Enterprise (3 years)**) each with scope, team, timeline, and indicative budget.
 
 **How to read budgets:** ranges are indicative and assume a blend of UK/EU senior contractors and full-time hires. They cover **people + infrastructure + licences + compliance + a marketing seed**. Currency: GBP. Swap in your local rates; the *relativities* matter more than the absolutes.
 
 ---
 
-## STAGE 1 — MVP (90 Days)
+## STAGE 1: MVP (90 Days)
 **Goal:** a credible, premium, **revenue-generating** UK whisky store with the seeds of differentiation (AI advisor v1, samples), launched on a stack that won't need re-platforming.
 
 ### Scope / features
@@ -15,7 +15,7 @@
 - **Search**: instant + typo-tolerant; basic semantic search.
 - **Cart & checkout**: Stripe (cards + Apple/Google Pay), guest checkout, **age verification**, **UK jurisdiction rules**, tax, shipping, gift options.
 - **Accounts**: auth (Clerk/Auth0), addresses, order history, wishlist, compare.
-- **Reviews & ratings** (verified purchase) — basic.
+- **Reviews & ratings** (verified purchase): basic.
 - **CMS (Sanity)**: blog + buying guides + a few education pieces (SEO foundation).
 - **AI Whisky Advisor v1**: grounded (RAG over catalogue) chat + Gift Finder (rules+AI).
 - **Newsletter capture**, abandoned-cart email, back-in-stock alerts.
@@ -55,7 +55,7 @@ Marketplace, auctions, investment, community/forums, native apps, multi-currency
 
 ---
 
-## STAGE 2 — Growth (12 Months)
+## STAGE 2: Growth (12 Months)
 **Goal:** evolve from store → **discovery platform + community + membership**, expand to EU (and begin US), and make AI personalisation real. Build the supply side for the marketplace.
 
 ### Scope / features (on top of MVP)
@@ -67,7 +67,7 @@ Marketplace, auctions, investment, community/forums, native apps, multi-currency
 - **AI maturity**: personalised recommendations (palate fingerprint v1), food-pairing engine, AI support agent, semantic search GA, AI merchandising/auto-tagging internally.
 - **Internationalisation**: multi-currency (Stripe), multi-language (i18n + hreflang), EU launch (VAT/IOSS, local payment methods), **jurisdiction engine v2**; begin US via 3PL/partner model.
 - **WhiskyVault v1**: digital collection (manual + from-purchase).
-- **Marketplace (private beta)**: seller onboarding/KYC, listings, Stripe Connect payouts, authenticity records — invite-only supply.
+- **Marketplace (private beta)**: seller onboarding/KYC, listings, Stripe Connect payouts, authenticity records: invite-only supply.
 - **Mobile**: PWA hardening; begin React Native app.
 - **CRO program**: experimentation (PostHog), lifecycle marketing, retention loops.
 - **Reliability/SRE**: SLOs, on-call, observability maturity; SOC 2 readiness started.
@@ -99,8 +99,8 @@ Marketplace, auctions, investment, community/forums, native apps, multi-currency
 
 ---
 
-## STAGE 3 — Enterprise (3 Years)
-**Goal:** the full ecosystem — **public marketplace + auctions + cask/bottle investment + data products + retail media + global, compliant operations** — engineered for millions of visitors and acquisition-grade scale.
+## STAGE 3: Enterprise (3 Years)
+**Goal:** the full ecosystem: **public marketplace + auctions + cask/bottle investment + data products + retail media + global, compliant operations**: engineered for millions of visitors and acquisition-grade scale.
 
 ### Scope / features (cumulative)
 - **Full public marketplace**: open seller onboarding, WhiskyMart-Fulfilled (bonded warehousing), promoted listings, ratings, disputes, escrow on high-value items, tiered commissions.
@@ -108,13 +108,13 @@ Marketplace, auctions, investment, community/forums, native apps, multi-currency
 - **Investment & cask exchange**: cask brokerage, fractional ownership, custody/storage, insurance, portfolio dashboard, exit/bottling; valuation/pricing **data product + public API**.
 - **Provenance/authentication at scale**: NFC/QR bottle authentication, blockchain-optional provenance chain, anti-counterfeit program.
 - **AI platform (Phase 5)**: deeply personalised everything; mature palate model; agentic concierge across buying/collecting/investing; AI ops (pricing, demand, fraud/trust scoring, content at scale).
-- **Retail media network**: self-serve brand advertising (search/category placements, sponsored content) — high-margin revenue.
+- **Retail media network**: self-serve brand advertising (search/category placements, sponsored content): high-margin revenue.
 - **Global operations**: APAC + selective MEA/Canada; regional warehouses/3PL; full multi-region data residency; localized everything.
 - **Enterprise hardening**: SOC 2 Type II / ISO 27001, multi-region HA/DR, advanced fraud, full composability (extract services where scale demands), B2B/trade portal.
 - **Native apps (iOS/Android) GA**: vault, scan-to-shop, auctions, allocations, push.
 
 ### Team (60–110 people across)
-- **Engineering** (multiple squads): Commerce, Marketplace, Auctions/Investment, AI/ML, Data Platform, Mobile, Platform/SRE/Security — 35–60.
+- **Engineering** (multiple squads): Commerce, Marketplace, Auctions/Investment, AI/ML, Data Platform, Mobile, Platform/SRE/Security: 35–60.
 - **Product & Design**: 10–18.
 - **Data/ML/Analytics**: 5–10.
 - **Growth/Marketing/Content/Creator**: 8–15.

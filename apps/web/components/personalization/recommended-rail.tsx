@@ -9,7 +9,7 @@ import { ProductCard } from "@/components/product-card";
 
 /**
  * "Recommended for you". Renders the server-provided fallback (e.g. best
- * sellers) initially — so it's SSG-friendly with no hydration mismatch — then
+ * sellers) initially (so it's SSG-friendly with no hydration mismatch) then
  * swaps to palate-based picks (via /api/recommendations) once a profile exists.
  */
 export function RecommendedRail({ fallback }: { fallback: Product[] }) {

@@ -54,7 +54,7 @@ export default function SommelierPage() {
     } catch {
       setTurns((t) => [
         ...t,
-        { id: crypto.randomUUID(), role: "advisor", text: "Sorry — I couldn't reach the cellar just now. Please try again." },
+        { id: crypto.randomUUID(), role: "advisor", text: "Sorry, I couldn't reach the cellar just now. Please try again." },
       ]);
     } finally {
       setLoading(false);
@@ -74,7 +74,7 @@ export default function SommelierPage() {
             Tell me what you love.
           </h1>
           <p className="mx-auto mt-4 max-w-xl text-[15px] leading-relaxed text-charcoal/60">
-            Describe a whisky you enjoyed, a flavour, a budget or an occasion — your Sommelier will
+            Describe a whisky you enjoyed, a flavour, a budget or an occasion: your Sommelier will
             recommend bottles from our cellar, with the reasoning behind each.
           </p>
         </div>

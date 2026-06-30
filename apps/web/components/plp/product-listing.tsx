@@ -65,7 +65,7 @@ export async function ProductListing({
           <div className="rounded-lg border border-line bg-ivory p-14 text-center">
             <p className="font-display text-[1.75rem] tracking-tightest text-charcoal">Nothing on this shelf</p>
             <p className="mt-2 text-sm text-charcoal/60">
-              Try removing a filter — or ask the WhiskyMart Sommelier to help you choose.
+              Try removing a filter, or ask the WhiskyMart Sommelier to help you choose.
             </p>
           </div>
         ) : (

@@ -7,8 +7,27 @@
 
 ## What I'm working on right now
 
+**Typography: remove every em-dash site-wide + document the rule → ✅ COMPLETE, VALIDATED. On `claude/amazing-meitner-cmly8g`.**
+Owner asked to purge every em-dash (the `U+2014` glyph) from the whole codebase
+and make sure they are never reintroduced.
+- **467 em-dashes replaced across 75 files** with context-appropriate punctuation
+  (colon for lead-ins/lists, comma for appositives, parentheses for inline asides,
+  semicolon/period for independent clauses), not a blind dash swap. Covered UI copy,
+  product/editorial seed content, i18n (en/de/fr), code comments/JSDoc, and all docs.
+- Hand-fixed the cases a script cannot judge: attribution dash in `content-blocks`
+  (dropped), the lone-em-dash spec placeholder (now "N/A"), line-wrapped dashes, and ~15
+  comma-splices/colon-before-conjunction spots in brand copy.
+- **Zero em-dashes remain** anywhere (`grep` clean). En-dashes (`–`) kept only in
+  numeric ranges ("1–2 working days").
+- **New `CLAUDE.md`** documents the hard no-em-dash rule + the punctuation guide so
+  future agents never reintroduce them; a verification `grep` is included.
+- Gates: `typecheck` ✓ · `lint` ✓ · `test` ✓ (94) · `build` ✓ (51 pages). Pure
+  copy/punctuation change; no logic, routes, data, or behaviour touched.
+
+---
+
 **Premium category landing pages + PDP dossier + credibility fixes → ✅ COMPLETE, VALIDATED, MERGED TO `main` (2026-06-30), DEPLOYING TO PRODUCTION via Vercel.**
-A focused editorial pass on `/c/[slug]` and `/products/[slug]` only — no whole-site
+A focused editorial pass on `/c/[slug]` and `/products/[slug]` only: no whole-site
 redesign; aesthetic, palette, typography, header, homepage and product-card system
 preserved. Developed on `claude/amazing-meitner-cmly8g`.
 
@@ -16,12 +35,12 @@ preserved. Developed on `claude/amazing-meitner-cmly8g`.
 - Reworked from one-line collection pages into **premium editorial collection pages**.
   `COLLECTIONS` now carries an `eyebrow`, a short **editorial story** (1–2 paragraphs),
   qualitative `copy` (Best for / Collector interest / Gift suitability) and a
-  `signature` flag — authored for all 12 collections (Islay, Speyside, Highland,
+  `signature` flag: authored for all 12 collections (Islay, Speyside, Highland,
   Islands, Japan, Ireland, Best sellers, Samples, Beginners, Peated, Under £50, Gifts).
 - New **`CollectionStory`** band (on the warm surface, beneath the dark `PageHero`):
   the story, a **data-driven flavour signature** (`aggregateFlavour` averages the
   collection's products → refined intensity meters + a `describeFlavour` headline,
-  e.g. Islay = "Smoky, Peaty & Maritime"), and a row of premium **info cards** —
+  e.g. Islay = "Smoky, Peaty & Maritime"), and a row of premium **info cards**:
   Best for, **Start here** (computed: top-rated in-stock bottle, linked), Collector
   interest, Gift suitability. Signature is shown for flavour-led collections and
   suppressed for mixed sets (Gifts, Under £50) to avoid a meaningless average.
@@ -32,10 +51,10 @@ preserved. Developed on `claude/amazing-meitner-cmly8g`.
 - **Tasting profile:** a `describeFlavour` lead-in + the upgraded **`FlavourBars`**
   (ranked intensity meters, gradient brass fill, numeric values) + nose/palate/finish
   cards with overline hierarchy.
-- **Cask & maturation:** the basic `<Fact>` grid became a **collector dossier** —
+- **Cask & maturation:** the basic `<Fact>` grid became a **collector dossier**:
   a bordered spec panel of label/value rows (Region, Age, ABV, Cask, Peat ["ppm
   phenols"/"Unpeated"], Chill-filtered, Natural colour, Bottling, Limited edition,
-  Outturn — all conditional on data present).
+  Outturn: all conditional on data present).
 - **Provenance:** story prose beside a **distillery card** (established / region /
   bottling). **Gallery:** flavour badge overlay + a `70cl · 43% ABV · 16 Years` caption.
 - **Recommendations:** "**Similar bottles from the cabinet**" + a derived lead
@@ -47,32 +66,32 @@ preserved. Developed on `claude/amazing-meitner-cmly8g`.
   120→`12cl`, odd→`ml`, 0→`""`); applied on PDP, cart, order summary and confirmation.
 - **Rating/review contradiction resolved.** The mock `ratingAvg`/`ratingCount` is now
   labelled **"House rating"** on the PDP (the contradictory `(212)` count removed), kept
-  distinct from the genuine (seed) **Customer reviews** section — no invented reviews.
+  distinct from the genuine (seed) **Customer reviews** section, no invented reviews.
   For products with no reviews (e.g. the Glencairn glass) the honest "No customer
   reviews yet" empty state now reads fine against the clearly-labelled house rating.
 - **JSON-LD** `aggregateRating` switched from `reviewCount` → **`ratingCount`** (these
   are house ratings, not written reviews); test updated.
-- **Copy polish (shared chrome):** removed unsupported claims — header "Curated since
+- **Copy polish (shared chrome):** removed unsupported claims: header "Curated since
   2012" → "A curated cabinet of single malts"; layout meta + footer tagline (en/de/fr)
   "world's most trusted…" → "A curated cabinet of whisky…".
 
-### Validation — all gates green
+### Validation: all gates green
 - `typecheck` ✓ · `lint` ✓ (0 warnings) · `test` ✓ (**94 tests**, +9: `formatVolume`,
   flavour helpers) · `build` ✓ (**51 static pages**; `/c/[slug]` 12 paths + `/products/[slug]`
-  10 paths prerendered SSG — static rendering preserved).
+  10 paths prerendered SSG: static rendering preserved).
 - QA'd via headless Chromium: `/c/islay`, `/c/speyside`, `/c/highland`, `/shop`,
   `/products/lagavulin-16-year-old`, `/products/glencairn-…` (accessory degrades
-  cleanly — no tasting/cask/facts sections), desktop + mobile.
+  cleanly: no tasting/cask/facts sections), desktop + mobile.
 
 ### Deferred / not done (intentionally)
-- Real category/region **photography** still not used (CSS/texture/monogram only —
+- Real category/region **photography** still not used (CSS/texture/monogram only,
   per brief and `DEFERRED.md`). Seeded customer reviews left as-is (demo content, not
   invented by this pass). Build still uses the sandbox CA workaround (CI/Vercel unaffected).
 
 ---
 
-**Premium funnel — cart, checkout & confirmation → ✅ COMPLETE, MERGED (PR #11), IN PRODUCTION.**
-Continued the premium thread through the purchase journey (presentation only — no logic/routes/data):
+**Premium funnel: cart, checkout & confirmation → ✅ COMPLETE, MERGED (PR #11), IN PRODUCTION.**
+Continued the premium thread through the purchase journey (presentation only, no logic/routes/data):
 - **Cart** (`app/cart/page.tsx`): staged product thumbnails (per-product `tone`) in framed niches, refined line items (brand·region eyebrow, serif title, size/ABV), tidier qty stepper, and a **sticky summary** with secure-checkout CTA + trust signals (age-verified, encrypted payment, drink responsibly).
 - **Order summary** (`checkout/order-summary.tsx`): framed, tone-matched thumbnails.
 - **Checkout stepper** (`checkout/checkout-flow.tsx`): refined numbered steps with hairline connectors and an amber-ringed current step; calmer error block.
@@ -81,10 +100,10 @@ Continued the premium thread through the purchase journey (presentation only —
 
 ---
 
-**Premium catalogue — staged product imagery (PLP cards + PDP) → ✅ COMPLETE, MERGED (PR #9), IN PRODUCTION.**
-Carried the hero's lit, staged quality into the shopping journey (catalogue presentation only — no routes/data/checkout/logic):
+**Premium catalogue: staged product imagery (PLP cards + PDP) → ✅ COMPLETE, MERGED (PR #9), IN PRODUCTION.**
+Carried the hero's lit, staged quality into the shopping journey (catalogue presentation only, no routes/data/checkout/logic):
 - **`ProductImage`** reworked into a premium **display-case render**: warm backlight halo + overhead spotlight, dark cabinet ground + vignette, rim-lit glass with speculars, brass cap, soft contact shadow, plinth line, faded reflection.
-- **Per-product spirit colour** via a new exported `toneFor(whisky, flavour)` helper — sherry → mahogany, young/fresh → gold, rich → copper, else amber — so bottles read distinctly. `ProductImage` takes an optional `tone`; cart/recently-viewed default to a stable per-seed tone.
+- **Per-product spirit colour** via a new exported `toneFor(whisky, flavour)` helper (sherry → mahogany, young/fresh → gold, rich → copper, else amber) so bottles read distinctly. `ProductImage` takes an optional `tone`; cart/recently-viewed default to a stable per-seed tone.
 - **Product cards** (`product-card.tsx`): dark display ground, gentle hover lift + soft shadow, deeper image zoom; pass the per-product tone.
 - **PDP gallery** (`products/[slug]/page.tsx`): staged display frame, capped to a premium size, per-product tone.
 - Placeholder art only (generic silhouettes, no real brand labels); **real photography still drops in behind the same caller contract** (`DEFERRED.md`). `typecheck`/`lint`/`build` green (51 pages); verified PLP + PDP desktop & mobile.
@@ -94,14 +113,14 @@ Carried the hero's lit, staged quality into the shopping journey (catalogue pres
 **Homepage hero & header refinement + bottle hero visual → ✅ COMPLETE, MERGED, IN PRODUCTION.**
 A focused header/hero polish (no site redesign), shipped across **PRs #5–#7**:
 - **Header:** desktop wordmark enlarged (`lg:h-[3.9rem]`) for a premium brand mark, not bulky (mobile unchanged).
-- **Hero copy/layout:** two clean headline lines — "The world's whisky" / "cabinet, curated for you." (forced break + `text-balance`, so mobile never orphans "you."); **CTAs side-by-side on desktop**, stacked on mobile; tighter, intentional vertical rhythm; **trust row trimmed to three signals** on the hero (Collector-ready removed — `TrustBar` gained an optional `max`; footer still shows four).
-- **Hero visual:** replaced the illustrated bottle with the **owner-supplied WhiskyMart "Cabinet Selection" single-bottle render** (own brand — a fictional house bottling, not a real distillery). Isolated to a transparent WebP (white background removed via Pillow flood-fill) at `apps/web/public/hero/whiskymart-bottle.webp`; staged on the dark hero via **`next/image`** with a warm amber **backlight halo** + ambient cabinet glow, a soft **overhead spotlight**, a **grounded base** (contact shadow, faded reflection, warm floor pool, brass shelf line), and warm **rim + glass/label enrichment**. Lazy-loaded; hidden on mobile.
-- ⚠️ A **Macallan** image was offered for the hero but **NOT used** — real trademarked/copyrighted distillery photography; declined for brand-safety and the own-brand WhiskyMart bottle used instead.
+- **Hero copy/layout:** two clean headline lines: "The world's whisky" / "cabinet, curated for you." (forced break + `text-balance`, so mobile never orphans "you."); **CTAs side-by-side on desktop**, stacked on mobile; tighter, intentional vertical rhythm; **trust row trimmed to three signals** on the hero (Collector-ready removed, `TrustBar` gained an optional `max`; footer still shows four).
+- **Hero visual:** replaced the illustrated bottle with the **owner-supplied WhiskyMart "Cabinet Selection" single-bottle render** (own brand: a fictional house bottling, not a real distillery). Isolated to a transparent WebP (white background removed via Pillow flood-fill) at `apps/web/public/hero/whiskymart-bottle.webp`; staged on the dark hero via **`next/image`** with a warm amber **backlight halo** + ambient cabinet glow, a soft **overhead spotlight**, a **grounded base** (contact shadow, faded reflection, warm floor pool, brass shelf line), and warm **rim + glass/label enrichment**. Lazy-loaded; hidden on mobile.
+- ⚠️ A **Macallan** image was offered for the hero but **NOT used**, real trademarked/copyrighted distillery photography; declined for brand-safety and the own-brand WhiskyMart bottle used instead.
 - Files touched: `components/hero-bottle.tsx`, `app/page.tsx`, `components/site-header.tsx`, `components/ui/trust-bar.tsx`, `public/hero/`. No routes/data/checkout/logic. `typecheck`/`lint`/`build` green (51 pages); verified desktop + mobile via headless Chromium. Production-deployed.
 
 ---
 
-**Brand identity — official WhiskyMart logo integrated → ✅ COMPLETE.**
+**Brand identity: official WhiskyMart logo integrated → ✅ COMPLETE.**
 The owner supplied a vector logo package (seal + wordmark + lockups, full-colour
 and one-colour, favicon). Dropped the SVGs into `apps/web/public/logos/` and
 wired the `Monogram`/`Wordmark` components to them (no hand-drawn artwork):
@@ -120,18 +139,18 @@ wired the `Monogram`/`Wordmark` components to them (no hand-drawn artwork):
 
 ---
 
-**Increment 11 — "The Cabinet, refined" (stricter luxury pass) → ✅ COMPLETE,
+**Increment 11: "The Cabinet, refined" (stricter luxury pass) → ✅ COMPLETE,
 MERGED TO `main`, IN PRODUCTION.**
 A second, stricter design iteration on top of Increment 10. The previous pass
 improved wording but still read as a polished ecommerce MVP; this pass pushes it
 toward a premium whisky house / private collector's cabinet. **Presentational
-only — no behaviour/logic/route/test changes.** Developed on branch
+only: no behaviour/logic/route/test changes.** Developed on branch
 `claude/amazing-meitner-cmly8g`, reviewed via **PR #3** (Vercel preview ✓ ·
 `claude-review` ✓), **owner signed off and squash-merged to `main`** (commit
 `8b2e329`) on 2026-06-25 → auto-deployed to the Vercel **production**
 environment (`whisky-mart-web.vercel.app`).
 
-### Increment 11 acceptance — ✅ COMPLETE & VERIFIED
+### Increment 11 acceptance: ✅ COMPLETE & VERIFIED
 - [x] **Tokens:** tightened, architectural **radius scale** (cards/panels markedly
   less "app-bubbly"); near-hairline **shadows**; refined warm-paper palette
   (deeper/cooler `cream`, new `line` hairline token, bronze-leaning `amber`/`gold`);
@@ -141,7 +160,7 @@ environment (`whisky-mart-web.vercel.app`).
   default on light surfaces); cask **amber demoted to a dark-surface `accent`**
   (hero + ink service card only). Buttons are uppercase, letter-spaced, squarer.
 - [x] **Product cards:** flat warm-ivory **tiles with hairline borders + gentle
-  image zoom** — no floating white card, no drop-shadow, no lift.
+  image zoom**: no floating white card, no drop-shadow, no lift.
 - [x] **Product placeholder:** a **dim lit display niche** (warm spotlight, dark
   cabinet ground, soft reflection) instead of kraft-paper parchment.
 - [x] **Quieter signals:** badges → tiny **letter-spaced labels**; chips squared;
@@ -160,33 +179,33 @@ environment (`whisky-mart-web.vercel.app`).
 > failed TLS in the sandbox; `NODE_EXTRA_CA_CERTS=/root/.ccr/ca-bundle.crt npx next
 > build` from `apps/web` builds cleanly (51/51 static pages). CI/Vercel are unaffected.
 
-> ⚠️ Imagery: still gradient/SVG placeholders — now a darker, museum-like lit niche.
+> ⚠️ Imagery: still gradient/SVG placeholders: now a darker, museum-like lit niche.
 > Real product/lifestyle **photography** remains the one asset to fully land it
 > (`DEFERRED.md`).
 
 ---
 
-**Increment 10 — "The Private Cask Room" design overhaul → ✅ COMPLETE.**
+**Increment 10: "The Private Cask Room" design overhaul → ✅ COMPLETE.**
 Full luxury/editorial redesign. Live preview auto-deploys from `main` to Vercel (`whisky-mart-web.vercel.app`); **whiskymart.com domain held until sign-off.**
 
-### Increment 10 acceptance — ✅ COMPLETE & VERIFIED
-- [x] **Tokens & type:** restrained luxury palette (obsidian/charcoal/oak · cream/ivory/parchment · cask amber · antique brass · burgundy · smoke); **fonts via `next/font/google` — Cormorant Garamond (display) + Inter (body)**; cask-glow gradients + film-grain texture; soft shadows only.
+### Increment 10 acceptance: ✅ COMPLETE & VERIFIED
+- [x] **Tokens & type:** restrained luxury palette (obsidian/charcoal/oak · cream/ivory/parchment · cask amber · antique brass · burgundy · smoke); **fonts via `next/font/google`: Cormorant Garamond (display) + Inter (body)**; cask-glow gradients + film-grain texture; soft shadows only.
 - [x] **Brand:** swappable SVG `Monogram` + `Wordmark` (amber accent) + `app/icon.svg` favicon.
 - [x] **Primitives:** `LuxurySection`, `PageHero`, `EditorialCard`, `TrustBar`, refined `Button`, `Badge`.
 - [x] **Header:** restrained utility bar (lang/currency/age note) + clean spacious nav + minimal switchers.
 - [x] **Homepage:** immersive cask-glow hero + micro-trust row; curated collections (The Cabinet, New & Limited, Under £50, Tasting Flights); editorial brand band ("Buy the bottle…") with Discover/Collect/Belong; premium Sommelier + Gift Finder service cards.
 - [x] **Product cards:** bottle-led, warm lit surface, refined badges/price, save control.
 - [x] **PLP:** archive-style filter panel + page hero + roomier grid.
-- [x] **PDP:** dossier — sticky buy panel + delivery/age note + key facts; Tasting Profile, Cask & Maturation, Distillery Story, Delivery/Age/Returns sections.
+- [x] **PDP:** dossier: sticky buy panel + delivery/age note + key facts; Tasting Profile, Cask & Maturation, Distillery Story, Delivery/Age/Returns sections.
 - [x] **Sommelier:** private-concierge panel + elegant prompt chips. **Gift Finder:** editorial 01/02/03 guided steps.
 - [x] **Footer:** dark catalogue footer; responsible-drinking + 18+ clearly legible.
 - [x] Behaviour/logic/tests unchanged. `typecheck` ✓ · `lint` ✓ · `test` ✓ (85) · `build` ✓ (51 pages, fonts fetched).
 
 Phase-1 MVP (1–6) + Phase 2 (7–9) + design overhaul (10) are complete and live on the Vercel preview (auto-deploy on push). **Domain attach is the final step after design sign-off.**
 
-> ⚠️ Imagery: still gradient/SVG placeholders (warm, lit) — real product/lifestyle **photography** is the one remaining asset to fully land the aesthetic (owner-provided or stock licence). Recorded in `DEFERRED.md`.
+> ⚠️ Imagery: still gradient/SVG placeholders (warm, lit): real product/lifestyle **photography** is the one remaining asset to fully land the aesthetic (owner-provided or stock licence). Recorded in `DEFERRED.md`.
 
-### Increment 9 acceptance criteria — ✅ COMPLETE & VERIFIED
+### Increment 9 acceptance criteria: ✅ COMPLETE & VERIFIED
 - [x] Interface-first palate profile (`lib/personalization/palate.ts`): quiz → ranked flavour axes; `PalateProvider` (localStorage).
 - [x] `/taste` quiz page; "Recommended for you" rail on home + `/taste` (grounded via `/api/recommendations`).
 - [x] Sommelier seeds from the saved palate when a query lacks a flavour hint.
@@ -194,25 +213,25 @@ Phase-1 MVP (1–6) + Phase 2 (7–9) + design overhaul (10) are complete and li
 - [x] Tests (`scoreQuiz`, profile, caps); `typecheck` / `lint` / `build` green (85 tests).
 - [x] Pushed to `origin/main`. (Learned palate fingerprint + server-side profile recorded in `DEFERRED.md`.)
 
-### Increment 8 acceptance criteria — ✅ COMPLETE & VERIFIED
+### Increment 8 acceptance criteria: ✅ COMPLETE & VERIFIED
 - [x] Interface-first i18n: message catalogue (`lib/i18n/`, en/de/fr) + `translate()` with English/key fallback.
 - [x] `LocaleProvider` (cookie-persisted) + `useT` + header `LocaleSwitcher`; `<html lang>` updates on switch.
 - [x] Core chrome translated (nav, footer, age gate); static generation preserved (English-canonical server render, preference applied client-side).
 - [x] Tests (translate fallback, catalogue integrity across locales); `typecheck` / `lint` / `build` green (78 tests).
 - [x] Pushed to `origin/main`. (Locale-routed URLs + `hreflang` + full-content translation recorded in `DEFERRED.md`.)
 
-**Push policy:** write access confirmed — Claude commits and pushes directly to `origin/main`.
+**Push policy:** write access confirmed: Claude commits and pushes directly to `origin/main`.
 **Standing rule:** update `Current_Task.md` and `Handoff.md` after **every** increment.
 
 > 📌 **Deferred production switches recorded in [`DEFERRED.md`](DEFERRED.md):**
 > Postgres (persistence) · Stripe (payments) · Claude (AI Sommelier) · Sanity (content) · **live FX + multi-currency settlement** · plus auth, search, age-verification, tax. Each swaps behind an existing interface.
 
-### Increment 7 acceptance criteria — ✅ COMPLETE & VERIFIED
+### Increment 7 acceptance criteria: ✅ COMPLETE & VERIFIED
 - [x] Interface-first currency layer (`lib/market/currency.ts`): supported currencies, `RatesProvider` (static FX now → live later), GBP→currency conversion + locale formatting.
 - [x] `CurrencyProvider` (cookie-persisted) + `<Price>` (currency-aware) + header `CurrencySwitcher`.
 - [x] All price displays converted to `<Price>` (cards, PDP, search, cart, checkout, order summary, confirmation, account).
-- [x] Static generation preserved (server renders GBP-canonical; preference applied client-side post-mount — no hydration mismatch, no forced dynamic).
-- [x] `SettlementNote` shown to non-GBP shoppers (payment still settles GBP — see `DEFERRED.md`).
+- [x] Static generation preserved (server renders GBP-canonical; preference applied client-side post-mount: no hydration mismatch, no forced dynamic).
+- [x] `SettlementNote` shown to non-GBP shoppers (payment still settles GBP, see `DEFERRED.md`).
 - [x] Tests for conversion/formatting; `typecheck` / `lint` / `build` green.
 - [x] Pushed to `origin/main`.
 
@@ -220,38 +239,38 @@ Phase-1 MVP (1–6) + Phase 2 (7–9) + design overhaul (10) are complete and li
 
 ## Completed increments
 
-### Increment 9 — Personalisation ✅ (Phase 2)
+### Increment 9: Personalisation ✅ (Phase 2)
 - Palate quiz + `PalateProvider`; `/taste`; "Recommended for you" rail (home + `/taste`) via `/api/recommendations`; Sommelier seeds from saved palate. SSG preserved.
 
-### Increment 8 — Multi-language / i18n ✅ (Phase 2)
+### Increment 8: Multi-language / i18n ✅ (Phase 2)
 - `lib/i18n/` message catalogue (en/de/fr) + `translate()`; `LocaleProvider`/`useT`/`LocaleSwitcher`; core chrome translated; static generation preserved.
 
-### Increment 7 — Multi-currency ✅ (Phase 2)
+### Increment 7: Multi-currency ✅ (Phase 2)
 - `lib/market/currency.ts` (`RatesProvider`, conversion, formatting); `CurrencyProvider`/`<Price>`/`CurrencySwitcher`/`SettlementNote`; all price displays currency-aware; static generation preserved.
 
-### Increment 6 — Content & SEO ✅
+### Increment 6: Content & SEO ✅
 - `ContentRepository` + `/guides`; JSON-LD (Product/Article/Breadcrumb); sitemap/robots; home rail + PDP cross-linking.
 
-### Increment 5 — AI Sommelier + Gift Finder ✅
+### Increment 5: AI Sommelier + Gift Finder ✅
 - `Advisor` interface + grounded mock; `/api/advisor` + `/api/gift-finder`; interactive `/sommelier` + `/gift-finder`.
 
-### Increment 4 — Accounts, order persistence & reviews ✅
+### Increment 4: Accounts, order persistence & reviews ✅
 - `OrderRepository`/`ReviewRepository` (in-memory); `/account` order history; verified-purchase reviews.
 
-### Increment 3 — Checkout, age verification & payment ✅
+### Increment 3: Checkout, age verification & payment ✅
 - Jurisdiction engine, VAT-aware pricing, `PaymentProvider` + mock, `/api/checkout/*`, multi-step checkout, confirmation.
 
-### Increment 2 — Search, Wishlist & Recently-viewed ✅
+### Increment 2: Search, Wishlist & Recently-viewed ✅
 - `/api/search` + relevance; instant-search; wishlist; recently-viewed; PLP active-filter chips.
 
-### Increment 1 — Storefront foundation ✅
+### Increment 1: Storefront foundation ✅
 - Monorepo, `packages/types`, Next.js 15 + Tailwind, design system, `CatalogRepository`, core pages, age-gate.
 
 ---
 
 ## Roadmap status
-- [x] **Phase 1 MVP** — storefront, search, checkout+compliance, accounts/reviews, AI, content/SEO *(Increments 1–6)*
-- [x] **Phase 2 — Global Discovery** — multi-currency ✅ *(7)* · i18n ✅ *(8)* · personalisation ✅ *(9)*
+- [x] **Phase 1 MVP**: storefront, search, checkout+compliance, accounts/reviews, AI, content/SEO *(Increments 1–6)*
+- [x] **Phase 2 (Global Discovery**) multi-currency ✅ *(7)* · i18n ✅ *(8)* · personalisation ✅ *(9)*
 - [ ] Production swaps: Postgres, Stripe, Claude, Sanity, live FX, real auth/search *(see `DEFERRED.md`)*
 - [ ] Analytics + accessibility (WCAG 2.2 AA) + Core Web Vitals budgets *(ongoing)*
 

@@ -49,7 +49,7 @@ export default function ConfirmationPage() {
           <div className="mt-6 flex justify-center">
             <span className="rule-gold" />
           </div>
-          <h1 className="mt-5 font-display text-[2.25rem] leading-tight tracking-tightest text-charcoal">Thank you — order confirmed</h1>
+          <h1 className="mt-5 font-display text-[2.25rem] leading-tight tracking-tightest text-charcoal">Thank you, order confirmed</h1>
           <p className="mt-3 text-charcoal/65">
             Order <span className="font-medium text-charcoal">{order.orderNumber}</span> · a confirmation has
             been sent to {order.email}.

@@ -2,14 +2,14 @@ import { NextResponse, type NextRequest } from "next/server";
 import { ReviewInput } from "@whiskymart/types";
 import { orders, reviews } from "@/lib/db";
 
-/** GET /api/products/:id/reviews — reviews + aggregate summary for a product. */
+/** GET /api/products/:id/reviews: reviews + aggregate summary for a product. */
 export async function GET(_req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   const [list, summary] = await Promise.all([reviews.listByProduct(id), reviews.summary(id)]);
   return NextResponse.json({ reviews: list, summary });
 }
 
-/** POST /api/products/:id/reviews — submit a review (verified if the email bought it). */
+/** POST /api/products/:id/reviews: submit a review (verified if the email bought it). */
 export async function POST(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   const body = await req.json();

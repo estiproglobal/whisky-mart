@@ -2,7 +2,7 @@ import { NextResponse, type NextRequest } from "next/server";
 import { catalog, getPrimaryVariant } from "@/lib/catalog/repository";
 
 /**
- * GET /api/search?q=&limit=  — instant-search suggestions.
+ * GET /api/search?q=&limit= : instant-search suggestions.
  *
  * Returns a slim payload for the header autocomplete. Backed by the seed
  * repository today; swaps to Algolia/Typesense behind the same contract later

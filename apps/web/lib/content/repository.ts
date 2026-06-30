@@ -2,7 +2,7 @@ import type { Article, ArticleType, ContentBlock } from "@whiskymart/types";
 import { SEED_ARTICLES } from "./seed";
 
 /**
- * ContentRepository — the seam between the UI and editorial content. In-memory
+ * ContentRepository: the seam between the UI and editorial content. In-memory
  * over the seed today; swaps to Sanity later with no caller changes (see
  * DEFERRED.md).
  */

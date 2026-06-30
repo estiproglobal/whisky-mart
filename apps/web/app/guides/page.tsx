@@ -6,7 +6,7 @@ import { PageHero } from "@/components/ui/page-hero";
 export const metadata: Metadata = {
   title: "Guides, reviews & whisky education",
   description:
-    "Buying guides, tasting education and stories from the WhiskyMart team — learn more, choose with confidence.",
+    "Buying guides, tasting education and stories from the WhiskyMart team: learn more, choose with confidence.",
 };
 
 export default async function GuidesPage() {
@@ -16,7 +16,7 @@ export default async function GuidesPage() {
       <PageHero
         eyebrow="The journal"
         title="Guides & Academy"
-        intro="Buying guides, tasting know-how and stories — everything you need to choose and enjoy whisky with confidence."
+        intro="Buying guides, tasting know-how and stories: everything you need to choose and enjoy whisky with confidence."
       />
 
       <div className="container-page py-12 sm:py-16">

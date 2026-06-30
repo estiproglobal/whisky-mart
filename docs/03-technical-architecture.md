@@ -1,4 +1,4 @@
-# 03 — Technical Architecture (Part 3)
+# 03: Technical Architecture (Part 3)
 
 > The recommended technology stack, **with justification and alternatives compared**. Architectural posture, layer-by-layer decisions, and scalability planning.
 
@@ -6,7 +6,7 @@
 
 ## 1. Architectural posture: composable / MACH
 
-**Decision:** Build on a **MACH** foundation — **M**icroservices, **A**PI-first, **C**loud-native, **H**eadless — rather than a monolithic off-the-shelf store.
+**Decision:** Build on a **MACH** foundation (**M**icroservices, **A**PI-first, **C**loud-native, **H**eadless) rather than a monolithic off-the-shelf store.
 
 **Why:** the five-phase vision spans commerce, a two-sided marketplace, auctions, cask investment, content, community, and ML. No single SaaS does all of this well. A composable architecture lets us:
 - adopt **best-of-breed** per capability (search, payments, CMS, AI);
@@ -14,7 +14,7 @@
 - swap any component without re-platforming;
 - scale hot paths (search, catalogue) independently of cold paths (CMS, admin).
 
-**The trade-off (stated honestly):** composability has higher up-front complexity and cost than a turnkey store. We mitigate this by **not over-decomposing early** — Phase 1 is a *modular monolith* (one well-structured commerce backend) that exposes clean APIs, and we extract services only when scale or team boundaries demand it. This is "MACH-ready," not "100 microservices on day one."
+**The trade-off (stated honestly):** composability has higher up-front complexity and cost than a turnkey store. We mitigate this by **not over-decomposing early**, Phase 1 is a *modular monolith* (one well-structured commerce backend) that exposes clean APIs, and we extract services only when scale or team boundaries demand it. This is "MACH-ready," not "100 microservices on day one."
 
 ```
                          ┌──────────────────────────┐
@@ -70,9 +70,9 @@ For each layer: **the recommendation**, the **alternatives considered**, and **w
 | Alternative | Verdict |
 |-------------|---------|
 | **Medusa.js** ✅ | Open-source, TS end-to-end (shared types with Next), modular architecture, marketplace-friendly, no per-GMV fees, full control of data & checkout. Fastest-growing OSS commerce. **Chosen for control + extensibility.** |
-| **Shopify (Plus) / Hydrogen** | Fastest time-to-revenue, world-class checkout, payments, fraud, hosting. **But:** GMV/transaction fees, limited backend control, marketplace/auction/investment don't fit its model, data lives in Shopify. **Recommended as a pragmatic Phase-1 accelerator** if speed-to-market trumps control — then migrate or run hybrid. |
+| **Shopify (Plus) / Hydrogen** | Fastest time-to-revenue, world-class checkout, payments, fraud, hosting. **But:** GMV/transaction fees, limited backend control, marketplace/auction/investment don't fit its model, data lives in Shopify. **Recommended as a pragmatic Phase-1 accelerator** if speed-to-market trumps control, then migrate or run hybrid. |
 | **commercetools / Saleor** | Enterprise-grade, API-first. commercetools is powerful but six-figure licences and heavyweight; Saleor (Python/GraphQL) is strong but a different language ecosystem than our TS-centric stack. Reconsider at enterprise scale. |
-| **Custom from scratch** | Maximum control, far too slow/expensive — reinventing carts, promotions, tax. Rejected. |
+| **Custom from scratch** | Maximum control, far too slow/expensive: reinventing carts, promotions, tax. Rejected. |
 | **WooCommerce / Magento** | PHP monoliths, scaling and composability pain, weaker for marketplace/AI ambitions. Rejected. |
 
 **The build-vs-buy decision (be explicit):**
@@ -96,12 +96,12 @@ This blueprint recommends **Medusa** because the long-term thesis (marketplace, 
 | DynamoDB / Spanner | Reserve for specific hyperscale needs later (e.g. event store). Premature for P1–P3. |
 
 **Polyglot persistence (right tool per job):**
-- **PostgreSQL** — transactional core (users, products, orders, payments, inventory, loyalty, marketplace, vault) + pgvector.
-- **Redis** — caching, sessions, rate-limiting, cart, queues (BullMQ), real-time auction state, leaderboards.
-- **ClickHouse** — analytics/event warehouse (clickstream, recommendations features, dashboards) — columnar, blazing for aggregations.
-- **S3 / R2** — media, documents, provenance scans, backups.
-- **Search index** — Algolia/Typesense (see §2.4).
-- **(Optional) Kafka/Kinesis/SQS** — event backbone for async workflows (order events, inventory sync, marketplace settlements).
+- **PostgreSQL**: transactional core (users, products, orders, payments, inventory, loyalty, marketplace, vault) + pgvector.
+- **Redis**: caching, sessions, rate-limiting, cart, queues (BullMQ), real-time auction state, leaderboards.
+- **ClickHouse** (analytics/event warehouse (clickstream, recommendations features, dashboards)) columnar, blazing for aggregations.
+- **S3 / R2**: media, documents, provenance scans, backups.
+- **Search index**: Algolia/Typesense (see §2.4).
+- **(Optional) Kafka/Kinesis/SQS**: event backbone for async workflows (order events, inventory sync, marketplace settlements).
 
 ### 2.4 Search & discovery engine
 
@@ -118,14 +118,14 @@ This blueprint recommends **Medusa** because the long-term thesis (marketplace, 
 
 ### 2.5 Authentication & Identity
 
-**Recommendation:** **Clerk** or **Auth0** for managed auth in P1 (fast, secure, passkeys/social/MFA), or **Supabase Auth/Better-Auth** if we want OSS/self-hosted. Add **age verification** via **Persona / Veriff / Yoti** (separate, dedicated compliance vendor — see [Doc 09](09-compliance-and-regulatory.md)).
+**Recommendation:** **Clerk** or **Auth0** for managed auth in P1 (fast, secure, passkeys/social/MFA), or **Supabase Auth/Better-Auth** if we want OSS/self-hosted. Add **age verification** via **Persona / Veriff / Yoti** (separate, dedicated compliance vendor: see [Doc 09](09-compliance-and-regulatory.md)).
 
 | Alternative | Verdict |
 |-------------|---------|
 | **Clerk** ✅ | Excellent DX, passkeys, orgs (good for B2B/sellers), pre-built UI, MFA. Great for TS/Next. |
 | **Auth0** | Enterprise-grade, mature, more expensive; strong if we need heavy enterprise SSO later. |
 | Supabase Auth / Better-Auth / Keycloak | OSS/self-host control; more ops burden. Reconsider at scale for cost/control. |
-| Roll-your-own | Don't — auth is a security minefield. Rejected. |
+| Roll-your-own | Don't: auth is a security minefield. Rejected. |
 
 Identity is **role-based** (shopper, member, seller, collector, investor, staff) and feeds the jurisdiction + compliance engine (verified age/region gates checkout).
 
@@ -152,7 +152,7 @@ Identity is **role-based** (shopper, member, seller, collector, investor, staff)
 | Braintree / PayPal | PayPal as an *additional* wallet method (trust for some buyers), not the core. |
 | Shopify Payments | Only if on Shopify backend. |
 
-Note: alcohol is a **regulated/high-risk MCC** — confirm processor acceptance and underwriting early (covered in [Doc 09](09-compliance-and-regulatory.md)).
+Note: alcohol is a **regulated/high-risk MCC**: confirm processor acceptance and underwriting early (covered in [Doc 09](09-compliance-and-regulatory.md)).
 
 ### 2.8 APIs
 
@@ -173,7 +173,7 @@ Note: alcohol is a **regulated/high-risk MCC** — confirm processor acceptance 
 | Marketing | GA4 + server-side tagging | Attribution, ads |
 | BI | Metabase (early) → Looker | Self-serve dashboards |
 
-**Why first-party:** post-cookie, our proprietary behavioural + palate data is both a personalisation asset and an acquisition moat — owning the pipeline matters.
+**Why first-party:** post-cookie, our proprietary behavioural + palate data is both a personalisation asset and an acquisition moat, owning the pipeline matters.
 
 ### 2.10 Cloud infrastructure
 
@@ -184,7 +184,7 @@ Note: alcohol is a **regulated/high-risk MCC** — confirm processor acceptance 
 | **AWS** ✅ | Broadest, most mature, best hiring pool, acquirer-friendly. **Chosen.** |
 | GCP | Excellent data/ML (BigQuery, Vertex); strong alternative, esp. if data-team-led. |
 | Azure | Strong if enterprise/Microsoft-aligned; less default for this profile. |
-| Vercel + managed services (Neon/Upstash/Planetscale) | **Recommended for P1/MVP** — minimal ops, fast. Graduate to AWS as scale/cost/control demand. |
+| Vercel + managed services (Neon/Upstash/Planetscale) | **Recommended for P1/MVP**, minimal ops, fast. Graduate to AWS as scale/cost/control demand. |
 
 **Pragmatic path:** **Vercel (frontend) + managed Postgres (Neon/Aurora Serverless) + Upstash Redis + managed services** for MVP → consolidate onto AWS with Terraform as the team and traffic grow.
 
@@ -197,7 +197,7 @@ Note: alcohol is a **regulated/high-risk MCC** — confirm processor acceptance 
 ### 2.12 Security layer
 
 (Full detail in [Doc 07 §Security](07-ai-development-spec.md) and [Doc 09](09-compliance-and-regulatory.md).)
-- **WAF + DDoS + bot management** (Cloudflare) — protects drops, auctions, checkout.
+- **WAF + DDoS + bot management** (Cloudflare), protects drops, auctions, checkout.
 - **Secrets management** (AWS Secrets Manager / Doppler), no secrets in code.
 - **Encryption** in transit (TLS 1.3) + at rest (KMS); field-level encryption for PII.
 - **PCI-DSS** scope minimised by tokenising via Stripe (SAQ-A).
@@ -208,12 +208,12 @@ Note: alcohol is a **regulated/high-risk MCC** — confirm processor acceptance 
 
 ### 2.13 AI infrastructure
 
-**Recommendation:** **Claude (Anthropic) via the Claude API** as the primary reasoning model for the Sommelier, gift finder, pairing, support agent, and content/merchandising assist — chosen for strong reasoning, long context (large catalogue/RAG context), tool use, and reliability. Use the **latest Claude models** (e.g. Opus-class for complex reasoning/agents, a faster/cheaper Claude for high-volume tasks like tagging/summarisation).
+**Recommendation:** **Claude (Anthropic) via the Claude API** as the primary reasoning model for the Sommelier, gift finder, pairing, support agent, and content/merchandising assist: chosen for strong reasoning, long context (large catalogue/RAG context), tool use, and reliability. Use the **latest Claude models** (e.g. Opus-class for complex reasoning/agents, a faster/cheaper Claude for high-volume tasks like tagging/summarisation).
 
 - **RAG stack:** embeddings → pgvector/Pinecone → retrieval → Claude with grounded prompts + citations. Knowledge base = catalogue + tasting notes + reviews + education + policies.
 - **Orchestration:** a thin **AI service** (TS) using the official SDK; tool-use for actions (search catalogue, fetch order, add to vault); **prompt caching** to cut cost on large static context (catalogue/policies).
 - **Guardrails:** age-gating, responsible-drinking framing, no medical claims, PII handling, output validation, eval suite + human-in-the-loop for support actions.
-- **Self-hosted/open models** (Llama/Mistral via Bedrock/together) considered for cost-sensitive bulk tasks (embeddings, tagging) — used where they're good enough, with Claude for the customer-facing reasoning that defines the brand.
+- **Self-hosted/open models** (Llama/Mistral via Bedrock/together) considered for cost-sensitive bulk tasks (embeddings, tagging): used where they're good enough, with Claude for the customer-facing reasoning that defines the brand.
 
 ---
 
@@ -223,10 +223,10 @@ Note: alcohol is a **regulated/high-risk MCC** — confirm processor acceptance 
 |-------|----------------|--------------------|
 | Frontend | Next.js + TS + Tailwind (PWA), React Native later | Remix; Nuxt; Hydrogen (if Shopify) |
 | Commerce core | Medusa.js (TS) | Shopify Plus (speed); commercetools/Saleor (enterprise) |
-| Services | NestJS (TS), Go for hot paths | — |
+| Services | NestJS (TS), Go for hot paths |: |
 | Primary DB | PostgreSQL (Aurora) + pgvector | MySQL; (MongoDB for niche docs) |
-| Cache/queue | Redis (ElastiCache/Upstash) + BullMQ | — |
-| Analytics store | ClickHouse → BigQuery/Snowflake | — |
+| Cache/queue | Redis (ElastiCache/Upstash) + BullMQ |, |
+| Analytics store | ClickHouse → BigQuery/Snowflake |, |
 | Search | Algolia → Typesense/Meilisearch + vector | Elasticsearch/OpenSearch |
 | Auth | Clerk / Auth0 | Supabase/Better-Auth/Keycloak |
 | Age verification | Persona / Veriff / Yoti | Token of Trust |
@@ -243,7 +243,7 @@ Note: alcohol is a **regulated/high-risk MCC** — confirm processor acceptance 
 
 ## 4. Scalability planning
 
-**Targets:** millions of annual visitors (peaks at product drops — 10–100× baseline for minutes), 100k+ SKUs, global low latency.
+**Targets:** millions of annual visitors (peaks at product drops, 10–100× baseline for minutes), 100k+ SKUs, global low latency.
 
 | Concern | Strategy |
 |---------|----------|

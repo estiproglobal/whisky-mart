@@ -1,5 +1,5 @@
 /**
- * @whiskymart/types — shared domain types for the WhiskyMart platform.
+ * @whiskymart/types: shared domain types for the WhiskyMart platform.
  *
  * Aligned to docs/05-database-schema.md. These are the canonical shapes the
  * storefront, services, search, and AI layer all agree on. Zod schemas are
@@ -255,7 +255,7 @@ export interface JurisdictionDecision {
 export interface OrderTotals {
   subtotal: Money;
   shipping: Money;
-  tax: Money; // VAT / sales-tax (component or added — see vatInclusive)
+  tax: Money; // VAT / sales-tax (component or added, see vatInclusive)
   duty: Money; // import duty estimate
   grandTotal: Money;
   vatInclusive: boolean;
@@ -324,7 +324,7 @@ export interface ReviewSummary {
 
 export type ArticleType = "article" | "guide" | "education";
 
-/** Structured content blocks — supports shoppable product embeds. */
+/** Structured content blocks: supports shoppable product embeds. */
 export type ContentBlock =
   | { kind: "heading"; text: string }
   | { kind: "paragraph"; text: string }

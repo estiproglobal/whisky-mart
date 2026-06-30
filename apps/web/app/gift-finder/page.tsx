@@ -68,7 +68,7 @@ export default function GiftFinderPage() {
             Find the perfect whisky gift.
           </h1>
           <p className="mx-auto mt-4 max-w-xl text-[15px] leading-relaxed text-charcoal/60">
-            Three considered questions — occasion, budget, taste. We&apos;ll narrow the shelf to a
+            Three considered questions: occasion, budget, taste. We&apos;ll narrow the shelf to a
             handful they&apos;ll remember.
           </p>
         </div>
@@ -98,7 +98,7 @@ export default function GiftFinderPage() {
 
           <fieldset>
             <legend className="overline text-whisky-700">03 · Taste they enjoy</legend>
-            <p className="mt-1 text-xs text-charcoal/45">Optional — choose any that apply.</p>
+            <p className="mt-1 text-xs text-charcoal/45">Optional: choose any that apply.</p>
             <div className="mt-3 flex flex-wrap gap-2.5">
               {FLAVOUR_AXES.map((axis) => (
                 <button

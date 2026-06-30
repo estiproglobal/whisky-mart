@@ -49,7 +49,7 @@ export function InstantSearch({ className }: { className?: string }) {
         setTotal(data.total);
         setActive(-1);
       } catch {
-        /* aborted or failed — leave previous results */
+        /* aborted or failed: leave previous results */
       } finally {
         setLoading(false);
       }

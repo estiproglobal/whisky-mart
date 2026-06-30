@@ -1,7 +1,7 @@
-# WhiskyMart demo — single-instance container.
+# WhiskyMart demo: single-instance container.
 # A long-running Node process keeps the (in-memory) order/review stores stable,
 # which is the most reliable way to host the preview. (Production swaps these
-# for Postgres etc. — see DEFERRED.md.)
+# for Postgres etc.: see DEFERRED.md.)
 FROM node:22-slim AS base
 ENV PNPM_HOME=/pnpm
 ENV PATH="$PNPM_HOME:$PATH"

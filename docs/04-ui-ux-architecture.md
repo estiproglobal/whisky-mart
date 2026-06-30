@@ -1,4 +1,4 @@
-# 04 — UI/UX Architecture (Part 4)
+# 04: UI/UX Architecture (Part 4)
 
 > Page-by-page design, wireframe recommendations, the design system, conversion-optimisation tactics, accessibility standards, and modern design direction.
 
@@ -146,7 +146,7 @@ BASKET → [Express: Apple/Google Pay/PayPal]  OR  guest/login
    ▼
    ORDER CONFIRMED  → tracking + account + cross-sell samples/accessories
 ```
-**CRO notes:** **single-page/accordion** checkout, express wallets first, guest checkout, address autocomplete, progress clarity, no surprise costs (show duty/tax early), trust + security badges, **don't dead-end restricted destinations** — convert to an allowed alternative or waitlist. Persisted basket; abandoned-cart recovery.
+**CRO notes:** **single-page/accordion** checkout, express wallets first, guest checkout, address autocomplete, progress clarity, no surprise costs (show duty/tax early), trust + security badges, **don't dead-end restricted destinations**: convert to an allowed alternative or waitlist. Persisted basket; abandoned-cart recovery.
 
 ### 3.7 Customer Dashboard ("My WhiskyMart")
 ```
@@ -170,7 +170,7 @@ Self-serve everything; the dashboard is where retail, community, vault, marketpl
 
 ---
 
-## 4. Conversion-optimisation (CRO) tactics — catalogue
+## 4. Conversion-optimisation (CRO) tactics: catalogue
 
 | Lever | Tactic |
 |-------|--------|
@@ -185,17 +185,17 @@ Self-serve everything; the dashboard is where retail, community, vault, marketpl
 | **A/B everything** | PostHog/feature-flag experimentation as a standing practice |
 
 ## 5. Personalisation surfaces
-Homepage rails, PLP ranking, PDP "similar/cheaper," search ranking, email/push, gift finder, and the advisor — all powered by the **palate fingerprint** + behaviour, with a visible, user-editable preference centre (transparency builds trust and improves data).
+Homepage rails, PLP ranking, PDP "similar/cheaper," search ranking, email/push, gift finder, and the advisor: all powered by the **palate fingerprint** + behaviour, with a visible, user-editable preference centre (transparency builds trust and improves data).
 
 ## 6. Modern design trends to adopt (judiciously)
 - **Editorial commerce** (magazine-like storytelling fused with shopping).
 - **Conversational/agentic UI** (the Sommelier as a first-class, persistent helper).
-- **Tasteful motion & micro-interactions** (feedback, delight — never blocking).
+- **Tasteful motion & micro-interactions** (feedback, delight: never blocking).
 - **Dark mode + theming**; **bento-grid** content layouts; large, confident typography.
 - **3D/AR** product views and **scan-to-shop**; shoppable video/livestream tastings.
 - **Glass/elevation** sparingly for premium feel; avoid trend-chasing that harms clarity or a11y.
 
-## 7. Accessibility standards (WCAG 2.2 AA — mandatory)
+## 7. Accessibility standards (WCAG 2.2 AA: mandatory)
 - Full **keyboard** operability; visible focus; logical tab/reading order.
 - **Contrast** ≥ 4.5:1 (text) / 3:1 (UI/large); never colour-only meaning (esp. stock/flavour).
 - Semantic HTML + **ARIA** only where needed; proper headings/landmarks; labelled forms with clear errors.

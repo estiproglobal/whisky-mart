@@ -95,7 +95,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
   const regionLabel = w ? titleCase(w.region) : "";
   const volume = formatVolume(variant.sizeMl);
 
-  // Dossier rows — built from whatever structured data the product carries.
+  // Dossier rows: built from whatever structured data the product carries.
   const specRows: Array<{ label: string; value: string }> = w
     ? [
         { label: "Region", value: regionLabel },
@@ -236,7 +236,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
           <div className="mt-6 space-y-2 rounded-xl border border-line bg-parchment/40 p-4 text-sm text-charcoal/70">
             <p className="flex items-start gap-2">
               <ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-whisky-700" />
-              Age-verified delivery — an adult signature (18+) is required.
+              Age-verified delivery: an adult signature (18+) is required.
             </p>
             <p className="flex items-start gap-2">
               <Truck className="mt-0.5 h-4 w-4 shrink-0 text-whisky-700" />
@@ -244,7 +244,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
             </p>
           </div>
 
-          {/* Key facts — at-a-glance; full dossier sits below */}
+          {/* Key facts: at-a-glance; full dossier sits below */}
           {w ? (
             <dl className="mt-6 grid grid-cols-3 gap-3">
               <Fact label="Region" value={regionLabel} />
@@ -263,7 +263,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
             title="Tasting profile"
             intro={
               product.flavour
-                ? `A ${describeFlavour(product.flavour, 3)} character — here's how the notes stack up.`
+                ? `A ${describeFlavour(product.flavour, 3)} character: here's how the notes stack up.`
                 : undefined
             }
           >
@@ -287,7 +287,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
           </Section>
         ) : null}
 
-        {/* Cask & maturation — collector dossier */}
+        {/* Cask & maturation: collector dossier */}
         {specRows.length > 0 ? (
           <Section eyebrow="Wood & time" title="Cask & maturation">
             <div className="max-w-3xl rounded-2xl border border-line bg-ivory p-6 sm:p-8">
@@ -320,7 +320,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
                   ) : null}
                   <div className="flex justify-between gap-3">
                     <dt className="text-charcoal/50">Region</dt>
-                    <dd className="font-medium capitalize text-charcoal">{regionLabel || "—"}</dd>
+                    <dd className="font-medium capitalize text-charcoal">{regionLabel || "N/A"}</dd>
                   </div>
                   {product.bottlerType !== "NA" ? (
                     <div className="flex justify-between gap-3">

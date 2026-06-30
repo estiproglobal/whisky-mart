@@ -23,7 +23,7 @@ function SignInForm() {
       className="max-w-sm space-y-4 rounded-lg border border-line bg-ivory p-6"
     >
       <p className="text-sm text-charcoal/60">
-        Sign in to see your orders and saved whisky. (Demo sign-in — no password yet.)
+        Sign in to see your orders and saved whisky. (Demo sign-in: no password yet.)
       </p>
       <label className="block">
         <span className="mb-1 block text-sm font-medium text-charcoal/80">Name</span>

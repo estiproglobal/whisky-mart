@@ -3,7 +3,7 @@
  * minor units; this converts it for *display* in the shopper's chosen currency.
  *
  * Interface-first: `RatesProvider` returns static rates today and swaps for a
- * live FX feed later. Payment settlement remains GBP for now — multi-currency
+ * live FX feed later. Payment settlement remains GBP for now: multi-currency
  * settlement (Stripe presentment) is recorded in DEFERRED.md.
  */
 

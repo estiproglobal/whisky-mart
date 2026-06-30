@@ -1,4 +1,4 @@
-# 05 — Database Schema (Part 5)
+# 05: Database Schema (Part 5)
 
 > ERD-level data model across all domains: Users, Products, Orders, Payments, Inventory, Reviews, Loyalty, Memberships, Content, Marketplace, Auctions, Investment, Community, AI, and Analytics.
 
@@ -81,7 +81,7 @@
 
 ---
 
-## 2. Catalog — Products & Taxonomy
+## 2. Catalog: Products & Taxonomy
 
 ### `products`
 | column | type | notes |
@@ -138,7 +138,7 @@ Either typed columns on a `whisky_details` table or EAV/JSONB. Recommended **`wh
 `id, name, type (warehouse|bonded|3pl|store), region [idx], address, is_bonded, capabilities JSONB`.
 
 ### `stock_reservations`
-`id, variant_id, cart_id/order_id, quantity, expires_at, status` — short-lived holds during checkout/drops.
+`id, variant_id, cart_id/order_id, quantity, expires_at, status`: short-lived holds during checkout/drops.
 
 ### `fulfilment_providers` / `shipments`
 - `shipments`: `id, order_id→orders, provider, tracking_number, status, age_check_required bool, shipped_at, delivered_at, signed_by, label_url, region`.
@@ -174,10 +174,10 @@ Either typed columns on a `whisky_details` table or EAV/JSONB. Recommended **`wh
 `id, order_id→orders, variant_id, product_title_snapshot, seller_id (nullable), is_marketplace bool, quantity, unit_price, tax_amount, duty_amount, fulfilment_status, commission_amount (3P), gift_message`.
 
 ### `order_events` (audit/state machine)
-`id, order_id, type, payload JSONB, actor (system|user|staff), ts` — full lifecycle audit.
+`id, order_id, type, payload JSONB, actor (system|user|staff), ts`: full lifecycle audit.
 
 ### `returns` / `rma`
-`id, order_item_id→order_items, reason, status, refund_amount, restock bool, created_at` — within alcohol-return regulations.
+`id, order_item_id→order_items, reason, status, refund_amount, restock bool, created_at`: within alcohol-return regulations.
 
 ---
 
@@ -193,7 +193,7 @@ Either typed columns on a `whisky_details` table or EAV/JSONB. Recommended **`wh
 `id, user_id→users, provider, provider_pm_id (token), brand, last4, exp, is_default`. No PAN stored (PCI SAQ-A; tokenised via Stripe).
 
 ### `payouts` (marketplace, P4)
-`id, seller_id→marketplace_sellers, period, gross, commission, fees, net, provider_transfer_id, status, paid_at` — Stripe Connect.
+`id, seller_id→marketplace_sellers, period, gross, commission, fees, net, provider_transfer_id, status, paid_at`: Stripe Connect.
 
 ### `ledger_entries` (double-entry, marketplace/investment)
 `id, account (platform|seller|escrow|tax|duty), order_id (nullable), type (sale|commission|refund|payout|fee|escrow_hold|escrow_release), amount, currency, balance_after, ref JSONB, ts`. Source of truth for money movement + reconciliation.
@@ -256,7 +256,7 @@ Either typed columns on a `whisky_details` table or EAV/JSONB. Recommended **`wh
 `id, cms_id (Sanity ref), type (article|guide|review|education|video|podcast|page), title, slug [idx], status, author_id→users (or external), published_at, seo JSONB, body_ref, primary_region_id?, reading_time`.
 
 ### `content_product_links`
-M:N `content_id→content_items, product_id→products, relation (mentions|featured|buy)` — powers shoppable content + internal linking.
+M:N `content_id→content_items, product_id→products, relation (mentions|featured|buy)`: powers shoppable content + internal linking.
 
 ### `content_taxonomy`
 M:N to `categories`, `regions`, `brands`, `distilleries`, tags.
@@ -351,13 +351,13 @@ view/materialised: per user, holdings (casks + investment bottles), cost basis, 
 ## 14. AI & Analytics
 
 ### AI (Postgres + vector)
-- `embeddings`: `id, owner_type (product|content|review|note), owner_id, model, vector vector(1536), created_at` — for RAG/semantic search (or store on entity tables via pgvector).
+- `embeddings`: `id, owner_type (product|content|review|note), owner_id, model, vector vector(1536), created_at`: for RAG/semantic search (or store on entity tables via pgvector).
 - `ai_conversations`: `id, user_id?, session_id, surface (advisor|gift_finder|support|pairing), context JSONB, created_at`.
 - `ai_messages`: `id, conversation_id→ai_conversations, role (user|assistant|tool|system), content, tool_calls JSONB, tokens, model, latency_ms, grounded_sources JSONB, created_at`.
-- `ai_feedback`: `id, message_id, user_id?, rating, reason` — eval signal.
+- `ai_feedback`: `id, message_id, user_id?, rating, reason`: eval signal.
 - `recommendation_cache`: `id, user_id, surface, items JSONB, model_version, generated_at, expires_at`.
 
-### Analytics (ClickHouse — event/columnar store)
+### Analytics (ClickHouse: event/columnar store)
 Not relational FKs; high-volume append-only events:
 - `events`: `event_id, ts, user_id?, anon_id, session_id, type (page_view|search|view_item|add_to_cart|begin_checkout|purchase|ai_query|review|bid…), properties JSON, device, geo, referrer, market`.
 - `search_queries`: `ts, user_id?, query, results_count, clicked_position?, semantic bool`.
@@ -370,7 +370,7 @@ Not relational FKs; high-volume append-only events:
 - `audit_logs`: `id, actor_id, actor_type, action, entity_type, entity_id, before JSONB, after JSONB, ip, ts` (security/compliance).
 - `feature_flags`: managed in PostHog/LaunchDarkly (mirrored if needed).
 - `notifications`: `id, user_id, channel (email|push|sms|inapp), template, payload, status, sent_at`.
-- `jurisdiction_rules`: `id, ship_to_country/region [idx], product_type, allowed bool, requires_license bool, carrier_constraints JSONB, tax_rule_ref, age_min, notes` — drives the compliance engine ([Doc 09]).
+- `jurisdiction_rules`: `id, ship_to_country/region [idx], product_type, allowed bool, requires_license bool, carrier_constraints JSONB, tax_rule_ref, age_min, notes`: drives the compliance engine ([Doc 09]).
 
 ---
 

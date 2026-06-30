@@ -1,6 +1,6 @@
 /**
  * Payment abstraction. The storefront talks to `PaymentProvider`, never to a
- * concrete processor — so the mock used today swaps for Stripe later (when
+ * concrete processor, so the mock used today swaps for Stripe later (when
  * `STRIPE_SECRET_KEY` is configured) without touching callers (see docs/03 §2.7).
  */
 

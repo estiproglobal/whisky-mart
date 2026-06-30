@@ -1,12 +1,12 @@
-# WhiskyMart.com — Platform Blueprint
+# WhiskyMart.com: Platform Blueprint
 
 > The strategic, product, and technical blueprint for transforming **WhiskyMart.com** (domain registered 17 July 2012) into the world's leading whisky commerce, content, community, and collector ecosystem.
 
 This repository is the **single source of truth** for the WhiskyMart.com vision. It is written to be read by three audiences:
 
-1. **Investors & executives** — the business case, economics, and expansion plan.
-2. **Product & design leadership** — the experience and feature architecture.
-3. **Engineering teams and AI coding agents** (Claude Code, Cursor, Windsurf, Replit Agent, Codex) — an implementation-ready technical specification.
+1. **Investors & executives**: the business case, economics, and expansion plan.
+2. **Product & design leadership**: the experience and feature architecture.
+3. **Engineering teams and AI coding agents** (Claude Code, Cursor, Windsurf, Replit Agent, Codex): an implementation-ready technical specification.
 
 ---
 
@@ -29,7 +29,7 @@ This repository is the **single source of truth** for the WhiskyMart.com vision.
 
 ## The thesis in one paragraph
 
-The global whisky market is large, premiumising, and emotionally engaged — yet the category leaders are either **acquired and slow-moving** (The Whisky Exchange, now Pernod Ricard), **feature-rich but ageing** (Master of Malt), or **membership-led but retail-bound** (The Whisky Shop). None of them has fused **first-party retail + a third-party marketplace + a collector/investment exchange + a genuine community + an AI sommelier** into a single trusted brand. WhiskyMart.com — a 14-year-aged, premium, exact-match domain — can. We propose a **composable, API-first platform** delivered in five phases, monetised across **eight revenue streams**, engineered for **millions of visitors, hundreds of thousands of SKUs, multi-currency and multi-language from day one**, and designed from the ground up to be **acquisition-attractive** to a strategic buyer (a major drinks group, a marketplace, or a luxury house).
+The global whisky market is large, premiumising, and emotionally engaged, yet the category leaders are either **acquired and slow-moving** (The Whisky Exchange, now Pernod Ricard), **feature-rich but ageing** (Master of Malt), or **membership-led but retail-bound** (The Whisky Shop). None of them has fused **first-party retail + a third-party marketplace + a collector/investment exchange + a genuine community + an AI sommelier** into a single trusted brand. WhiskyMart.com (a 14-year-aged, premium, exact-match domain) can. We propose a **composable, API-first platform** delivered in five phases, monetised across **eight revenue streams**, engineered for **millions of visitors, hundreds of thousands of SKUs, multi-currency and multi-language from day one**, and designed from the ground up to be **acquisition-attractive** to a strategic buyer (a major drinks group, a marketplace, or a luxury house).
 
 ---
 
@@ -43,7 +43,7 @@ Phase 4  ──▶  Collectors & Investment Marketplace        (Months 15–24)
 Phase 5  ──▶  AI-Powered Personalised Whisky Platform    (Continuous, Months 6+)
 ```
 
-AI is **not** Phase 5 in practice — it is woven through every phase. Phase 5 simply marks the point at which personalisation becomes the *primary* organising principle of the product.
+AI is **not** Phase 5 in practice, it is woven through every phase. Phase 5 simply marks the point at which personalisation becomes the *primary* organising principle of the product.
 
 ---
 

@@ -1,7 +1,7 @@
 import { Monogram } from "@/components/brand/monogram";
 
 /**
- * PageHero — a dark, immersive editorial header for listing/content pages
+ * PageHero: a dark, immersive editorial header for listing/content pages
  * (PLP, category, guides, search, taste). Warm cask glow + faint monogram.
  */
 export function PageHero({

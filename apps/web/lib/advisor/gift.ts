@@ -34,7 +34,7 @@ export async function giftFind(input: GiftFinderInput): Promise<AdvisorResponse>
   const occasion = input.occasion ? ` for ${input.occasion.toLowerCase()}` : "";
   const message =
     recs.length === 0
-      ? "I couldn't find a gift match just now — browse our gift collection for ideas."
+      ? "I couldn't find a gift match just now. Browse our gift collection for ideas."
       : `Here ${recs.length === 1 ? "is a gift" : `are ${recs.length} gifts`}${occasion} they'll love:`;
 
   return { message, intent, recommendations: recs, disclaimer: RESPONSIBLE_DISCLAIMER };

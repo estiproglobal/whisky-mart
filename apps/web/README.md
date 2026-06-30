@@ -1,6 +1,6 @@
 # @whiskymart/web
 
-The WhiskyMart.com storefront — Next.js 15 (App Router) + TypeScript + Tailwind.
+The WhiskyMart.com storefront: Next.js 15 (App Router) + TypeScript + Tailwind.
 
 This is **MVP Increment 1: the storefront foundation**. It runs entirely on a
 seed catalogue through a swappable data layer (`lib/catalog/repository.ts`), so
@@ -28,7 +28,7 @@ pnpm --filter @whiskymart/web lint        # eslint
 
 | Area | Path |
 |------|------|
-| Pages (App Router) | `app/` — home, `shop`, `c/[slug]`, `products/[slug]`, `search`, `cart`, `sommelier` |
+| Pages (App Router) | `app/`: home, `shop`, `c/[slug]`, `products/[slug]`, `search`, `cart`, `sommelier` |
 | Design-system components | `components/` |
 | Cart (client context + localStorage) | `components/cart/` |
 | Data layer (seed + repository) | `lib/catalog/` |
@@ -37,7 +37,7 @@ pnpm --filter @whiskymart/web lint        # eslint
 
 ## What's intentionally stubbed (next increments)
 
-- **Checkout / payment / age verification** — buttons present, flow lands in Increment 3.
-- **AI Sommelier** — teaser page now; conversational RAG advisor in Increment 5.
-- **Accounts / wishlist / reviews persistence** — Increment 4.
-- **Real product data & images** — swap the seed source for Medusa/API; replace gradient placeholders with `next/image` + CDN.
+- **Checkout / payment / age verification**, buttons present, flow lands in Increment 3.
+- **AI Sommelier**: teaser page now; conversational RAG advisor in Increment 5.
+- **Accounts / wishlist / reviews persistence**, Increment 4.
+- **Real product data & images**: swap the seed source for Medusa/API; replace gradient placeholders with `next/image` + CDN.

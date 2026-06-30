@@ -63,7 +63,7 @@ export function SiteFooter() {
         })}
       </div>
 
-      {/* Responsible drinking — kept clearly legible, not hidden */}
+      {/* Responsible drinking: kept clearly legible, not hidden */}
       <div className="border-t border-cream/10">
         <div className="container-page relative py-7">
           <TrustBar tone="dark" />

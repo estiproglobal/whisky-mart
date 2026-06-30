@@ -8,7 +8,7 @@ const ITEMS = [
 ];
 
 /**
- * TrustBar — a restrained micro-trust row. `tone="dark"` for use on the hero /
+ * TrustBar: a restrained micro-trust row. `tone="dark"` for use on the hero /
  * ink surfaces; default light for in-page use. `max` caps how many signals show
  * (the hero shows three; the footer shows all).
  */

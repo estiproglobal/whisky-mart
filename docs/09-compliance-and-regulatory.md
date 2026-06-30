@@ -1,6 +1,6 @@
-# 09 — Compliance & Regulatory Dossier
+# 09: Compliance & Regulatory Dossier
 
-> Alcohol e-commerce is shaped less by what you *can build* than by what you're *allowed to sell, to whom, and where*. This dossier turns compliance from a blocker into a **competitive moat** — the "jurisdiction engine" that lets WhiskyMart.com expand into markets competitors avoid.
+> Alcohol e-commerce is shaped less by what you *can build* than by what you're *allowed to sell, to whom, and where*. This dossier turns compliance from a blocker into a **competitive moat**, the "jurisdiction engine" that lets WhiskyMart.com expand into markets competitors avoid.
 
 > **This is not legal advice.** It is an engineering + operations brief. Engage specialist alcohol/e-commerce counsel per market before launch. Laws change; the **jurisdiction engine** is designed to encode rules that legal keeps current.
 
@@ -8,7 +8,7 @@
 
 ## 1. Why compliance is core architecture (not an add-on)
 
-A single customer action — "ship this bottle to this address" — must be evaluated against: **product type**, **origin**, **destination jurisdiction**, **buyer age/identity**, **applicable taxes/duties**, **licensing**, and **permitted carrier**. Getting this wrong risks fines, seizure, criminal liability, and loss of payment processing. So we build a **server-side jurisdiction engine** ([Doc 05 `jurisdiction_rules`](05-database-schema.md)) that every checkout must pass.
+A single customer action ("ship this bottle to this address") must be evaluated against: **product type**, **origin**, **destination jurisdiction**, **buyer age/identity**, **applicable taxes/duties**, **licensing**, and **permitted carrier**. Getting this wrong risks fines, seizure, criminal liability, and loss of payment processing. So we build a **server-side jurisdiction engine** ([Doc 05 `jurisdiction_rules`](05-database-schema.md)) that every checkout must pass.
 
 ```
 checkout: cart + ship-to address
@@ -27,13 +27,13 @@ checkout: cart + ship-to address
 
 ## 2. Age verification (every market, no exceptions)
 
-- **At account/checkout:** verify the buyer is of legal purchase age (18 UK/EU; **21 US**; varies elsewhere). Use a dedicated vendor — **Persona / Veriff / Yoti / Token of Trust** — supporting document scan, database checks, and age-estimation, with re-verification expiry.
-- **At delivery:** in many jurisdictions (notably the US), the **carrier must check ID and obtain an adult signature (21+) on delivery** — an "adult signature required" service. USPS **cannot** carry alcohol; **FedEx/UPS** can, but only under a licensed-shipper agreement.
+- **At account/checkout:** verify the buyer is of legal purchase age (18 UK/EU; **21 US**; varies elsewhere). Use a dedicated vendor (**Persona / Veriff / Yoti / Token of Trust**) supporting document scan, database checks, and age-estimation, with re-verification expiry.
+- **At delivery:** in many jurisdictions (notably the US), the **carrier must check ID and obtain an adult signature (21+) on delivery**, an "adult signature required" service. USPS **cannot** carry alcohol; **FedEx/UPS** can, but only under a licensed-shipper agreement.
 - **Store** verification status + audit trail (`age_verifications`); gate the AI advisor and all purchase flows; never assist or sell to minors.
 
 ---
 
-## 3. United Kingdom (Launch — Wave 1)
+## 3. United Kingdom (Launch: Wave 1)
 
 - **Licensing:** premises/personal licence regime under the Licensing Act 2003 for selling alcohol (incl. online dispatch from a licensed premises).
 - **Age:** 18+; "Challenge 25" good practice; verify online + delivery confirmation.
@@ -43,11 +43,11 @@ checkout: cart + ship-to address
 
 ## 4. European Union (Wave 2)
 
-- **Cross-border within EU** is easier than US but still requires care: **VAT** handling (OSS/IOSS schemes), **excise duty** (destination-country duty; EMCS/duty-paid considerations for B2C cross-border), country-specific age (mostly 18, some 16 for certain drinks — but spirits typically 18), labelling/language, and **deposit-return**/packaging rules in some states.
+- **Cross-border within EU** is easier than US but still requires care: **VAT** handling (OSS/IOSS schemes), **excise duty** (destination-country duty; EMCS/duty-paid considerations for B2C cross-border), country-specific age (mostly 18, some 16 for certain drinks, but spirits typically 18), labelling/language, and **deposit-return**/packaging rules in some states.
 - **Practical model:** local fulfilment / bonded stock per region or duty-paid country stock rather than naive cross-border shipping of every order. Local payment methods (iDEAL, Bancontact, SOFORT/SEPA, Klarna).
 - **Markets to prioritise:** DE, FR, NL, ES, IT + Ireland.
 
-## 5. United States (Wave 3 — hardest, highest-value)
+## 5. United States (Wave 3: hardest, highest-value)
 
 The US is the largest market **and** the most complex, due to the post-Prohibition **three-tier system** and **state-by-state** control:
 
@@ -57,7 +57,7 @@ The US is the largest market **and** the most complex, due to the post-Prohibiti
 - **Tax:** state + local sales tax (economic nexus) + excise; **per-state licensing** to ship.
 - **Carriers:** FedEx/UPS only, under licensed agreements; USPS never.
 - **Recommended model:** **do not attempt naive nationwide DTC spirits shipping.** Use a **licensed-retailer/marketplace/3PL partner model** (e.g. partner with licensed in-state retailers/fulfilment, or operate via a compliant marketplace structure), gated by the jurisdiction engine state-by-state. Treat the US as a phased, partner-enabled rollout, not a flip-the-switch market.
-- **Market size:** US alcohol e-commerce ≈ **$74bn (2025)**, projected **~$87bn (2026)** — worth the complexity, done right.
+- **Market size:** US alcohol e-commerce ≈ **$74bn (2025)**, projected **~$87bn (2026)**: worth the complexity, done right.
 
 ## 6. Asia-Pacific & rest-of-world (Waves 4–5)
 
@@ -74,7 +74,7 @@ The US is the largest market **and** the most complex, due to the post-Prohibiti
 
 ## 8. Data protection & privacy
 
-- **GDPR (UK/EU):** lawful basis, consent for marketing, **data export + erasure**, DPIA for profiling (the palate model = profiling — document it), data residency, processor agreements, breach notification.
+- **GDPR (UK/EU):** lawful basis, consent for marketing, **data export + erasure**, DPIA for profiling (the palate model = profiling, document it), data residency, processor agreements, breach notification.
 - **CCPA/CPRA (US):** opt-out of sale/share, access/delete rights.
 - **AI-specific:** transparency about AI use, no sensitive-data inference beyond stated purpose, human review for consequential actions, guardrails (age, responsible-drinking).
 - **Audit:** `audit_logs` + `consents` + `data_requests` tables ([Doc 05](05-database-schema.md)).
@@ -111,15 +111,15 @@ The US is the largest market **and** the most complex, due to the post-Prohibiti
 Most competitors avoid hard jurisdictions or ship naively and absorb risk. By treating compliance as **encoded, testable architecture**, WhiskyMart.com can:
 - **Expand into more markets, faster and safer** than rivals.
 - **Convert "restricted" dead-ends into alternatives/waitlists** (don't lose the customer).
-- **Win trust** with authenticity/provenance — the single biggest unmet need in collectible whisky.
+- **Win trust** with authenticity/provenance: the single biggest unmet need in collectible whisky.
 - **De-risk the business** for a future acquirer (clean, auditable, compliant operations command a premium).
 
 ---
 
 ## Sources
-- DTC alcohol shipping & age verification — [Sovos](https://sovos.com/blog/ship/direct-to-consumer-dtc-shipping-essentials-age-verification/); [Avalara](https://www.avalara.com/us/en/learn/whitepapers/getting-it-right-the-4-steps-to-age-verification-for-direct-shippers.html); [Token of Trust](https://tokenoftrust.com/blog/sell-alcohol-online-legally/); [Persona](https://withpersona.com/blog/age-verification-online-alcohol-retailers).
-- Regulations overview — [BottlePOS](https://bottlepos.com/blog/alcohol-e-commerce-regulations); [Bottlecapps checklist](https://www.bottlecapps.com/blogs/ecommerce-alcohol-compliance-checklist-age-verification-to-shipping-laws/); [Corporate Compliance Insights](https://www.corporatecomplianceinsights.com/raising-bar-alcohol-compliance-ecommerce/); [eCFR 27 CFR Part 5](https://www.ecfr.gov/current/title-27/chapter-I/subchapter-A/part-5).
-- Multi-store compliance commerce — [Spree Commerce](https://spreecommerce.org/alcohol-spirits-ecommerce/).
+- DTC alcohol shipping & age verification, [Sovos](https://sovos.com/blog/ship/direct-to-consumer-dtc-shipping-essentials-age-verification/); [Avalara](https://www.avalara.com/us/en/learn/whitepapers/getting-it-right-the-4-steps-to-age-verification-for-direct-shippers.html); [Token of Trust](https://tokenoftrust.com/blog/sell-alcohol-online-legally/); [Persona](https://withpersona.com/blog/age-verification-online-alcohol-retailers).
+- Regulations overview: [BottlePOS](https://bottlepos.com/blog/alcohol-e-commerce-regulations); [Bottlecapps checklist](https://www.bottlecapps.com/blogs/ecommerce-alcohol-compliance-checklist-age-verification-to-shipping-laws/); [Corporate Compliance Insights](https://www.corporatecomplianceinsights.com/raising-bar-alcohol-compliance-ecommerce/); [eCFR 27 CFR Part 5](https://www.ecfr.gov/current/title-27/chapter-I/subchapter-A/part-5).
+- Multi-store compliance commerce: [Spree Commerce](https://spreecommerce.org/alcohol-spirits-ecommerce/).
 
 ---
 

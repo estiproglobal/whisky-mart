@@ -2,7 +2,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
 /**
- * EditorialCard — a quiet luxury card for the brand "Discover / Collect /
+ * EditorialCard: a quiet luxury card for the brand "Discover / Collect /
  * Belong" trio and similar editorial blocks. Restrained: parchment surface,
  * fine brass border, serif title.
  */

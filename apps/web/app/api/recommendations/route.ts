@@ -8,7 +8,7 @@ import type { AdvisorIntent } from "@/lib/advisor/types";
 const Body = z.object({ flavours: z.array(z.enum(FLAVOUR_AXES)).default([]) });
 
 /**
- * POST /api/recommendations — palate-based "recommended for you".
+ * POST /api/recommendations: palate-based "recommended for you".
  * Grounded: returns real catalogue products via the shared recommendation engine.
  */
 export async function POST(req: NextRequest) {

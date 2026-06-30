@@ -2,7 +2,7 @@ import { NextResponse, type NextRequest } from "next/server";
 import { FLAVOUR_AXES, type FlavourAxis } from "@whiskymart/types";
 import { getAdvisor } from "@/lib/advisor";
 
-/** POST /api/advisor — ask the Sommelier; returns a grounded recommendation. */
+/** POST /api/advisor: ask the Sommelier; returns a grounded recommendation. */
 export async function POST(req: NextRequest) {
   const body = (await req.json()) as { message?: string; palate?: unknown };
   const message = body.message?.trim();

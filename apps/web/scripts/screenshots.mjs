@@ -1,4 +1,4 @@
-// WhiskyMart — capture screenshots of the key journeys.
+// WhiskyMart: capture screenshots of the key journeys.
 //
 // Usage (browsers available locally, unlike the sandbox):
 //   1) Run the app:
@@ -77,4 +77,4 @@ await shot("/account", "11-account");
 await shot("/account/wishlist", "12-wishlist");
 
 await browser.close();
-console.log(`\nDone — see ./${OUT}/`);
+console.log(`\nDone: see ./${OUT}/`);

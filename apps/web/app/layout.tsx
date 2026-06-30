@@ -28,11 +28,11 @@ const bodySans = Inter({
 
 export const metadata: Metadata = {
   title: {
-    default: "WhiskyMart — Discover, buy, collect & invest in whisky",
+    default: "WhiskyMart: Discover, buy, collect & invest in whisky",
     template: "%s | WhiskyMart",
   },
   description:
-    "Discover, buy and collect exceptional whisky — a curated cabinet of single malts, rare bottlings and tasting samples.",
+    "Discover, buy and collect exceptional whisky: a curated cabinet of single malts, rare bottlings and tasting samples.",
   metadataBase: new URL("https://www.whiskymart.com"),
 };
 

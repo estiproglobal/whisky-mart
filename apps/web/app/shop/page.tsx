@@ -18,7 +18,7 @@ export default async function ShopPage({
       <PageHero
         eyebrow="The catalogue"
         title="The whisky archive"
-        intro="Explore the full collection — filter by region, flavour and house, or ask the Sommelier if you're not sure where to begin."
+        intro="Explore the full collection: filter by region, flavour and house, or ask the Sommelier if you're not sure where to begin."
       />
       <ProductListing searchParams={sp} />
     </>

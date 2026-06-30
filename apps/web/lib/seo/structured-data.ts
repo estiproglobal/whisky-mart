@@ -23,7 +23,7 @@ export function productJsonLd(product: Product) {
     },
   };
   if (product.ratingCount > 0) {
-    // House/expert rating expressed as ratingCount (scores), not reviewCount —
+    // House/expert rating expressed as ratingCount (scores), not reviewCount:
     // written customer reviews are a separate, independently sourced signal.
     data.aggregateRating = {
       "@type": "AggregateRating",

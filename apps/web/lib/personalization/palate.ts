@@ -3,7 +3,7 @@ import type { FlavourAxis } from "@whiskymart/types";
 /**
  * Palate profile (Phase 2 personalisation). Built from a short quiz today and
  * stored client-side; a richer server-side profile learned from behaviour
- * (the "palate fingerprint" in docs/02) is the production follow-up — see
+ * (the "palate fingerprint" in docs/02) is the production follow-up: see
  * DEFERRED.md.
  */
 export interface PalateProfile {
@@ -28,7 +28,7 @@ export const PALATE_QUIZ: QuizQuestion[] = [
     id: "smoke",
     prompt: "How do you feel about smoky, peaty whisky?",
     options: [
-      { label: "Love it — bring the bonfire", flavours: ["smoky", "peaty"] },
+      { label: "Love it, bring the bonfire", flavours: ["smoky", "peaty"] },
       { label: "A gentle wisp is nice", flavours: ["smoky"] },
       { label: "Not for me", flavours: [] },
     ],

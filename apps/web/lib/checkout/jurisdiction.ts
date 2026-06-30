@@ -3,7 +3,7 @@ import type { JurisdictionDecision } from "@whiskymart/types";
 /**
  * Server-side jurisdiction / compliance rules (see docs/09).
  *
- * This is a deliberately small, encoded rules table — the seed of the
+ * This is a deliberately small, encoded rules table: the seed of the
  * "jurisdiction engine" described in the blueprint. Every checkout is evaluated
  * here on the server; the client is never trusted to decide shippability.
  */
@@ -27,7 +27,7 @@ const RULES: Record<string, CountryRule> = {
     taxRatePct: 20,
     dutyRatePct: 0,
     vatInclusive: true,
-    carrierNote: "Age-verified delivery — an adult signature (18+) is required.",
+    carrierNote: "Age-verified delivery: an adult signature (18+) is required.",
   },
   IE: { label: "Ireland", allowed: true, ageMin: 18, taxRatePct: 23, dutyRatePct: 0, vatInclusive: false },
   DE: { label: "Germany", allowed: true, ageMin: 18, taxRatePct: 19, dutyRatePct: 0, vatInclusive: false },
@@ -42,7 +42,7 @@ const RULES: Record<string, CountryRule> = {
     dutyRatePct: 0,
     vatInclusive: false,
     reason:
-      "We can't yet ship spirits to most US states — direct-to-consumer spirits shipping is licensed state-by-state.",
+      "We can't yet ship spirits to most US states; direct-to-consumer spirits shipping is licensed state-by-state.",
     alternative: "US shipping is coming via licensed partners. Join the waitlist and we'll notify you.",
   },
 };
@@ -69,7 +69,7 @@ export function evaluateJurisdiction(country: string): JurisdictionDecision {
       dutyRatePct: 0,
       vatInclusive: false,
       reason: "We don't currently ship to this destination.",
-      alternative: "We're expanding — check back soon or contact us about your location.",
+      alternative: "We're expanding: check back soon or contact us about your location.",
     };
   }
 

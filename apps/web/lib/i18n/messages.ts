@@ -1,5 +1,5 @@
 /**
- * UI message catalogue (Phase 2 — i18n). Interface-first: messages live here
+ * UI message catalogue (Phase 2: i18n). Interface-first: messages live here
  * today; a TMS / CMS-backed source and locale-routed URLs (for hreflang SEO)
  * are the production follow-up (see DEFERRED.md).
  *
@@ -33,7 +33,7 @@ const en: Messages = {
   "header.account": "Account",
   "header.wishlist": "Wishlist",
   "header.basket": "Basket",
-  "footer.tagline": "A curated cabinet of whisky — discover, buy and collect exceptional single malts and rare bottlings.",
+  "footer.tagline": "A curated cabinet of whisky: discover, buy and collect exceptional single malts and rare bottlings.",
   "footer.shop": "Shop",
   "footer.explore": "Explore",
   "footer.responsibly": "Please drink responsibly.",
@@ -42,7 +42,7 @@ const en: Messages = {
   "ageGate.subtitle": "You must be 18 or over to enter. Please drink responsibly.",
   "ageGate.yes": "Yes, I am 18+",
   "ageGate.no": "No",
-  "ageGate.denied": "Sorry — you must be of legal drinking age to use this site.",
+  "ageGate.denied": "Sorry, you must be of legal drinking age to use this site.",
 };
 
 const de: Messages = {
@@ -82,7 +82,7 @@ const fr: Messages = {
   "header.wishlist": "Liste de souhaits",
   "header.basket": "Panier",
   "footer.tagline":
-    "Un cabinet de whisky soigneusement sélectionné — découvrir, acheter et collectionner des single malts d'exception et des embouteillages rares.",
+    "Un cabinet de whisky soigneusement sélectionné, découvrir, acheter et collectionner des single malts d'exception et des embouteillages rares.",
   "footer.shop": "Boutique",
   "footer.explore": "Explorer",
   "footer.responsibly": "À consommer avec modération.",
@@ -91,7 +91,7 @@ const fr: Messages = {
   "ageGate.subtitle": "Vous devez avoir 18 ans ou plus pour entrer. À consommer avec modération.",
   "ageGate.yes": "Oui, j'ai 18 ans ou plus",
   "ageGate.no": "Non",
-  "ageGate.denied": "Désolé — vous devez avoir l'âge légal pour utiliser ce site.",
+  "ageGate.denied": "Désolé, vous devez avoir l'âge légal pour utiliser ce site.",
 };
 
 export const MESSAGES: Record<Locale, Messages> = { en, de, fr };

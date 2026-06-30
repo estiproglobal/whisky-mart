@@ -1,6 +1,6 @@
-# 02 — Product Architecture (Part 2)
+# 02: Product Architecture (Part 2)
 
-> Every major module across Commerce, Customer, Content, Community, and AI — with data ownership, phase, and dependencies.
+> Every major module across Commerce, Customer, Content, Community, and AI: with data ownership, phase, and dependencies.
 
 This document defines **what the platform does**. The technical realisation is in [Doc 03](03-technical-architecture.md); the data model in [Doc 05](05-database-schema.md).
 
@@ -52,7 +52,7 @@ The heart of the platform. A **flexible product model** that handles bottles, sa
 - **Phase:** P1.
 
 ### A2. Categories & Taxonomy
-A **multi-dimensional, faceted taxonomy** — whisky doesn't fit a single tree, so we model it as **tags/facets + curated collections**, not a rigid hierarchy.
+A **multi-dimensional, faceted taxonomy**: whisky doesn't fit a single tree, so we model it as **tags/facets + curated collections**, not a rigid hierarchy.
 
 Primary navigable dimensions:
 - **Type:** Scotch (Single Malt, Blended, Blended Malt, Grain), Bourbon, Rye, Irish, Japanese, World Whisky, plus adjacent (Rum, Cognac, Gin, Tequila, Champagne…).
@@ -86,16 +86,16 @@ Glassware, decanters, water droppers, books, storage, hip flasks. High-margin at
 - **Phase:** P1.
 
 ### A11. Samples (sampling-first discovery)
-3cl/5cl samples decanted from bottles — our modern "Drinks by the Dram." Enables **flights**, **try-before-you-buy**, advent calendars, and low-risk discovery. A core acquisition + conversion mechanism.
+3cl/5cl samples decanted from bottles: our modern "Drinks by the Dram." Enables **flights**, **try-before-you-buy**, advent calendars, and low-risk discovery. A core acquisition + conversion mechanism.
 - **Phase:** P1 (catalogue), P2 (subscription flights).
 
-### A12. Marketplace (3P sellers) — *Phase 4*
+### A12. Marketplace (3P sellers): *Phase 4*
 Third-party listings under the unified catalogue. Seller onboarding/KYC, listing management, inventory sync, order routing, settlements/payouts, ratings, dispute resolution, optional **WhiskyMart-Fulfilled**. Buyers experience one seamless catalogue; sellers get reach.
 
-### A13. Auctions — *Phase 4*
+### A13. Auctions: *Phase 4*
 Timed online auctions for rare/collectible bottles. Bidding engine, reserve/no-reserve, proxy bids, watchlists, seller commission + buyer's premium, authentication, settlement, shipping. Benchmarked against Whisky Auctioneer.
 
-### A14. Investment & Casks — *Phase 4*
+### A14. Investment & Casks: *Phase 4*
 Cask investment marketplace + rare-bottle investment. Listings with provenance, valuation data, **custody/storage** (bonded warehouse), insurance, portfolio dashboard, exit options (resale/auction/bottling). Benchmarked against Cask Trade / Whisky Partners. Heavily compliance- and trust-gated.
 
 ---
@@ -134,7 +134,7 @@ Birthday rewards, milestone gifts, surprise-and-delight for top customers, membe
 Membership tiers (B5/Doc 01), sample/box subscriptions, "auto-replenish my favourite," with self-serve pause/skip/cancel and dunning management.
 - **Phase:** P3 (membership), P2 (boxes).
 
-### B9. WhiskyVault (digital collection) — *differentiator*
+### B9. WhiskyVault (digital collection): *differentiator*
 A digital record of bottles a user owns (added manually, via purchase, or by scanning bottle NFC/QR). Tracks estimated value (from our valuation data), provenance/authentication, "open vs sealed," and offers one-click **list for sale / send to auction / insure**. Bridges retail → community → marketplace → investment. **This is a flywheel feature unique to WhiskyMart.**
 - **Phase:** P3 (collection), P4 (valuation + sell).
 
@@ -208,7 +208,7 @@ Onboard whisky reviewers/influencers as creators: affiliate links, creator store
 
 ---
 
-## E. AI LAYER (cross-cutting — woven through all phases)
+## E. AI LAYER (cross-cutting: woven through all phases)
 
 > AI is the spine of differentiation. All AI features share a common foundation: a **RAG knowledge base** (catalogue + tasting notes + reviews + education) + a **palate/behaviour model** per user + **Claude** as the reasoning engine, with strict guardrails (no medical/over-consumption advice, age-gated, responsible-drinking framing).
 
@@ -221,7 +221,7 @@ Conversational sommelier available site-wide. Understands natural language ("I l
 - **Phase:** P2 (baseline), P5 (advanced).
 
 ### E3. Food Pairing Engine
-"What pairs with this whisky?" / "I'm having X for dinner — which whisky?" Structured pairing knowledge + LLM reasoning, surfaced on PDPs and as a standalone tool.
+"What pairs with this whisky?" / "I'm having X for dinner: which whisky?" Structured pairing knowledge + LLM reasoning, surfaced on PDPs and as a standalone tool.
 - **Phase:** P2.
 
 ### E4. Gift Finder

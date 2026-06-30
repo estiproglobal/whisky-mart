@@ -33,7 +33,7 @@ function summariseIntent(intent: AdvisorIntent): string {
 
 /**
  * Grounded, rule-based Sommelier. Retrieves real catalogue products via the
- * shared engine — never invents products, prices, or stock. Swapped for a
+ * shared engine: never invents products, prices, or stock. Swapped for a
  * Claude-backed advisor behind the `Advisor` interface (see DEFERRED.md).
  */
 export class GroundedMockAdvisor implements Advisor {
@@ -62,11 +62,11 @@ export class GroundedMockAdvisor implements Advisor {
     const summary = summariseIntent(intent);
     let message: string;
     if (recs.length === 0) {
-      message = "I couldn't find a match in our range just now — try browsing the full collection.";
+      message = "I couldn't find a match in our range just now. Try browsing the full collection.";
     } else if (relaxed && intent.maxPrice !== undefined) {
       message = `I couldn't find a perfect match${summary ? ` for ${summary}` : ""}, so here are the closest options:`;
     } else if (summary) {
-      message = `Got it — ${summary}. Here ${recs.length === 1 ? "is one" : `are ${recs.length}`} I'd pour for you:`;
+      message = `Got it, ${summary}. Here ${recs.length === 1 ? "is one" : `are ${recs.length}`} I'd pour for you:`;
     } else {
       message = "Happy to help you choose. Here are a few favourites to start with:";
     }

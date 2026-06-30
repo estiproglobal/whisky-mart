@@ -2,7 +2,7 @@ import type { FlavourProfile } from "@whiskymart/types";
 import { FLAVOUR_LABELS, rankedAxes } from "@/lib/catalog/flavour";
 
 /**
- * Visual flavour profile — refined tasting meters (see docs/04 — PDP flavour
+ * Visual flavour profile (refined tasting meters (see docs/04) PDP flavour
  * wheel/bars). Axes are ranked by intensity; `limit` trims to the strongest
  * notes for compact "signature" displays.
  */

@@ -104,7 +104,7 @@ export function ProductReviews({ productId }: { productId: string }) {
           </span>
         </div>
       ) : (
-        <p className="mt-3 text-sm text-charcoal/60">No customer reviews yet — be the first.</p>
+        <p className="mt-3 text-sm text-charcoal/60">No customer reviews yet. Be the first.</p>
       )}
 
       {open ? (

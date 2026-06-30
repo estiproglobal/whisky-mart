@@ -42,7 +42,7 @@ export default async function HomePage() {
               <span className="block">cabinet, curated for you.</span>
             </h1>
             <p className="mt-5 max-w-md text-[15px] leading-relaxed text-cream/65 sm:text-base">
-              Discover, buy, learn, collect and invest — a hand-curated catalogue of single malts,
+              Discover, buy, learn, collect and invest: a hand-curated catalogue of single malts,
               rare bottlings and tasting flights, with a private Sommelier to guide every choice.
             </p>
             <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
@@ -68,21 +68,21 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* House credo — a quiet editorial pause */}
+      {/* House credo: a quiet editorial pause */}
       <section className="border-b border-line bg-cream">
         <div className="container-page py-16 text-center sm:py-20">
           <div className="flex justify-center">
             <span className="rule-gold" />
           </div>
           <p className="mx-auto mt-7 max-w-3xl font-display text-[1.6rem] leading-[1.4] text-charcoal/85 sm:text-[2rem]">
-            We keep a small, deliberate cellar — every bottle chosen for its character, its
+            We keep a small, deliberate cellar: every bottle chosen for its character, its
             provenance, and the moment it was made for.
           </p>
           <p className="overline mt-7 text-whisky-700">The WhiskyMart house</p>
         </div>
       </section>
 
-      {/* The Cabinet — best sellers */}
+      {/* The Cabinet: best sellers */}
       <LuxurySection
         eyebrow="The Cabinet"
         title="What our members are pouring"
@@ -127,7 +127,7 @@ export default async function HomePage() {
               index="01"
               eyebrow="Discover"
               title="Guided by taste"
-              body="Tell us a bottle you loved or a flavour you crave — the Sommelier narrows the shelf to whiskies matched to your palate."
+              body="Tell us a bottle you loved or a flavour you crave; the Sommelier narrows the shelf to whiskies matched to your palate."
               href="/sommelier"
               cta="Meet the Sommelier"
             />
@@ -135,7 +135,7 @@ export default async function HomePage() {
               index="02"
               eyebrow="Collect"
               title="Provenance & rare releases"
-              body="Limited bottlings, age statements and cask detail — chosen for character and kept honest, ready for the collector marketplace to come."
+              body="Limited bottlings, age statements and cask detail: chosen for character and kept honest, ready for the collector marketplace to come."
               href="/c/bestsellers"
               cta="Browse the cabinet"
             />
@@ -143,7 +143,7 @@ export default async function HomePage() {
               index="03"
               eyebrow="Belong"
               title="Tasting notes & guides"
-              body="Expert guides, structured tasting notes and a taste profile that follows you — the beginnings of a membership-led whisky club."
+              body="Expert guides, structured tasting notes and a taste profile that follows you, the beginnings of a membership-led whisky club."
               href="/guides"
               cta="Read the guides"
             />
@@ -151,7 +151,7 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* Premium service cards — Sommelier & Gift Finder */}
+      {/* Premium service cards: Sommelier & Gift Finder */}
       <section className="container-page py-14 sm:py-20">
         <div className="grid gap-5 lg:grid-cols-2">
           <div className="texture-grain edge-sheen relative flex flex-col overflow-hidden rounded-lg border border-gold/25 bg-ink bg-cask-glow-soft p-9 text-cream sm:p-11">
@@ -159,7 +159,7 @@ export default async function HomePage() {
             <p className="overline mt-6 text-gold-light">Private concierge</p>
             <h3 className="mt-4 font-display text-[2rem] leading-tight">Ask the Sommelier</h3>
             <p className="mt-3 flex-1 text-[15px] leading-relaxed text-cream/65">
-              Find a bottle for a dinner, a gift, or your next cabinet slot. Describe the moment — we&apos;ll
+              Find a bottle for a dinner, a gift, or your next cabinet slot. Describe the moment: we&apos;ll
               recommend, with reasons.
             </p>
             <Link href="/sommelier" className={buttonClasses("accent", "md", "mt-8 self-start")}>
@@ -173,7 +173,7 @@ export default async function HomePage() {
             <h3 className="mt-4 font-display text-[2rem] leading-tight text-charcoal">Gift Finder</h3>
             <p className="mt-3 flex-1 text-[15px] leading-relaxed text-charcoal/60">
               Occasion, budget, taste. We&apos;ll narrow the shelf to a handful of bottles they&apos;ll
-              remember — beautifully presented.
+              remember: beautifully presented.
             </p>
             <Link href="/gift-finder" className={buttonClasses("outline", "md", "mt-8 self-start")}>
               Find a gift <ArrowRight className="h-4 w-4" />
@@ -205,7 +205,7 @@ export default async function HomePage() {
         <LuxurySection
           eyebrow="Try before the bottle"
           title="Tasting flights"
-          intro="Low-risk 3cl samples — discover what you love before committing to a full bottle."
+          intro="Low-risk 3cl samples: discover what you love before committing to a full bottle."
           viewAllHref="/c/samples"
         >
           <Grid>

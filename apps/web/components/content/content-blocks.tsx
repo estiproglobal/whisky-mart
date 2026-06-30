@@ -32,7 +32,7 @@ export function ContentBlocks({
             return (
               <blockquote key={i} className="border-l-2 border-gold pl-6 font-display text-[1.6rem] leading-snug text-charcoal/85">
                 “{block.text}”
-                {block.cite ? <footer className="mt-2 text-sm not-italic text-smoke">— {block.cite}</footer> : null}
+                {block.cite ? <footer className="mt-2 text-sm not-italic text-smoke">{block.cite}</footer> : null}
               </blockquote>
             );
           case "products": {

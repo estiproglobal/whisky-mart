@@ -31,7 +31,7 @@ export const SEED_PRODUCTS: Product[] = [
     bottlerType: "OB",
     status: "active",
     description:
-      "A towering Islay single malt — deep, dry and smoky, with the seaweed-led peat Lagavulin is famous for, balanced by rich sweetness and a long, elegant finish.",
+      "A towering Islay single malt: deep, dry and smoky, with the seaweed-led peat Lagavulin is famous for, balanced by rich sweetness and a long, elegant finish.",
     story:
       "Matured for sixteen years on the southern shore of Islay, this is the benchmark by which peated whiskies are judged.",
     whisky: { abv: 43, ageYears: 16, region: "islay", caskType: ["ex-bourbon"], peatPpm: 35, chillFiltered: true, naturalColour: false, limitedEdition: false },
@@ -61,7 +61,7 @@ export const SEED_PRODUCTS: Product[] = [
     bottlerType: "OB",
     status: "active",
     description:
-      "The world's most-awarded single malt and a perfect first step into Speyside — fresh, fruity and beautifully balanced with a signature note of pear.",
+      "The world's most-awarded single malt and a perfect first step into Speyside, fresh, fruity and beautifully balanced with a signature note of pear.",
     whisky: { abv: 40, ageYears: 12, region: "speyside", caskType: ["ex-bourbon", "ex-sherry"], chillFiltered: true, naturalColour: false, limitedEdition: false },
     variants: [{ id: "v_gf12_70", sku: "GF12-70", sizeMl: 700, price: gbp(3995), memberPrice: gbp(3595), inStock: true }],
     image: { seed: "glenfiddich", alt: "Bottle of Glenfiddich 12 Year Old single malt Scotch whisky" },
@@ -136,7 +136,7 @@ export const SEED_PRODUCTS: Product[] = [
     bottlerType: "OB",
     status: "active",
     description:
-      "Matured exclusively in hand-picked sherry-seasoned oak casks from Jerez. Rich, full-bodied and unmistakably Macallan — dried fruit, ginger and Christmas spice.",
+      "Matured exclusively in hand-picked sherry-seasoned oak casks from Jerez. Rich, full-bodied and unmistakably Macallan: dried fruit, ginger and Christmas spice.",
     whisky: { abv: 40, ageYears: 12, region: "speyside", caskType: ["ex-sherry"], chillFiltered: true, naturalColour: true, limitedEdition: false },
     variants: [{ id: "v_mac12_70", sku: "MAC12-70", sizeMl: 700, price: gbp(8495), memberPrice: gbp(7645), inStock: true }],
     image: { seed: "macallan", alt: "Bottle of The Macallan 12 Year Old Sherry Oak single malt" },
@@ -161,7 +161,7 @@ export const SEED_PRODUCTS: Product[] = [
     bottlerType: "OB",
     status: "active",
     description:
-      "The classic maritime malt from the Isle of Skye — peppery smoke, brine and a famous pinch of sea salt, with warming sweetness underneath.",
+      "The classic maritime malt from the Isle of Skye, peppery smoke, brine and a famous pinch of sea salt, with warming sweetness underneath.",
     whisky: { abv: 45.8, ageYears: 10, region: "islands", caskType: ["ex-bourbon"], peatPpm: 25, chillFiltered: true, naturalColour: true, limitedEdition: false },
     variants: [{ id: "v_tal10_70", sku: "TAL10-70", sizeMl: 700, price: gbp(4495), memberPrice: gbp(4045), inStock: true }],
     image: { seed: "talisker", alt: "Bottle of Talisker 10 Year Old single malt Scotch whisky" },
@@ -229,13 +229,13 @@ export const SEED_PRODUCTS: Product[] = [
   {
     id: "p_islay_flight",
     type: "sample",
-    title: "Islay Discovery — Tasting Flight (4 × 3cl)",
+    title: "Islay Discovery: Tasting Flight (4 × 3cl)",
     slug: "islay-discovery-tasting-flight",
     brand: { id: "b_whiskymart", name: "WhiskyMart Selection", slug: "whiskymart-selection" },
     bottlerType: "NA",
     status: "active",
     description:
-      "Four 3cl samples of benchmark Islay malts — a low-risk way to find your favourite before committing to a full bottle. Includes Lagavulin, Ardbeg, Laphroaig and Bowmore.",
+      "Four 3cl samples of benchmark Islay malts, a low-risk way to find your favourite before committing to a full bottle. Includes Lagavulin, Ardbeg, Laphroaig and Bowmore.",
     whisky: { abv: 46, ageYears: null, region: "islay", caskType: [], peatPpm: 50, limitedEdition: false },
     variants: [{ id: "v_flight_islay", sku: "FLIGHT-ISLAY", sizeMl: 120, price: gbp(2495), inStock: true }],
     image: { seed: "islay-flight", alt: "Islay whisky tasting flight of four 3cl samples" },

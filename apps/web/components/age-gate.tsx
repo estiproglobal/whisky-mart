@@ -9,7 +9,7 @@ const STORAGE_KEY = "wm_age_ok";
 
 /**
  * Lightweight client-side age gate (UK 18+). This is the storefront courtesy
- * gate only — binding age verification happens server-side at checkout via a
+ * gate only: binding age verification happens server-side at checkout via a
  * dedicated provider (see docs/09-compliance-and-regulatory.md §2).
  */
 export function AgeGate() {

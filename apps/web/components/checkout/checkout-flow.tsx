@@ -229,7 +229,7 @@ export function CheckoutFlow() {
                 {SHIPPABLE_COUNTRIES.map((c) => (
                   <option key={c.code} value={c.code}>
                     {c.label}
-                    {c.allowed ? "" : " — not available"}
+                    {c.allowed ? "" : " (not available)"}
                   </option>
                 ))}
               </select>

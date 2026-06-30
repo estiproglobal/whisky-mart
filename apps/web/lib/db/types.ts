@@ -1,7 +1,7 @@
 import type { Order, Review, ReviewInput, ReviewSummary } from "@whiskymart/types";
 
 /**
- * Persistence interfaces. The app depends only on these — the in-memory
+ * Persistence interfaces. The app depends only on these: the in-memory
  * implementation used today (`./memory`) swaps for Prisma + Postgres later
  * with no changes to API routes or UI. See DEFERRED.md.
  */

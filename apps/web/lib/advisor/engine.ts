@@ -50,7 +50,7 @@ export interface RecommendOptions {
 }
 
 /**
- * Score and rank catalogue products against an intent. Pure + grounded — it
+ * Score and rank catalogue products against an intent. Pure + grounded: it
  * only ever returns real products with real prices.
  */
 export function recommend(

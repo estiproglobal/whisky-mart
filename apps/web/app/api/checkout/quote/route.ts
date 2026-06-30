@@ -6,7 +6,7 @@ import { calculateTotals } from "@/lib/checkout/pricing";
 import type { QuoteRequest, QuoteResponse } from "@/lib/checkout/contracts";
 
 /**
- * POST /api/checkout/quote — jurisdiction decision + shipping options + totals.
+ * POST /api/checkout/quote: jurisdiction decision + shipping options + totals.
  * The client uses this to show shipping/tax and to gate restricted destinations.
  */
 export async function POST(req: NextRequest) {

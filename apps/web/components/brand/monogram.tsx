@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 
 /**
- * WhiskyMart seal — the supplied brass monogram (`public/logos`). Sized by the
+ * WhiskyMart seal: the supplied brass monogram (`public/logos`). Sized by the
  * caller via `className` (height/width). `decorative` hides it from assistive
  * tech when nearby text already names the brand (e.g. the hero watermark).
  */

@@ -2,7 +2,7 @@ import type { ProductImage as ProductImageType, WhiskyDetails, FlavourProfile } 
 import { cn } from "@/lib/utils";
 
 /**
- * A premium, staged product render — a single bottle lit in a dark display
+ * A premium, staged product render: a single bottle lit in a dark display
  * niche: warm backlight halo + overhead spotlight, dark cabinet ground, rim-lit
  * glass, a tone-matched spirit, a brass cap, a soft contact shadow and a faded
  * reflection. A stand-in for real photography (drops in later behind the same
@@ -148,7 +148,7 @@ export function ProductImage({
         <rect x="44" y="64" width="1.4" height="72" rx="0.7" fill="#E7C489" opacity="0.18" />
         <rect x="30" y="40" width="1.4" height="18" rx="0.7" fill="#F4E8CF" opacity="0.14" />
 
-        {/* Label (abstract — no brand text) */}
+        {/* Label (abstract: no brand text) */}
         <rect x="19" y="98" width="26" height="40" rx="1.5" fill="#F6EFE1" opacity="0.95" />
         <rect x="19" y="98" width="26" height="40" rx="1.5" fill="none" stroke="#A98A4E" strokeWidth="0.6" />
         <circle cx="32" cy="108" r="3.2" fill="none" stroke="#A98A4E" strokeWidth="0.7" />

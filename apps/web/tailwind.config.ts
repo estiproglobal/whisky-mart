@@ -1,7 +1,7 @@
 import type { Config } from "tailwindcss";
 
 /**
- * WhiskyMart — "The Private Cask Room" design tokens.
+ * WhiskyMart: "The Private Cask Room" design tokens.
  * Restrained luxury: obsidian + oak darks, warm parchment lights, cask amber +
  * antique brass accents, deep burgundy. (See Current_Task.md / brief.)
  */
@@ -19,12 +19,12 @@ const config: Config = {
         ink: "#0B0A08",
         charcoal: "#171310", // primary text on light
         oak: "#211510", // dark oak brown (editorial bands)
-        // Lights — refined warm paper (brand cream #F2EDE2)
+        // Lights: refined warm paper (brand cream #F2EDE2)
         cream: "#F2EDE2", // page background
         ivory: "#FBF8F1", // card / panel surface
         parchment: "#E7D9C0", // section tint (deeper for definition)
         line: "#E0D3BB", // warm hairline border on light surfaces
-        // Accents — official brand brass + copper, used sparingly
+        // Accents: official brand brass + copper, used sparingly
         amber: { DEFAULT: "#C97A2B", dark: "#A8631F" }, // cask copper accent
         gold: { DEFAULT: "#B08D57", light: "#C8A877", dark: "#8C6E40" }, // antique brass
         burgundy: "#451616",
@@ -51,7 +51,7 @@ const config: Config = {
         tightest: "-0.025em",
         luxe: "0.28em", // eyebrow / overline caps
       },
-      // Tightened, architectural radius scale — gallery, not app-bubbly.
+      // Tightened, architectural radius scale: gallery, not app-bubbly.
       borderRadius: {
         DEFAULT: "0.1875rem",
         md: "0.25rem",
@@ -61,7 +61,7 @@ const config: Config = {
         "3xl": "0.75rem",
       },
       boxShadow: {
-        // Near-hairline — depth comes from tone + borders, not drop shadows
+        // Near-hairline: depth comes from tone + borders, not drop shadows
         card: "0 1px 2px -1px rgba(11,10,8,0.05)",
         lift: "0 2px 4px -2px rgba(11,10,8,0.07), 0 24px 48px -34px rgba(11,10,8,0.30)",
       },
