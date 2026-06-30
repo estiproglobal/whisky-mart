@@ -7,7 +7,7 @@
 
 ## What I'm working on right now
 
-**Typography: remove every em-dash site-wide + document the rule → ✅ COMPLETE, VALIDATED. On `claude/amazing-meitner-cmly8g`.**
+**Typography: remove every em-dash site-wide + document the rule → ✅ COMPLETE, VALIDATED, MERGED TO `main` (2026-06-30), DEPLOYING TO PRODUCTION via Vercel.**
 Owner asked to purge every em-dash (the `U+2014` glyph) from the whole codebase
 and make sure they are never reintroduced.
 - **467 em-dashes replaced across 75 files** with context-appropriate punctuation
