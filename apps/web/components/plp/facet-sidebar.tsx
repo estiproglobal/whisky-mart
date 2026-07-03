@@ -45,14 +45,11 @@ export function FacetSidebar({ facets }: { facets: ProductSearchResult["facets"]
   return (
     <aside className="space-y-5">
       <div className="flex items-center justify-between">
-        <div className="flex items-center gap-2.5">
-          <span className="rule-gold" />
-          <h2 className="overline text-whisky-700">Refine the shelf</h2>
-        </div>
+        <h2 className="font-sans text-label text-cream">Refine the shelf</h2>
         {hasFilters ? (
           <button
             onClick={clearAll}
-            className="inline-flex items-center gap-1 text-xs font-medium text-whisky-700 hover:text-whisky-900"
+            className="inline-flex items-center gap-1 font-sans text-label-sm text-copper transition-opacity hover:opacity-75"
           >
             <X className="h-3.5 w-3.5" /> Clear all
           </button>
@@ -64,24 +61,24 @@ export function FacetSidebar({ facets }: { facets: ProductSearchResult["facets"]
         if (options.length === 0) return null;
         const chosen = selected(group.key);
         return (
-          <fieldset key={group.key} className="border-t border-line pt-4">
-            <legend className="mb-2.5 font-display text-base text-charcoal">{group.title}</legend>
+          <fieldset key={group.key} className="border-t border-line-dark pt-4">
+            <legend className="mb-2.5 font-display text-d3 text-cream">{group.title}</legend>
             <ul className="space-y-1.5">
               {options.map((opt) => {
                 const isChecked = chosen.includes(opt.value);
                 return (
                   <li key={opt.value}>
-                    <label className="flex cursor-pointer items-center gap-2.5 text-sm">
+                    <label className="flex cursor-pointer items-center gap-2.5 font-sans text-body-sm">
                       <input
                         type="checkbox"
                         checked={isChecked}
                         onChange={() => toggle(group.key, opt.value)}
-                        className="h-4 w-4 rounded border-whisky-300 text-whisky-600 focus:ring-whisky-500"
+                        className="h-4 w-4 rounded border-line-dark bg-surface accent-[#C1763B]"
                       />
-                      <span className={cn("flex-1", isChecked ? "text-charcoal" : "text-charcoal/70")}>
+                      <span className={cn("flex-1", isChecked ? "text-cream" : "text-cream-muted")}>
                         {opt.label}
                       </span>
-                      <span className="text-xs text-charcoal/40">{opt.count}</span>
+                      <span className="text-label-sm text-cream/45">{opt.count}</span>
                     </label>
                   </li>
                 );

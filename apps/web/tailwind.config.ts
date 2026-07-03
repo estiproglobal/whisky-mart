@@ -1,9 +1,14 @@
 import type { Config } from "tailwindcss";
 
 /**
- * WhiskyMart: "The Private Cask Room" design tokens.
- * Restrained luxury: obsidian + oak darks, warm parchment lights, cask amber +
- * antique brass accents, deep burgundy. (See Current_Task.md / brief.)
+ * WhiskyMart: "The Archive" design tokens (Increment 12B).
+ * A distiller's private archive: warehouse dark, paper records, copper stills.
+ * Seven colours, one accent; everything else is derived. See
+ * docs/12b-design-plan.md for the AA contrast table.
+ *
+ * Contrast rule: raw `copper` passes AA on `ground`/`surface` only. On
+ * `parchment`, textual accents must use `copper-deep` (4.8:1); raw copper on
+ * parchment is reserved for non-text hairlines (the pour line).
  */
 const config: Config = {
   content: [
@@ -14,62 +19,49 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Darks
-        obsidian: "#0A0907",
-        ink: "#0B0A08",
-        charcoal: "#171310", // primary text on light
-        oak: "#211510", // dark oak brown (editorial bands)
-        // Lights: refined warm paper (brand cream #F2EDE2)
-        cream: "#F2EDE2", // page background
-        ivory: "#FBF8F1", // card / panel surface
-        parchment: "#E7D9C0", // section tint (deeper for definition)
-        line: "#E0D3BB", // warm hairline border on light surfaces
-        // Accents: official brand brass + copper, used sparingly
-        amber: { DEFAULT: "#C97A2B", dark: "#A8631F" }, // cask copper accent
-        gold: { DEFAULT: "#B08D57", light: "#C8A877", dark: "#8C6E40" }, // antique brass
-        burgundy: "#451616",
-        smoke: "#645A4F", // secondary text (AA on cream)
-        // Warm neutral ramp (backgrounds / borders / text)
-        whisky: {
-          50: "#F6EEDF",
-          100: "#EADCC2",
-          200: "#DABF95",
-          300: "#C9A468",
-          400: "#C97A2B",
-          500: "#A8631F",
-          600: "#8C5822",
-          700: "#71471D",
-          800: "#503217",
-          900: "#281911",
+        ground: "#171210", // peat/char: the page ground, dark-first
+        surface: "#211A16", // oak: cards, panels, header
+        parchment: "#EFE6D3", // paper: the inverse surface (plates, journal)
+        ink: "#14100D", // text on parchment
+        cream: {
+          DEFAULT: "#EDE4D6", // text on dark
+          muted: "rgba(237,228,214,0.62)", // secondary text on dark (AA 6.2:1)
+        },
+        copper: {
+          DEFAULT: "#C1763B", // the single accent
+          deep: "#8F5527", // hover/pressed; textual accent on parchment
+        },
+        line: {
+          dark: "rgba(237,228,214,0.14)", // hairline on dark
+          light: "rgba(20,16,13,0.15)", // hairline on parchment
         },
       },
       fontFamily: {
         display: ["var(--font-display)", "Georgia", "serif"],
+        body: ["var(--font-body)", "Georgia", "serif"],
         sans: ["var(--font-sans)", "system-ui", "sans-serif"],
       },
-      letterSpacing: {
-        tightest: "-0.025em",
-        luxe: "0.28em", // eyebrow / overline caps
+      fontSize: {
+        // The five-step scale (docs/12b-design-plan.md §2).
+        d1: ["clamp(2.8rem, 6vw, 4.5rem)", { lineHeight: "1.05" }],
+        d2: ["clamp(1.9rem, 3.2vw, 2.75rem)", { lineHeight: "1.08" }],
+        d3: ["1.375rem", { lineHeight: "1.2" }],
+        body: ["1.0625rem", { lineHeight: "1.65" }],
+        "body-sm": ["0.9375rem", { lineHeight: "1.6" }],
+        label: ["0.8125rem", { lineHeight: "1.4", letterSpacing: "0.04em" }],
+        "label-sm": ["0.75rem", { lineHeight: "1.35", letterSpacing: "0.04em" }],
       },
-      // Tightened, architectural radius scale: gallery, not app-bubbly.
+      // 2px everywhere; the scale is collapsed on purpose so no surface can
+      // drift back to app-bubbly radii. `rounded-full` stays for count dots.
       borderRadius: {
-        DEFAULT: "0.1875rem",
-        md: "0.25rem",
-        lg: "0.3125rem",
-        xl: "0.4375rem",
-        "2xl": "0.625rem",
-        "3xl": "0.75rem",
-      },
-      boxShadow: {
-        // Near-hairline: depth comes from tone + borders, not drop shadows
-        card: "0 1px 2px -1px rgba(11,10,8,0.05)",
-        lift: "0 2px 4px -2px rgba(11,10,8,0.07), 0 24px 48px -34px rgba(11,10,8,0.30)",
-      },
-      backgroundImage: {
-        "cask-glow":
-          "radial-gradient(58% 70% at 50% -8%, rgba(190,122,43,0.16), rgba(190,122,43,0.03) 46%, transparent 72%)",
-        "cask-glow-soft":
-          "radial-gradient(50% 60% at 82% 0%, rgba(169,138,78,0.11), transparent 70%)",
+        none: "0",
+        sm: "2px",
+        DEFAULT: "2px",
+        md: "2px",
+        lg: "2px",
+        xl: "2px",
+        "2xl": "2px",
+        "3xl": "2px",
       },
     },
   },

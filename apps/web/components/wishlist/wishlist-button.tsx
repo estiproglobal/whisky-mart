@@ -28,14 +28,14 @@ export function WishlistButton({
         onClick={() => toggle(productId)}
         aria-pressed={saved}
         className={cn(
-          "inline-flex h-11 items-center justify-center gap-2 rounded-md border px-5 text-[12px] font-semibold uppercase tracking-[0.14em] transition-colors",
+          "inline-flex h-11 items-center justify-center gap-2 rounded border px-5 font-sans text-label transition-opacity",
           saved
-            ? "border-charcoal/30 bg-parchment text-charcoal"
-            : "border-charcoal/25 text-charcoal hover:border-charcoal hover:bg-charcoal hover:text-cream",
+            ? "border-copper/60 text-copper"
+            : "border-cream/30 text-cream hover:border-cream/70",
           className,
         )}
       >
-        <Heart className={cn("h-4 w-4", saved && "fill-whisky-700 text-whisky-700")} />
+        <Heart className={cn("h-4 w-4", saved && "fill-copper text-copper")} aria-hidden="true" />
         {saved ? "Saved" : "Wishlist"}
       </button>
     );
@@ -52,11 +52,11 @@ export function WishlistButton({
       aria-label={label}
       title={label}
       className={cn(
-        "inline-flex h-9 w-9 items-center justify-center rounded-full border border-charcoal/10 bg-ivory/85 backdrop-blur transition-colors hover:bg-ivory",
+        "inline-flex h-9 w-9 items-center justify-center rounded-full border border-line-dark bg-ground/70 backdrop-blur transition-opacity hover:opacity-80",
         className,
       )}
     >
-      <Heart className={cn("h-4 w-4", saved ? "fill-whisky-700 text-whisky-700" : "text-charcoal/55")} />
+      <Heart className={cn("h-4 w-4", saved ? "fill-copper text-copper" : "text-cream/70")} aria-hidden="true" />
     </button>
   );
 }

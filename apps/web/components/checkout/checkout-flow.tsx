@@ -38,14 +38,14 @@ function Field({
 }) {
   return (
     <label className="block">
-      <span className="mb-1 block text-sm font-medium text-charcoal/80">{label}</span>
+      <span className="mb-1 block font-sans text-label text-cream/85">{label}</span>
       <input
         type={type}
         value={value}
         onChange={(e) => onChange(e.target.value)}
         autoComplete={autoComplete}
         placeholder={placeholder}
-        className="h-11 w-full rounded-md border border-line bg-ivory px-3 text-sm outline-none focus:border-charcoal/40"
+        className="h-11 w-full rounded border border-line-dark bg-surface px-3 font-sans text-body-sm text-cream outline-none placeholder:text-cream/35 focus:border-cream/40"
       />
     </label>
   );
@@ -104,10 +104,10 @@ export function CheckoutFlow() {
 
   if (lines.length === 0 && !placing) {
     return (
-      <div className="rounded-2xl bg-ivory p-10 text-center shadow-card">
-        <p className="text-charcoal/70">Your basket is empty.</p>
+      <div className="rounded border border-line-dark bg-surface p-10 text-center">
+        <p className="text-body-sm text-cream-muted">Your basket is empty.</p>
         <Link href="/shop" className={buttonClasses("primary", "md", "mt-5")}>
-          Browse whisky
+          Browse the shelf
         </Link>
       </div>
     );
@@ -177,31 +177,31 @@ export function CheckoutFlow() {
             <li key={s.id} className="flex items-center gap-3">
               <span className="flex items-center gap-2">
                 <span
-                  className={`flex h-6 w-6 items-center justify-center rounded-full text-[11px] font-semibold ${
+                  className={`flex h-6 w-6 items-center justify-center rounded-full font-sans text-[11px] font-semibold ${
                     i < stepIndex
-                      ? "bg-charcoal text-cream"
+                      ? "bg-cream/20 text-cream"
                       : i === stepIndex
-                        ? "bg-charcoal text-cream ring-2 ring-amber/40 ring-offset-2 ring-offset-cream"
-                        : "border border-line text-charcoal/40"
+                        ? "bg-copper text-ink"
+                        : "border border-line-dark text-cream/45"
                   }`}
                 >
                   {i < stepIndex ? <Check className="h-3.5 w-3.5" /> : i + 1}
                 </span>
                 <span
-                  className={`text-[11px] uppercase tracking-[0.14em] ${
-                    i === stepIndex ? "font-semibold text-charcoal" : "text-charcoal/45"
+                  className={`font-sans text-label-sm ${
+                    i === stepIndex ? "font-medium text-cream" : "text-cream/50"
                   }`}
                 >
                   {s.label}
                 </span>
               </span>
-              {i < STEPS.length - 1 ? <span aria-hidden="true" className="hidden h-px w-6 bg-line sm:block" /> : null}
+              {i < STEPS.length - 1 ? <span aria-hidden="true" className="hidden h-px w-6 bg-cream/15 sm:block" /> : null}
             </li>
           ))}
         </ol>
 
         {error ? (
-          <div className="mb-5 flex items-start gap-2 rounded-md bg-red-50 p-4 text-sm text-red-800">
+          <div className="mb-5 flex items-start gap-2 rounded border border-copper/60 bg-surface p-4 text-body-sm text-cream">
             <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0" />
             <span>{error}</span>
           </div>
@@ -210,7 +210,7 @@ export function CheckoutFlow() {
         {/* DELIVERY */}
         {step === "delivery" ? (
           <section className="space-y-4">
-            <h2 className="font-display text-2xl text-charcoal">Delivery details</h2>
+            <h2 className="font-display text-d3 text-cream">Delivery details</h2>
             <Field label="Email" value={email} onChange={setEmail} type="email" autoComplete="email" />
             <Field label="Full name" value={address.fullName} onChange={(v) => setAddress({ ...address, fullName: v })} autoComplete="name" />
             <Field label="Address line 1" value={address.line1} onChange={(v) => setAddress({ ...address, line1: v })} autoComplete="address-line1" />
@@ -220,11 +220,11 @@ export function CheckoutFlow() {
               <Field label="Postcode" value={address.postcode} onChange={(v) => setAddress({ ...address, postcode: v })} autoComplete="postal-code" />
             </div>
             <label className="block">
-              <span className="mb-1 block text-sm font-medium text-charcoal/80">Country</span>
+              <span className="mb-1 block font-sans text-label text-cream/85">Country</span>
               <select
                 value={address.country}
                 onChange={(e) => setAddress({ ...address, country: e.target.value })}
-                className="h-11 w-full rounded-md border border-line bg-ivory px-3 text-sm outline-none focus:border-charcoal/40"
+                className="h-11 w-full rounded border border-line-dark bg-surface px-3 font-sans text-body-sm text-cream outline-none focus:border-cream/40 [&>option]:text-ink"
               >
                 {SHIPPABLE_COUNTRIES.map((c) => (
                   <option key={c.code} value={c.code}>
@@ -236,12 +236,12 @@ export function CheckoutFlow() {
             </label>
 
             {blocked && decision ? (
-              <div className="rounded-xl border border-whisky-300 bg-whisky-50 p-4 text-sm">
-                <p className="flex items-center gap-2 font-medium text-whisky-900">
+              <div className="rounded border border-copper/60 bg-surface p-4 text-body-sm">
+                <p className="flex items-center gap-2 font-medium text-cream">
                   <AlertTriangle className="h-4 w-4" /> We can&apos;t ship to {decision.countryLabel} yet
                 </p>
-                <p className="mt-1 text-charcoal/70">{decision.reason}</p>
-                {decision.alternative ? <p className="mt-1 text-charcoal/70">{decision.alternative}</p> : null}
+                <p className="mt-1 text-cream-muted">{decision.reason}</p>
+                {decision.alternative ? <p className="mt-1 text-cream-muted">{decision.alternative}</p> : null}
               </div>
             ) : null}
 
@@ -257,20 +257,20 @@ export function CheckoutFlow() {
         {/* AGE */}
         {step === "age" ? (
           <section className="space-y-4">
-            <h2 className="font-display text-2xl text-charcoal">Age verification</h2>
-            <p className="text-sm text-charcoal/70">
+            <h2 className="font-display text-d3 text-cream">Age verification</h2>
+            <p className="text-body-sm text-cream-muted">
               It&apos;s illegal to sell alcohol to anyone under {decision?.ageMin ?? 18}. By continuing you
               confirm you and the recipient are of legal drinking age.
             </p>
             {decision?.carrierNote ? (
-              <p className="rounded-xl bg-whisky-50 p-3 text-sm text-charcoal/70">{decision.carrierNote}</p>
+              <p className="rounded border border-line-dark bg-surface p-3 text-body-sm text-cream-muted">{decision.carrierNote}</p>
             ) : null}
-            <label className="flex items-start gap-3 text-sm">
+            <label className="flex items-start gap-3 text-body-sm text-cream/85">
               <input
                 type="checkbox"
                 checked={ageConfirmed}
                 onChange={(e) => setAgeConfirmed(e.target.checked)}
-                className="mt-0.5 h-4 w-4 rounded border-whisky-300 text-whisky-600 focus:ring-whisky-500"
+                className="mt-0.5 h-4 w-4 rounded border-line-dark bg-surface accent-[#C1763B]"
               />
               <span>I confirm I am {decision?.ageMin ?? 18} or over and so is the recipient.</span>
             </label>
@@ -284,13 +284,13 @@ export function CheckoutFlow() {
         {/* SHIPPING */}
         {step === "shipping" ? (
           <section className="space-y-4">
-            <h2 className="font-display text-2xl text-charcoal">Delivery method</h2>
+            <h2 className="font-display text-d3 text-cream">Delivery method</h2>
             <div className="space-y-3">
               {(quote?.shippingMethods ?? []).map((m) => (
                 <label
                   key={m.id}
-                  className={`flex cursor-pointer items-center justify-between rounded-md border p-4 transition-colors ${
-                    shippingMethodId === m.id ? "border-charcoal bg-parchment" : "border-line"
+                  className={`flex cursor-pointer items-center justify-between rounded border p-4 transition-opacity ${
+                    shippingMethodId === m.id ? "border-copper bg-surface" : "border-line-dark hover:opacity-80"
                   }`}
                 >
                   <span className="flex items-center gap-3">
@@ -299,14 +299,14 @@ export function CheckoutFlow() {
                       name="shipping"
                       checked={shippingMethodId === m.id}
                       onChange={() => setShippingMethodId(m.id)}
-                      className="h-4 w-4 text-whisky-600 focus:ring-whisky-500"
+                      className="h-4 w-4 accent-[#C1763B]"
                     />
                     <span>
-                      <span className="block text-sm font-medium text-charcoal">{m.label}</span>
-                      <span className="block text-xs text-charcoal/50">{m.etaDays}</span>
+                      <span className="block font-sans text-body-sm font-medium text-cream">{m.label}</span>
+                      <span className="block font-sans text-label-sm text-cream-muted">{m.etaDays}</span>
                     </span>
                   </span>
-                  <span className="text-sm font-medium text-charcoal">
+                  <span className="font-sans text-body-sm font-medium text-cream">
                     {m.price.amount === 0 ? "Free" : <Price money={m.price} />}
                   </span>
                 </label>
@@ -322,10 +322,11 @@ export function CheckoutFlow() {
         {/* PAYMENT */}
         {step === "payment" ? (
           <section className="space-y-4">
-            <h2 className="font-display text-2xl text-charcoal">Payment</h2>
-            <p className="flex items-center gap-2 text-sm text-charcoal/60">
-              <Lock className="h-4 w-4" /> Mock payment (no real charge). Use any 16-digit number and a future
-              expiry. A number ending <code className="rounded bg-whisky-50 px-1">0002</code> simulates a decline.
+            <h2 className="font-display text-d3 text-cream">Payment</h2>
+            <p className="flex items-center gap-2 text-body-sm text-cream-muted">
+              <Lock className="h-4 w-4" aria-hidden="true" /> Simulated payment; no real charge is made. Use any
+              16-digit number and a future expiry. A number ending{" "}
+              <code className="rounded border border-line-dark px-1 font-sans">0002</code> simulates a decline.
             </p>
             <Field label="Card number" value={card.number} onChange={(v) => setCard({ ...card, number: v })} placeholder="4242 4242 4242 4242" autoComplete="cc-number" />
             <div className="grid grid-cols-3 gap-4">
@@ -343,18 +344,18 @@ export function CheckoutFlow() {
         {/* REVIEW */}
         {step === "review" ? (
           <section className="space-y-5">
-            <h2 className="font-display text-2xl text-charcoal">Review &amp; place order</h2>
-            <div className="rounded-md border border-line p-4 text-sm">
-              <p className="font-medium text-charcoal">Delivering to</p>
-              <p className="mt-1 text-charcoal/70">
+            <h2 className="font-display text-d3 text-cream">Review &amp; place order</h2>
+            <div className="rounded border border-line-dark bg-surface p-4 text-body-sm">
+              <p className="font-sans font-medium text-cream">Delivering to</p>
+              <p className="mt-1 text-cream-muted">
                 {address.fullName}, {address.line1}
                 {address.line2 ? `, ${address.line2}` : ""}, {address.city}, {address.postcode},{" "}
                 {decision?.countryLabel}
               </p>
-              <p className="mt-1 text-charcoal/70">{email}</p>
+              <p className="mt-1 text-cream-muted">{email}</p>
             </div>
-            <p className="flex items-center gap-2 text-sm text-charcoal/60">
-              <Lock className="h-4 w-4" /> By placing this order you agree to our terms. Please drink responsibly.
+            <p className="flex items-center gap-2 text-body-sm text-cream-muted">
+              <Lock className="h-4 w-4" aria-hidden="true" /> By placing this order you agree to our terms. Please drink responsibly.
             </p>
             <div className="flex gap-3">
               <Button variant="outline" onClick={() => go("payment")} disabled={placing}>Back</Button>

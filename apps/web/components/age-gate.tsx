@@ -32,30 +32,28 @@ export function AgeGate() {
       role="dialog"
       aria-modal="true"
       aria-labelledby="age-gate-title"
-      className="fixed inset-0 z-50 flex items-center justify-center bg-ink/85 p-4 backdrop-blur-sm"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-ground/90 p-4 backdrop-blur-sm"
     >
-      <div className="w-full max-w-md rounded-lg border border-line bg-cream p-9 text-center shadow-lift">
+      <div className="w-full max-w-md rounded border border-line-light bg-parchment p-9 text-center text-ink">
         <div className="flex justify-center">
           <Wordmark className="h-12" />
         </div>
-        <div className="mt-6 flex justify-center">
-          <span className="rule-gold" />
-        </div>
-        <h1 id="age-gate-title" className="mt-6 font-display text-[1.75rem] leading-tight tracking-tightest text-charcoal">
+        <span aria-hidden="true" className="mx-auto mt-6 block h-px w-12 bg-copper" />
+        <h1 id="age-gate-title" className="mt-6 font-display text-[1.75rem] leading-tight">
           {t("ageGate.question")}
         </h1>
-        <p className="mt-3 text-sm text-charcoal/70">{t("ageGate.subtitle")}</p>
+        <p className="mt-3 text-body-sm text-ink/70">{t("ageGate.subtitle")}</p>
 
         {state === "denied" ? (
-          <p className="mt-7 rounded-md border border-line bg-parchment/70 p-4 text-sm text-whisky-900">
+          <p className="mt-7 rounded border border-line-light bg-parchment p-4 text-body-sm text-ink/80">
             {t("ageGate.denied")}
           </p>
         ) : (
           <div className="mt-7 flex gap-3">
-            <Button onClick={confirm} className="flex-1">
+            <Button variant="ink" onClick={confirm} className="flex-1">
               {t("ageGate.yes")}
             </Button>
-            <Button variant="outline" onClick={() => setState("denied")} className="flex-1">
+            <Button variant="outline-ink" onClick={() => setState("denied")} className="flex-1">
               {t("ageGate.no")}
             </Button>
           </div>

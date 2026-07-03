@@ -31,10 +31,10 @@ export function PalateQuiz() {
   const canSubmit = answeredCount > 0;
 
   return (
-    <div className="space-y-8 rounded-lg border border-line bg-ivory p-6 sm:p-8">
+    <div className="space-y-8 rounded border border-line-dark bg-surface p-6 sm:p-8">
       {PALATE_QUIZ.map((q) => (
         <fieldset key={q.id}>
-          <legend className="font-display text-xl text-charcoal">{q.prompt}</legend>
+          <legend className="font-display text-d3 text-cream">{q.prompt}</legend>
           <div className="mt-3.5 flex flex-wrap gap-2">
             {q.options.map((opt, idx) => {
               const selected = (answers[q.id] ?? []).includes(idx);
@@ -45,10 +45,10 @@ export function PalateQuiz() {
                   onClick={() => toggle(q.id, idx, !!q.multi)}
                   aria-pressed={selected}
                   className={cn(
-                    "inline-flex items-center gap-1.5 rounded-md border px-4 py-1.5 text-sm transition-colors",
+                    "inline-flex items-center gap-1.5 rounded border px-4 py-1.5 font-sans text-body-sm transition-opacity",
                     selected
-                      ? "border-charcoal bg-charcoal text-cream"
-                      : "border-line text-charcoal/80 hover:border-charcoal",
+                      ? "border-copper bg-copper text-ink"
+                      : "border-line-dark text-cream/85 hover:opacity-75",
                   )}
                 >
                   {selected ? <Check className="h-3.5 w-3.5" /> : null}
@@ -65,10 +65,10 @@ export function PalateQuiz() {
           {done ? "Update my palate" : "Save my palate"}
         </Button>
         {done && palate ? (
-          <span className="text-sm text-charcoal/60">
+          <span className="text-body-sm text-cream-muted">
             Saved:{" "}
             {palate.flavours.length ? (
-              <span className="capitalize text-whisky-700">{palate.flavours.join(", ")}</span>
+              <span className="capitalize text-copper">{palate.flavours.join(", ")}</span>
             ) : (
               "we'll keep it broad"
             )}

@@ -2,33 +2,35 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Fonts are provided by next/font (see app/layout.tsx) via --font-display
-   (Cormorant Garamond) and --font-sans (Inter); Tailwind maps font-display /
-   font-sans to them with Georgia / system-ui fallbacks. */
+/* Fonts arrive via next/font (see app/layout.tsx): --font-display is Libre
+   Caslon Display, --font-body is Newsreader (optical sizing on), --font-sans
+   is Archivo. Tailwind maps font-display / font-body / font-sans to them. */
 
 @layer base {
   html {
     scroll-behavior: smooth;
   }
   body {
-    @apply bg-cream text-charcoal antialiased;
-    font-family: theme("fontFamily.sans");
+    @apply bg-ground text-cream antialiased;
+    font-family: theme("fontFamily.body");
+    font-size: 1.0625rem;
+    line-height: 1.65;
     font-feature-settings: "kern", "liga", "calt";
-    letter-spacing: -0.006em;
     text-rendering: optimizeLegibility;
   }
   .font-display {
     font-family: theme("fontFamily.display");
-    letter-spacing: -0.018em;
-    font-feature-settings: "kern", "liga", "dlig";
+    font-feature-settings: "kern", "liga";
   }
   ::selection {
-    background: theme("colors.amber.DEFAULT");
+    background: theme("colors.copper.DEFAULT");
     color: theme("colors.ink");
   }
-  /* Visible focus for keyboard users (WCAG 2.2). */
+  /* Visible focus for keyboard users (WCAG 2.2). Outline (not ring) so it
+     reads on dark and parchment surfaces alike. */
   :focus-visible {
-    @apply outline-none ring-2 ring-amber ring-offset-2 ring-offset-cream;
+    outline: 2px solid theme("colors.copper.DEFAULT");
+    outline-offset: 2px;
   }
   /* Respect users who prefer less motion. */
   @media (prefers-reduced-motion: reduce) {
@@ -49,30 +51,37 @@
   .container-page {
     @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
   }
-  /* Editorial overline / eyebrow label (set colour at call site). */
-  .overline {
-    @apply text-[11px] font-semibold uppercase tracking-luxe;
+  /* The thin copper rule under section headings. */
+  .pour-line {
+    @apply mt-4 block h-px w-12 bg-copper;
   }
-  /* Fine brass hairline rule. */
-  .rule-gold {
-    @apply h-px w-10 bg-gold/60;
+  /* The one orchestrated moment: the homepage hero settles on load.
+     Everything else is opacity/underline. Killed by the reduced-motion
+     guard above (animation-duration ~0). */
+  .hero-settle-image {
+    animation: hero-settle-image 1.4s cubic-bezier(0.22, 0.61, 0.36, 1) both;
   }
-  /* A quiet editorial link: underline grows in on hover. */
-  .link-quiet {
-    @apply relative inline-flex items-center gap-1.5 transition-colors;
+  .hero-settle-text {
+    animation: hero-settle-text 1.1s cubic-bezier(0.22, 0.61, 0.36, 1) 0.15s both;
   }
-  /* Subtle film-grain texture for dark cask-room surfaces. */
-  .texture-grain::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    opacity: 0.05;
-    mix-blend-mode: overlay;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  @keyframes hero-settle-image {
+    from {
+      opacity: 0;
+      transform: scale(1.02);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
   }
-  /* A faint inner top-edge sheen for dark surfaces (cabinet light). */
-  .edge-sheen {
-    box-shadow: inset 0 1px 0 0 rgba(244, 235, 221, 0.05);
+  @keyframes hero-settle-text {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 }

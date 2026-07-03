@@ -11,17 +11,16 @@ export interface CollectionCopy {
 
 function InfoCard({ label, children }: { label: string; children: React.ReactNode }) {
   return (
-    <div className="rounded-xl border border-line bg-ivory p-5">
-      <p className="overline text-whisky-700">{label}</p>
-      <div className="mt-2 text-sm leading-relaxed text-charcoal/70">{children}</div>
+    <div className="rounded border border-line-dark bg-surface p-5">
+      <p className="font-sans text-label-sm text-copper">{label}</p>
+      <div className="mt-2 text-body-sm text-cream-muted">{children}</div>
     </div>
   );
 }
 
 /**
  * Editorial band beneath a category hero: a short collection story, a
- * data-driven flavour signature, and a row of premium info cards. Rendered on
- * the warm page surface to transition gracefully into the catalogue below.
+ * data-driven flavour signature, and a row of info cards.
  */
 export function CollectionStory({
   story,
@@ -39,7 +38,7 @@ export function CollectionStory({
   const hasSignature = signature !== null;
 
   return (
-    <section className="border-b border-line bg-cream">
+    <section className="border-b border-line-dark">
       <div className="container-page py-14 lg:py-16">
         <div
           className={
@@ -49,64 +48,56 @@ export function CollectionStory({
           }
         >
           {/* Story */}
-          <div className="max-w-2xl">
-            <div className="flex items-center gap-3">
-              <span className="rule-gold" />
-              <p className="overline text-whisky-700">The collection</p>
-            </div>
-            <div className="mt-5 space-y-4">
-              {story.map((paragraph, i) => (
-                <p
-                  key={i}
-                  className={
-                    i === 0
-                      ? "font-display text-[1.5rem] leading-snug text-charcoal/90"
-                      : "text-[15px] leading-relaxed text-charcoal/70"
-                  }
-                >
-                  {paragraph}
-                </p>
-              ))}
-            </div>
+          <div className="max-w-2xl space-y-4">
+            {story.map((paragraph, i) => (
+              <p
+                key={i}
+                className={
+                  i === 0
+                    ? "font-display text-[1.5rem] leading-snug text-cream"
+                    : "text-body-sm text-cream-muted"
+                }
+              >
+                {paragraph}
+              </p>
+            ))}
           </div>
 
           {/* Flavour signature */}
           {hasSignature ? (
-            <aside className="h-fit rounded-2xl border border-line bg-ivory p-6 shadow-card sm:p-7">
-              <p className="overline text-whisky-700">Flavour signature</p>
-              <p className="mt-2 font-display text-2xl capitalize leading-tight text-charcoal">
+            <aside className="h-fit rounded border border-line-dark bg-surface p-6 sm:p-7">
+              <p className="font-sans text-label-sm text-copper">Flavour signature</p>
+              <p className="mt-2 font-display text-d3 capitalize text-cream">
                 {describeFlavour(signature, 3) || "Balanced & varied"}
               </p>
               <div className="mt-5">
                 <FlavourBars flavour={signature} limit={6} />
               </div>
-              <p className="mt-5 border-t border-line pt-3 text-[11px] leading-relaxed text-charcoal/40">
+              <p className="mt-5 border-t border-line-dark pt-3 font-sans text-label-sm text-cream/50">
                 Averaged across {signatureCount} {signatureCount === 1 ? "bottle" : "bottles"} in this collection.
               </p>
             </aside>
           ) : null}
         </div>
 
-        {/* Premium info cards */}
+        {/* Info cards */}
         <dl className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           <InfoCard label="Best for">{copy.bestFor}</InfoCard>
 
           {startHere ? (
             <Link
               href={`/products/${startHere.slug}`}
-              className="group rounded-xl border border-line bg-ivory p-5 transition-colors hover:border-charcoal/30"
+              className="group rounded border border-line-dark bg-surface p-5 transition-opacity hover:opacity-85"
             >
-              <p className="overline text-whisky-700">Start here</p>
-              <p className="mt-2 font-display text-lg leading-snug text-charcoal transition-colors group-hover:text-whisky-800">
+              <p className="font-sans text-label-sm text-copper">Start here</p>
+              <p className="mt-2 font-display text-d3 leading-snug text-cream group-hover:underline group-hover:decoration-1 group-hover:underline-offset-4">
                 {startHere.title}
               </p>
-              <span className="mt-2 inline-block text-[11px] font-semibold uppercase tracking-[0.14em] text-whisky-700">
-                View bottle →
-              </span>
+              <span className="mt-2 inline-block font-sans text-label-sm text-copper">View bottle</span>
             </Link>
           ) : (
             <InfoCard label="Signature profile">
-              {signature ? describeFlavour(signature, 3) : "A spread of styles across the cabinet."}
+              {signature ? describeFlavour(signature, 3) : "A spread of styles across the shelf."}
             </InfoCard>
           )}
 

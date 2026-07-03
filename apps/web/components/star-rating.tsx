@@ -17,11 +17,11 @@ export function StarRating({
         {Array.from({ length: 5 }).map((_, i) => (
           <Star
             key={i}
-            className={cn("h-4 w-4", i < rounded ? "fill-gold text-gold" : "text-whisky-200")}
+            className={cn("h-4 w-4", i < rounded ? "fill-copper text-copper" : "text-cream/25")}
           />
         ))}
       </div>
-      <span className="text-sm text-charcoal/70">
+      <span className="font-sans text-body-sm text-cream-muted">
         <span className="sr-only">Rated </span>
         {value.toFixed(1)}
         {count !== undefined ? ` (${count})` : ""}

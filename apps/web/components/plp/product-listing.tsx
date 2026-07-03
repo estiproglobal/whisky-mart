@@ -46,15 +46,15 @@ export async function ProductListing({
   return (
     <div className="container-page grid grid-cols-1 gap-10 py-12 sm:py-14 lg:grid-cols-[270px_1fr]">
       <aside className="lg:sticky lg:top-40 lg:self-start">
-        <div className="rounded-lg border border-line bg-ivory p-6">
+        <div className="rounded border border-line-dark bg-surface p-6">
           <FacetSidebar facets={facets} />
         </div>
       </aside>
 
       <div>
-        <div className="mb-6 flex items-center justify-between border-b border-line pb-4">
-          <p className="text-[11px] uppercase tracking-[0.14em] text-charcoal/55">
-            <span className="font-semibold text-charcoal">{total}</span> {total === 1 ? "bottle" : "bottles"}
+        <div className="mb-6 flex items-center justify-between border-b border-line-dark pb-4">
+          <p className="font-sans text-label text-cream-muted">
+            <span className="font-medium text-cream">{total}</span> {total === 1 ? "bottle" : "bottles"}
           </p>
           <SortSelect value={sort} />
         </div>
@@ -62,10 +62,10 @@ export async function ProductListing({
         <ActiveFilters />
 
         {items.length === 0 ? (
-          <div className="rounded-lg border border-line bg-ivory p-14 text-center">
-            <p className="font-display text-[1.75rem] tracking-tightest text-charcoal">Nothing on this shelf</p>
-            <p className="mt-2 text-sm text-charcoal/60">
-              Try removing a filter, or ask the WhiskyMart Sommelier to help you choose.
+          <div className="rounded border border-line-dark bg-surface p-14 text-center">
+            <p className="font-display text-d3 text-cream">Nothing on this shelf</p>
+            <p className="mt-2 text-body-sm text-cream-muted">
+              Try removing a filter. If nothing here fits, the Sommelier will find what does.
             </p>
           </div>
         ) : (

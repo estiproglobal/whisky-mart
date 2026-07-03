@@ -12,7 +12,7 @@ export function LocaleSwitcher() {
         value={locale}
         onChange={(e) => setLocale(e.target.value as Locale)}
         aria-label="Language"
-        className="h-7 rounded-md border border-transparent bg-transparent px-1.5 text-xs text-charcoal/70 hover:text-charcoal focus:border-gold/40 focus:outline-none"
+        className="h-7 rounded border border-transparent bg-transparent px-1.5 font-sans text-label-sm text-cream-muted hover:text-cream [&>option]:text-ink"
       >
         {SUPPORTED_LOCALES.map((l) => (
           <option key={l.code} value={l.code}>

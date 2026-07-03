@@ -12,7 +12,7 @@ export function CurrencySwitcher() {
         value={currency}
         onChange={(e) => setCurrency(e.target.value)}
         aria-label="Display currency"
-        className="h-7 rounded-md border border-transparent bg-transparent px-1.5 text-xs text-charcoal/70 hover:text-charcoal focus:border-gold/40 focus:outline-none"
+        className="h-7 rounded border border-transparent bg-transparent px-1.5 font-sans text-label-sm text-cream-muted hover:text-cream [&>option]:text-ink"
       >
         {SUPPORTED_CURRENCIES.map((c) => (
           <option key={c.code} value={c.code}>

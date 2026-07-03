@@ -1,4 +1,3 @@
-import { Sparkles } from "lucide-react";
 import type { Product } from "@whiskymart/types";
 import { ProductCard } from "@/components/product-card";
 
@@ -14,10 +13,7 @@ export function RecommendationGrid({ items }: { items: RecItem[] }) {
       {items.map(({ product, reason }) => (
         <div key={product.id} className="flex flex-col gap-2">
           <ProductCard product={product} />
-          <p className="flex gap-1.5 text-sm text-charcoal/70">
-            <Sparkles className="mt-0.5 h-3.5 w-3.5 shrink-0 text-whisky-600" />
-            <span>{reason}</span>
-          </p>
+          <p className="text-body-sm text-cream-muted">{reason}</p>
         </div>
       ))}
     </div>

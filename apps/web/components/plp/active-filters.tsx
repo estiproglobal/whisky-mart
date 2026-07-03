@@ -48,7 +48,7 @@ export function ActiveFilters() {
         <button
           key={`${chip.key}:${chip.value}`}
           onClick={() => remove(chip.key, chip.value)}
-          className="inline-flex items-center gap-1.5 rounded-md border border-line bg-ivory px-3 py-1 text-[12px] font-medium text-charcoal/80 transition-colors hover:border-charcoal/30 hover:text-charcoal"
+          className="inline-flex items-center gap-1.5 rounded border border-line-dark bg-surface px-3 py-1 font-sans text-label-sm text-cream-muted transition-opacity hover:opacity-75"
         >
           {chip.label}
           <X className="h-3.5 w-3.5" aria-hidden="true" />

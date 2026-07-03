@@ -1,30 +1,33 @@
 import * as React from "react";
 import { cn } from "@/lib/utils";
 
-type Variant = "primary" | "accent" | "secondary" | "outline" | "ghost";
+type Variant = "primary" | "outline" | "ink" | "outline-ink" | "ghost";
 type Size = "sm" | "md" | "lg";
 
+/**
+ * Buttons are Archivo, sentence case, 2px radius. Interaction feedback is
+ * opacity only (the site's one orchestrated motion lives on the homepage
+ * hero). `primary`/`outline`/`ghost` are for dark surfaces; `ink`/
+ * `outline-ink` are for parchment.
+ */
 const variants: Record<Variant, string> = {
-  // Restrained luxe default: near-black on light surfaces.
-  primary: "bg-charcoal text-cream hover:bg-oak",
-  // Cask amber: reserved for dark surfaces (hero, ink panels) where it pops.
-  accent: "bg-amber text-ink hover:bg-amber-dark",
-  // Quiet parchment alternative.
-  secondary: "bg-parchment text-charcoal hover:bg-whisky-100",
-  outline: "border border-charcoal/25 text-charcoal hover:border-charcoal hover:bg-charcoal hover:text-cream",
-  ghost: "text-charcoal hover:bg-parchment",
+  primary: "bg-copper text-ink hover:opacity-90",
+  outline: "border border-cream/30 text-cream hover:border-cream/70",
+  ink: "bg-ink text-parchment hover:opacity-90",
+  "outline-ink": "border border-ink/30 text-ink hover:border-ink/70",
+  ghost: "text-cream hover:opacity-75",
 };
 
 const sizes: Record<Size, string> = {
-  sm: "h-9 px-4 text-[11px]",
-  md: "h-11 px-7 text-[12px]",
-  lg: "h-[3.25rem] px-9 text-[12px]",
+  sm: "h-9 px-4",
+  md: "h-11 px-6",
+  lg: "h-12 px-8",
 };
 
 /** Shared button styling: also used to style `<Link>` elements as buttons. */
 export function buttonClasses(variant: Variant = "primary", size: Size = "md", className?: string): string {
   return cn(
-    "inline-flex items-center justify-center gap-2 rounded-md font-semibold uppercase tracking-[0.14em] transition-colors duration-200 disabled:pointer-events-none disabled:opacity-50",
+    "inline-flex items-center justify-center gap-2 rounded font-sans text-label font-medium transition-opacity duration-200 disabled:pointer-events-none disabled:opacity-50",
     variants[variant],
     sizes[size],
     className,

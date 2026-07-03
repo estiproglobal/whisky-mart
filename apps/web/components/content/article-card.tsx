@@ -1,12 +1,22 @@
 import Link from "next/link";
 import type { Article } from "@whiskymart/types";
+import { getPhoto } from "@/lib/photo";
+import { Photo } from "@/components/ui/photo";
 
-// Muted, cohesive warm surfaces (no vivid gradients).
-const SURFACES: Array<[string, string]> = [
-  ["#2A1A12", "#3A2415"],
-  ["#15110D", "#2A1A12"],
-  ["#3A2415", "#6B431C"],
-  ["#241710", "#4A1717"],
+/** Which atmosphere slot covers which article (by heroSeed). */
+const COVER_SLOTS: Record<string, string> = {
+  "guide-under-50": "shelf",
+  "edu-taste": "tasting-table",
+  "edu-islay": "islay-coast",
+  "blog-japan": "pour",
+};
+
+/* Tonal fallbacks while the photography binaries are absent: quiet, near-dark
+   surfaces (no vivid gradients). */
+const FALLBACKS: Array<[string, string]> = [
+  ["#241A13", "#1A130E"],
+  ["#1F1712", "#15100C"],
+  ["#281D14", "#1B140F"],
 ];
 
 function hash(seed: string): number {
@@ -15,39 +25,44 @@ function hash(seed: string): number {
   return Math.abs(h);
 }
 
-const TYPE_LABEL: Record<Article["type"], string> = {
-  article: "Journal",
+const KICKER: Record<Article["type"], string> = {
+  article: "From the journal",
   guide: "Buying guide",
-  education: "Academy",
+  education: "How to drink better",
 };
 
+/**
+ * A magazine-style cover card for the journal: cover photo (or tonal ground),
+ * kicker, title, reading time. Sits on parchment surfaces.
+ */
 export function ArticleCard({ article, minutes }: { article: Article; minutes: number }) {
-  const [from, to] = SURFACES[hash(article.heroSeed) % SURFACES.length]!;
+  const cover = getPhoto(COVER_SLOTS[article.heroSeed] ?? "casks");
+  const [from, to] = FALLBACKS[hash(article.heroSeed) % FALLBACKS.length]!;
+
   return (
-    <Link
-      href={`/guides/${article.slug}`}
-      className="group flex h-full flex-col overflow-hidden rounded-lg border border-line bg-ivory transition-colors duration-300 hover:border-charcoal/30"
-    >
-      <div
-        className="relative flex aspect-[16/10] items-end overflow-hidden p-5"
-        style={{ background: `linear-gradient(135deg, ${from}, ${to})` }}
-      >
+    <Link href={`/guides/${article.slug}`} className="group flex h-full flex-col overflow-hidden rounded border border-line-light bg-parchment text-ink">
+      {cover ? (
+        <Photo
+          src={cover.src}
+          alt={cover.alt}
+          fill
+          sizes="(min-width: 1024px) 30vw, (min-width: 640px) 45vw, 92vw"
+          className="aspect-[16/10] transition-opacity duration-300 group-hover:opacity-90"
+        />
+      ) : (
         <span
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 bg-cask-glow-soft opacity-60"
+          className="block aspect-[16/10] transition-opacity duration-300 group-hover:opacity-90"
+          style={{ background: `linear-gradient(160deg, ${from}, ${to})` }}
         />
-        <span className="relative overline text-gold-light">{TYPE_LABEL[article.type]}</span>
-      </div>
+      )}
       <div className="flex flex-1 flex-col gap-2.5 p-6">
-        <h3 className="font-display text-[1.4rem] leading-tight text-charcoal transition-colors group-hover:text-whisky-800">
+        <p className="font-sans text-label-sm text-copper-deep">{KICKER[article.type]}</p>
+        <h3 className="font-display text-d3 group-hover:underline group-hover:decoration-1 group-hover:underline-offset-4">
           {article.title}
         </h3>
-        <p className="line-clamp-2 text-sm leading-relaxed text-charcoal/55">{article.excerpt}</p>
-        <p className="mt-auto pt-2 text-[10.5px] uppercase tracking-[0.14em] text-smoke">
-          {new Date(article.publishedAt).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" })}
-          {" · "}
-          {minutes} min read
-        </p>
+        <p className="line-clamp-2 text-body-sm text-ink/70">{article.excerpt}</p>
+        <p className="mt-auto pt-2 font-sans text-label-sm text-ink/55">{minutes} min read</p>
       </div>
     </Link>
   );

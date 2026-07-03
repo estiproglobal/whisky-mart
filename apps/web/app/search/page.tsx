@@ -15,10 +15,7 @@ export default async function SearchPage({
   const query = sp.q ?? "";
   return (
     <>
-      <PageHero
-        eyebrow="Search"
-        title={query ? `Results for “${query}”` : "Search the cellar"}
-      />
+      <PageHero title={query ? `Results for “${query}”` : "Search the shelf"} />
       <ProductListing searchParams={sp} />
     </>
   );
