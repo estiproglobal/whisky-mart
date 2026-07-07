@@ -119,6 +119,54 @@ const COLLECTIONS: Record<string, Collection> = {
     photoId: "still",
     base: { region: ["ireland"] },
   },
+  campbeltown: {
+    title: "Campbeltown",
+    intro: "Three distilleries left, and all three worth the trouble.",
+    story: [
+      "Campbeltown was once the whisky capital of the world, with more than thirty distilleries in one small port town. The crash of the 1920s left three. What survived makes some of the most sought-after whisky in Scotland.",
+      "The house style is oily and coastal, with salt and a streak of old-fashioned funk the faithful prize. Stock is allocated and moves fast; if something here is in stock, that is not a permanent condition.",
+    ],
+    copy: {
+      bestFor: "Drinkers chasing character over polish.",
+      collectorInterest: "Intense. Small output and fierce demand keep values climbing.",
+      giftSuitability: "A knowing gift for someone already deep into whisky.",
+    },
+    signature: true,
+    photoId: "casks",
+    base: { region: ["campbeltown"] },
+  },
+  lowland: {
+    title: "Lowland",
+    intro: "Light, grassy and made for before dinner.",
+    story: [
+      "The Lowlands sit between Edinburgh, Glasgow and the border, and the whisky is as gentle as the countryside. Triple distillation is the old tradition here; it strips weight and leaves a light, clean spirit.",
+      "These are aperitif whiskies. Grass, blossom and citrus, best poured before food rather than after it.",
+    ],
+    copy: {
+      bestFor: "Newcomers, and anyone who finds most whisky too heavy.",
+      collectorInterest: "Modest, with a few quiet exceptions.",
+      giftSuitability: "Safe, gentle and easy to like.",
+    },
+    signature: true,
+    photoId: "barley",
+    base: { region: ["lowland"] },
+  },
+  american: {
+    title: "American Whiskey",
+    intro: "Bourbon, rye and new oak doing the heavy lifting.",
+    story: [
+      "American whiskey is built on new charred oak, which is why bourbon tastes of vanilla and caramel from the first sip. By law bourbon needs at least 51% corn in the mash; rye swaps that sweetness for spice.",
+      "The good news is the pricing. The American shelf holds some of the best value in the shop, and the cocktails write themselves.",
+    ],
+    copy: {
+      bestFor: "Sweeter palates, cocktail makers and anyone bored of subtlety.",
+      collectorInterest: "Growing, though the allocated releases rarely leave America.",
+      giftSuitability: "Friendly, familiar and well priced.",
+    },
+    signature: true,
+    photoId: "shelf",
+    base: { region: ["kentucky", "tennessee"] },
+  },
   bestsellers: {
     title: "Best sellers",
     intro: "The bottles we sell most, for good reason.",

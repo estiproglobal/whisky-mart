@@ -30,10 +30,9 @@ describe("productJsonLd", () => {
     expect(data.offers.availability).toMatch(/InStock/);
   });
 
-  it("includes an AggregateRating (rating count, not review count) when rated", () => {
+  it("never publishes an AggregateRating (house scores are not customer ratings)", () => {
     const data = productJsonLd(lagavulin) as unknown as ProductLd;
-    expect(data.aggregateRating?.ratingCount).toBe(lagavulin.ratingCount);
-    expect(data.aggregateRating?.ratingValue).toBe(lagavulin.ratingAvg);
+    expect(data.aggregateRating).toBeUndefined();
   });
 
   it("works for accessories (no whisky details)", () => {

@@ -3,7 +3,12 @@ import { getPrimaryVariant } from "@/lib/catalog/repository";
 
 const SITE = "https://www.whiskymart.com";
 
-/** schema.org Product + Offer (+ AggregateRating) for a PDP. */
+/**
+ * schema.org Product + Offer for a PDP. Deliberately no AggregateRating:
+ * the site's scores are house tasting ratings, not customer ratings, and
+ * publishing them as aggregate data would overstate them (Increment 12B
+ * credibility rules).
+ */
 export function productJsonLd(product: Product) {
   const variant = getPrimaryVariant(product);
   const data: Record<string, unknown> = {
@@ -22,15 +27,6 @@ export function productJsonLd(product: Product) {
       url: `${SITE}/products/${product.slug}`,
     },
   };
-  if (product.ratingCount > 0) {
-    // House/expert rating expressed as ratingCount (scores), not reviewCount:
-    // written customer reviews are a separate, independently sourced signal.
-    data.aggregateRating = {
-      "@type": "AggregateRating",
-      ratingValue: product.ratingAvg,
-      ratingCount: product.ratingCount,
-    };
-  }
   return data;
 }
 

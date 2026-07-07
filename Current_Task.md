@@ -7,7 +7,41 @@
 
 ## What I'm working on right now
 
-**Increment 12B "The Archive", session 1 (design system · photography plumbing · homepage · copy · credibility) → ✅ COMPLETE & VALIDATED on branch `claude/increment-12b-design-homepage-pvs2un` (Parts 1, 2, 4, 6, 7 of `CLAUDE_CODE_PROMPT_Increment12B.md`). Session 2 (catalog expansion + full `/vision`) still to come; the PR ships both.**
+**Increment 12B "The Archive" → ✅ ALL PARTS COMPLETE & VALIDATED on branch `claude/increment-12b-design-homepage-pvs2un`. Session 1 covered Parts 1, 2, 4, 6, 7; session 2 (same branch) covered Parts 3 and 5. Ready for PR review; no direct pushes to `main`.**
+
+**Session 2 (Parts 3 + 5):**
+
+- **Part 3, catalog:** seed expanded from 10 to **55 SKUs**: 41 bottles across
+  Islay (7), Speyside (8+2 collector), Highland (6), Islands (4+1 collector),
+  Campbeltown (3+1 collector), Lowland (3), Ireland (3), Japan (3+1 collector)
+  and Kentucky (4), plus 4 tasting flights and 5 accessories. All real,
+  well-known bottlings with correct distillery/region/age/ABV/cask data and
+  UK-plausible GBP pricing across the tiers (entry £27.95 up to Yamazaki 18 at
+  £749); five collector anchors £289–£749 for the `/vision` investment story.
+  Honest, specific tasting notes throughout; new `lib/catalog/seed.test.ts`
+  guards schema validity, uniqueness, region coverage, tier spread and
+  plausible ABV/age ranges. New `/c/campbeltown`, `/c/lowland` and
+  `/c/american` collection pages. Homepage shelf query now caps at core-range
+  prices so the collector tier doesn't crowd out the everyday bottles.
+  ⚠️ Per the increment prompt: the owner should still **spot-check prices/ABVs
+  against a live UK retailer before merging**; data was written from knowledge,
+  not live listings (the sandbox has no retail-site access).
+- **Part 5, `/vision`:** the stub replaced by the full five-chapter editorial
+  (the shop · discovery · community · the collectors' market · the AI
+  platform), each with an honest Live now/Planned label, 80–120 words of plain
+  English and one concrete example moment, ending with the factual foundation
+  paragraph and a single link back to the shop. Parchment, Newsreader, one
+  photo slot per chapter (renders when the binaries land).
+- **Also in session 2 (credibility):** product JSON-LD no longer publishes an
+  `AggregateRating` (house scores are not customer ratings); the PDP house
+  rating shows off `ratingAvg` and new SKUs carry `ratingCount: 0`.
+- **Gates (session 2):** `typecheck` ✓ · `lint` ✓ · `test` ✓ (**103**, +6 seed
+  integrity) · `build` ✓ (**102 static pages**) · copy audit clean · Lighthouse
+  home 93/96, `/vision` 94/96, Springbank PDP 92/97 (perf/a11y).
+
+---
+
+**Session 1 (Parts 1, 2, 4, 6, 7):**
 
 - **Design plan first (Part 8):** written, owner-approved and committed as
   `docs/12b-design-plan.md` before any code.

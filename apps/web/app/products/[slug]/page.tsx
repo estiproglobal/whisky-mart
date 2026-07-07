@@ -154,7 +154,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
 
           <LabelPlate product={product} variant="pdp" className="mt-5" />
 
-          {product.ratingCount > 0 ? (
+          {product.ratingAvg > 0 ? (
             <p className="mt-4 inline-flex items-center gap-2">
               <StarRating value={product.ratingAvg} />
               <span className="font-sans text-label-sm text-cream-muted">House rating</span>
