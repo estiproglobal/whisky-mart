@@ -254,7 +254,9 @@ export function ProductImage({
           "radial-gradient(90% 70% at 50% 34%, #241A13 0%, #1A130E 58%, #120D09 100%)",
       }}
     >
-      {/* Recess vignette + faint shelf line */}
+      {/* Recess vignette. (A copper shelf hairline sat here originally; cut
+          under the "remove one accessory" rule: the plate is the only
+          decorated device.) */}
       <span
         aria-hidden="true"
         className="pointer-events-none absolute inset-0"
@@ -262,11 +264,6 @@ export function ProductImage({
           boxShadow:
             "inset 0 1px 0 0 rgba(237,228,214,0.05), inset 0 0 52px 8px rgba(0,0,0,0.32), inset 0 -56px 60px -40px rgba(0,0,0,0.55)",
         }}
-      />
-      <span
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-x-[14%] bottom-[10%] h-px"
-        style={{ background: "linear-gradient(90deg, transparent, rgba(193,118,59,0.28), transparent)" }}
       />
 
       <svg viewBox="0 0 64 160" className="relative z-10 h-[86%] w-auto" aria-hidden="true">

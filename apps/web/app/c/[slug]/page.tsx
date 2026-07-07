@@ -21,7 +21,7 @@ interface Collection {
   base: ProductFilter;
 }
 
-/** Curated collections / category landing pages. */
+/** Collection landing pages. */
 const COLLECTIONS: Record<string, Collection> = {
   islay: {
     title: "Islay",

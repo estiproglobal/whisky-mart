@@ -62,13 +62,13 @@ export class GroundedMockAdvisor implements Advisor {
     const summary = summariseIntent(intent);
     let message: string;
     if (recs.length === 0) {
-      message = "I couldn't find a match in our range just now. Try browsing the full collection.";
+      message = "Nothing on the shelf fits that just now. Try the full shelf, or loosen the brief.";
     } else if (relaxed && intent.maxPrice !== undefined) {
-      message = `I couldn't find a perfect match${summary ? ` for ${summary}` : ""}, so here are the closest options:`;
+      message = `Nothing fits that budget exactly${summary ? ` for ${summary}` : ""}, so here is the closest the shelf gets:`;
     } else if (summary) {
-      message = `Got it, ${summary}. Here ${recs.length === 1 ? "is one" : `are ${recs.length}`} I'd pour for you:`;
+      message = `Got it, ${summary}. Here ${recs.length === 1 ? "is the one" : `are ${recs.length}`} I'd pour:`;
     } else {
-      message = "Happy to help you choose. Here are a few favourites to start with:";
+      message = "Tell me more and I'll narrow it. Meanwhile, these rarely disappoint:";
     }
 
     return { message, intent, recommendations: recs, disclaimer: RESPONSIBLE_DISCLAIMER };

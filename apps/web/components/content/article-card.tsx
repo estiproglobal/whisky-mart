@@ -14,9 +14,9 @@ const COVER_SLOTS: Record<string, string> = {
 /* Tonal fallbacks while the photography binaries are absent: quiet, near-dark
    surfaces (no vivid gradients). */
 const FALLBACKS: Array<[string, string]> = [
-  ["#241A13", "#1A130E"],
-  ["#1F1712", "#15100C"],
-  ["#281D14", "#1B140F"],
+  ["#33261A", "#201812"],
+  ["#2C2118", "#1C1510"],
+  ["#382A1C", "#241B13"],
 ];
 
 function hash(seed: string): number {

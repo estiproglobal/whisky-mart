@@ -2,8 +2,8 @@ import { cn } from "@/lib/utils";
 import { Monogram } from "./monogram";
 
 /**
- * The WhiskyMart horizontal lockup (seal + wordmark + "Private Casks. Curated."),
- * from the supplied brand package (`public/logos`).
+ * The WhiskyMart horizontal lockup (seal + wordmark + strapline), from the
+ * supplied brand package (`public/logos`).
  * - `surface="dark"`  → full-colour brass + ivory artwork (use on dark surfaces).
  * - `surface="light"` → charcoal monochrome (use on cream/light surfaces).
  * `compact` renders the seal only. Height is set by the caller via `className`.

@@ -17,8 +17,8 @@ type PlateVariant = "card" | "pdp" | "featured";
 function plateData(product: Product): string[] {
   const w = product.whisky;
   if (product.type === "sample") {
-    const drams = product.variants.length > 0 ? product.variants[0] : undefined;
-    return ["Tasting flight", drams && drams.sizeMl ? `${drams.sizeMl / 10}cl drams` : ""].filter(Boolean);
+    const first = product.variants.length > 0 ? product.variants[0] : undefined;
+    return ["Tasting flight", first && first.sizeMl ? `${first.sizeMl / 10}cl in total` : ""].filter(Boolean);
   }
   if (!w) return ["Accessory"];
   const cask = w.caskType.length > 0 ? w.caskType[0] : "";
@@ -26,10 +26,13 @@ function plateData(product: Product): string[] {
   return [w.region, cask, `${w.abv}% ABV`, age].filter(Boolean) as string[];
 }
 
-/** The expression line: the product title with the leading brand stripped. */
+/** The expression line: the product title with the leading brand stripped.
+    When the title doesn't start with the brand (flights, accessories), the
+    full title is the expression so the plate keeps the product's identity. */
 function expressionOf(product: Product): string {
   const stripped = product.title.replace(new RegExp(`^(The\\s+)?${product.brand.name}\\s*`, "i"), "").trim();
-  return stripped === product.title ? "" : stripped;
+  if (stripped !== product.title) return stripped;
+  return product.title === product.brand.name ? "" : product.title;
 }
 
 const NAME_SIZE: Record<PlateVariant, string> = {

@@ -1,11 +1,66 @@
 # Current Task
 
-**Last updated:** 2026-06-30
+**Last updated:** 2026-07-03
 **Owner:** Claude (agent)
 
 ---
 
 ## What I'm working on right now
+
+**Increment 12B "The Archive", session 1 (design system · photography plumbing · homepage · copy · credibility) → ✅ COMPLETE & VALIDATED on branch `claude/increment-12b-design-homepage-pvs2un` (Parts 1, 2, 4, 6, 7 of `CLAUDE_CODE_PROMPT_Increment12B.md`). Session 2 (catalog expansion + full `/vision`) still to come; the PR ships both.**
+
+- **Design plan first (Part 8):** written, owner-approved and committed as
+  `docs/12b-design-plan.md` before any code.
+- **Part 1, design system:** Increment 11's token layer replaced by "The Archive"
+  (ground `#171210` / surface / parchment / ink / cream / copper + copper-deep;
+  2px radii; hairlines at cream@14% / ink@15%; one orchestrated hero
+  fade-and-settle, all other feedback opacity/underline; reduced-motion kept).
+  Type: Libre Caslon Display + Newsreader (optical sizing) + Archivo via
+  `next/font`, five-step scale (`text-d1/d2/d3/body/label`). The **`LabelPlate`**
+  signature element (card/pdp/featured variants) carries product identity.
+  Killed sitewide: eyebrow overlines, film grain, edge sheen, cask-glow
+  gradients, numbered 01/02/03 markers, hover lifts/zooms, uppercase buttons.
+  AA verified (copper fails on parchment, so parchment text accents use
+  copper-deep; documented in the token layer).
+- **Part 2, photography system:** `lib/photo/` slot manifest (10 slots, 8 with
+  curated Unsplash sources + licences) + `<Photo>` treatment (desaturation +
+  8% copper overlay) + fs-based graceful fallback (tonal grounds until
+  binaries exist) + `scripts/fetch-photos.mjs` + `public/photo/CREDITS.md`.
+  ⚠️ The sandbox network policy blocks all image CDNs (owner chose option C):
+  run the fetch script with network access to land the images; everything is
+  pre-wired (`next/image`, explicit `sizes`, AVIF/WebP, hero `priority`).
+  Product imagery: dark niche stage + per-format generic bottle renders
+  (tall / squat Islay / Japanese / glassware / flight trio), no fake label
+  text; the plate carries the brand. `DEFERRED.md` §8 updated.
+- **Part 4, homepage:** six acts exactly per spec (photo hero, featured bottle
+  via `FEATURED_PRODUCT_ID` in `lib/home.ts`, ONE shelf rail of 6 with a
+  no-duplicate query + test, Sommelier parchment split panel with a worked
+  exchange rendering a real Talisker 10 mini card, journal covers, road-ahead
+  line → `/vision`). Six-rail scaffolding, credo band, EditorialCards,
+  HeroBottle and hero trust row deleted.
+- **Part 6, copy:** rewritten sitewide to the humanization rules (homepage,
+  12 collections, Sommelier/Gift Finder framing, empty states, 4 seed guides,
+  metadata, i18n en/de/fr aligned; advisor reply/reason strings made specific
+  and data-grounded). `scripts/copy-audit.sh` (ban list + em-dash codepoint +
+  colon-splice heuristic) runs clean.
+- **Part 7, credibility:** "What our members are pouring" gone; rating
+  stars/counts off cards; PDP keeps the labelled house rating (no count);
+  seeded reviews re-attributed plainly to the WhiskyMart tasting team;
+  duplicated hero bottle render deleted; header icon `aria-label`s verified in
+  rendered HTML; footer colophon added ("demonstration storefront…", en/de/fr);
+  age gate, responsible-drinking lines and Sommelier guardrails unchanged in
+  behaviour. Dead footer links fixed: new `/about` + `/help` pages, honest
+  one-screen `/vision` stub (session 2 replaces it), "Sell with us" removed.
+- **Perf/a11y:** the age gate now ships in the server HTML with a pre-paint
+  `data-age-ok` script (was mounting post-hydration and was every page's LCP);
+  Newsreader italic axis dropped (unused). **Lighthouse: home 93/96,
+  PDP 92/97, `/vision` 94/96 (perf/a11y)**, gates ≥85/≥95 met. 390px checked.
+- **Gates:** `typecheck` ✓ · `lint` ✓ · `test` ✓ (**97**, +LabelPlate +
+  shelf-no-duplicates; Badge tests removed with the component) · `build` ✓
+  (54 pages) · Part 8 walkthrough + "remove one accessory" applied (the copper
+  shelf hairline inside product niches was cut).
+
+---
 
 **Typography: remove every em-dash site-wide + document the rule → ✅ COMPLETE, VALIDATED, MERGED TO `main` (2026-06-30), DEPLOYING TO PRODUCTION via Vercel.**
 Owner asked to purge every em-dash (the `U+2014` glyph) from the whole codebase

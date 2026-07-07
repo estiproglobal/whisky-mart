@@ -21,7 +21,6 @@ const displaySerif = Libre_Caslon_Display({
 
 const bodySerif = Newsreader({
   subsets: ["latin"],
-  style: ["normal", "italic"],
   axes: ["opsz"],
   variable: "--font-body",
   display: "swap",
@@ -47,7 +46,22 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en-GB" className={`${displaySerif.variable} ${bodySerif.variable} ${utilitySans.variable}`}>
+    <html
+      lang="en-GB"
+      className={`${displaySerif.variable} ${bodySerif.variable} ${utilitySans.variable}`}
+      suppressHydrationWarning
+    >
+      <head>
+        {/* Pre-paint check so verified visitors never see the age gate flash
+            (the gate itself ships in the server HTML for LCP; see
+            components/age-gate.tsx). */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              'try{if(localStorage.getItem("wm_age_ok")==="1")document.documentElement.setAttribute("data-age-ok","1")}catch(e){}',
+          }}
+        />
+      </head>
       <body className="flex min-h-screen flex-col">
         <LocaleProvider>
           <CurrencyProvider>
