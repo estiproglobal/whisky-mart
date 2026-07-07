@@ -24,7 +24,7 @@ export function FlavourBars({
         const v = flavour[axis];
         return (
           <div key={axis} className="flex items-center gap-3">
-            <dt className="w-16 shrink-0 text-[11px] font-semibold uppercase tracking-[0.12em] text-smoke">
+            <dt className="w-16 shrink-0 font-sans text-label-sm text-cream-muted">
               {FLAVOUR_LABELS[axis]}
             </dt>
             <dd className="flex flex-1 items-center gap-2.5">
@@ -34,15 +34,15 @@ export function FlavourBars({
                 aria-valuemin={0}
                 aria-valuemax={100}
                 aria-label={`${FLAVOUR_LABELS[axis]} intensity ${v} of 100`}
-                className="relative h-1.5 flex-1 overflow-hidden rounded-full bg-charcoal/[0.06] ring-1 ring-inset ring-charcoal/[0.04]"
+                className="relative h-1.5 flex-1 overflow-hidden rounded-full bg-cream/10"
               >
                 <span
-                  className="absolute inset-y-0 left-0 rounded-full bg-gradient-to-r from-whisky-300 via-whisky-400 to-whisky-500"
+                  className="absolute inset-y-0 left-0 rounded-full bg-copper"
                   style={{ width: `${v}%` }}
                 />
               </span>
               {showValues ? (
-                <span className="w-5 shrink-0 text-right text-[11px] tabular-nums text-charcoal/35">{v}</span>
+                <span className="w-5 shrink-0 text-right font-sans text-label-sm tabular-nums text-cream/40">{v}</span>
               ) : null}
             </dd>
           </div>

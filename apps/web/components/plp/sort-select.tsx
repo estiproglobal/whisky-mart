@@ -24,12 +24,12 @@ export function SortSelect({ value }: { value: ProductSort }) {
   }
 
   return (
-    <label className="flex items-center gap-2 text-[11px] uppercase tracking-[0.14em] text-charcoal/55">
+    <label className="flex items-center gap-2 font-sans text-label text-cream-muted">
       Sort
       <select
         value={value}
         onChange={onChange}
-        className="h-9 rounded-md border border-line bg-ivory px-2.5 text-[12px] normal-case tracking-normal text-charcoal focus:border-charcoal/40 focus:outline-none"
+        className="h-9 rounded border border-line-dark bg-surface px-2.5 font-sans text-label-sm text-cream focus:border-cream/40 focus:outline-none"
       >
         {OPTIONS.map((o) => (
           <option key={o.value} value={o.value}>

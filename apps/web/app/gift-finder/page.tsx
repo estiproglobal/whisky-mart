@@ -49,33 +49,27 @@ export default function GiftFinderPage() {
 
   const chip = (active: boolean) =>
     cn(
-      "rounded-md border px-4 py-2 text-sm transition-colors",
+      "rounded border px-4 py-2 font-sans text-body-sm transition-opacity",
       active
-        ? "border-charcoal bg-charcoal text-cream"
-        : "border-line bg-cream text-charcoal/80 hover:border-charcoal",
+        ? "border-copper bg-copper text-ink"
+        : "border-line-dark bg-ground text-cream/85 hover:opacity-75",
     );
 
   return (
     <div className="container-page py-12 sm:py-16">
       <div className="mx-auto max-w-3xl">
         <div className="text-center">
-          <div className="flex items-center justify-center gap-3">
-            <span className="rule-gold" />
-            <span className="overline text-whisky-700">The art of gifting</span>
-            <span className="rule-gold" />
-          </div>
-          <h1 className="mt-6 font-display text-[2.75rem] leading-[1.02] tracking-tightest text-charcoal sm:text-[3.4rem]">
-            Find the perfect whisky gift.
-          </h1>
-          <p className="mx-auto mt-4 max-w-xl text-[15px] leading-relaxed text-charcoal/60">
-            Three considered questions: occasion, budget, taste. We&apos;ll narrow the shelf to a
-            handful they&apos;ll remember.
+          <h1 className="font-display text-d1 text-cream">Find them the right bottle.</h1>
+          <span aria-hidden="true" className="mx-auto mt-4 block h-px w-12 bg-copper" />
+          <p className="mx-auto mt-5 max-w-xl text-body-sm text-cream-muted">
+            Answer three questions and we&apos;ll shortlist from the shelf. If they&apos;re new to
+            whisky, say so; it changes the answer.
           </p>
         </div>
 
-        <form onSubmit={find} className="mt-10 space-y-8 rounded-lg border border-line bg-ivory p-6 sm:p-8">
+        <form onSubmit={find} className="mt-10 space-y-8 rounded border border-line-dark bg-surface p-6 sm:p-8">
           <fieldset>
-            <legend className="overline text-whisky-700">01 · Occasion</legend>
+            <legend className="font-sans text-label text-cream">The occasion</legend>
             <div className="mt-3 flex flex-wrap gap-2.5">
               {OCCASIONS.map((o) => (
                 <button key={o} type="button" onClick={() => setOccasion(o)} className={chip(occasion === o)}>
@@ -86,7 +80,7 @@ export default function GiftFinderPage() {
           </fieldset>
 
           <fieldset>
-            <legend className="overline text-whisky-700">02 · Budget</legend>
+            <legend className="font-sans text-label text-cream">The budget</legend>
             <div className="mt-3 flex flex-wrap gap-2.5">
               {BUDGETS.map((b, i) => (
                 <button key={b.label} type="button" onClick={() => setBudgetIdx(i)} className={chip(budgetIdx === i)}>
@@ -97,8 +91,8 @@ export default function GiftFinderPage() {
           </fieldset>
 
           <fieldset>
-            <legend className="overline text-whisky-700">03 · Taste they enjoy</legend>
-            <p className="mt-1 text-xs text-charcoal/45">Optional: choose any that apply.</p>
+            <legend className="font-sans text-label text-cream">Tastes they enjoy</legend>
+            <p className="mt-1 font-sans text-label-sm text-cream/55">Optional. Choose any that apply.</p>
             <div className="mt-3 flex flex-wrap gap-2.5">
               {FLAVOUR_AXES.map((axis) => (
                 <button
@@ -113,12 +107,12 @@ export default function GiftFinderPage() {
             </div>
           </fieldset>
 
-          <label className="flex items-center gap-2.5 border-t border-gold/15 pt-6 text-sm">
+          <label className="flex items-center gap-2.5 border-t border-line-dark pt-6 font-sans text-body-sm text-cream/85">
             <input
               type="checkbox"
               checked={forBeginner}
               onChange={(e) => setForBeginner(e.target.checked)}
-              className="h-4 w-4 rounded border-whisky-300 text-whisky-600 focus:ring-whisky-500"
+              className="h-4 w-4 rounded border-line-dark bg-ground accent-[#C1763B]"
             />
             They&apos;re new to whisky
           </label>
@@ -126,11 +120,11 @@ export default function GiftFinderPage() {
           <Button type="submit" size="lg" disabled={loading}>
             {loading ? (
               <>
-                <Loader2 className="h-4 w-4 animate-spin" /> Curating gifts…
+                <Loader2 className="h-4 w-4 animate-spin" /> Checking the shelf…
               </>
             ) : (
               <>
-                <Gift className="h-4 w-4" /> Find gifts
+                <Gift className="h-4 w-4" aria-hidden="true" /> Find gifts
               </>
             )}
           </Button>
@@ -138,9 +132,9 @@ export default function GiftFinderPage() {
 
         {result ? (
           <div className="mt-12 space-y-5">
-            <p className="font-display text-2xl text-charcoal">{result.message}</p>
+            <p className="font-display text-d3 text-cream">{result.message}</p>
             <RecommendationGrid items={recs} />
-            <p className="text-xs text-smoke">{result.disclaimer}</p>
+            <p className="font-sans text-label-sm text-cream/55">{result.disclaimer}</p>
           </div>
         ) : null}
       </div>

@@ -12,35 +12,27 @@ import type { OrderRepository, ReviewRepository } from "./types";
 
 const orderStore: Order[] = [];
 
-// A few seeded reviews so product pages aren't empty in development.
+// Seeded tasting notes, plainly attributed to the house so no review is
+// fabricated customer proof (Increment 12B credibility rules). Customer
+// reviews arrive through the normal review flow.
 const reviewStore: Review[] = [
   {
     id: "rev_seed_1",
     productId: "p_lagavulin16",
-    author: "Iain M.",
+    author: "WhiskyMart tasting team",
     rating: 5,
     title: "The benchmark Islay",
-    body: "Smoke, sea salt and a long elegant finish. My desert-island dram.",
-    verifiedPurchase: true,
+    body: "Smoke first, then sea salt, then a finish that outstays most conversations. This is the bottle we measure other peated whiskies against.",
+    verifiedPurchase: false,
     createdAt: "2026-05-02T10:00:00.000Z",
   },
   {
     id: "rev_seed_2",
-    productId: "p_lagavulin16",
-    author: "Priya S.",
-    rating: 4,
-    title: "Wonderful, if you love peat",
-    body: "Rich and complex. A touch intense for a beginner but superb value.",
-    verifiedPurchase: true,
-    createdAt: "2026-05-18T14:30:00.000Z",
-  },
-  {
-    id: "rev_seed_3",
     productId: "p_glenfiddich12",
-    author: "Tom B.",
+    author: "WhiskyMart tasting team",
     rating: 4,
-    title: "Great everyday Speyside",
-    body: "Easy, fruity and approachable. The first malt I recommend to friends.",
+    title: "An honest everyday Speyside",
+    body: "Pear, honey and no rough edges. It is the first malt we hand to someone starting out, and it never embarrasses anyone.",
     verifiedPurchase: false,
     createdAt: "2026-04-21T19:15:00.000Z",
   },

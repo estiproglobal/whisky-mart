@@ -44,7 +44,8 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
   const referenced = referencedProductIds(article);
 
   return (
-    <article className="container-page py-10">
+    <article className="bg-parchment text-ink">
+      <div className="container-page py-10">
       <JsonLd data={articleJsonLd(article)} />
       <JsonLd
         data={breadcrumbJsonLd([
@@ -54,23 +55,20 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
         ])}
       />
 
-      <nav aria-label="Breadcrumb" className="mb-6 text-sm text-charcoal/50">
-        <Link href="/" className="hover:text-whisky-700">Home</Link>
+      <nav aria-label="Breadcrumb" className="mb-6 font-sans text-label-sm text-ink/55">
+        <Link href="/" className="transition-opacity hover:opacity-75">Home</Link>
         <span className="px-2">/</span>
-        <Link href="/guides" className="hover:text-whisky-700">Guides</Link>
+        <Link href="/guides" className="transition-opacity hover:opacity-75">Guides</Link>
         <span className="px-2">/</span>
-        <span className="text-charcoal/70">{article.title}</span>
+        <span className="text-ink/75">{article.title}</span>
       </nav>
 
       <div className="mx-auto max-w-3xl">
-        <div className="flex items-center gap-3">
-          <span className="rule-gold" />
-          <p className="overline text-whisky-700">
-            {article.type === "guide" ? "Buying guide" : article.type === "education" ? "Academy" : "Journal"}
-          </p>
-        </div>
-        <h1 className="mt-5 font-display text-[2.75rem] leading-[1.04] tracking-tightest text-charcoal">{article.title}</h1>
-        <p className="mt-4 text-sm text-charcoal/55">
+        <p className="font-sans text-label-sm text-copper-deep">
+          {article.type === "guide" ? "Buying guide" : article.type === "education" ? "How to drink better" : "From the journal"}
+        </p>
+        <h1 className="mt-4 font-display text-d1 text-ink">{article.title}</h1>
+        <p className="mt-4 font-sans text-label-sm text-ink/60">
           {article.author} ·{" "}
           {new Date(article.publishedAt).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" })}{" "}
           · {readingMinutes(article)} min read · {referenced.length} whiskies featured
@@ -82,7 +80,8 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
 
         {related.length > 0 ? (
           <section className="mt-14">
-            <h2 className="font-display text-[1.75rem] tracking-tightest text-charcoal">Featured whiskies</h2>
+            <h2 className="font-display text-d2 text-ink">Featured whiskies</h2>
+            <span aria-hidden="true" className="pour-line" />
             <div className="mt-5 grid grid-cols-2 gap-4 sm:grid-cols-3">
               {related.map((p) => (
                 <ProductCard key={p.id} product={p} />
@@ -92,10 +91,11 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
         ) : null}
 
         <div className="mt-12">
-          <Link href="/guides" className="text-sm font-medium text-whisky-700 hover:text-whisky-900">
-            ← All guides
+          <Link href="/guides" className="font-sans text-label text-copper-deep underline decoration-1 underline-offset-4 transition-opacity hover:opacity-75">
+            All guides
           </Link>
         </div>
+      </div>
       </div>
     </article>
   );

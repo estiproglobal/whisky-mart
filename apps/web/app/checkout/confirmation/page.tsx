@@ -30,8 +30,8 @@ export default function ConfirmationPage() {
   if (!order) {
     return (
       <div className="container-page py-16 text-center">
-        <h1 className="font-display text-2xl text-charcoal">No recent order</h1>
-        <p className="mt-2 text-charcoal/60">We couldn&apos;t find an order to show.</p>
+        <h1 className="font-display text-d2 text-cream">No recent order</h1>
+        <p className="mt-2 text-body-sm text-cream-muted">We couldn&apos;t find an order to show.</p>
         <Link href="/shop" className={buttonClasses("primary", "md", "mt-6")}>
           Continue shopping
         </Link>
@@ -43,54 +43,49 @@ export default function ConfirmationPage() {
     <div className="container-page py-12">
       <div className="mx-auto max-w-2xl">
         <div className="text-center">
-          <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full border border-gold/40 bg-ivory shadow-card">
-            <CheckCircle2 className="h-9 w-9 text-whisky-700" strokeWidth={1.5} />
-          </div>
-          <div className="mt-6 flex justify-center">
-            <span className="rule-gold" />
-          </div>
-          <h1 className="mt-5 font-display text-[2.25rem] leading-tight tracking-tightest text-charcoal">Thank you, order confirmed</h1>
-          <p className="mt-3 text-charcoal/65">
-            Order <span className="font-medium text-charcoal">{order.orderNumber}</span> · a confirmation has
+          <CheckCircle2 className="mx-auto h-10 w-10 text-copper" strokeWidth={1.5} aria-hidden="true" />
+          <h1 className="mt-5 font-display text-d2 text-cream">Thank you, order confirmed</h1>
+          <p className="mt-3 text-body-sm text-cream-muted">
+            Order <span className="font-medium text-cream">{order.orderNumber}</span> · a confirmation has
             been sent to {order.email}.
           </p>
         </div>
 
-        <div className="mt-8 rounded-lg border border-line bg-ivory p-6">
+        <div className="mt-8 rounded border border-line-dark bg-surface p-6">
           <ul className="space-y-3">
             {order.items.map((item) => (
-              <li key={item.variantId} className="flex justify-between text-sm">
-                <span className="text-charcoal/80">
+              <li key={item.variantId} className="flex justify-between font-sans text-body-sm">
+                <span className="text-cream/85">
                   {item.title}
                   {formatVolume(item.sizeMl) ? ` · ${formatVolume(item.sizeMl)}` : ""} × {item.quantity}
                 </span>
-                <Price className="font-medium text-charcoal" money={item.lineTotal} />
+                <Price className="font-medium text-cream" money={item.lineTotal} />
               </li>
             ))}
           </ul>
-          <div className="mt-4 space-y-1.5 border-t border-line pt-4 text-sm">
-            <div className="flex justify-between text-charcoal/70">
+          <div className="mt-4 space-y-1.5 border-t border-line-dark pt-4 font-sans text-body-sm">
+            <div className="flex justify-between text-cream-muted">
               <span>Subtotal</span>
               <Price money={order.totals.subtotal} />
             </div>
-            <div className="flex justify-between text-charcoal/70">
+            <div className="flex justify-between text-cream-muted">
               <span>Shipping ({order.shippingMethod.label})</span>
               <span>{order.totals.shipping.amount === 0 ? "Free" : <Price money={order.totals.shipping} />}</span>
             </div>
             {!order.totals.vatInclusive && order.totals.tax.amount > 0 ? (
-              <div className="flex justify-between text-charcoal/70">
+              <div className="flex justify-between text-cream-muted">
                 <span>Tax / VAT</span>
                 <Price money={order.totals.tax} />
               </div>
             ) : null}
-            <div className="flex justify-between border-t border-line pt-2 font-display text-lg text-charcoal">
+            <div className="flex justify-between border-t border-line-dark pt-2 font-display text-d3 text-cream">
               <span>Total</span>
               <Price money={order.totals.grandTotal} />
             </div>
           </div>
 
-          <div className="mt-5 border-t border-line pt-4 text-sm text-charcoal/70">
-            <p className="font-medium text-charcoal">Delivering to</p>
+          <div className="mt-5 border-t border-line-dark pt-4 font-sans text-body-sm text-cream-muted">
+            <p className="font-medium text-cream">Delivering to</p>
             <p className="mt-1">
               {order.shippingAddress.fullName}, {order.shippingAddress.line1}, {order.shippingAddress.city},{" "}
               {order.shippingAddress.postcode}

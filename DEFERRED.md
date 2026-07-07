@@ -144,7 +144,7 @@ the on-the-record list so these are not forgotten.
 | Search | Seed + `relevanceScore()` over `/api/search` | Algolia / Typesense + vector | `/api/search` route + repository |
 | Age verification | Self-declared gate + checkout checkbox | Persona / Veriff / Yoti | checkout `age` step + `/api/checkout/pay` |
 | Jurisdiction/tax | Encoded rules table | Tax engine (Stripe Tax / Avalara) + fuller rules | `lib/checkout/jurisdiction.ts` |
-| Imagery | Warm lit SVG/gradient placeholders | Real product/lifestyle **photography** (CDN + `next/image`) | `components/product-image.tsx`, `article-card.tsx` |
+| Imagery | **Photography system (Increment 12B):** a photo-slot manifest (`lib/photo/manifest.ts`, curated Unsplash sources + licences) rendered through the `<Photo>` treatment (desaturation + copper overlay, `next/image`), with tonal fallbacks until binaries exist; product imagery is a dark niche stage (per-format generic bottle renders) with the `LabelPlate` carrying identity | Run `apps/web/scripts/fetch-photos.mjs` with network access to unsplash.com to land the binaries (credits in `public/photo/CREDITS.md`); optionally swap niches for real free-licensed bottle photography behind the same contract | `lib/photo/`, `components/ui/photo.tsx`, `components/product-image.tsx` |
 
 ---
 

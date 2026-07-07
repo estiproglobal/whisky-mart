@@ -2,10 +2,10 @@
 
 import * as React from "react";
 import Link from "next/link";
-import { Heart, LogOut, Package } from "lucide-react";
+import { Heart, LogOut } from "lucide-react";
 import type { Order } from "@whiskymart/types";
 import { useAccount } from "@/components/account/account-provider";
-import { Button, buttonClasses } from "@/components/ui/button";
+import { Button } from "@/components/ui/button";
 import { Price } from "@/components/market/price";
 
 function SignInForm() {
@@ -20,26 +20,27 @@ function SignInForm() {
         e.preventDefault();
         if (valid) signIn({ name: name.trim(), email: email.trim() });
       }}
-      className="max-w-sm space-y-4 rounded-lg border border-line bg-ivory p-6"
+      className="max-w-sm space-y-4 rounded border border-line-dark bg-surface p-6"
     >
-      <p className="text-sm text-charcoal/60">
-        Sign in to see your orders and saved whisky. (Demo sign-in: no password yet.)
+      <p className="text-body-sm text-cream-muted">
+        Sign in to see your orders and saved whisky. This is a demonstration sign-in; there is no
+        password.
       </p>
       <label className="block">
-        <span className="mb-1 block text-sm font-medium text-charcoal/80">Name</span>
+        <span className="mb-1 block font-sans text-label text-cream/85">Name</span>
         <input
           value={name}
           onChange={(e) => setName(e.target.value)}
-          className="h-11 w-full rounded-md border border-line bg-ivory px-3 text-sm outline-none focus:border-charcoal/40"
+          className="h-11 w-full rounded border border-line-dark bg-ground px-3 font-sans text-body-sm text-cream outline-none focus:border-cream/40"
         />
       </label>
       <label className="block">
-        <span className="mb-1 block text-sm font-medium text-charcoal/80">Email</span>
+        <span className="mb-1 block font-sans text-label text-cream/85">Email</span>
         <input
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="h-11 w-full rounded-md border border-line bg-ivory px-3 text-sm outline-none focus:border-charcoal/40"
+          className="h-11 w-full rounded border border-line-dark bg-ground px-3 font-sans text-body-sm text-cream outline-none focus:border-cream/40"
         />
       </label>
       <Button type="submit" disabled={!valid} className="w-full">
@@ -67,13 +68,13 @@ function OrderHistory({ email }: { email: string }) {
     };
   }, [email]);
 
-  if (orders === null) return <p className="text-sm text-charcoal/50">Loading orders…</p>;
+  if (orders === null) return <p className="text-body-sm text-cream-muted">Loading orders…</p>;
   if (orders.length === 0) {
     return (
-      <div className="rounded-lg border border-line bg-ivory p-6 text-sm text-charcoal/60">
+      <div className="rounded border border-line-dark bg-surface p-6 text-body-sm text-cream-muted">
         No orders yet.{" "}
-        <Link href="/shop" className="font-medium text-whisky-700 hover:underline">
-          Start shopping →
+        <Link href="/shop" className="text-copper underline decoration-1 underline-offset-4 transition-opacity hover:opacity-75">
+          Browse the shelf
         </Link>
       </div>
     );
@@ -82,19 +83,19 @@ function OrderHistory({ email }: { email: string }) {
   return (
     <ul className="space-y-3">
       {orders.map((o) => (
-        <li key={o.id} className="rounded-lg border border-line bg-ivory p-5">
+        <li key={o.id} className="rounded border border-line-dark bg-surface p-5">
           <div className="flex flex-wrap items-center justify-between gap-2">
-            <span className="font-display text-lg text-charcoal">{o.orderNumber}</span>
-            <span className="rounded-[3px] border border-line bg-parchment px-2 py-0.5 text-[10px] font-semibold uppercase tracking-[0.14em] text-charcoal/70">
+            <span className="font-display text-d3 text-cream">{o.orderNumber}</span>
+            <span className="rounded border border-line-dark px-2 py-0.5 font-sans text-label-sm text-cream-muted">
               {o.status}
             </span>
           </div>
-          <p className="mt-1 text-sm text-charcoal/60">
+          <p className="mt-1 font-sans text-body-sm text-cream-muted">
             {new Date(o.placedAt).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" })}
             {" · "}
             {o.items.reduce((n, i) => n + i.quantity, 0)} item(s) · <Price money={o.totals.grandTotal} />
           </p>
-          <p className="mt-2 truncate text-sm text-charcoal/70">
+          <p className="mt-2 truncate text-body-sm text-cream/80">
             {o.items.map((i) => `${i.title} ×${i.quantity}`).join(", ")}
           </p>
         </li>
@@ -109,7 +110,7 @@ export default function AccountPage() {
 
   return (
     <div className="container-page py-10">
-      <h1 className="font-display text-[2.25rem] tracking-tightest text-charcoal">My WhiskyMart</h1>
+      <h1 className="font-display text-d2 text-cream">My WhiskyMart</h1>
 
       {!customer ? (
         <div className="mt-8">
@@ -117,32 +118,27 @@ export default function AccountPage() {
         </div>
       ) : (
         <div className="mt-6 grid gap-8 lg:grid-cols-[260px_1fr]">
-          <aside className="h-fit rounded-lg border border-line bg-ivory p-6">
-            <p className="font-display text-xl text-charcoal">{customer.name}</p>
-            <p className="text-sm text-charcoal/50">{customer.email}</p>
+          <aside className="h-fit rounded border border-line-dark bg-surface p-6">
+            <p className="font-display text-d3 text-cream">{customer.name}</p>
+            <p className="font-sans text-body-sm text-cream-muted">{customer.email}</p>
             <div className="mt-4 space-y-2">
-              <Link href="/account/wishlist" className="flex items-center gap-2 text-sm text-charcoal/70 hover:text-whisky-700">
-                <Heart className="h-4 w-4" /> Wishlist
+              <Link href="/account/wishlist" className="flex items-center gap-2 font-sans text-body-sm text-cream-muted transition-opacity hover:opacity-75">
+                <Heart className="h-4 w-4" aria-hidden="true" /> Wishlist
               </Link>
               <button
                 onClick={signOut}
-                className="flex items-center gap-2 text-sm text-charcoal/70 hover:text-whisky-700"
+                className="flex items-center gap-2 font-sans text-body-sm text-cream-muted transition-opacity hover:opacity-75"
               >
-                <LogOut className="h-4 w-4" /> Sign out
+                <LogOut className="h-4 w-4" aria-hidden="true" /> Sign out
               </button>
             </div>
           </aside>
 
           <section>
-            <h2 className="mb-4 flex items-center gap-2 font-display text-2xl text-charcoal">
-              <Package className="h-5 w-5 text-whisky-600" /> Order history
-            </h2>
+            <h2 className="mb-4 font-display text-d3 text-cream">Order history</h2>
             <OrderHistory email={customer.email} />
-            <p className="mt-6 text-xs text-charcoal/40">
-              Tip: orders placed with this email at checkout appear here.{" "}
-              <Link href="/shop" className={buttonClasses("ghost", "sm", "ml-1 inline-flex")}>
-                Browse whisky
-              </Link>
+            <p className="mt-6 font-sans text-label-sm text-cream/55">
+              Orders placed with this email at checkout appear here.
             </p>
           </section>
         </div>

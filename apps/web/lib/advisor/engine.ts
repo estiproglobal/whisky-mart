@@ -116,11 +116,16 @@ function buildReason(product: Product, intent: AdvisorIntent, target?: Product):
   const flavourWords = (matched.length ? matched : topFlavours(product, 2)).map((a) => FLAVOUR_LABEL[a]);
   if (flavourWords.length) parts.push(andList(flavourWords));
 
-  if (product.whisky?.region) parts.push(`a classic ${cap(product.whisky.region)}`);
+  if (product.whisky?.region) parts.push(`from ${cap(product.whisky.region)}`);
   if (target && product.id !== target.id) parts.push(`in the style of ${target.brand.name}`);
-  if (intent.beginner && product.flavourTags.includes("beginner")) parts.push("approachable for a newcomer");
-  if (intent.maxPrice !== undefined && primaryPrice(product) <= intent.maxPrice) parts.push("within your budget");
+  if (intent.beginner && product.flavourTags.includes("beginner")) parts.push("gentle enough for a first bottle");
+  if (intent.maxPrice !== undefined && primaryPrice(product) <= intent.maxPrice) parts.push("inside your budget");
 
-  const sentence = parts.length ? cap(parts.join(", ")) : "A well-loved WhiskyMart pick";
+  // One concrete fact per bottle so no two reasons read alike.
+  const w = product.whisky;
+  if (w?.peatPpm) parts.push(`peated to ${w.peatPpm} ppm`);
+  else if (w?.ageYears) parts.push(`${w.ageYears} years in ${w.caskType[0] ?? "oak"}`);
+
+  const sentence = parts.length ? cap(parts.join(", ")) : "A house favourite";
   return `${sentence}.`;
 }

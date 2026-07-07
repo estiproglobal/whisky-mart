@@ -20,7 +20,7 @@ function StarInput({ value, onChange }: { value: number; onChange: (v: number) =
           aria-label={`${n} star${n === 1 ? "" : "s"}`}
           onClick={() => onChange(n)}
         >
-          <Star className={cn("h-6 w-6", n <= value ? "fill-gold text-gold" : "text-whisky-200")} />
+          <Star className={cn("h-6 w-6", n <= value ? "fill-copper text-copper" : "text-cream/25")} />
         </button>
       ))}
     </div>
@@ -90,7 +90,7 @@ export function ProductReviews({ productId }: { productId: string }) {
   return (
     <section className="mt-14">
       <div className="flex flex-wrap items-center justify-between gap-3">
-        <h2 className="font-display text-2xl text-charcoal">Customer reviews</h2>
+        <h2 className="font-display text-d2 text-cream">Customer reviews</h2>
         <Button variant="outline" size="sm" onClick={() => setOpen((v) => !v)}>
           {open ? "Cancel" : "Write a review"}
         </Button>
@@ -99,41 +99,41 @@ export function ProductReviews({ productId }: { productId: string }) {
       {summary.count > 0 ? (
         <div className="mt-3 flex items-center gap-3">
           <StarRating value={summary.average} />
-          <span className="text-sm text-charcoal/60">
+          <span className="font-sans text-body-sm text-cream-muted">
             {summary.average.toFixed(1)} out of 5 · {summary.count} review{summary.count === 1 ? "" : "s"}
           </span>
         </div>
       ) : (
-        <p className="mt-3 text-sm text-charcoal/60">No customer reviews yet. Be the first.</p>
+        <p className="mt-3 text-body-sm text-cream-muted">No customer reviews yet. Be the first.</p>
       )}
 
       {open ? (
-        <form onSubmit={submit} className="mt-5 space-y-4 rounded-lg border border-line bg-ivory p-6">
+        <form onSubmit={submit} className="mt-5 space-y-4 rounded border border-line-dark bg-surface p-6">
           <StarInput value={rating} onChange={setRating} />
           {!customer ? (
             <input
               value={name}
               onChange={(e) => setName(e.target.value)}
               placeholder="Your name"
-              className="h-11 w-full rounded-md border border-line bg-cream px-3 text-sm outline-none focus:border-charcoal/40"
+              className="h-11 w-full rounded border border-line-dark bg-ground px-3 font-sans text-body-sm text-cream outline-none placeholder:text-cream/40 focus:border-cream/40"
             />
           ) : (
-            <p className="text-sm text-charcoal/60">Posting as {customer.name}</p>
+            <p className="text-body-sm text-cream-muted">Posting as {customer.name}</p>
           )}
           <input
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             placeholder="Headline"
-            className="h-11 w-full rounded-md border border-line bg-cream px-3 text-sm outline-none focus:border-charcoal/40"
+            className="h-11 w-full rounded border border-line-dark bg-ground px-3 font-sans text-body-sm text-cream outline-none placeholder:text-cream/40 focus:border-cream/40"
           />
           <textarea
             value={body}
             onChange={(e) => setBody(e.target.value)}
             placeholder="What did you think? Nose, palate, finish…"
             rows={4}
-            className="w-full rounded-md border border-line bg-cream px-3 py-2 text-sm outline-none focus:border-charcoal/40"
+            className="w-full rounded border border-line-dark bg-ground px-3 py-2 font-sans text-body-sm text-cream outline-none placeholder:text-cream/40 focus:border-cream/40"
           />
-          {error ? <p className="text-sm text-red-700">{error}</p> : null}
+          {error ? <p className="text-body-sm text-copper">{error}</p> : null}
           <Button type="submit" disabled={!canSubmit || submitting}>
             {submitting ? "Submitting…" : "Submit review"}
           </Button>
@@ -142,18 +142,18 @@ export function ProductReviews({ productId }: { productId: string }) {
 
       <ul className="mt-6 space-y-4">
         {reviews.map((r) => (
-          <li key={r.id} className="rounded-lg border border-line bg-ivory p-5">
+          <li key={r.id} className="rounded border border-line-dark bg-surface p-5">
             <div className="flex items-center justify-between gap-2">
               <StarRating value={r.rating} />
               {r.verifiedPurchase ? (
-                <span className="rounded-[3px] border border-whisky-600/40 bg-cream/85 px-2 py-[3px] text-[10px] font-semibold uppercase tracking-[0.14em] text-whisky-800">
+                <span className="rounded border border-line-dark px-2 py-[3px] font-sans text-label-sm text-cream-muted">
                   Verified purchase
                 </span>
               ) : null}
             </div>
-            <h3 className="mt-3 font-display text-xl text-charcoal">{r.title}</h3>
-            <p className="mt-1 text-sm text-charcoal/70">{r.body}</p>
-            <p className="mt-2 text-xs text-charcoal/40">
+            <h3 className="mt-3 font-display text-d3 text-cream">{r.title}</h3>
+            <p className="mt-1 text-body-sm text-cream/80">{r.body}</p>
+            <p className="mt-2 font-sans text-label-sm text-cream/50">
               {r.author} ·{" "}
               {new Date(r.createdAt).toLocaleDateString("en-GB", {
                 day: "numeric",

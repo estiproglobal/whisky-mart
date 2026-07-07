@@ -104,8 +104,8 @@ export function InstantSearch({ className }: { className?: string }) {
         <label htmlFor="instant-search" className="sr-only">
           Search whisky
         </label>
-        <div className="flex items-center gap-2 rounded-md border border-line bg-ivory px-3 focus-within:border-charcoal/40">
-          <Search className="h-4 w-4 text-charcoal/40" aria-hidden="true" />
+        <div className="flex items-center gap-2 rounded border border-line-dark bg-surface px-3 focus-within:border-cream/40">
+          <Search className="h-4 w-4 text-cream/40" aria-hidden="true" />
           <input
             id="instant-search"
             type="search"
@@ -122,19 +122,19 @@ export function InstantSearch({ className }: { className?: string }) {
             aria-expanded={showDropdown}
             aria-controls="instant-search-results"
             aria-autocomplete="list"
-            className="h-10 w-full bg-transparent text-sm outline-none placeholder:text-charcoal/40"
+            className="h-10 w-full bg-transparent font-sans text-body-sm text-cream outline-none placeholder:text-cream/40"
           />
-          {loading ? <Loader2 className="h-4 w-4 animate-spin text-charcoal/30" aria-hidden="true" /> : null}
+          {loading ? <Loader2 className="h-4 w-4 animate-spin text-cream/30" aria-hidden="true" /> : null}
         </div>
 
         {showDropdown ? (
           <div
             id="instant-search-results"
             role="listbox"
-            className="absolute left-0 right-0 top-full z-50 mt-2 overflow-hidden rounded-md border border-line bg-ivory shadow-lift"
+            className="absolute left-0 right-0 top-full z-50 mt-2 overflow-hidden rounded border border-line-dark bg-surface"
           >
             {items.length === 0 && !loading ? (
-              <p className="px-4 py-6 text-center text-sm text-charcoal/50">
+              <p className="px-4 py-6 text-center text-body-sm text-cream-muted">
                 No matches for “{value.trim()}”.
               </p>
             ) : (
@@ -145,22 +145,22 @@ export function InstantSearch({ className }: { className?: string }) {
                       href={`/products/${item.slug}`}
                       onClick={() => setOpen(false)}
                       onMouseEnter={() => setActive(i)}
-                      className={`flex items-center gap-3 px-3 py-2 ${i === active ? "bg-whisky-50" : ""}`}
+                      className={`flex items-center gap-3 px-3 py-2 ${i === active ? "bg-cream/10" : ""}`}
                     >
                       <ProductImage
                         image={{ seed: item.imageSeed, alt: item.imageAlt }}
-                        className="h-12 w-10 shrink-0 rounded-md"
+                        className="h-12 w-10 shrink-0 rounded"
                       />
                       <span className="min-w-0 flex-1">
-                        <span className="block truncate text-sm font-medium text-charcoal">
+                        <span className="block truncate font-sans text-body-sm font-medium text-cream">
                           {item.title}
                         </span>
-                        <span className="block truncate text-xs text-charcoal/50">
+                        <span className="block truncate font-sans text-label-sm capitalize text-cream-muted">
                           {item.brand}
                           {item.region ? ` · ${item.region}` : ""}
                         </span>
                       </span>
-                      <Price className="shrink-0 text-sm font-medium text-charcoal" money={item.price} />
+                      <Price className="shrink-0 font-sans text-body-sm font-medium text-cream" money={item.price} />
                     </Link>
                   </li>
                 ))}
@@ -170,7 +170,7 @@ export function InstantSearch({ className }: { className?: string }) {
               <button
                 type="button"
                 onClick={goToSearch}
-                className="block w-full border-t border-whisky-100 bg-whisky-50/50 px-4 py-2.5 text-center text-sm font-medium text-whisky-700 hover:bg-whisky-50"
+                className="block w-full border-t border-line-dark px-4 py-2.5 text-center font-sans text-label text-copper transition-opacity hover:opacity-75"
               >
                 View all {total} result{total === 1 ? "" : "s"}
               </button>

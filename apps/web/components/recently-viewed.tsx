@@ -57,7 +57,7 @@ export function RecentlyViewedRail({
 
   return (
     <section className="container-page py-10">
-      <h2 className="mb-5 font-display text-2xl text-charcoal sm:text-3xl">{title}</h2>
+      <div className="mb-6"><h2 className="font-display text-d2 text-cream">{title}</h2><span aria-hidden="true" className="pour-line" /></div>
       <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
         {products.map((p) => (
           <ProductCard key={p.id} product={p} />

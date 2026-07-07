@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
 import type { Product } from "@whiskymart/types";
 import { ProductCard } from "./product-card";
 
@@ -15,14 +14,17 @@ export function ProductRail({
   if (products.length === 0) return null;
   return (
     <section className="container-page py-10">
-      <div className="mb-5 flex items-end justify-between">
-        <h2 className="font-display text-2xl text-charcoal sm:text-3xl">{title}</h2>
+      <div className="mb-6 flex items-end justify-between gap-5">
+        <div>
+          <h2 className="font-display text-d2 text-cream">{title}</h2>
+          <span aria-hidden="true" className="pour-line" />
+        </div>
         {viewAllHref ? (
           <Link
             href={viewAllHref}
-            className="inline-flex items-center gap-1 text-sm font-medium text-whisky-700 hover:text-whisky-900"
+            className="font-sans text-label text-copper underline decoration-1 underline-offset-4 transition-opacity hover:opacity-75"
           >
-            View all <ArrowRight className="h-4 w-4" />
+            View all
           </Link>
         ) : null}
       </div>

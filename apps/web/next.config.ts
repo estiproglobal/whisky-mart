@@ -8,6 +8,8 @@ const nextConfig: NextConfig = {
   eslint: { ignoreDuringBuilds: true },
   // Type errors SHOULD fail the build, keep this false.
   typescript: { ignoreBuildErrors: false },
+  // Atmosphere photography (public/photo) is served as AVIF/WebP.
+  images: { formats: ["image/avif", "image/webp"] },
 };
 
 export default nextConfig;

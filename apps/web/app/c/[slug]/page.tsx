@@ -9,7 +9,6 @@ import { aggregateFlavour } from "@/lib/catalog/flavour";
 
 interface Collection {
   title: string;
-  eyebrow: string;
   /** One-line summary: used for the hero strapline and page metadata. */
   intro: string;
   /** Short editorial story (lead paragraph first). */
@@ -17,201 +16,251 @@ interface Collection {
   copy: CollectionCopy;
   /** Show the data-driven flavour signature (off for mixed, non-flavour sets). */
   signature: boolean;
+  /** Atmosphere photo slot for the category header (lib/photo/manifest). */
+  photoId: string;
   base: ProductFilter;
 }
 
-/** Curated collections / category landing pages. */
+/** Collection landing pages. */
 const COLLECTIONS: Record<string, Collection> = {
   islay: {
     title: "Islay",
-    eyebrow: "Region",
-    intro: "Smoky, peaty and maritime: the malts of Scotland's whisky island.",
+    intro: "Peat smoke, sea air and no apologies.",
     story: [
-      "Islay is a small, wind-scoured island off Scotland's west coast whose malts are unlike anywhere else, peat smoke drawn from the land itself, sea-spray and brine, and a depth that has made the island a place of pilgrimage for collectors.",
-      "Barley dried over peat fires carries phenols measured in ppm, and the result ranges from medicinal and tarry to sweet and coastal. These are not quiet drams: an Islay malt rewards patience and a little water, opening from smoke into citrus, vanilla and a long, maritime finish.",
+      "Islay is a small island off Scotland's west coast with nine working distilleries and weather that gets into the whisky. Barley dried over peat fires gives the malts their smoke. The sea does the rest.",
+      "The range is wider than its reputation suggests. At one end you get tar, iodine and bonfires; at the other, smoke folded into citrus and vanilla so gently you barely notice it arrive. Water helps. Patience helps more.",
     ],
     copy: {
-      bestFor: "Drinkers who want intensity: smoke, brine and a finish that lingers.",
-      collectorInterest: "High. Distillery age statements and limited Islay releases hold their value keenly.",
-      giftSuitability: "A confident gift for an established peat lover; pair with a flight for the curious.",
+      bestFor: "Drinkers who want intensity and a finish that outlasts the conversation.",
+      collectorInterest: "High. Aged Islay statements and limited releases hold their value.",
+      giftSuitability: "A confident gift for a known peat lover. For the curious, send a flight instead.",
     },
     signature: true,
+    photoId: "islay-coast",
     base: { region: ["islay"] },
   },
   speyside: {
     title: "Speyside",
-    eyebrow: "Region",
-    intro: "Elegant, fruity and approachable: the heart of single malt.",
+    intro: "Orchard fruit, honey and the gentlest way in.",
     story: [
-      "Speyside is the heart of single malt, more distilleries than any other Scottish region, gathered along the River Spey. The house style is elegance: orchard fruit, honey, gentle oak and, where sherry casks are used, a deeper seam of dried fruit and spice.",
-      "It is the most welcoming doorway into whisky and, at the same time, home to some of the most collected names in the world, refined enough for the connoisseur, generous enough for a first dram.",
+      "More than half of Scotland's malt distilleries crowd along the River Spey. The house style is orchard fruit, honey and gentle oak. Sherry casks, where they're used, add dried fruit and spice underneath.",
+      "It's the easiest place to start and a hard place to leave. Several of the most collected names in whisky sit within a few miles of each other here.",
     ],
     copy: {
-      bestFor: "Newcomers and anyone who prefers fruit and honey to smoke.",
-      collectorInterest: "Very high: Speyside holds many of the most sought-after distilleries.",
-      giftSuitability: "Excellent. Polished, crowd-pleasing and hard to get wrong.",
+      bestFor: "Newcomers, and anyone who prefers fruit and honey to smoke.",
+      collectorInterest: "Very high. Many of the world's most sought-after distilleries are Speyside.",
+      giftSuitability: "Hard to get wrong.",
     },
     signature: true,
+    photoId: "casks",
     base: { region: ["speyside"] },
   },
   highland: {
     title: "Highland",
-    eyebrow: "Region",
-    intro: "Diverse and characterful malts from Scotland's largest region.",
+    intro: "Scotland's biggest region, and its least predictable.",
     story: [
-      "The Highlands are Scotland's largest whisky region, and its most varied: there is no single Highland style, only a vast geography running from delicate, floral coastal malts to robust, heathery drams from the glens.",
-      "That breadth is the appeal: whatever you love in a whisky, the Highlands hold a version of it. A region to explore slowly.",
+      "The Highlands run from the coast to the glens, and the whisky runs with them. There is no single Highland style. A floral, citrus-led malt and a heathery, muscular one can come from distilleries fifty miles apart.",
+      "That breadth is the point. Whatever you already like, some corner of the Highlands makes a version of it.",
     ],
     copy: {
-      bestFor: "Explorers who want range: from light and floral to rich and full-bodied.",
-      collectorInterest: "Strong, with several blue-chip distilleries among the glens.",
-      giftSuitability: "Versatile and safe: a style here suits almost everyone.",
+      bestFor: "Explorers who want range, from light and floral to rich and full-bodied.",
+      collectorInterest: "Strong. Several blue-chip names sit among the glens.",
+      giftSuitability: "Versatile. A style here suits almost everyone.",
     },
     signature: true,
+    photoId: "barley",
     base: { region: ["highland"] },
   },
   islands: {
     title: "Islands",
-    eyebrow: "Region",
-    intro: "Coastal malts with a maritime backbone.",
+    intro: "Sea air, pepper and honey from Scotland's scattered isles.",
     story: [
-      "Beyond Islay, Scotland's islands (Skye, Orkney, Arran, Mull and more) produce malts with a maritime backbone: smoke tempered by sea air, pepper, honey and salt.",
-      "Coastal and characterful, the island malts sit between Highland elegance and Islay intensity.",
+      "Skye, Orkney, Arran, Mull and their neighbours make malts with salt on the breeze. The smoke is usually gentler than Islay's, and there's often honey and black pepper where you'd expect tar.",
+      "Few distilleries, fierce loyalties. The island shelf is small and it does not stay in stock long.",
     ],
     copy: {
-      bestFor: "Those who like a little smoke and a lot of sea air.",
-      collectorInterest: "Solid: the island distilleries are few and fiercely loved.",
-      giftSuitability: "A characterful gift with broad appeal.",
+      bestFor: "Anyone who likes a little smoke and a lot of coast.",
+      collectorInterest: "Solid. The distilleries are few and well loved.",
+      giftSuitability: "Characterful without being a dare.",
     },
     signature: true,
+    photoId: "islay-coast",
     base: { region: ["islands"] },
   },
   japan: {
     title: "Japanese Whisky",
-    eyebrow: "Region",
-    intro: "Delicate, precise and harmonious.",
+    intro: "Balance over force, and scarcity to match.",
     story: [
-      "Japanese whisky has gone from niche to coveted in barely a decade, prized for a style all its own: delicate, precise and harmonious, built on the pursuit of balance over force.",
-      "Master blenders marry malt and grain (sometimes finished in rare Mizunara oak) for a subtle, floral complexity that has swept global awards.",
+      "Japanese whisky is built on blending. Malt and grain from a house's own distilleries are married for balance rather than force, sometimes finished in rare Mizunara oak, which leaves a trace of sandalwood you won't find anywhere else.",
+      "Demand emptied the warehouses years ago. Aged stock is scarce, prices reflect it, and the best bottles still disappear quickly.",
     ],
     copy: {
-      bestFor: "Drinkers who value finesse, balance and subtlety.",
-      collectorInterest: "Exceptional: scarcity has made Japanese bottlings among the most collected in the world.",
-      giftSuitability: "A refined, memorable gift.",
+      bestFor: "Drinkers who value finesse and subtlety.",
+      collectorInterest: "Very high. Scarcity has made Japanese bottlings fiercely collected.",
+      giftSuitability: "Refined and memorable.",
     },
     signature: true,
+    photoId: "pour",
     base: { region: ["japan"] },
   },
   ireland: {
     title: "Irish Whiskey",
-    eyebrow: "Region",
-    intro: "Smooth, triple-distilled and characterful.",
+    intro: "Triple-distilled, creamy and underrated.",
     story: [
-      "Irish whiskey is traditionally triple-distilled for a smooth, rounded character, and at its most distinctive in the single pot still style, where malted and unmalted barley give a creamy, spicy complexity found nowhere else.",
-      "Approachable yet deep, it is one of whisky's most rewarding and under-explored corners.",
+      "Irish whiskey is usually triple-distilled, which makes it rounder and softer in the mouth. The style to know is single pot still, made from malted and unmalted barley together. It tastes creamy and spicy at once, and nobody else makes it.",
+      "It spent decades overlooked. That's changing, and the good bottles are still fairly priced.",
     ],
     copy: {
-      bestFor: "Anyone who likes smooth, creamy spice without smoke.",
-      collectorInterest: "Rising: single pot still releases are increasingly sought after.",
-      giftSuitability: "Smooth and welcoming: an easy gift to love.",
+      bestFor: "Anyone who likes creamy spice and no smoke.",
+      collectorInterest: "Rising. Single pot still releases are increasingly sought after.",
+      giftSuitability: "Soft, welcoming and easy to love.",
     },
     signature: true,
+    photoId: "still",
     base: { region: ["ireland"] },
+  },
+  campbeltown: {
+    title: "Campbeltown",
+    intro: "Three distilleries left, and all three worth the trouble.",
+    story: [
+      "Campbeltown was once the whisky capital of the world, with more than thirty distilleries in one small port town. The crash of the 1920s left three. What survived makes some of the most sought-after whisky in Scotland.",
+      "The house style is oily and coastal, with salt and a streak of old-fashioned funk the faithful prize. Stock is allocated and moves fast; if something here is in stock, that is not a permanent condition.",
+    ],
+    copy: {
+      bestFor: "Drinkers chasing character over polish.",
+      collectorInterest: "Intense. Small output and fierce demand keep values climbing.",
+      giftSuitability: "A knowing gift for someone already deep into whisky.",
+    },
+    signature: true,
+    photoId: "casks",
+    base: { region: ["campbeltown"] },
+  },
+  lowland: {
+    title: "Lowland",
+    intro: "Light, grassy and made for before dinner.",
+    story: [
+      "The Lowlands sit between Edinburgh, Glasgow and the border, and the whisky is as gentle as the countryside. Triple distillation is the old tradition here; it strips weight and leaves a light, clean spirit.",
+      "These are aperitif whiskies. Grass, blossom and citrus, best poured before food rather than after it.",
+    ],
+    copy: {
+      bestFor: "Newcomers, and anyone who finds most whisky too heavy.",
+      collectorInterest: "Modest, with a few quiet exceptions.",
+      giftSuitability: "Safe, gentle and easy to like.",
+    },
+    signature: true,
+    photoId: "barley",
+    base: { region: ["lowland"] },
+  },
+  american: {
+    title: "American Whiskey",
+    intro: "Bourbon, rye and new oak doing the heavy lifting.",
+    story: [
+      "American whiskey is built on new charred oak, which is why bourbon tastes of vanilla and caramel from the first sip. By law bourbon needs at least 51% corn in the mash; rye swaps that sweetness for spice.",
+      "The good news is the pricing. The American shelf holds some of the best value in the shop, and the cocktails write themselves.",
+    ],
+    copy: {
+      bestFor: "Sweeter palates, cocktail makers and anyone bored of subtlety.",
+      collectorInterest: "Growing, though the allocated releases rarely leave America.",
+      giftSuitability: "Friendly, familiar and well priced.",
+    },
+    signature: true,
+    photoId: "shelf",
+    base: { region: ["kentucky", "tennessee"] },
   },
   bestsellers: {
     title: "Best sellers",
-    eyebrow: "Collection",
-    intro: "The bottles our cabinet reaches for most.",
+    intro: "The bottles we sell most, for good reason.",
     story: [
-      "The bottles our cabinet reaches for most, a cross-section of styles that have earned their place through balance, value and sheer drinkability.",
-      "If you are not sure where to begin, begin here. These are the drams we recommend again and again.",
+      "These are the bottles that leave the shop fastest. No theme connects them except that people finish them and buy them again.",
+      "If you're not sure where to begin, begin here.",
     ],
     copy: {
-      bestFor: "Anyone wanting a sure thing: proven, well-loved bottles.",
-      collectorInterest: "Mixed: chosen for drinking pleasure first, with several collectible names among them.",
-      giftSuitability: "Reliably excellent gifts across every budget.",
+      bestFor: "Anyone wanting a sure thing.",
+      collectorInterest: "Mixed. These are chosen for drinking first, though a few collectible names sit among them.",
+      giftSuitability: "Reliable at every budget.",
     },
     signature: true,
+    photoId: "shelf",
     base: { badges: ["bestseller"] },
   },
   samples: {
     title: "Samples & flights",
-    eyebrow: "Tasting",
-    intro: "Try before you commit: 3cl samples and curated flights.",
+    intro: "Taste it for the price of a dram, not a bottle.",
     story: [
-      "The smartest way to find your favourite: try before you commit. Our 3cl samples and curated flights let you explore a region or a style for the price of a couple of drams, not a full bottle.",
-      "Every sample is decanted from the same stock we sell; what you taste is exactly what you'll pour.",
+      "A 3cl sample holds two honest pours. It's the cheapest way to find out whether a £70 bottle deserves your £70, and our flights group them so you can walk a region in an evening.",
+      "Every sample is decanted from the same stock we sell; what you taste is what you'd pour.",
     ],
     copy: {
-      bestFor: "Explorers, gift-buyers and anyone narrowing down a full-bottle purchase.",
-      collectorInterest: "Low by design: these are for tasting, not the shelf.",
-      giftSuitability: "An ideal low-commitment gift, or a tasting night in a box.",
+      bestFor: "Explorers, gift-buyers and anyone narrowing down a full bottle.",
+      collectorInterest: "None. These are for drinking.",
+      giftSuitability: "A tasting night in a box.",
     },
     signature: true,
+    photoId: "tasting-table",
     base: { type: ["sample"] },
   },
   beginners: {
     title: "Great for beginners",
-    eyebrow: "Collection",
-    intro: "Approachable, easy-to-love whiskies to start your journey.",
+    intro: "Gentle first bottles with nothing to prove.",
     story: [
-      "Whisky should be a pleasure from the first pour. These are the bottles we hand to people starting out, approachable, forgiving and easy to love, with none of the rough edges that put newcomers off.",
-      "Start gentle. The smoke and the cask-strength rarities will still be here when you want them.",
+      "Whisky should be a pleasure from the first pour, so these bottles are forgiving. No aggressive smoke, no cask-strength heat, nothing that needs explaining or apologising for.",
+      "Start gentle. The peat monsters will still be here when you're ready.",
     ],
     copy: {
-      bestFor: "First-timers and anyone building confidence.",
-      collectorInterest: "Not the point: these are made to be opened and enjoyed.",
-      giftSuitability: "The safest gift for someone new to whisky.",
+      bestFor: "First bottles and building confidence.",
+      collectorInterest: "Not the point. These are made to be opened.",
+      giftSuitability: "The safest choice for someone new to whisky.",
     },
     signature: true,
+    photoId: "glass-pair",
     base: { tags: ["beginner"] },
   },
   peated: {
     title: "Peated whisky",
-    eyebrow: "Tasting",
-    intro: "For lovers of smoke and peat.",
+    intro: "Smoke, from a wisp to a bonfire.",
     story: [
-      "For lovers of smoke. Peated whiskies are made from barley dried over peat fires, and the phenols that carry through (measured in ppm) give everything from a gentle campfire wisp to full medicinal, tarry intensity.",
-      "Not only an Islay story: peat turns up across Scotland and beyond. This is the shelf for the smoke-seekers.",
+      "Peated whisky starts in the kiln, where smouldering peat dries the barley and leaves phenols behind. A light hand gives you a campfire wisp. A heavy one gives you tar, iodine and arguments at the dinner table.",
+      "It isn't only an Islay habit. Peat turns up across Scotland and well beyond it, and this shelf collects the lot.",
     ],
     copy: {
-      bestFor: "Confirmed peat-heads and anyone chasing smoke and intensity.",
-      collectorInterest: "High: heavily peated limited editions are keenly collected.",
-      giftSuitability: "Only for someone who already loves smoke; otherwise, gift a flight.",
+      bestFor: "Confirmed smoke-seekers.",
+      collectorInterest: "High. Heavily peated limited editions are keenly collected.",
+      giftSuitability: "Only for someone who already loves smoke. Otherwise send a flight.",
     },
     signature: true,
+    photoId: "islay-coast",
     base: { flavour: ["peaty"] },
   },
   "under-50": {
     title: "Under £50",
-    eyebrow: "Collection",
-    intro: "Outstanding whisky that won't break the bank.",
+    intro: "The bottles we actually drink on a Tuesday.",
     story: [
-      "Great whisky doesn't have to be expensive. Under £50 you'll find genuinely excellent bottles (gentle Speysiders, peppery coastal malts and more) that suit everyday sipping and make confident gifts.",
-      "Proof that the best bottle is the one you'll actually reach for on a Tuesday.",
+      "Under £50 sits most of the whisky we drink ourselves. A gentle Speysider for weeknights, or a peppery coastal malt when the weather turns. None of it needs a special occasion.",
+      "The best bottle is the one you'll open. These get opened.",
     ],
     copy: {
-      bestFor: "Everyday drinking and dependable, affordable gifts.",
-      collectorInterest: "Low: bought to be enjoyed, not stored away.",
-      giftSuitability: "Outstanding value gifts that never feel cheap.",
+      bestFor: "Everyday drinking and dependable gifts.",
+      collectorInterest: "Low. Bought to be enjoyed, not stored.",
+      giftSuitability: "Generous without being reckless.",
     },
     signature: false,
+    photoId: "shelf",
     base: { maxPrice: 5000 },
   },
   gifts: {
     title: "Gifts",
-    eyebrow: "Collection",
-    intro: "Memorable whisky gifts for every occasion.",
+    intro: "The right bottle for the right person.",
     story: [
-      "A memorable whisky gift is really a memorable experience, the right bottle for the right person, properly presented. From a first single malt to a collector's centrepiece, the cabinet holds something for every occasion.",
-      "Not sure where to start? A tasting flight is the most generous low-risk gift there is; let them find their own favourite.",
+      "A good whisky gift is a bottle matched to its drinker, not the most expensive thing on the shelf. Tell us who it's for and the Gift Finder will shortlist honestly.",
+      "When in doubt, give a flight. Letting someone find their own favourite is the most generous gift there is.",
     ],
     copy: {
-      bestFor: "Every kind of recipient: from the curious to the committed collector.",
+      bestFor: "Every kind of recipient, from curious to committed.",
       collectorInterest: "Spans the range, from everyday bottles to limited editions.",
-      giftSuitability: "The whole point: chosen to give well.",
+      giftSuitability: "That's the idea.",
     },
     signature: false,
+    photoId: "cork",
     base: {},
   },
 };
@@ -257,7 +306,7 @@ export default async function CollectionPage({
 
   return (
     <>
-      <PageHero eyebrow={collection.eyebrow} title={collection.title} intro={collection.intro} />
+      <PageHero title={collection.title} intro={collection.intro} photoId={collection.photoId} />
       <CollectionStory
         story={collection.story}
         copy={collection.copy}

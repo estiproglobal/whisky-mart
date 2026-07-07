@@ -9,12 +9,12 @@ export function WishlistIndicator() {
   return (
     <Link
       href="/account/wishlist"
-      className="relative inline-flex h-10 w-10 items-center justify-center rounded-xl hover:bg-whisky-50"
+      className="relative inline-flex h-10 w-10 items-center justify-center rounded text-cream transition-opacity hover:opacity-75"
       aria-label={`Wishlist, ${count} item${count === 1 ? "" : "s"}`}
     >
-      <Heart className="h-5 w-5 text-charcoal" aria-hidden="true" />
+      <Heart className="h-5 w-5" aria-hidden="true" strokeWidth={1.5} />
       {count > 0 ? (
-        <span className="absolute -right-0.5 -top-0.5 flex h-5 min-w-5 items-center justify-center rounded-full bg-whisky-600 px-1 text-xs font-semibold text-cream">
+        <span className="absolute -right-0.5 -top-0.5 flex h-5 min-w-5 items-center justify-center rounded-full bg-copper px-1 font-sans text-xs font-semibold text-ink">
           {count}
         </span>
       ) : null}

@@ -1,39 +1,40 @@
-import { Monogram } from "@/components/brand/monogram";
+import { getPhoto } from "@/lib/photo";
+import { Photo } from "@/components/ui/photo";
 
 /**
- * PageHero: a dark, immersive editorial header for listing/content pages
- * (PLP, category, guides, search, taste). Warm cask glow + faint monogram.
+ * PageHero: the dark editorial header for listing/content pages (PLP,
+ * category, guides, search, taste). Takes an optional atmosphere photo slot
+ * (category headers); degrades to the plain ground until the binary exists.
+ * Server components only (photo lookup touches the filesystem).
  */
 export function PageHero({
-  eyebrow,
   title,
   intro,
+  photoId,
   children,
 }: {
-  eyebrow?: string;
   title: string;
   intro?: string;
+  photoId?: string;
   children?: React.ReactNode;
 }) {
+  const photo = photoId ? getPhoto(photoId) : null;
   return (
-    <section className="texture-grain relative overflow-hidden bg-ink bg-cask-glow-soft text-cream">
-      <div
-        className="pointer-events-none absolute -right-16 -top-10 hidden opacity-[0.05] lg:block"
-        aria-hidden="true"
-      >
-        <Monogram decorative className="h-72 w-72" />
-      </div>
-      <div className="container-page relative py-16 sm:py-20">
-        {eyebrow ? (
-          <div className="flex items-center gap-3">
-            <span className="rule-gold" />
-            <p className="overline text-gold-light">{eyebrow}</p>
-          </div>
-        ) : null}
-        <h1 className="mt-5 max-w-3xl font-display text-[2.6rem] leading-[1.02] tracking-tightest sm:text-[3.4rem]">
-          {title}
-        </h1>
-        {intro ? <p className="mt-5 max-w-2xl text-[15px] leading-relaxed text-cream/65">{intro}</p> : null}
+    <section className="relative overflow-hidden border-b border-line-dark bg-ground text-cream">
+      {photo ? (
+        <>
+          <Photo src={photo.src} alt="" fill sizes="100vw" className="absolute inset-0" />
+          <span
+            aria-hidden="true"
+            className="absolute inset-0"
+            style={{ background: "linear-gradient(52deg, rgba(23,18,16,0.94) 30%, rgba(23,18,16,0.6) 62%, rgba(23,18,16,0.25) 100%)" }}
+          />
+        </>
+      ) : null}
+      <div className="container-page relative py-14 sm:py-16">
+        <h1 className="max-w-3xl font-display text-d1 text-cream">{title}</h1>
+        <span aria-hidden="true" className="pour-line" />
+        {intro ? <p className="mt-5 max-w-2xl text-body-sm text-cream-muted">{intro}</p> : null}
         {children ? <div className="mt-7">{children}</div> : null}
       </div>
     </section>
