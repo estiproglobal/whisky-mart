@@ -1,13 +1,15 @@
 # Current Task
 
-**Last updated:** 2026-07-03
+**Last updated:** 2026-07-07
 **Owner:** Claude (agent)
 
 ---
 
 ## What I'm working on right now
 
-**Increment 12B "The Archive" → ✅ ALL PARTS COMPLETE & VALIDATED on branch `claude/increment-12b-design-homepage-pvs2un`. Session 1 covered Parts 1, 2, 4, 6, 7; session 2 (same branch) covered Parts 3 and 5. Ready for PR review; no direct pushes to `main`.**
+**Increment 12B "The Archive" → ✅ ALL PARTS COMPLETE, VALIDATED, MERGED TO `main` (PR #13, squash → `7e5d2be`, 2026-07-07), DEPLOYING TO PRODUCTION via Vercel.** Developed on `claude/increment-12b-design-homepage-pvs2un`; session 1 covered Parts 1, 2, 4, 6, 7 and session 2 (same branch) covered Parts 3 and 5.
+
+> ⏳ **Two owner follow-ups before the demo is fully finished** (both flagged in the PR): (1) **spot-check the catalog prices/ABVs/age statements against a live UK retailer** (`apps/web/lib/catalog/seed.ts`): the data was written from knowledge, not live listings, and a whisky-literate buyer will open the Islay page first; (2) **land the photography**: run `apps/web/scripts/fetch-photos.mjs` with network access to unsplash.com (or allowlist the CDNs), eyeball each image against its brief, and curate the two open slots (`still`, `islay-coast`; `public/photo/CREDITS.md`). The site renders on tonal grounds until then.
 
 **Session 2 (Parts 3 + 5):**
 

@@ -1,6 +1,6 @@
 # Handoff
 
-**Date:** 2026-07-03
+**Date:** 2026-07-07
 **From:** Claude (agent session)
 **To:** Repo owner (estiproglobal) / next agent session
 
@@ -8,7 +8,7 @@
 
 ## Completed
 
-- **Increment 12B "The Archive": ✅ ALL PARTS COMPLETE & VALIDATED on `claude/increment-12b-design-homepage-pvs2un` (NOT yet merged; ready for PR review).** Session 2 added Part 3 (catalog: 10 → **55 SKUs**, real bottlings with correct age/ABV/cask data and UK-plausible pricing, five collector anchors £289–£749, new campbeltown/lowland/american collection pages, `seed.test.ts` integrity guards, shelf query capped at core prices) and Part 5 (the full five-chapter `/vision` editorial with honest Live/Planned framing, replacing the stub). Product JSON-LD no longer emits `AggregateRating`. Gates: `typecheck` ✓ · `lint` ✓ · `test` ✓ (**103**) · `build` ✓ (**102 pages**) · Lighthouse home 93/96 · `/vision` 94/96 · PDP 92/97 · copy audit clean.
+- **Increment 12B "The Archive": ✅ ALL PARTS COMPLETE, VALIDATED, MERGED TO `main` (PR #13, squash → `7e5d2be`, 2026-07-07) → Vercel auto-deploys to production (`whisky-mart-web.vercel.app`).** Developed on `claude/increment-12b-design-homepage-pvs2un`. Session 2 added Part 3 (catalog: 10 → **55 SKUs**, real bottlings with correct age/ABV/cask data and UK-plausible pricing, five collector anchors £289–£749, new campbeltown/lowland/american collection pages, `seed.test.ts` integrity guards, shelf query capped at core prices) and Part 5 (the full five-chapter `/vision` editorial with honest Live/Planned framing, replacing the stub). Product JSON-LD no longer emits `AggregateRating`. Gates: `typecheck` ✓ · `lint` ✓ · `test` ✓ (**103**) · `build` ✓ (**102 pages**) · Lighthouse home 93/96 · `/vision` 94/96 · PDP 92/97 · copy audit clean.
   - **Owner actions before merge:** (1) **spot-check catalog prices/ABVs/ages against a live UK retailer** (the increment prompt's own caveat; data was written from knowledge, not live listings; `lib/catalog/seed.ts`); (2) run `node apps/web/scripts/fetch-photos.mjs` somewhere with network access to unsplash.com (or allowlist the CDNs in the environment) to land the photography, eyeball each image against its brief, and curate the two open slots (`still`, `islay-coast`; see `public/photo/CREDITS.md`); (3) note the three owner-uploaded planning docs at the repo root (`STRATEGY.md`, `PATH_B_PLAN.md`, `CLAUDE_CODE_PROMPT_Increment12B.md`) still contain em-dashes and are deliberately excluded from the copy audit; purge or keep as you prefer.
 - **Session 1 (Parts 1, 2, 4, 6, 7): ✅ COMPLETE.** Owner-approved design plan committed first (`docs/12b-design-plan.md`). New token layer (dark-first ground/surface/parchment/ink/cream/copper, 2px radii, Libre Caslon Display + Newsreader + Archivo, five-step scale), the `LabelPlate` signature element, six-act homepage (`lib/home.ts` carries `FEATURED_PRODUCT_ID` and the no-duplicate shelf query), sitewide retrofit within existing structure, copy rewritten to the Part 6 humanization rules (audited via `apps/web/scripts/copy-audit.sh`), credibility fixes (no fabricated social proof, house-attributed seed reviews, colophon, `/about` + `/help` + honest `/vision` stub replacing dead footer links). Photography ships as plumbing per owner decision C: `lib/photo/` manifest (8/10 slots carry curated Unsplash sources + licences), `<Photo>` treatment, tonal fallbacks, `scripts/fetch-photos.mjs`, `public/photo/CREDITS.md`; **run the fetch script with network access to unsplash.com to land the binaries** (the sandbox policy blocked all image CDNs; slots `still` and `islay-coast` still need a human pick). Age gate now server-rendered with a pre-paint `data-age-ok` script (same behaviour, fixes LCP). Gates: `typecheck` ✓ · `lint` ✓ · `test` ✓ (97) · `build` ✓ (54 pages) · Lighthouse home 93/96, PDP 92/97, `/vision` 94/96 (perf/a11y) · 390px checked · em-dash/ban-list audit clean.
   - **Session 2 TODO (Parts 3 + 5):** expand the catalog to 45–55 real, spot-checked SKUs (prices/ABVs/ages against UK retail; collector tier £250–1500), write the full five-chapter `/vision` editorial (replacing the stub page), extend `photo/CREDITS.md` if new slots are added, keep the copy rules (`scripts/copy-audit.sh`) and update the two context files. Then PR from this branch; no direct pushes to `main`.
@@ -89,7 +89,7 @@
 
 ## In-progress
 
-- **Nothing in flight.** The em-dash purge and the prior category/PDP editorial + credibility pass are both **merged to `main`** and in production; the feature branch matches `main`.
+- **Nothing in flight.** Increment 12B "The Archive" is **merged to `main`** (PR #13, squash → `7e5d2be`) and deploying; the feature branch matches `main`.
 - **Deploy pipeline LIVE:** Vercel ↔ `main` → production at `whisky-mart-web.vercel.app`. **`whiskymart.com` not yet attached** (owner/DNS action: `DEPLOY.md`).
 
 ## Blocked by
@@ -99,19 +99,23 @@
 
 ## Next Action
 
-1. **Attach `whiskymart.com`**: the category/PDP editorial + credibility pass is merged and deploying, so point the custom domain in Vercel → Domains (DNS steps in `DEPLOY.md`). Owner/DNS action.
-2. **(Optional) Provide photography**: real bottle/lifestyle images are the one asset that will fully land the luxury aesthetic (placeholders are now museum-like but synthetic).
-3. **Then: go-live as a real store / hardening:** wire the `DEFERRED.md` swaps (Stripe → Postgres → real auth → Claude → Sanity → live FX) + analytics/a11y/CWV/CI, alongside the legal/merchant prerequisites (alcohol licence, payment underwriting, age-verification vendor).
-4. **OR Phase 3**: Community & Membership per `docs/02`.
+1. **Spot-check the 12B catalog against a live UK retailer** (prices, ABVs, age statements in `apps/web/lib/catalog/seed.ts`) before showing the demo to a whisky-literate buyer. The data was written from knowledge, not live listings; one wrong age statement costs more credibility than the redesign buys.
+2. **Land the 12B photography**: run `apps/web/scripts/fetch-photos.mjs` with network access to unsplash.com (or allowlist the CDNs in the Vercel/CI environment), eyeball each image against its brief in `lib/photo/manifest.ts`, and curate the two open slots (`still`, `islay-coast`). Credits in `public/photo/CREDITS.md`. The site renders on tonal grounds until then.
+3. **Attach `whiskymart.com`**: point the custom domain in Vercel → Domains (DNS steps in `DEPLOY.md`). Owner/DNS action.
+4. **Package & sell** per `PATH_B_PLAN.md` step 2 (`SALE_PACKAGE.md`, screenshots, repo cleanup), now that the buyer-demo increment is live.
 5. Keep every increment runnable, tested, and pushed to `main`; update the two context files after each.
 
 ## How to run
 
 ```bash
 pnpm install
-pnpm build        # production build (51 static pages)
-pnpm test         # 94 unit tests
+pnpm build        # production build (102 static pages)
+pnpm test         # 103 unit tests
 pnpm --filter @whiskymart/web dev   # local dev at http://localhost:3000
 # sandbox build (turbo doesn't forward the CA): from apps/web run
 #   NODE_EXTRA_CA_CERTS=/root/.ccr/ca-bundle.crt npx next build
+# copy audit (Increment 12B humanization rules): from apps/web run
+#   ./scripts/copy-audit.sh
+# land the atmosphere photography (needs unsplash.com access): from apps/web run
+#   node scripts/fetch-photos.mjs
 ```

@@ -84,16 +84,21 @@ DEFERRED.md                            # planned production swaps (Postgres, Str
 > **Build status:** **Phase-1 MVP feature-complete** on `main` (Increments 1–6:
 > storefront · search/wishlist · checkout+compliance+payment · accounts/
 > persistence/reviews · AI Sommelier+Gift Finder · content+SEO). **Phase 2
-> complete**: multi-currency (7) + i18n (8) + personalisation (9). **Increment
-> 10: "The Private Cask Room" luxury/editorial design overhaul** + **Increment
-> 11: "The Cabinet, refined": a stricter luxury pass** (token-led restraint:
-> tighter radii, hairline-led flat tiles, ink-default CTAs with amber demoted to
-> a dark-surface accent, quieter badges, museum-like lit product niche; behaviour
-> unchanged). 85 tests, all gates green. **Increment 11 reviewed via PR #3,
-> owner-signed-off, and squash-merged to `main` (`8b2e329`): now the live Vercel
-> production deployment** (`whisky-mart-web.vercel.app`, auto-deploy from `main`);
-> **`whiskymart.com` not yet attached** (owner/DNS: `DEPLOY.md`). Interface-first
-> throughout: production integrations + real photography are recorded in
-> `DEFERRED.md`. **Brand:** the owner-supplied WhiskyMart logo package (seal +
-> wordmark + lockups + favicon) is integrated from `apps/web/public/logos/`
-> (charcoal lockup on light surfaces, full-colour brass+ivory on dark).
+> complete**: multi-currency (7) + i18n (8) + personalisation (9). Increments 10
+> and 11 delivered the luxury/editorial design passes. **Increment 12B "The
+> Archive" is the current live design** (buyer-demo edition): a full redesign
+> around a dark distiller's-archive token system (Libre Caslon Display +
+> Newsreader + Archivo, the `<LabelPlate>` signature element), a six-act
+> editorial homepage, a 55-SKU real-world catalog with a collector tier, the
+> long-form `/vision` five-chapter roadmap, a sitewide humanized copy rewrite,
+> and credibility fixes (no fabricated social proof, demo colophon). Photography
+> is wired interface-first (`lib/photo/` manifest + `<Photo>` treatment + fetch
+> script + `CREDITS.md`); binaries land via `scripts/fetch-photos.mjs` when the
+> image CDNs are reachable. **103 tests, all gates green; Lighthouse home 93/96,
+> PDP 92/97, /vision 94/96.** **Reviewed via PR #13 and squash-merged to `main`
+> (`7e5d2be`, 2026-07-07): now the live Vercel production deployment**
+> (`whisky-mart-web.vercel.app`, auto-deploy from `main`); **`whiskymart.com`
+> not yet attached** (owner/DNS: `DEPLOY.md`). Interface-first throughout:
+> production integrations are recorded in `DEFERRED.md`. **Brand:** the
+> owner-supplied WhiskyMart logo package (seal + wordmark + lockups + favicon) is
+> integrated from `apps/web/public/logos/`.
