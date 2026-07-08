@@ -55,6 +55,17 @@
   .pour-line {
     @apply mt-4 block h-px w-12 bg-copper;
   }
+  /* Atmosphere fallback: a warm, lit dark panel for photographic slots while
+     the binaries are absent (see lib/photo). Reads as an intentional
+     cask-room surface rather than an empty ground; real photos replace it
+     behind the same slot. */
+  .atmosphere-fallback {
+    background-image:
+      radial-gradient(58% 68% at 74% 26%, rgba(193, 118, 59, 0.22), transparent 62%),
+      radial-gradient(85% 80% at 16% 108%, rgba(143, 85, 39, 0.18), transparent 60%),
+      linear-gradient(158deg, #2a1e15 0%, #1c140d 56%, #140f0a 100%);
+    box-shadow: inset 0 0 90px 24px rgba(0, 0, 0, 0.34);
+  }
   /* The one orchestrated moment: the homepage hero settles on load.
      Everything else is opacity/underline. Killed by the reduced-motion
      guard above (animation-duration ~0). */
