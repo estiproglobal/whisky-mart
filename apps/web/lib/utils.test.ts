@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { formatAge, formatMoney, formatVolume } from "./utils";
+import { formatAge, formatMoney, formatVolume, formatRegion, formatCask } from "./utils";
 
 describe("formatMoney", () => {
   it("formats GBP minor units as pounds", () => {
@@ -38,5 +38,33 @@ describe("formatVolume", () => {
     expect(formatVolume(0)).toBe("");
     expect(formatVolume(null)).toBe("");
     expect(formatVolume(undefined)).toBe("");
+  });
+});
+
+describe("formatRegion", () => {
+  it("capitalises region slugs", () => {
+    expect(formatRegion("islay")).toBe("Islay");
+    expect(formatRegion("speyside")).toBe("Speyside");
+    expect(formatRegion("kentucky")).toBe("Kentucky");
+    expect(formatRegion("")).toBe("");
+    expect(formatRegion(null)).toBe("");
+  });
+});
+
+describe("formatCask", () => {
+  it("renders cask slugs as reader-friendly labels", () => {
+    expect(formatCask("ex-bourbon")).toBe("Ex-bourbon cask");
+    expect(formatCask("ex-sherry")).toBe("Ex-sherry cask");
+    expect(formatCask("mizunara")).toBe("Mizunara oak");
+    expect(formatCask("new-american-oak")).toBe("New American oak");
+    expect(formatCask("port")).toBe("Port cask");
+  });
+
+  it("never returns a raw hyphenated slug for known casks", () => {
+    for (const slug of ["ex-bourbon", "ex-sherry", "european-oak", "new-american-oak"]) {
+      expect(formatCask(slug)).not.toBe(slug);
+    }
+    expect(formatCask("")).toBe("");
+    expect(formatCask(null)).toBe("");
   });
 });

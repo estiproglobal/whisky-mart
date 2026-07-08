@@ -8,10 +8,13 @@ const accessory = SEED_PRODUCTS.find((p) => p.type === "accessory")!;
 const flight = SEED_PRODUCTS.find((p) => p.type === "sample")!;
 
 describe("LabelPlate", () => {
-  it("shows the brand and the whisky's data row", () => {
+  it("shows the brand and the whisky's data row, formatted (not raw slugs)", () => {
     render(<LabelPlate product={bottle} variant="pdp" />);
     expect(screen.getByText("Lagavulin")).toBeInTheDocument();
-    expect(screen.getByText("islay")).toBeInTheDocument();
+    // Region and cask render formatted: "Islay", "Ex-bourbon cask" (not "islay"/"ex-bourbon").
+    expect(screen.getByText("Islay")).toBeInTheDocument();
+    expect(screen.getByText("Ex-bourbon cask")).toBeInTheDocument();
+    expect(screen.queryByText("islay")).not.toBeInTheDocument();
     expect(screen.getByText("43% ABV")).toBeInTheDocument();
     expect(screen.getByText("16 years")).toBeInTheDocument();
   });

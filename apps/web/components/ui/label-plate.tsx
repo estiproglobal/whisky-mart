@@ -1,6 +1,6 @@
 import * as React from "react";
 import type { Product } from "@whiskymart/types";
-import { cn } from "@/lib/utils";
+import { cn, formatRegion, formatCask } from "@/lib/utils";
 
 /**
  * The signature element of "The Archive": a bordered parchment plate typeset
@@ -21,9 +21,9 @@ function plateData(product: Product): string[] {
     return ["Tasting flight", first && first.sizeMl ? `${first.sizeMl / 10}cl in total` : ""].filter(Boolean);
   }
   if (!w) return ["Accessory"];
-  const cask = w.caskType.length > 0 ? w.caskType[0] : "";
+  const cask = w.caskType.length > 0 ? formatCask(w.caskType[0]) : "";
   const age = w.ageYears ? `${w.ageYears} years` : "No age statement";
-  return [w.region, cask, `${w.abv}% ABV`, age].filter(Boolean) as string[];
+  return [formatRegion(w.region), cask, `${w.abv}% ABV`, age].filter(Boolean) as string[];
 }
 
 /** The expression line: the product title with the leading brand stripped.

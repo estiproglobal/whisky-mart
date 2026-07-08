@@ -32,3 +32,29 @@ export function formatVolume(sizeMl: number | null | undefined): string {
   const cl = sizeMl / 10;
   return Number.isInteger(cl) ? `${cl}cl` : `${sizeMl}ml`;
 }
+
+/** Region slug → display name ("islay" → "Islay", "kentucky" → "Kentucky"). */
+export function formatRegion(region: string | null | undefined): string {
+  if (!region) return "";
+  return region.charAt(0).toUpperCase() + region.slice(1);
+}
+
+/**
+ * Cask slug → reader form ("ex-bourbon" → "Ex-bourbon cask", "ex-sherry" →
+ * "Ex-sherry cask", "mizunara" → "Mizunara oak"). Display-layer only; the seed
+ * data keeps its slugs. Unknown `ex-` slugs gain a trailing "cask".
+ */
+const CASK_LABELS: Record<string, string> = {
+  "ex-bourbon": "Ex-bourbon cask",
+  "ex-sherry": "Ex-sherry cask",
+  "european-oak": "European oak",
+  "new-american-oak": "New American oak",
+  port: "Port cask",
+  mizunara: "Mizunara oak",
+};
+export function formatCask(cask: string | null | undefined): string {
+  if (!cask) return "";
+  if (CASK_LABELS[cask]) return CASK_LABELS[cask];
+  const titled = cask.charAt(0).toUpperCase() + cask.slice(1);
+  return cask.startsWith("ex-") ? `${titled} cask` : titled;
+}
