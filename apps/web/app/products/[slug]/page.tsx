@@ -6,7 +6,6 @@ import { formatAge, formatVolume } from "@/lib/utils";
 import { describeFlavour } from "@/lib/catalog/flavour";
 import { Price } from "@/components/market/price";
 import { ProductImage, toneFor, formatFor } from "@/components/product-image";
-import { StarRating } from "@/components/star-rating";
 import { FlavourBars } from "@/components/flavour-bars";
 import { LabelPlate } from "@/components/ui/label-plate";
 import { ProductCard } from "@/components/product-card";
@@ -154,20 +153,8 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
 
           <LabelPlate product={product} variant="pdp" className="mt-5" />
 
-          {product.ratingAvg > 0 ? (
-            <p className="mt-4 inline-flex items-center gap-2">
-              <StarRating value={product.ratingAvg} />
-              <span className="font-sans text-label-sm text-cream-muted">House rating</span>
-            </p>
-          ) : null}
-
-          <div className="mt-5 flex items-end gap-3">
+          <div className="mt-6 flex items-end gap-3">
             <Price className="font-display text-d2 text-cream" money={variant.price} />
-            {variant.memberPrice ? (
-              <span className="pb-1.5 font-sans text-body-sm text-copper">
-                Members <Price money={variant.memberPrice} />
-              </span>
-            ) : null}
           </div>
           <p className="mt-1.5 font-sans text-body-sm text-cream-muted">
             {volume ? `${volume} · ` : ""}

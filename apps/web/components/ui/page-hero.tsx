@@ -30,6 +30,17 @@ export function PageHero({
             style={{ background: "linear-gradient(52deg, rgba(23,18,16,0.94) 30%, rgba(23,18,16,0.6) 62%, rgba(23,18,16,0.25) 100%)" }}
           />
         </>
+      ) : photoId ? (
+        /* A photo slot is intended here but the binary is absent: warm the
+           header so it reads as an atmospheric band rather than flat ground. */
+        <>
+          <span aria-hidden="true" className="atmosphere-fallback absolute inset-0" />
+          <span
+            aria-hidden="true"
+            className="absolute inset-0"
+            style={{ background: "linear-gradient(52deg, rgba(23,18,16,0.86) 24%, rgba(23,18,16,0.5) 60%, rgba(23,18,16,0.2) 100%)" }}
+          />
+        </>
       ) : null}
       <div className="container-page relative py-14 sm:py-16">
         <h1 className="max-w-3xl font-display text-d1 text-cream">{title}</h1>

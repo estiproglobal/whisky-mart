@@ -26,31 +26,36 @@ export default async function HomePage() {
           moves. */}
       <section className="relative overflow-hidden bg-ground">
         {hero ? (
-          <Photo
-            src={hero.src}
-            alt={hero.alt}
-            fill
-            priority
-            sizes="100vw"
-            className="hero-settle-image absolute inset-0"
-          />
+          <>
+            <Photo
+              src={hero.src}
+              alt={hero.alt}
+              fill
+              priority
+              sizes="100vw"
+              className="hero-settle-image absolute inset-0"
+            />
+            {/* Scrim rising from the lower left so the headline reads over a
+                bright photo. */}
+            <span
+              aria-hidden="true"
+              className="pointer-events-none absolute inset-0"
+              style={{ background: "linear-gradient(52deg, rgba(23,18,16,0.92) 18%, rgba(23,18,16,0.55) 48%, rgba(23,18,16,0.12) 78%)" }}
+            />
+          </>
         ) : (
-          /* Tonal stand-in until the photography lands (scripts/fetch-photos.mjs). */
-          <span
-            aria-hidden="true"
-            className="hero-settle-image absolute inset-0"
-            style={{
-              background:
-                "radial-gradient(70% 85% at 78% 88%, rgba(193,118,59,0.14), transparent 62%), radial-gradient(120% 90% at 50% 100%, #221913 0%, #171210 55%)",
-            }}
-          />
+          /* Lit stand-in until the photography lands (scripts/fetch-photos.mjs):
+             an intentional cask-room panel, plus a gentle lower scrim so the
+             headline keeps AA contrast without the near-black emptiness. */
+          <>
+            <span aria-hidden="true" className="atmosphere-fallback hero-settle-image absolute inset-0" />
+            <span
+              aria-hidden="true"
+              className="pointer-events-none absolute inset-0"
+              style={{ background: "linear-gradient(15deg, rgba(20,15,10,0.72) 6%, rgba(20,15,10,0.28) 40%, transparent 66%)" }}
+            />
+          </>
         )}
-        {/* Scrim rising from the lower left so the headline always reads. */}
-        <span
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-0"
-          style={{ background: "linear-gradient(52deg, rgba(23,18,16,0.92) 18%, rgba(23,18,16,0.55) 48%, rgba(23,18,16,0.12) 78%)" }}
-        />
 
         <div className="container-page relative flex min-h-[72vh] items-end pb-16 pt-24 sm:pb-20">
           <div className="hero-settle-text max-w-2xl">

@@ -1,11 +1,32 @@
 # Current Task
 
-**Last updated:** 2026-07-07
+**Last updated:** 2026-07-08
 **Owner:** Claude (agent)
 
 ---
 
 ## What I'm working on right now
+
+**Increment 12C "Repair Pass" → ✅ CODE COMPLETE on branch `increment-12c-repair`, PR open, awaiting owner review of the Vercel preview (do NOT merge until reviewed, per the 12C prompt Part 4). One item is owner-gated (real photography, see below).**
+
+12B shipped with its text, structure and catalog working but its visual layer broken. This pass diagnosed and repaired it.
+
+**Part 1 diagnosis (written up in the PR):** the atmosphere-photo binaries were referenced but never committed (`git ls-files apps/web/public/photo` showed only `CREDITS.md`), and the image CDNs remain 403-blocked from the build environment, so every `<Photo>` slot fell back to a near-black gradient that read as empty on the dark ground. The product bottle renders (inline SVG) and the header icons were in fact rendering correctly (confirmed in-browser); the owner's report conflated the empty atmosphere slots with "no product imagery".
+
+**Part 2, five confirmed defects, all fixed:**
+1. Header icons already render with `aria-label`s and no raw hrefs (verified in-browser); left correct.
+2. Numeric "House rating" removed from the PDP entirely (it contradicted "no customer reviews yet" on the zero-review SKUs and read as fabricated). Genuine review averages remain in the reviews section; product JSON-LD already dropped `AggregateRating` in 12B.
+3. "Members £..." price removed from the PDP; `memberPrice` left dormant in the seed data with no UI.
+4. Label-plate region/cask now render formatted via new `formatRegion`/`formatCask` display helpers ("islay" → "Islay", "ex-bourbon" → "Ex-bourbon cask"); seed slugs unchanged. Separators verified.
+5. All four seed guides deepened to 708–744 words (4-min reads) in the shop-owner voice, with shoppable embeds grounded across the expanded catalog.
+
+**Part 3, visual pass:** added a warm, lit `.atmosphere-fallback` treatment (original CSS, zero external image deps) so the hero, journal covers and category headers read as intentional cask-room panels instead of empty black; made the hero scrim conditional on a real photo; card surface separation already carried by the 1px cream@14% borders; remove-one-accessory cut = journal cards no longer dim the cover on hover (title underline is the single cue).
+
+**Part 4, gates:** `typecheck` ✓ · `lint` ✓ · `test` ✓ (**106**, +3 formatter/plate) · `build` ✓ (102 pages) · copy audit clean · Lighthouse **home 93/96, PDP 91/97** (perf/a11y). Home/PDP/shop/guides/guide/vision/sommelier checked in-browser at desktop and 390px.
+
+> ⚠️ **OWNER-GATED: real atmosphere photography.** The build environment still cannot reach Unsplash/Pexels (403 policy block), so the real photos could not be downloaded. The PR ships the designed fallback (which looks intentional and has no external dependencies, a plus for a buyer transfer). To land the real photographs: allowlist the image CDNs in the environment's network settings, then run `apps/web/scripts/fetch-photos.mjs` (8 slots are pre-curated with sources + licences; `still` and `islay-coast` still need a pick) and commit. `<Photo>` keeps `priority` preload so the hero LCP is correct once the real image lands. This is the only part of the 12C prompt's Part 1 acceptance ("each slot renders a photographic image") that remains open, and it is not resolvable from the sandbox.
+
+---
 
 **Increment 12B "The Archive" → ✅ ALL PARTS COMPLETE, VALIDATED, MERGED TO `main` (PR #13, squash → `7e5d2be`, 2026-07-07), DEPLOYING TO PRODUCTION via Vercel.** Developed on `claude/increment-12b-design-homepage-pvs2un`; session 1 covered Parts 1, 2, 4, 6, 7 and session 2 (same branch) covered Parts 3 and 5.
 
